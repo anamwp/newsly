@@ -52,70 +52,60 @@ registerBlockType('guternberg-starter-block/blurb', {
             alignment: 'right'
         },
     },
-    // edit(props){
-    //     console.log('edit props', props);
-    //     const {
-    //         attributes: {content},
-    //         setAttributes,
-    //         className
-    //     } = props;
-
-    //     const blockProps = useBlockProps({
-    //         style: blockStyle
-    //     })
-
-    //     const onChangeContent = (newContent) => {
-    //         setAttributes({
-    //             content: newContent
-    //         })
-    //     }
-
-    //     return (
-    //         <>
-    //             <RichText
-    //                 { ...blockProps }
-    //                 tagName="p"
-    //                 onChange={onChangeContent} 
-    //                 value={content}
-    //             />
-    //             <div {...blockProps}>
-    //                 Hellow world from the editor
-    //             </div>
-    //         </>
-    //     )
-    // },
+    /**
+     * 
+     * @param {*} param0 
+     * @returns 
+     */
     edit({attributes, setAttributes}){
-
-        // const blockProps = useBlockProps({
-        //     style: blockStyle
-        // })
-
+        /**
+         * pass style through useBlockProps()
+         */
+        const blockProps = useBlockProps({
+            style: blockStyle
+        })
+        /**
+         * 
+         * @param {*} newContent 
+         */
         const onChangeContent = (newContent) => {
             setAttributes({
                 content: newContent
             })
         }
-
+        /**
+         * 
+         * @param {*} newColor 
+         */
         const onChangeTextColor = (newColor) => {
             setAttributes({
                 text_color: newColor
             })
         }
-
+        /**
+         * 
+         * @param {*} newBGColor 
+         */
         const onChangeBGColor = (newBGColor) => {
             setAttributes({
                 bg_color: newBGColor
             })
         }
-
+        /**
+         * 
+         * @param {*} newAlignment 
+         */
         const onChangeAlignment = (newAlignment) => {
             setAttributes({
                 alignment: 'undefined' === newAlignment  ? none : newAlignment,
             })
         }
-
+        /**
+         * return edit content
+         */
         return (
             <div {...useBlockProps()} >
+                {/* block level control in the editor */}
                 {
                     <BlockControls>
                         <AlignmentToolbar 
@@ -124,6 +114,7 @@ registerBlockType('guternberg-starter-block/blurb', {
                             />
                     </BlockControls>
                 }
+                {/* for sidebar control */}
                 <InspectorControls key={'settings'}>
                     <div id="blurb-controls">
                         <fieldset>
@@ -144,6 +135,7 @@ registerBlockType('guternberg-starter-block/blurb', {
                         </fieldset>
                     </div>
                 </InspectorControls>
+                {/* Rich Text control */}
                 <RichText
                     className= {attributes.className}
                     style={{ textAlign: attributes.alignment }}
@@ -151,6 +143,7 @@ registerBlockType('guternberg-starter-block/blurb', {
                     onChange={onChangeContent} 
                     value={attributes.content ? attributes.content : 'This is rich text editor content'}
                 />
+                {/* Text Control */}
                 <TextControl
                     value={attributes.message}
                     onChange = { val => setAttributes({message: val}) }
@@ -159,33 +152,23 @@ registerBlockType('guternberg-starter-block/blurb', {
                         color: attributes.text_color
                     }}
                 />
-                {/* <div {...blockProps}>
-                    Hellow world from the editor
-                </div> */}
             </div>
         )
     },
-
-    // save(props){
-    //     // console.log('save props', props);
-    //     const blockProps = useBlockProps.save();
-    //     return (
-    //         <div {...blockProps }>
-    //             <RichText.Content
-    //                 className={`blurb-align-${props.attributes.alignment}`}
-    //                 tagName="p"
-    //                 value={props.attributes.content}
-    //             />
-    //             {/* <div {...blockProps}>
-    //                 hello world for the frontend. 
-    //             </div> */}
-    //         </div>
-    //     )
-    // }
+    /**
+     * 
+     * @param {*} props 
+     * @returns 
+     */
     save: ( props ) => {
-        console.log('save props', props);
+        /**
+         * get block props and 
+         * assign it to a variable
+         */
         const blockProps = useBlockProps.save();
- 
+        /**
+         * return save data
+         *  */     
         return (
             <div { ...blockProps }>
                 <RichText.Content
