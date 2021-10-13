@@ -1,0 +1,27 @@
+{
+    "attributes": {
+        "content": {
+            "type": "array",
+            "source": "children",
+            "selector": "p"
+        },
+        "message": {
+            "type": "string",
+            "source": "text",
+            "selector": "div",
+            "default": "Hello message attributes"
+        },
+        "alignment": {
+            "type": "string", 
+            "default": "none"
+        },
+        "text_color": {
+            "type": "string",
+            "default":  "none"
+        },
+        "bg_color": {
+            "type": "string",
+            "default":  "none"
+        }
+    }
+}
