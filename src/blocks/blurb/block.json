@@ -17,11 +17,11 @@
         },
         "text_color": {
             "type": "string",
-            "default":  "none"
+            "default":  "#fff"
         },
         "bg_color": {
             "type": "string",
-            "default":  "none"
+            "default":  "#000"
         }
     }
 }
