@@ -1,5 +1,5 @@
 {
-    "name": "theanamhossain/wp-plugin-starter",
+    "name": "theanamhossain/anam-gutenberg-starter",
     "description": "A starter plugin to start your next big idea",
     "type": "wordpress-plugin",
     "license": "GPLv2",
@@ -13,7 +13,7 @@
     "require": {}, 
     "autoload": {
         "psr-4": {
-            "WP\\PluginStarter\\": "includes/"
+            "Anam\\GutenbergStarter\\": "includes/"
         },
         "files": []
     }

@@ -1,5 +1,5 @@
 <?php 
-    namespace WP\PluginStarter\Shortcode;
+    namespace Anam\GutenbergStarter\Shortcode;
 
     class Demo{
         /**

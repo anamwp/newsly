@@ -1,5 +1,5 @@
 <?php 
-    namespace WP\PluginStarter;
+    namespace Anam\GutenbergStarter;
 
     class Init{
         public function __construct(){

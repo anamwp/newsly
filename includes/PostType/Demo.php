@@ -1,5 +1,5 @@
 <?php 
-    namespace WP\PluginStarter\PostType;
+    namespace Anam\GutenbergStarter\PostType;
 
     class Demo {
         /**

@@ -1,5 +1,5 @@
 <?php 
-    namespace WP\PluginStarter\Blocks\Blurb;
+    namespace Anam\GutenbergStarter\Blocks\Blurb;
 
     class Block{
        /**
@@ -14,13 +14,13 @@
          * @return void
          */
         public function create_blurb_block(){
-            $asset_file = include(GUTENBERG_STARTER_URL . '/build/index.asset.php');
+            $asset_file = include(ANAM_GUTENBERG_STARTER_URL . '/build/index.asset.php');
             /**
              * register block script
              */
             wp_register_script(
                 'blurb-script',
-                GUTENBERG_STARTER_URL.'/build/index.js', 
+                ANAM_GUTENBERG_STARTER_URL.'/build/index.js', 
                 $asset_file['dependencies'], 
                 $asset_file['version']
             );
@@ -28,7 +28,7 @@
              * register block type
              */
             register_block_type( 
-                'starter-block/blurb', 
+                'guternberg-starter-block/blurb', 
                 array(
                     'api_version' => 2,
                     'editor_script' => 'blurb-script'

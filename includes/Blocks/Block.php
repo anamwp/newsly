@@ -1,5 +1,5 @@
 <?php 
-    namespace WP\PluginStarter\Blocks;
+    namespace Anam\GutenbergStarter\Blocks;
     
     class Block{
         /**

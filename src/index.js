@@ -16,7 +16,7 @@ const blockStyle = {
     padding: '20px',
 };
  
-registerBlockType('starter-block/blurb', {
+registerBlockType('guternberg-starter-block/blurb', {
     apiVersion: 2,
     title: 'Blurb', 
     icon: 'smiley',
