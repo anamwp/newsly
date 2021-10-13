@@ -1,5 +1,16 @@
 {
     "attributes": {
-        
+        "mediaId": {
+            "type": "number",
+            "default": 0
+        },
+        "mediaUrl": {
+            "type": "string",
+            "default": ""
+        },
+        "media": {
+            "type": "string", 
+            "default": null
+        }
     }
 }

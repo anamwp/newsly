@@ -1,9 +1,11 @@
 import React from 'react'
 
-export default function save() {
+export default function save(props) {
     return (
         <div>
-            hello call to action from save.
+            <figure>
+                <img src={props.attributes.mediaUrl} alt="" />
+            </figure>
         </div>
     )
 }
