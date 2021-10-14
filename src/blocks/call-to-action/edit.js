@@ -10,7 +10,8 @@ import {
     InspectorControls,
     ColorPalette,
     AlignmentToolbar,
-    BlockIcon
+    BlockIcon,
+    RichText
 } from "@wordpress/block-editor";
 
 export default function edit(props) {
@@ -30,6 +31,16 @@ export default function edit(props) {
             media: null,
             mediaId: 0,
             mediaUrl: ""
+        })
+    }
+    const onChangeTitle = (newTitle) => {
+        setAttributes({ 
+            title: newTitle
+        })
+    }
+    const onChangeContent = (newContent) => {
+        setAttributes({
+            content: newContent
         })
     }
     return (
@@ -68,6 +79,21 @@ export default function edit(props) {
                             &&
                             <img src={props.attributes.mediaUrl} alt="" />
                         }
+                    </div>
+                    <div className="call-to-action-title">
+                        <RichText
+                            style={{ textAlign: props.attributes.alignment }}
+                            tagName="h3"
+                            onChange={onChangeTitle} 
+                            value={props.attributes.title && props.attributes.title}
+                        />
+                    </div>
+                    <div className="call-to-action-content">
+                        <RichText
+                            tagName="p"
+                            onChange={onChangeContent}
+                            value={props.attributes.content && props.attributes.content}
+                        />
                     </div>
                 </div>
             </figure>

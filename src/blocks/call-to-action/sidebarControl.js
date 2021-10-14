@@ -73,7 +73,7 @@ export default function SidebarControl({data, onSelectImage, removeImage}) {
                         </MediaUploadCheck>
                     }
                     </p>
-                    </PanelBody>
+                </PanelBody>
             </InspectorControls>
         </div>
     )
