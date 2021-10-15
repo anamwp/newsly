@@ -43,8 +43,7 @@
             "default": ""
         },
         "focalPoint": {
-            "type": "object",
-            "default": null
+            "type": "object"
         }
     }
 }

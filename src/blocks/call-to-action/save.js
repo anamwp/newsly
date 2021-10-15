@@ -14,7 +14,15 @@ export default function save(props) {
                 {
                     props.attributes.media 
                     &&
-                    <img src={props.attributes.mediaUrl} alt="" />
+                    <img 
+                    src={props.attributes.mediaUrl} 
+                    alt=""
+                    style={{
+                        objectPosition: props.attributes.focalPoint
+                        ? `${props.attributes.focalPoint.x * 100}% ${props.attributes.focalPoint.y * 100}%`
+                        : undefined
+                    }} 
+                    />
                 }
             </div>
             <div className="call-to-action-title">

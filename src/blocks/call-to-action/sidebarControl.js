@@ -1,6 +1,6 @@
 import {__} from "@wordpress/i18n";
 import React from 'react';
-import {Button, ResponsiveWrapper, PanelBody} from "@wordpress/components"
+import {Button, ResponsiveWrapper, PanelBody, FocalPointPicker} from "@wordpress/components"
 import{
     BlockControls,
     AlignmentToolbar,
@@ -10,7 +10,7 @@ import{
 } from "@wordpress/block-editor";
 
 export default function SidebarControl({data, onSelectImage, removeImage, onChangeAlignment}) {
-    const {attributes} = data;
+    const {attributes, setAttributes} = data;
     return (
         <div>
             {/* <BlockControls>
@@ -80,6 +80,19 @@ export default function SidebarControl({data, onSelectImage, removeImage, onChan
                             />
                         </MediaUploadCheck>
                     }
+                    </p>
+                    <p>
+                        {
+                            attributes.mediaUrl &&
+                            <FocalPointPicker
+                                label={__("Focal Point", "anam-gutenberg-starter")}
+                                url={attributes.mediaUrl}
+                                value={attributes.focalPoint}
+                                onChange={ (value) => setAttributes({
+                                    focalPoint: value
+                                }) }
+                            />
+                        }
                     </p>
                 </PanelBody>
                 <PanelBody
