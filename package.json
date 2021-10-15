@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@wordpress/blob": "^3.2.1",
+    "classnames": "^2.3.1",
     "del": "^6.0.0",
     "gulp": "^4.0.2",
     "gulp-minify-css": "^1.2.4",

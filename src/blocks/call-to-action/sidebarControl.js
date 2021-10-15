@@ -2,15 +2,23 @@ import {__} from "@wordpress/i18n";
 import React from 'react';
 import {Button, ResponsiveWrapper, PanelBody} from "@wordpress/components"
 import{
+    BlockControls,
+    AlignmentToolbar,
     InspectorControls,
     MediaUpload,
     MediaUploadCheck
 } from "@wordpress/block-editor";
 
-export default function SidebarControl({data, onSelectImage, removeImage}) {
+export default function SidebarControl({data, onSelectImage, removeImage, onChangeAlignment}) {
     const {attributes} = data;
     return (
         <div>
+            {/* <BlockControls>
+                <AlignmentToolbar 
+                    value={attributes.alignment}
+                    onChange={onChangeAlignment}
+                    />
+            </BlockControls> */}
             <InspectorControls>
                 <PanelBody
                     title={__("Call to action Image", "anam-gutenberg-starter")}
@@ -73,6 +81,15 @@ export default function SidebarControl({data, onSelectImage, removeImage}) {
                         </MediaUploadCheck>
                     }
                     </p>
+                </PanelBody>
+                <PanelBody
+                    title={__("Alignment", "anam-gutenberg-starter")}
+                    initialOpen={true}
+                >
+                    <AlignmentToolbar 
+                        value={attributes.alignment}
+                        onChange={onChangeAlignment}
+                    />
                 </PanelBody>
             </InspectorControls>
         </div>

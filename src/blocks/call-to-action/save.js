@@ -1,12 +1,16 @@
 import React from 'react';
 import {
+    useBlockProps,
     RichText
 } from "@wordpress/block-editor";
 
 export default function save(props) {
+    const blockProps = useBlockProps.save({
+        className: "call-to-action"
+    })
     return (
-        <div className="call-to-action" >
-            <div className="call-to-action-media-wrapper">
+        <div {...blockProps} >
+            <div className="call-to-action-media-wrapper" style={{ textAlign: props.attributes.alignment }}>
                 {
                     props.attributes.media 
                     &&
@@ -15,12 +19,14 @@ export default function save(props) {
             </div>
             <div className="call-to-action-title">
                 <RichText.Content
+                    style={{ textAlign: props.attributes.alignment }}
                     tagName="h3"
                     value={props.attributes.title && props.attributes.title }
                 />
             </div>
             <div className="call-to-action-content">
                 <RichText.Content
+                    style={{ textAlign: props.attributes.alignment }}
                     tagName="p"
                     value={props.attributes.content && props.attributes.content}
                 />

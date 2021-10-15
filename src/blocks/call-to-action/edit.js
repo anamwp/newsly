@@ -1,8 +1,14 @@
 import {__} from "@wordpress/i18n";
 import React from 'react';
-import { Button, ResponsiveWrapper, PanelBody  } from '@wordpress/components';
-import { image as icon } from '@wordpress/icons';
+import { 
+    Button, 
+    ResponsiveWrapper, 
+    PanelBody,  
+    ButtonGroup
+} from '@wordpress/components';
+import { closeSmall, image as icon } from '@wordpress/icons';
 import SidebarControl from "./sidebarControl";
+import {isBlobURL} from "@wordpress/blob";
 import {
     MediaUpload,
     MediaUploadCheck,
@@ -11,12 +17,14 @@ import {
     ColorPalette,
     AlignmentToolbar,
     BlockIcon,
-    RichText
+    RichText,
+    MediaPlaceholder
 } from "@wordpress/block-editor";
+import classnames from "classnames";
 
 export default function edit(props) {
-
-    const {attributes, setAttributes, className} = props;
+    // console.log('props ', props);
+    const {attributes, setAttributes, className, isSelected} = props;
     
     const onSelectImage = (imageObj) => {
         // console.log('imageObj', imageObj);
@@ -43,15 +51,103 @@ export default function edit(props) {
             content: newContent
         })
     }
+    const onChangeAlignment = (newAlignment) => {
+        setAttributes({
+            alignment: 'undefined' === newAlignment  ? none : newAlignment,
+        })
+    }
+    const renderPlaceholderForImage = () => {
+        return(
+            <div className="call-to-action-image-placeholder-wrapper">
+                <MediaPlaceholder
+                    allowedTypes={ [ 'image' ] }
+                    multiple={ false }
+                    icon="format-image"
+                    labels={ {
+                        title: ' ',
+                    } }
+                    onSelect={ ( imageEntity ) => {
+                        debugger;
+                        console.log(imageEntity);
+                        if ( isBlobURL( imageEntity?.url ) ) {
+                            return;
+                        }
+                        setAttributes( {
+                            url: imageEntity?.url,
+                            alt: imageEntity?.alt,
+                            media: imageEntity,
+                            mediaId: imageEntity?.id,
+                            mediaUrl: imageEntity?.url
+                        } );
+                    }
+                    }
+                />
+            </div>
+        )
+    }
+    const renderImage = () => {
+        const {
+            focalPoint
+        } = attributes;
+        // console.log("focalPoint", focalPoint)
+        const classes = classnames('call-to-action-image-wrapper',{
+            'is-selected': isSelected
+        });
+        return(
+            <>
+                <div className={ classes }>
+                    {
+                        isSelected && (
+                            <ButtonGroup 
+                            className="block-library-gallery-item__inline-menu is-right is-visible"
+                            >
+                                <Button
+                                    icon={closeSmall}
+                                    onClick={ () => {
+                                        setAttributes({
+                                            url: ''
+                                        })
+                                    } }
+                                    label={__('Remove Image', 'anam-gutenberg-starter')}
+                                    disabled={ !isSelected }
+                                />
+                            </ButtonGroup>
+                        )
+                    }
+                    {/* <div 
+                        className="call-to-action-media-wrapper"
+                        style={{ textAlign: props.attributes.alignment }}
+                    > */}
+                        {
+                            props.attributes.media 
+                            &&
+                            <img 
+                            src={props.attributes.mediaUrl} 
+                            alt=""
+                            style={{
+                                objectPosition: focalPoint
+                                ? `${focalPoint.x * 100}% ${focalPoint.y * 100}%`
+                                : undefined
+                            }} 
+                            />
+                        }
+                    {/* </div> */}
+                </div>
+            </>
+        )
+
+    }
     return (
         <div {...useBlockProps()}>
             <SidebarControl
                 data={props}
                 onSelectImage={onSelectImage}
                 removeImage={removeImage}
+                onChangeAlignment={onChangeAlignment}
             />
-            <figure>
-                {
+            <div>
+                
+                {/* {
                     !props.attributes.media
                     &&
                     <MediaUploadCheck>
@@ -71,13 +167,21 @@ export default function edit(props) {
                             ) }
                             />
                     </MediaUploadCheck>
-                }
+                } */}
                 <div className="call-to-action">
-                    <div className="call-to-action-media-wrapper">
-                        {
+                    <div 
+                        className="call-to-action-media-wrapper"
+                        style={{ textAlign: props.attributes.alignment }}
+                    >
+                        {/* {
                             props.attributes.media 
                             &&
                             <img src={props.attributes.mediaUrl} alt="" />
+                        } */}
+                        {
+                            props.attributes.media 
+                            ? renderImage()
+                            : renderPlaceholderForImage()
                         }
                     </div>
                     <div className="call-to-action-title">
@@ -90,13 +194,14 @@ export default function edit(props) {
                     </div>
                     <div className="call-to-action-content">
                         <RichText
+                            style={{ textAlign: props.attributes.alignment }}
                             tagName="p"
                             onChange={onChangeContent}
                             value={props.attributes.content && props.attributes.content}
                         />
                     </div>
                 </div>
-            </figure>
+            </div>
         </div>
     )
 }
