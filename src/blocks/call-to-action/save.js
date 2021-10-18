@@ -10,21 +10,24 @@ export default function save(props) {
     })
     return (
         <div {...blockProps} >
-            <div className="call-to-action-media-wrapper" style={{ textAlign: props.attributes.alignment }}>
-                {
-                    props.attributes.media 
-                    &&
-                    <img 
-                    src={props.attributes.mediaUrl} 
-                    alt=""
-                    style={{
-                        objectPosition: props.attributes.focalPoint
-                        ? `${props.attributes.focalPoint.x * 100}% ${props.attributes.focalPoint.y * 100}%`
-                        : undefined
-                    }} 
-                    />
-                }
-            </div>
+            { 
+                props.attributes.showImage && 
+                <div className="call-to-action-media-wrapper" style={{ textAlign: props.attributes.alignment }}>
+                    {
+                        props.attributes.media 
+                        &&
+                        <img 
+                        src={props.attributes.mediaUrl} 
+                        alt=""
+                        style={{
+                            objectPosition: props.attributes.focalPoint
+                            ? `${props.attributes.focalPoint.x * 100}% ${props.attributes.focalPoint.y * 100}%`
+                            : undefined
+                        }} 
+                        />
+                    }
+                </div>
+            }
             <div className="call-to-action-title">
                 <RichText.Content
                     style={{ textAlign: props.attributes.alignment }}
