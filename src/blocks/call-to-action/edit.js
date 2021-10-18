@@ -105,7 +105,8 @@ export default function edit(props) {
                                     icon={closeSmall}
                                     onClick={ () => {
                                         setAttributes({
-                                            url: ''
+                                            media: '',
+                                            mediaUrl: ''
                                         })
                                     } }
                                     label={__('Remove Image', 'anam-gutenberg-starter')}
@@ -179,9 +180,13 @@ export default function edit(props) {
                             <img src={props.attributes.mediaUrl} alt="" />
                         } */}
                         {
-                            props.attributes.media 
-                            ? renderImage()
-                            : renderPlaceholderForImage()
+                            props.attributes.showImage 
+                            ?
+                                props.attributes.media 
+                                ? renderImage()
+                                : renderPlaceholderForImage()
+                            : 
+                                false
                         }
                     </div>
                     <div className="call-to-action-title">
