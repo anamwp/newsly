@@ -43,7 +43,10 @@ export default function save(props) {
                     value={props.attributes.content && props.attributes.content}
                 />
             </div>
-            <div className="call-to-action-button">
+            <div 
+            className="call-to-action-button" 
+            style={{ textAlign: props.attributes.alignment }}
+            >
                 <InnerBlocks.Content/>
             </div>
         </div>
