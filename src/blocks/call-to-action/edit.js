@@ -212,19 +212,13 @@ export default function edit(props) {
                         <InnerBlocks
                             template={[
                                 [
-                                    'core/paragraph', 
-                                    {
-                                        placeholder:__('Action Link', 'anam-gutenberg-starter')
-                                    }
-                                ],
-                                [
                                     'core/button', 
                                     {
                                         placeholder:__('Action Link', 'anam-gutenberg-starter')
                                     }
                                 ],
                             ]}   
-                            allowedBlocks={['core/paragraph', 'core/button']}
+                            allowedBlocks={['core/button']}
                             templateInsertUpdatesSelection={true}
                             __experimentalCaptureToolbars={true}
                         />
