@@ -38,20 +38,40 @@
                 $asset_file['version']
             );
             /**
+             * register style
+             */
+            wp_register_style(
+                'starter-editor-style', 
+                ANAM_GUTENBERG_STARTER_URL.'/build/index.css', 
+                [], 
+                $asset_file['version']
+            );
+            wp_register_style(
+                'starter-frontend-style', 
+                ANAM_GUTENBERG_STARTER_URL.'/build/style-index.css', 
+                [], 
+                $asset_file['version']
+            );
+
+            /**
              * register block type
              */
             register_block_type( 
                 'anam-guternberg-starter-block/blurb', 
                 array(
                     'api_version' => 2,
-                    'editor_script' => 'starter-script'
+                    'editor_script' => 'starter-script',
+                    'editor_style' => 'starter-editor-style',
+                    'style' => 'starter-frontend-style'
                 )
             );
             register_block_type( 
                 'anam-guternberg-starter-block/call-to-action', 
                 array(
                     'api_version' => 2,
-                    'editor_script' => 'starter-script'
+                    'editor_script' => 'starter-script',
+                    'editor_style' => 'starter-editor-style',
+                    'style' => 'starter-frontend-style'
                 )
             );
         }

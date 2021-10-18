@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     useBlockProps,
-    RichText
+    RichText,
+    InnerBlocks
 } from "@wordpress/block-editor";
 
 export default function save(props) {
@@ -41,6 +42,9 @@ export default function save(props) {
                     tagName="p"
                     value={props.attributes.content && props.attributes.content}
                 />
+            </div>
+            <div className="call-to-action-button">
+                <InnerBlocks.Content/>
             </div>
         </div>
     )

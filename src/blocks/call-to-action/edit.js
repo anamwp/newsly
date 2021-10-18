@@ -18,7 +18,8 @@ import {
     AlignmentToolbar,
     BlockIcon,
     RichText,
-    MediaPlaceholder
+    MediaPlaceholder,
+    InnerBlocks
 } from "@wordpress/block-editor";
 import classnames from "classnames";
 
@@ -146,6 +147,7 @@ export default function edit(props) {
                 removeImage={removeImage}
                 onChangeAlignment={onChangeAlignment}
             />
+            
             <div>
                 
                 {/* {
@@ -169,6 +171,7 @@ export default function edit(props) {
                             />
                     </MediaUploadCheck>
                 } */}
+                
                 <div className="call-to-action">
                     <div 
                         className="call-to-action-media-wrapper"
@@ -204,6 +207,28 @@ export default function edit(props) {
                             onChange={onChangeContent}
                             value={props.attributes.content && props.attributes.content}
                         />
+                    </div>
+                    <div className="call-to-action-button">
+                        <InnerBlocks
+                            template={[
+                                [
+                                    'core/paragraph', 
+                                    {
+                                        placeholder:__('Action Link', 'anam-gutenberg-starter')
+                                    }
+                                ],
+                                [
+                                    'core/button', 
+                                    {
+                                        placeholder:__('Action Link', 'anam-gutenberg-starter')
+                                    }
+                                ],
+                            ]}   
+                            allowedBlocks={['core/paragraph', 'core/button']}
+                            templateInsertUpdatesSelection={true}
+                            __experimentalCaptureToolbars={true}
+                        />
+                        
                     </div>
                 </div>
             </div>
