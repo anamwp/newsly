@@ -74,6 +74,15 @@
                     'style' => 'starter-frontend-style'
                 )
             );
+            register_block_type( 
+                'anam-gutenberg-starter-block/single-post', 
+                array(
+                    'api_version' => 2,
+                    'editor_script' => 'starter-script',
+                    'editor_style' => 'starter-editor-style',
+                    'style' => 'starter-frontend-style'
+                )
+            );
         }
     }
         

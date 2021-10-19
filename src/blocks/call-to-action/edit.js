@@ -68,7 +68,7 @@ export default function edit(props) {
                         title: ' ',
                     } }
                     onSelect={ ( imageEntity ) => {
-                        debugger;
+                        // debugger;
                         console.log(imageEntity);
                         if ( isBlobURL( imageEntity?.url ) ) {
                             return;

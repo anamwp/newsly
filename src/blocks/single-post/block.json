@@ -1,0 +1,8 @@
+{
+    "attributes": {
+        "postId": {
+            "type": "number",
+            "default": null
+        }
+    }
+}
