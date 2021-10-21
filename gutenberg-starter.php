@@ -74,11 +74,14 @@ final Class Anam_Gutenberg_Starter {
          * http://localhost/devplugin/wp-content/plugins/gutenberg-starter
          */
         define( 'ANAM_GUTENBERG_STARTER_URL', plugins_url('', ANAM_GUTENBERG_STARTER_FILE ) );
+        define( 'ANAM_GUTENBERG_STARTER_DIR_URL', plugin_dir_url( __FILE__ ) );
         /**
          * return the asset folder director
          * http://localhost/devplugin/wp-content/plugins/gutenberg-starter/assets
          */
-        define( 'ANAM_GUTENBERG_STARTER_ASSETS', ANAM_GUTENBERG_STARTER_URL . '/assets' );
+        define( 'ANAM_GUTENBERG_STARTER_ASSETS', ANAM_GUTENBERG_STARTER_URL . '/build' );
+        define( 'ANAM_GUTENBERG_STARTER_DIR_ASSETS', ANAM_GUTENBERG_STARTER_DIR_URL . 'build' );
+
     }
     /**
      * add installation time 

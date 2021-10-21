@@ -27,28 +27,32 @@
         }
         
         public function register_starter_blocks(){
-            $asset_file = include(ANAM_GUTENBERG_STARTER_URL . '/build/index.asset.php');
+            // $asset_file = require(ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.asset.php');
+            $asset_file = include(ANAM_GUTENBERG_STARTER_PATH . '/build/index.asset.php');
             /**
              * register block script
              */
             wp_register_script(
                 'starter-script',
-                ANAM_GUTENBERG_STARTER_URL.'/build/index.js', 
+                ANAM_GUTENBERG_STARTER_DIR_URL.'build/index.js', 
                 $asset_file['dependencies'], 
                 $asset_file['version']
             );
             /**
-             * register style
+             * register blocks editor style
              */
             wp_register_style(
                 'starter-editor-style', 
-                ANAM_GUTENBERG_STARTER_URL.'/build/index.css', 
+                ANAM_GUTENBERG_STARTER_DIR_URL.'build/index.css', 
                 [], 
                 $asset_file['version']
             );
+            /**
+             * register blocks frontend style 
+             */
             wp_register_style(
                 'starter-frontend-style', 
-                ANAM_GUTENBERG_STARTER_URL.'/build/style-index.css', 
+                ANAM_GUTENBERG_STARTER_DIR_URL.'build/style-index.css', 
                 [], 
                 $asset_file['version']
             );
@@ -80,8 +84,31 @@
                     'api_version' => 2,
                     'editor_script' => 'starter-script',
                     'editor_style' => 'starter-editor-style',
-                    'style' => 'starter-frontend-style'
+                    'style' => 'starter-frontend-style',
+                    'render_callback' => [$this, 'single_post_render_frontend_callback']
                 )
+            );
+        }
+
+        public function single_post_render_frontend_callback( $block_attributes, $content ) {
+            $selected_category_ID = +$block_attributes['selectedCategroyId'];
+            // echo '<pre>';
+            // var_dump($selected_category_ID);
+            // echo '</pre>';
+            $recent_posts = wp_get_recent_posts( array(
+                'numberposts' => -1,
+                'post_status' => 'publish',
+                'cat' => $selected_category_ID
+            ) );
+            if ( count( $recent_posts ) === 0 ) {
+                return 'No posts';
+            }
+            $post = $recent_posts[ 0 ];
+            $post_id = $post['ID'];
+            return sprintf(
+                '<a class="wp-block-my-plugin-latest-post" href="%1$s">%2$s</a>',
+                esc_url( get_permalink( $post_id ) ),
+                esc_html( get_the_title( $post_id ) )
             );
         }
     }

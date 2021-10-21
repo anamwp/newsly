@@ -3,6 +3,14 @@
         "postId": {
             "type": "number",
             "default": null
+        },
+        "categories": {
+			"type": "array",
+			"default": []
+		},
+        "selectedCategroyId": {
+            "type": "string",
+            "default": ""
         }
     }
 }
