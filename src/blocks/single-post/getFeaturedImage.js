@@ -21,7 +21,7 @@ export default function getFeaturedImage(props) {
                     )
                 } )
                 : 
-                'Loading'
+                'Fetching Image'
             }
         </div>
     )

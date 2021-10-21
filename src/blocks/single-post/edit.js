@@ -53,6 +53,10 @@ export default function edit( props ) {
             {/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
             /> */}
+            
+            {
+                !attributes.selectedCategroyId && <p>Select a category first.</p>
+            }
             { ! getPosts && 'Loading' }
             { getPosts && getPosts.length === 0 && 'No Posts' }
             { getPosts && getPosts.length > 0 && 

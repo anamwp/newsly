@@ -101,6 +101,7 @@
                 return 'No posts';
             }
             ob_start();
+            if( array_key_exists('selectedCategroyId', $block_attributes)):
             ?>
             <div>
                 <?php foreach($recent_posts as $post): ?>
@@ -115,6 +116,13 @@
                 <?php endforeach; ?>
             </div>
             <?php
+            else:
+                ?>
+                <div>
+                    <p>Please select a category first from block settings</p>
+                </div>
+                <?php
+            endif;
             $output = ob_get_clean();
             return $output;
         }
