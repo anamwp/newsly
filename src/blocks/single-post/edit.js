@@ -5,6 +5,7 @@ import ServerSideRender from '@wordpress/server-side-render';
 import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
+import GetFeaturedImage from './getFeaturedImage';
 
 export default function edit( props ) {
     const blockProps = useBlockProps();
@@ -34,15 +35,6 @@ export default function edit( props ) {
             selectedCategroyId: selectedCat
         })
     }
-    const getPostMedia = async postId => {
-        await apiFetch( { path: `/wp/v2/media/${postId}` } )
-            .then( res => {
-                return res;
-            }) 
-            .catch( err => {
-                return err.message;
-            } )
-    }
 
     const getPosts = useSelect( ( select ) => {
         return select( 'core' ).getEntityRecords( 'postType', 'post', {
@@ -50,6 +42,7 @@ export default function edit( props ) {
         } );
     }, [attributes.selectedCategroyId] );
 
+    
     return (    
         <div {...blockProps}>
             <SidebarControl 
@@ -66,6 +59,9 @@ export default function edit( props ) {
                 getPosts.map(singlePost => {
                     return(
                         <p>
+                            <GetFeaturedImage
+                                postId={singlePost.featured_media}
+                            />
                             <a href={ singlePost.link }>
                                 { singlePost.title.rendered }
                             </a>
