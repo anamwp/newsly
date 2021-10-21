@@ -10,7 +10,7 @@ export default function edit( props ) {
     const blockProps = useBlockProps();
 
     const {attributes, setAttributes} = props;
-    const {getEntityRecords, getmedia} = select('core');
+    const {getEntityRecords, getMedia} = select('core');
     const {getEditorSettings, getCurrentPost} = select('core/editor');
     // let __catDataa = getEntityRecords('taxonomy', 'category');
     {
@@ -34,6 +34,21 @@ export default function edit( props ) {
             selectedCategroyId: selectedCat
         })
     }
+    const getPostMedia = async postId => {
+        await apiFetch( { path: `/wp/v2/media/${postId}` } )
+            .then( res => {
+                return res;
+            }) 
+            .catch( err => {
+                return err.message;
+            } )
+    }
+
+    const getPosts = useSelect( ( select ) => {
+        return select( 'core' ).getEntityRecords( 'postType', 'post', {
+            categories: [attributes.selectedCategroyId]
+        } );
+    }, [attributes.selectedCategroyId] );
 
     return (    
         <div {...blockProps}>
@@ -42,10 +57,22 @@ export default function edit( props ) {
                 categories={attributes.categories}
                 handleCategoryChange={handleCategoryChange}
             />
-            <ServerSideRender
+            {/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
-                // attributes={ attributes }
-            />
+            /> */}
+            { ! getPosts && 'Loading' }
+            { getPosts && getPosts.length === 0 && 'No Posts' }
+            { getPosts && getPosts.length > 0 && 
+                getPosts.map(singlePost => {
+                    return(
+                        <p>
+                            <a href={ singlePost.link }>
+                                { singlePost.title.rendered }
+                            </a>
+                        </p>
+                    )
+                })
+            }
         </div>
     )
 }

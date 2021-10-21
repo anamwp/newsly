@@ -91,10 +91,7 @@
         }
 
         public function single_post_render_frontend_callback( $block_attributes, $content ) {
-            $selected_category_ID = +$block_attributes['selectedCategroyId'];
-            // echo '<pre>';
-            // var_dump($selected_category_ID);
-            // echo '</pre>';
+            $selected_category_ID = array_key_exists('selectedCategroyId', $block_attributes) ? +$block_attributes['selectedCategroyId'] : '';
             $recent_posts = wp_get_recent_posts( array(
                 'numberposts' => -1,
                 'post_status' => 'publish',
@@ -103,13 +100,23 @@
             if ( count( $recent_posts ) === 0 ) {
                 return 'No posts';
             }
-            $post = $recent_posts[ 0 ];
-            $post_id = $post['ID'];
-            return sprintf(
-                '<a class="wp-block-my-plugin-latest-post" href="%1$s">%2$s</a>',
-                esc_url( get_permalink( $post_id ) ),
-                esc_html( get_the_title( $post_id ) )
-            );
+            ob_start();
+            ?>
+            <div>
+                <?php foreach($recent_posts as $post): ?>
+                    <p>
+                        <?php 
+                            echo get_the_post_thumbnail($post['ID'], 'full');
+                        ?>
+                        <a href="<?php echo get_the_permalink($post['ID']); ?>">
+                            <?php echo get_the_title( $post['ID'] ); ?>
+                        </a>
+                    </p>
+                <?php endforeach; ?>
+            </div>
+            <?php
+            $output = ob_get_clean();
+            return $output;
         }
     }
         
