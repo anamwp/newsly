@@ -91,29 +91,58 @@
         }
 
         public function single_post_render_frontend_callback( $block_attributes, $content ) {
+            /**
+             * assign post id from
+             * block attributes array
+             * if nothing found 
+             * assing empty
+             */
+            $selected_post_ID = array_key_exists('selectedPostId', $block_attributes) ? +$block_attributes['selectedPostId'] : '';
+            /**
+             * assing category id 
+             * from block attributes
+             * if nothing found 
+             * then assign empty
+             */
             $selected_category_ID = array_key_exists('selectedCategroyId', $block_attributes) ? +$block_attributes['selectedCategroyId'] : '';
-            $recent_posts = wp_get_recent_posts( array(
-                'numberposts' => -1,
-                'post_status' => 'publish',
-                'cat' => $selected_category_ID
-            ) );
+            /**
+             * display data from attributes
+             * if no saved data attribute found
+             * then run query and fetch recent posts
+             */
+            if(array_key_exists('fetchedPosts', $block_attributes)):
+                $recent_posts = $block_attributes['fetchedPosts'][0];
+            else:
+                if(array_key_exists('selectedPostId', $block_attributes) && $selected_post_ID):
+                    $recent_posts = wp_get_recent_posts( array(
+                        'numberposts' => -1,
+                        'post_status' => 'publish',
+                        'p' => $selected_post_ID
+                        // 'cat' => $selected_category_ID
+                    ) );
+                else:
+                    return 'No post found to display';
+                endif;
+            endif;
+            /**
+             * if no post found
+             * return fall back message
+             */
             if ( count( $recent_posts ) === 0 ) {
-                return 'No posts';
+                return 'No posts found';
             }
             ob_start();
             if( array_key_exists('selectedCategroyId', $block_attributes)):
             ?>
             <div>
-                <?php foreach($recent_posts as $post): ?>
-                    <p>
-                        <?php 
-                            echo get_the_post_thumbnail($post['ID'], 'full');
-                        ?>
-                        <a href="<?php echo get_the_permalink($post['ID']); ?>">
-                            <?php echo get_the_title( $post['ID'] ); ?>
-                        </a>
-                    </p>
-                <?php endforeach; ?>
+                <p>
+                    <?php 
+                        echo get_the_post_thumbnail($recent_posts['id'], 'full');
+                    ?>
+                    <a href="<?php echo get_the_permalink($recent_posts['id']); ?>">
+                        <?php echo get_the_title( $recent_posts['id'] ); ?>
+                    </a>
+                </p>
             </div>
             <?php
             else:

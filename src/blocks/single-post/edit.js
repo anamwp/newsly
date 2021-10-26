@@ -29,18 +29,108 @@ export default function edit( props ) {
             })
         } );
     }
-
+    const handlePostsByCategory = (selectedCatId = attributes.selectedCategroyId) => {
+        /**
+         * if nothing passed 
+         * then assing catId from 
+         * attributes
+         */
+        let catId = selectedCatId ? selectedCatId : attributes.selectedCategroyId;
+        /**
+         * fetch the data 
+         * from restapi endpoint
+         * for specific category
+         */
+        apiFetch( {
+            path: `/wp/v2/posts?categories=${catId}`
+        } )
+        .then( res => {
+            let catPostsArr = [];
+            res.map(res => {
+                catPostsArr.push({
+                    label: res.title.rendered,
+                    value: res.id
+                })
+            })
+            setAttributes({
+                selectedCategoryPosts: catPostsArr
+            })
+        })
+        .catch(err => console.log(err))
+    }
+    /**
+     * handle category change
+     * @param {*} selectedCat 
+     */
     const handleCategoryChange = (selectedCat) => {
         setAttributes({
             selectedCategroyId: selectedCat
-        })
+        });
+        handlePostsByCategory(selectedCat);
     }
-
+    /**
+     * fetch category 
+     * specific posts
+     */
     const getPosts = useSelect( ( select ) => {
-        return select( 'core' ).getEntityRecords( 'postType', 'post', {
+        /**
+         * if no selected category id 
+         * return 
+         */
+        if( ! attributes.selectedCategroyId){
+            return;
+        }
+        /**
+         * If selected category id available 
+         * then fetch specific category post
+         */
+        let getSelectedPosts =  select( 'core' ).getEntityRecords( 'postType', 'post', {
             categories: [attributes.selectedCategroyId]
         } );
+        /**
+         * if no data found 
+         * return
+         */
+        if(null == getSelectedPosts){
+            return;
+        }
+        return getSelectedPosts;
+
     }, [attributes.selectedCategroyId] );
+
+    const handleSelectedPostData = (newPostId) => {
+        console.log('selectedPost', typeof newPostId);
+        let selectedPostId = newPostId ? newPostId : attributes.selectedPostId
+        /**
+         * set the new post ID
+         * to selectedPostId attribute
+         */
+        if(newPostId){
+            setAttributes({
+                selectedPostId: newPostId
+            })
+        }
+        /**
+         * if there is no 
+         * selectedPostId 
+         * then return
+         */
+        if(!selectedPostId){
+            return;
+        }
+        /**
+         * fetch data from rest point
+         */
+        apiFetch({
+            path: `/wp/v2/posts/?include=${selectedPostId}`
+        })
+        .then( res => {
+            setAttributes({
+                fetchedPosts: res
+            })
+        })
+        .catch( err => console.log('err', err) );
+    }
 
     
     return (    
@@ -49,12 +139,25 @@ export default function edit( props ) {
                 props={props}
                 categories={attributes.categories}
                 handleCategoryChange={handleCategoryChange}
+                handleSelectedPostData={handleSelectedPostData}
             />
             {/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
             /> */}
-            
+            {attributes.fetchedPosts.length == 0 && <p>fetching post content</p>}
             {
+                attributes.fetchedPosts.length > 0
+                && 
+                <p>
+                    <GetFeaturedImage
+                        postId={attributes.fetchedPosts[0].featured_media}
+                    />
+                    <a href={ attributes.fetchedPosts[0].link }>
+                        { attributes.fetchedPosts[0].title.rendered }
+                    </a>
+                </p>
+            }
+            {/* {
                 !attributes.selectedCategroyId && <p>Select a category first.</p>
             }
             { ! getPosts && 'Loading' }
@@ -72,7 +175,7 @@ export default function edit( props ) {
                         </p>
                     )
                 })
-            }
+            } */}
         </div>
     )
 }

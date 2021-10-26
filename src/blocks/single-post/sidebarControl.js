@@ -5,9 +5,8 @@ import { PanelBody, SelectControl } from '@wordpress/components';
 import React from 'react';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
-export default function sidebarControl({props, categories, handleCategoryChange}) {
+export default function sidebarControl({props, categories, handleCategoryChange, handleSelectedPostData}) {
     const {attributes, setAttributes} = props;
-    
 
     return (
         <div>
@@ -22,6 +21,13 @@ export default function sidebarControl({props, categories, handleCategoryChange}
                             value={attributes.selectedCategroyId}
                             options={categories}
                             onChange={handleCategoryChange}
+                        />
+                    </p>
+                    <p>
+                        <SelectControl
+                            label={__('Choose post to display', 'anam-gutenberg-starter')}
+                            options={attributes.selectedCategoryPosts}
+                            onChange={handleSelectedPostData}
                         />
                     </p>
                 </PanelBody>
