@@ -17,7 +17,10 @@ export default function edit( props ) {
     {
         attributes.categories.length === 0 &&
         apiFetch( { path: '/wp/v2/categories' } ).then( ( cat ) => {
-            let catArr = [];
+            let catArr = [{
+                label: 'Select a category',
+                value: ''
+            }];
             cat.map(cat => {
                 catArr.push({
                     label: cat.name,
@@ -29,6 +32,10 @@ export default function edit( props ) {
             })
         } );
     }
+    /**
+     * set posts while change the category
+     * @param {*} selectedCatId 
+     */
     const handlePostsByCategory = (selectedCatId = attributes.selectedCategroyId) => {
         /**
          * if nothing passed 
@@ -46,6 +53,10 @@ export default function edit( props ) {
         } )
         .then( res => {
             let catPostsArr = [];
+            console.log('res', res[0]);
+            setAttributes({
+                fetchedPosts: [res[0]]
+            })
             res.map(res => {
                 catPostsArr.push({
                     label: res.title.rendered,
@@ -63,6 +74,18 @@ export default function edit( props ) {
      * @param {*} selectedCat 
      */
     const handleCategoryChange = (selectedCat) => {
+        /**
+         * if no value passed 
+         * then reset all data
+         */
+        if(!selectedCat){
+            setAttributes({
+                selectedCategroyId: '',
+                selectedCategoryPosts: [],
+                fetchedPosts: []
+            });
+            return;
+        }
         setAttributes({
             selectedCategroyId: selectedCat
         });
@@ -97,9 +120,14 @@ export default function edit( props ) {
         return getSelectedPosts;
 
     }, [attributes.selectedCategroyId] );
-
+    /**
+     * fetch posts by id 
+     * and then assign
+     * fetchedPosts attribute 
+     * @param {*} newPostId 
+     * @returns 
+     */
     const handleSelectedPostData = (newPostId) => {
-        console.log('selectedPost', typeof newPostId);
         let selectedPostId = newPostId ? newPostId : attributes.selectedPostId
         /**
          * set the new post ID
@@ -132,6 +160,27 @@ export default function edit( props ) {
         .catch( err => console.log('err', err) );
     }
 
+    const FallbackMessage = (props) => {
+        return(
+            <p>
+                {props.message}
+            </p>
+        )
+    }
+    const PostCard = (props) => {
+        let postData = props.data;
+        console.log(postData);
+        return(
+            <div>
+                <GetFeaturedImage
+                    postId={postData.featured_media}
+                />
+                <a href={ postData.link }>
+                    { postData.title.rendered }
+                </a>
+            </div>
+        )
+    }
     
     return (    
         <div {...blockProps}>
@@ -144,18 +193,28 @@ export default function edit( props ) {
             {/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
             /> */}
-            {attributes.fetchedPosts.length == 0 && <p>fetching post content</p>}
+            {console.log('attributes.fetchedPosts', attributes)}
             {
-                attributes.fetchedPosts.length > 0
+                attributes.fetchedPosts.length == 0 
                 && 
-                <p>
-                    <GetFeaturedImage
-                        postId={attributes.fetchedPosts[0].featured_media}
-                    />
-                    <a href={ attributes.fetchedPosts[0].link }>
-                        { attributes.fetchedPosts[0].title.rendered }
-                    </a>
-                </p>
+                <FallbackMessage
+                    message="Please select a post to display"
+                />
+            }
+            {
+                (!attributes.selectedPostId && attributes.categories.length > 0 && attributes.fetchedPosts.length > 0) &&
+                <PostCard
+                    data={attributes.fetchedPosts[0]}
+                    before="1"
+                />
+            }
+            {
+                (attributes.selectedPostId && attributes.fetchedPosts.length > 0)
+                && 
+                <PostCard
+                    data={attributes.fetchedPosts[0]}
+                    before="0"
+                />
             }
             {/* {
                 !attributes.selectedCategroyId && <p>Select a category first.</p>
