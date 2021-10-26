@@ -142,6 +142,11 @@
                     <a href="<?php echo get_the_permalink($recent_posts['id']); ?>">
                         <?php echo get_the_title( $recent_posts['id'] ); ?>
                     </a>
+                    <div>
+                        <?php
+                        echo $recent_posts['excerpt']['rendered'];
+                        ?>
+                    </div>
                 </p>
             </div>
             <?php

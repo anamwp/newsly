@@ -1,11 +1,12 @@
 import React from 'react';
 import {useSelect, withSelect, select} from '@wordpress/data';
-import { useBlockProps } from "@wordpress/block-editor";
+import { RichText, useBlockProps } from "@wordpress/block-editor";
 import ServerSideRender from '@wordpress/server-side-render';
 import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import GetFeaturedImage from './getFeaturedImage';
+import RenderPostCategoryData from './components';
 
 export default function edit( props ) {
     const blockProps = useBlockProps();
@@ -174,6 +175,8 @@ export default function edit( props ) {
             </p>
         )
     }
+    
+    
     /**
      * component to display post card
      * @param {*} props 
@@ -181,17 +184,31 @@ export default function edit( props ) {
      */
     const PostCard = (props) => {
         let postData = props.data;
+        console.log('postData', postData);
         return(
             <div>
                 <GetFeaturedImage
                     postId={postData.featured_media}
                 />
-                <a href={ postData.link }>
-                    { postData.title.rendered }
-                </a>
+                <RenderPostCategoryData
+                    catArr={postData.categories}
+                />
+                <h3>
+                    <a href={ postData.link }>
+                        { postData.title.rendered }
+                    </a>
+                </h3>                
+                <RichText
+                    tagName="p"
+                    value={postData.excerpt.rendered}
+                />
+                {/* <div>
+                    {postData.excerpt.rendered}
+                </div> */}
             </div>
         )
     }
+
     
     return (    
         <div {...blockProps}>
