@@ -53,7 +53,10 @@ export default function edit( props ) {
         } )
         .then( res => {
             let catPostsArr = [];
-            console.log('res', res[0]);
+            /**
+             * set response first data 
+             * to fetchPosts attribute
+             */
             setAttributes({
                 fetchedPosts: [res[0]]
             })
@@ -159,7 +162,11 @@ export default function edit( props ) {
         })
         .catch( err => console.log('err', err) );
     }
-
+    /**
+     * Fallback message
+     * @param {*} props 
+     * @returns 
+     */
     const FallbackMessage = (props) => {
         return(
             <p>
@@ -167,9 +174,13 @@ export default function edit( props ) {
             </p>
         )
     }
+    /**
+     * component to display post card
+     * @param {*} props 
+     * @returns 
+     */
     const PostCard = (props) => {
         let postData = props.data;
-        console.log(postData);
         return(
             <div>
                 <GetFeaturedImage
@@ -193,7 +204,6 @@ export default function edit( props ) {
             {/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
             /> */}
-            {console.log('attributes.fetchedPosts', attributes)}
             {
                 attributes.fetchedPosts.length == 0 
                 && 
