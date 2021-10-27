@@ -16,7 +16,11 @@ export default function edit( props ) {
     const {getEntityRecords, getMedia} = select('core');
     const {getEditorSettings, getCurrentPost} = select('core/editor');
     // let __catDataa = getEntityRecords('taxonomy', 'category');
-    {
+    /**
+     * fetch all categoris 
+     * at first loading
+     */
+    useEffect(() => {
         attributes.categories.length === 0 &&
         apiFetch( { path: '/wp/v2/categories' } ).then( ( cat ) => {
             let catArr = [{
@@ -33,7 +37,7 @@ export default function edit( props ) {
                 categories: catArr
             })
         } );
-    }
+    }, [])
     /**
      * set posts while change the category
      * @param {*} selectedCatId 
@@ -176,8 +180,6 @@ export default function edit( props ) {
             </p>
         )
     }
-    
-    
     /**
      * component to display post card
      * @param {*} props 
@@ -210,24 +212,27 @@ export default function edit( props ) {
                     value={postData.excerpt.rendered}
                     />
                 }
-                {/* <div>
-                    {postData.excerpt.rendered}
-                </div> */}
             </div>
         )
     }
-
+    /**
+     * handle category display control
+     * in post card
+     */
     const handleCategoryToggleControl = () => {
         setAttributes({
             showCategory: !attributes.showCategory
         })
     }
+    /**
+     * handle excerpt display control 
+     * in post card
+     */
     const handleExcerptToggleControl = () => {
         setAttributes({
             showExcerpt: !attributes.showExcerpt
         })
     }
-
     
     return (    
         <div {...blockProps}>
