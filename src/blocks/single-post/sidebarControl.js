@@ -30,30 +30,26 @@ export default function sidebarControl({props, categories, handleCategoryChange,
                             onChange={handleSelectedPostData}
                         />
                     </p>
-                    <p className="display-single-post-category-switch">
-                        <ToggleControl
-                            label={__("Show Category", "anam-gutenberg-starter")}
-                            // help={
-                            //     attributes.showCategory
-                            //     ? __(" ", "anam-gutenberg-starter")
-                            //     : __("Display Image for Call to action", "anam-gutenberg-starter")
-                            // }
-                            checked={attributes.showCategory}
-                            onChange= {handleCategoryToggleControl}                        
-                        />
-                    </p>
-                    <p className="display-single-post-excerpt-switch">
-                        <ToggleControl
-                            label={__("Show Excerpt", "anam-gutenberg-starter")}
-                            // help={
-                            //     attributes.showExcerpt
-                            //     ? __(" ", "anam-gutenberg-starter")
-                            //     : __("Display Image for Call to action", "anam-gutenberg-starter")
-                            // }
-                            checked={attributes.showExcerpt}
-                            onChange= {handleExcerptToggleControl}                        
-                        />
-                    </p>
+                    {
+                        attributes.selectedCategroyId &&
+                        <p className="display-single-post-category-switch">
+                            <ToggleControl
+                                label={__("Show Category", "anam-gutenberg-starter")}
+                                checked={attributes.showCategory}
+                                onChange= {handleCategoryToggleControl}                        
+                            />
+                        </p>
+                    }
+                    {
+                        attributes.selectedCategroyId &&
+                        <p className="display-single-post-excerpt-switch">
+                            <ToggleControl
+                                label={__("Show Excerpt", "anam-gutenberg-starter")}
+                                checked={attributes.showExcerpt}
+                                onChange= {handleExcerptToggleControl}                        
+                            />
+                        </p>
+                    }
                 </PanelBody>
             </InspectorControls>
         </div>
