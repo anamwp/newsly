@@ -1,11 +1,11 @@
 import {__} from "@wordpress/i18n";
 import {useSelect, withSelect, select} from '@wordpress/data';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, SelectControl } from '@wordpress/components';
+import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import React from 'react';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
-export default function sidebarControl({props, categories, handleCategoryChange, handleSelectedPostData}) {
+export default function sidebarControl({props, categories, handleCategoryChange, handleSelectedPostData, handleCategoryToggleControl, handleExcerptToggleControl}) {
     const {attributes, setAttributes} = props;
 
     return (
@@ -28,6 +28,30 @@ export default function sidebarControl({props, categories, handleCategoryChange,
                             label={__('Choose post to display', 'anam-gutenberg-starter')}
                             options={attributes.selectedCategoryPosts}
                             onChange={handleSelectedPostData}
+                        />
+                    </p>
+                    <p className="display-single-post-category-switch">
+                        <ToggleControl
+                            label={__("Show Category", "anam-gutenberg-starter")}
+                            // help={
+                            //     attributes.showCategory
+                            //     ? __(" ", "anam-gutenberg-starter")
+                            //     : __("Display Image for Call to action", "anam-gutenberg-starter")
+                            // }
+                            checked={attributes.showCategory}
+                            onChange= {handleCategoryToggleControl}                        
+                        />
+                    </p>
+                    <p className="display-single-post-excerpt-switch">
+                        <ToggleControl
+                            label={__("Show Excerpt", "anam-gutenberg-starter")}
+                            // help={
+                            //     attributes.showExcerpt
+                            //     ? __(" ", "anam-gutenberg-starter")
+                            //     : __("Display Image for Call to action", "anam-gutenberg-starter")
+                            // }
+                            checked={attributes.showExcerpt}
+                            onChange= {handleExcerptToggleControl}                        
                         />
                     </p>
                 </PanelBody>

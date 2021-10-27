@@ -23,6 +23,14 @@
         "fetchedPosts": {
             "type": "array",
             "default": []
+        },
+        "showExcerpt": {
+            "type": "boolean",
+            "default": true
+        },
+        "showCategory": {
+            "type": "boolean",
+            "default": true
         }
     }
 }

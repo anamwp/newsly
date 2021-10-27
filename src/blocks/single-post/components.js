@@ -5,7 +5,6 @@ import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 export default function RenderPostCategoryData(props) {
     let postArr = props.catArr.toString();
     const [catData, setCatData] = useState();
-    // console.log('props ', props);
 
     useEffect(() => {
         apiFetch({
@@ -16,7 +15,6 @@ export default function RenderPostCategoryData(props) {
     }, [postArr])
     
     return (
-        console.log('catData', catData),
         <div>
             {
                 !catData && <p>Fetching Data</p>                 

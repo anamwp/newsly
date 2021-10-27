@@ -184,29 +184,45 @@ export default function edit( props ) {
      */
     const PostCard = (props) => {
         let postData = props.data;
-        console.log('postData', postData);
         return(
             <div>
                 <GetFeaturedImage
                     postId={postData.featured_media}
                 />
-                <RenderPostCategoryData
+                {
+                    attributes.showCategory &&
+                    <RenderPostCategoryData
                     catArr={postData.categories}
-                />
+                    />
+                }
                 <h3>
                     <a href={ postData.link }>
                         { postData.title.rendered }
                     </a>
-                </h3>                
-                <RichText
+                </h3>
+                {
+                    attributes.showExcerpt &&
+                    <RichText
                     tagName="p"
                     value={postData.excerpt.rendered}
-                />
+                    />
+                }
                 {/* <div>
                     {postData.excerpt.rendered}
                 </div> */}
             </div>
         )
+    }
+
+    const handleCategoryToggleControl = () => {
+        setAttributes({
+            showCategory: !attributes.showCategory
+        })
+    }
+    const handleExcerptToggleControl = () => {
+        setAttributes({
+            showExcerpt: !attributes.showExcerpt
+        })
     }
 
     
@@ -217,6 +233,8 @@ export default function edit( props ) {
                 categories={attributes.categories}
                 handleCategoryChange={handleCategoryChange}
                 handleSelectedPostData={handleSelectedPostData}
+                handleCategoryToggleControl={handleCategoryToggleControl}
+                handleExcerptToggleControl={handleExcerptToggleControl}
             />
             {/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
