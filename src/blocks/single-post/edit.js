@@ -7,6 +7,7 @@ import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import GetFeaturedImage from './getFeaturedImage';
 import RenderPostCategoryData from './components';
+import { Disabled } from '@wordpress/components';
 
 export default function edit( props ) {
     const blockProps = useBlockProps();
@@ -195,11 +196,13 @@ export default function edit( props ) {
                     catArr={postData.categories}
                     />
                 }
-                <h3>
-                    <a href={ postData.link }>
-                        { postData.title.rendered }
-                    </a>
-                </h3>
+                <Disabled>
+                    <h3>
+                        <a href={ postData.link }>
+                            { postData.title.rendered }
+                        </a>
+                    </h3>
+                </Disabled>
                 {
                     attributes.showExcerpt &&
                     <RichText

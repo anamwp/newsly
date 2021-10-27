@@ -132,23 +132,46 @@
                 return 'No posts found';
             }
             ob_start();
+            /**
+             * get the category array of a post
+             * then fetch those data
+             */
+            if( ! array_key_exists('showCategory', $block_attributes) ):
+                $single_post_cat_arr = $recent_posts['categories'];
+                $single_post_cat_data = get_terms('category', [
+                    'include' => $recent_posts['categories']
+                ]);
+            endif;
             if( array_key_exists('selectedCategroyId', $block_attributes)):
             ?>
-            <div>
-                <p>
-                    <?php 
-                        echo get_the_post_thumbnail($recent_posts['id'], 'full');
-                    ?>
-                    <a href="<?php echo get_the_permalink($recent_posts['id']); ?>">
-                        <?php echo get_the_title( $recent_posts['id'] ); ?>
-                    </a>
+                <div>
                     <div>
-                        <?php
-                        echo $recent_posts['excerpt']['rendered'];
+                        <?php 
+                            echo get_the_post_thumbnail($recent_posts['id'], 'full');
                         ?>
                     </div>
-                </p>
-            </div>
+                    <?php if( ! array_key_exists('showCategory', $block_attributes) ): ?>
+                        <div>
+                            <?php foreach($single_post_cat_data as $cat_data): ?>
+                                <a href="<?php echo get_term_link( $cat_data->term_id ) ?>">
+                                    <?php echo $cat_data->name; ?>
+                                </a>
+                            <?php endforeach;?>
+                        </div>
+                    <?php endif; ?>
+                    <h3>
+                        <a href="<?php echo get_the_permalink($recent_posts['id']); ?>">
+                            <?php echo get_the_title( $recent_posts['id'] ); ?>
+                        </a>
+                    </h3>
+                    <?php if( ! array_key_exists('showExcerpt', $block_attributes) ): ?>
+                        <div>
+                            <?php
+                            echo $recent_posts['excerpt']['rendered'];
+                            ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
             <?php
             else:
                 ?>
