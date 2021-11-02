@@ -144,12 +144,14 @@
             endif;
             if( array_key_exists('selectedCategroyId', $block_attributes)):
             ?>
-                <div>
-                    <div>
+                <div class="single-post-card">
+                    <?php if( ! array_key_exists('showFeaturedImage', $block_attributes) ): ?>
+                    <div class="featured-image">
                         <?php 
                             echo get_the_post_thumbnail($recent_posts['id'], 'full');
                         ?>
                     </div>
+                    <?php endif; ?>
                     <?php if( ! array_key_exists('showCategory', $block_attributes) ): ?>
                         <div>
                             <?php foreach($single_post_cat_data as $cat_data): ?>
