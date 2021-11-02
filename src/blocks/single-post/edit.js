@@ -190,12 +190,18 @@ export default function edit( props ) {
      */
     const PostCard = (props) => {
         let postData = props.data;
+        console.log('check post data', postData.featured_media);
         let parentProps = props.parent;
         return(
             <div>
-                <GetFeaturedImage
+                {
+                    postData.featured_media !== 0 
+                    ? 
+                    <GetFeaturedImage
                     postId={postData.featured_media}
-                />
+                    />
+                    : <div>No featured image found</div>
+                }
                 {
                     attributes.showCategory &&
                     <RenderPostCategoryData
