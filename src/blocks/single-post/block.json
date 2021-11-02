@@ -24,6 +24,10 @@
             "type": "array",
             "default": []
         },
+        "fetchedPostCategoryData": {
+            "type": "array",
+            "default": []
+        },
         "showExcerpt": {
             "type": "boolean",
             "default": true

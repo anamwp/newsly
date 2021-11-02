@@ -103,6 +103,8 @@ export default function edit( props ) {
     /**
      * fetch category 
      * specific posts
+     * no use of this function
+     * ------------------------
      */
     const getPosts = useSelect( ( select ) => {
         /**
@@ -184,9 +186,11 @@ export default function edit( props ) {
      * component to display post card
      * @param {*} props 
      * @returns 
+     * post card content
      */
     const PostCard = (props) => {
         let postData = props.data;
+        let parentProps = props.parent;
         return(
             <div>
                 <GetFeaturedImage
@@ -196,6 +200,7 @@ export default function edit( props ) {
                     attributes.showCategory &&
                     <RenderPostCategoryData
                     catArr={postData.categories}
+                    parentProps={parentProps}
                     />
                 }
                 <Disabled>
@@ -258,7 +263,7 @@ export default function edit( props ) {
                 (!attributes.selectedPostId && attributes.categories.length > 0 && attributes.fetchedPosts.length > 0) &&
                 <PostCard
                     data={attributes.fetchedPosts[0]}
-                    before="1"
+                    parent={props}
                 />
             }
             {
@@ -266,7 +271,7 @@ export default function edit( props ) {
                 && 
                 <PostCard
                     data={attributes.fetchedPosts[0]}
-                    before="0"
+                    parent={props}
                 />
             }
             {/* {
