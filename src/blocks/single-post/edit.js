@@ -8,6 +8,7 @@ import apiFetch from '@wordpress/api-fetch';
 import GetFeaturedImage from './getFeaturedImage';
 import RenderPostCategoryData from './components';
 import { Disabled } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
 
 export default function edit( props ) {
     const blockProps = useBlockProps();
@@ -190,18 +191,32 @@ export default function edit( props ) {
      */
     const PostCard = (props) => {
         let postData = props.data;
-        console.log('check post data', postData.featured_media);
         let parentProps = props.parent;
         return(
-            <div>
+            <div className="single-post-card">
+                {/* 
+                if user want to show featured image 
+                and post have featured image
+                */}
                 {
-                    postData.featured_media !== 0 
-                    ? 
+                    attributes.showFeaturedImage && 
+                    postData.featured_media !== 0 && 
                     <GetFeaturedImage
                     postId={postData.featured_media}
                     />
-                    : <div>No featured image found</div>
                 }
+                {/* 
+                If user want to show featured image
+                but post have no featured image
+                */}
+                {
+                    attributes.showFeaturedImage &&
+                    postData.featured_media == 0 &&
+                    <div>{__('No featured image found', 'anam-gutenberg-starter')}</div>
+                }
+                {/* 
+                Toggle category display
+                */}
                 {
                     attributes.showCategory &&
                     <RenderPostCategoryData
@@ -209,6 +224,9 @@ export default function edit( props ) {
                     parentProps={parentProps}
                     />
                 }
+                {/* 
+                disabled click inside editor
+                */}
                 <Disabled>
                     <h3>
                         <a href={ postData.link }>
@@ -216,6 +234,9 @@ export default function edit( props ) {
                         </a>
                     </h3>
                 </Disabled>
+                {/* 
+                excerpt of the post
+                */}
                 {
                     attributes.showExcerpt &&
                     <RichText
@@ -244,6 +265,12 @@ export default function edit( props ) {
             showExcerpt: !attributes.showExcerpt
         })
     }
+
+    const handleFeaturedImageToggleControl = () => {
+        setAttributes({
+            showFeaturedImage: !attributes.showFeaturedImage
+        })
+    }
     
     return (    
         <div {...blockProps}>
@@ -254,6 +281,7 @@ export default function edit( props ) {
                 handleSelectedPostData={handleSelectedPostData}
                 handleCategoryToggleControl={handleCategoryToggleControl}
                 handleExcerptToggleControl={handleExcerptToggleControl}
+                handleFeaturedImageToggleControl={handleFeaturedImageToggleControl}
             />
             {/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"

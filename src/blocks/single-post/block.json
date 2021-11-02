@@ -35,6 +35,10 @@
         "showCategory": {
             "type": "boolean",
             "default": true
+        },
+        "showFeaturedImage": {
+            "type": "boolean",
+            "default": true
         }
     }
 }

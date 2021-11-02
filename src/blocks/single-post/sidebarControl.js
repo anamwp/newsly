@@ -5,7 +5,7 @@ import { PanelBody, SelectControl, ToggleControl } from '@wordpress/components';
 import React from 'react';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
-export default function sidebarControl({props, categories, handleCategoryChange, handleSelectedPostData, handleCategoryToggleControl, handleExcerptToggleControl}) {
+export default function sidebarControl({props, categories, handleCategoryChange, handleSelectedPostData, handleCategoryToggleControl, handleExcerptToggleControl, handleFeaturedImageToggleControl}) {
     const {attributes, setAttributes} = props;
 
     return (
@@ -28,6 +28,13 @@ export default function sidebarControl({props, categories, handleCategoryChange,
                             label={__('Choose post to display', 'anam-gutenberg-starter')}
                             options={attributes.selectedCategoryPosts}
                             onChange={handleSelectedPostData}
+                        />
+                    </p>
+                    <p className="display-single-post-featured-image">
+                        <ToggleControl
+                            label={__("Show Featured Image", "anam-gutenberg-starter")}
+                            checked={attributes.showFeaturedImage}
+                            onChange={handleFeaturedImageToggleControl}
                         />
                     </p>
                     {
