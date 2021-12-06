@@ -1,0 +1,11 @@
+[data-type="anam-guternberg-starter-block/card"] {
+    .card {
+        border: solid 1px red;
+        &__title {
+            background: green;
+        }
+        &__description {
+            background: yellow;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "attributes": {
+        "title": {
+            "type": "array",
+            "source": "children",
+            "selector": "h3",
+            "default": "This is rich text editor content"
+        },
+        "content": {
+            "type": "array",
+            "source": "children",
+            "selector": "p",
+            "default": "The select media function will functionally be exactly the same as WordPress’ featured image function. We will inside Inspector add a panel that consist of a button to choose an image."
+        }
+    }
+}
