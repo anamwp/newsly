@@ -20,18 +20,18 @@ export default function save(props) {
       *  */     
     return (
          <div { ...blockProps }>
-             <RichText.Content
-                 className={ `gutenberg-examples-align-${ props.attributes.alignment }` }
-                 style={{ textAlign: props.attributes.alignment }}
-                 tagName="p"
-                 value={ props.attributes.content }
-             />
-             <div style={{
-                 backgroundColor: props.attributes.bg_color,
-                 color: props.attributes.text_color
-             }}>
-                 {props.attributes.message}
-             </div>
+            <RichText.Content
+                className={ `gutenberg-examples-align-${ props.attributes.alignment }` }
+                style={{ textAlign: props.attributes.alignment }}
+                tagName="p"
+                value={ props.attributes.content }
+            />
+            <div style={{
+                backgroundColor: props.attributes.bg_color,
+                color: props.attributes.text_color
+            }}>
+                {props.attributes.message}
+            </div>
          </div>
     );
 }
