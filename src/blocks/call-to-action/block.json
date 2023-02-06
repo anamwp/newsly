@@ -1,53 +1,53 @@
 {
-    "attributes": {
-        "title": {
-            "type": "array", 
-            "source": "children",
-            "selector": "h3",
-            "default": "This is rich text editor content"
-        },
-        "content": {
-            "type": "array",
-            "source": "children",
-            "selector": "p",
-            "default": "The select media function will functionally be exactly the same as WordPress’ featured image function. We will inside Inspector add a panel that consist of a button to choose an image."
-        },
-        "mediaId": {
-            "type": "number",
-            "default": 0
-        },
-        "mediaUrl": {
-            "type": "string",
-            "default": ""
-        },
-        "media": {
-            "type": "string", 
-            "default": null
-        },
-        "alignment": {
-            "type": "string",
-            "default": "left"
-        },
-        "url": {
-            "type": "string",
-            "source": "attribute",
-            "selector": "img",
-            "attribute": "src",
-            "default": ""
-        },
-        "alt": {
-            "type": "string",
-            "source": "attribute",
-            "selector": "img",
-            "attribute": "alt",
-            "default": ""
-        },
-        "focalPoint": {
-            "type": "object"
-        },
-        "showImage": {
-            "type": "boolean",
-            "default": true
-        }
-    }
+	"attributes": {
+		"title": {
+			"type": "array",
+			"source": "children",
+			"selector": "h3",
+			"default": "This is rich text editor content"
+		},
+		"content": {
+			"type": "array",
+			"source": "children",
+			"selector": "p",
+			"default": "The select media function will functionally be exactly the same as WordPress’ featured image function. We will inside Inspector add a panel that consist of a button to choose an image."
+		},
+		"mediaId": {
+			"type": "number",
+			"default": 0
+		},
+		"mediaUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"media": {
+			"type": "object",
+			"default": null
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"url": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "img",
+			"attribute": "src",
+			"default": ""
+		},
+		"alt": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "img",
+			"attribute": "alt",
+			"default": ""
+		},
+		"focalPoint": {
+			"type": "object"
+		},
+		"showImage": {
+			"type": "boolean",
+			"default": true
+		}
+	}
 }
