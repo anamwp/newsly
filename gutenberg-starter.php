@@ -122,4 +122,23 @@ function anam_gutenberg_starter() {
  */
 anam_gutenberg_starter();
 
+/**
+ * Create custom category of CGL block in gutenberg editor
+ *
+ * @param [type] $categories Custom category name.
+ * @return Array
+ */
+function prefix_register_layout_category_handler( $categories ) {
+	$categories[] = array(
+		'slug'  => 'anam-starter',
+		'title' => 'Anam Starter',
+	);
+	return $categories;
+}
+
+if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
+	add_filter( 'block_categories_all', 'prefix_register_layout_category_handler' );
+} else {
+	add_filter( 'block_categories', 'prefix_register_layout_category_handler' );
+}
 

@@ -1,27 +1,26 @@
 {
-    "attributes": {
-        "content": {
-            "type": "array",
-            "source": "children",
-            "selector": "p"
-        },
-        "message": {
-            "type": "string",
-            "source": "text",
-            "selector": "div",
-            "default": "Hello message attributes"
-        },
-        "alignment": {
-            "type": "string", 
-            "default": "none"
-        },
-        "text_color": {
-            "type": "string",
-            "default":  "#fff"
-        },
-        "bg_color": {
-            "type": "string",
-            "default":  "#000"
-        }
-    }
+	"attributes": {
+		"newcontent": {
+			"type": "string",
+			"source": "html",
+			"selector": "p",
+			"default": ""
+		},
+		"newmessage": {
+			"type": "string",
+			"default": ""
+		},
+		"alignment": {
+			"type": "string",
+			"default": "none"
+		},
+		"text_color": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"bg_color": {
+			"type": "string",
+			"default": "#000"
+		}
+	}
 }

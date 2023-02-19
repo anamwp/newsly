@@ -177,9 +177,9 @@ export default function edit(props) {
 						className="call-to-action-media-wrapper"
 						style={{ textAlign: props.attributes.alignment }}
 					>
-						{props.attributes.media && (
+						{/* {props.attributes.media && (
 							<img src={props.attributes.mediaUrl} alt="" />
-						)}
+						)} */}
 						{props.attributes.showImage
 							? props.attributes.media
 								? renderImage()
