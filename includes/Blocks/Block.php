@@ -70,6 +70,15 @@ class Block {
 			)
 		);
 		register_block_type(
+			'anam-guternberg-starter-block/test',
+			array(
+				'api_version'   => 2,
+				'editor_script' => 'starter-script',
+				'editor_style'  => 'starter-editor-style',
+				'style'         => 'starter-frontend-style',
+			)
+		);
+		register_block_type(
 			'anam-guternberg-starter-block/call-to-action',
 			array(
 				'api_version'   => 2,
