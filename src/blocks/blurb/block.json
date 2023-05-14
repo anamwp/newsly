@@ -3,12 +3,14 @@
 		"newcontent": {
 			"type": "string",
 			"source": "html",
-			"selector": "p",
-			"default": ""
+			"selector": "h2",
+			"default": "Lorem ipsum dolor sit amet"
 		},
 		"newmessage": {
 			"type": "string",
-			"default": ""
+			"source": "html",
+			"selector": "p",
+			"default": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
 		},
 		"alignment": {
 			"type": "string",
@@ -16,11 +18,15 @@
 		},
 		"text_color": {
 			"type": "string",
-			"default": "#fff"
+			"default": "#000"
 		},
-		"bg_color": {
+		"content_color": {
 			"type": "string",
 			"default": "#000"
+		},
+		"blurb_bg_color": {
+			"type": "string",
+			"default": "#eee"
 		}
 	}
 }

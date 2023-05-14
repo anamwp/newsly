@@ -1,6 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { TextControl } from '@wordpress/components';
+import {
+	TextControl,
+	ColorPicker,
+	Panel,
+	PanelBody,
+	PanelRow,
+	FontSizePicker,
+} from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import { more } from '@wordpress/icons';
 
 import {
 	useBlockProps,
@@ -8,21 +17,45 @@ import {
 	AlignmentToolbar,
 	BlockControls,
 	ColorPalette,
+	InnerBlocks,
 	InspectorControls,
+	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 
-const blockStyle = {
-	backgroundColor: '#900',
-	color: '#fff',
-	padding: '20px',
-};
+// const blockStyle = {
+// 	backgroundColor: '#900',
+// 	color: '#fff',
+// 	padding: '20px',
+// };
+
+const fontSizes = [
+	{
+		name: __('Small'),
+		slug: 'small',
+		size: 12,
+	},
+	{
+		name: __('Big'),
+		slug: 'big',
+		size: 26,
+	},
+];
+const fallbackFontSize = 16;
+const MY_TEMPLATE = [
+	// ['core/image', {}],
+	// ['core/heading', { placeholder: 'Book Title' }],
+	// ['core/paragraph', { placeholder: 'Summary' }],
+	['core/button', { placeholder: 'Book Your Demo' }],
+];
 
 export default function edit({ attributes, setAttributes }) {
+	const [fontSize, setFontSize] = useState(12);
 	/**
 	 * pass style through useBlockProps()
 	 */
 	const blockProps = useBlockProps({
-		style: blockStyle,
+		className: 'gts__blurb',
+		// style: blockStyle,
 	});
 	/**
 	 *
@@ -46,11 +79,21 @@ export default function edit({ attributes, setAttributes }) {
 	 *
 	 * @param {*} newBGColor
 	 */
-	const onChangeBGColor = (newBGColor) => {
+	// const onChangeBGColor = (newBGColor) => {
+	// 	setAttributes({
+	// 		bg_color: newBGColor,
+	// 	});
+	// };
+	const handleTextColor = (newColor) => {
 		setAttributes({
-			bg_color: newBGColor,
+			content_color: newColor,
 		});
 	};
+	// const handleTextBackground = (newBGColor) => {
+	// 	setAttributes({
+	// 		content_bg_color: newBGColor,
+	// 	});
+	// };
 	/**
 	 *
 	 * @param {*} newAlignment
@@ -64,7 +107,7 @@ export default function edit({ attributes, setAttributes }) {
 	 * return edit content
 	 */
 	return (
-		<div {...useBlockProps()}>
+		<div {...blockProps}>
 			{/* block level control in the editor */}
 			{
 				<BlockControls>
@@ -76,42 +119,90 @@ export default function edit({ attributes, setAttributes }) {
 			}
 			{/* for sidebar control */}
 			<InspectorControls key={'settings'}>
-				<div id="blurb-controls">
-					<fieldset>
-						<legend className="blurb-control-label">
-							{__('Text', 'wp-plugin-starter')}
-						</legend>
-						<ColorPalette onChange={onChangeTextColor} />
-					</fieldset>
-					<fieldset>
-						<legend className="blurb-control-label">
-							{__('Background', 'wp-plugin-starter')}
-						</legend>
-						<ColorPalette onChange={onChangeBGColor} />
-					</fieldset>
+				<div id="blurb__controls">
+					<Panel header="">
+						<PanelBody
+							title="Background"
+							icon={more}
+							initialOpen={true}
+						>
+							<PanelRow>
+								Set the total block background color
+							</PanelRow>
+							<ColorPicker
+								onChange={(newFontSize) => {
+									setAttributes({
+										blurb_bg_color: newFontSize,
+									});
+								}}
+							/>
+						</PanelBody>
+						<PanelBody title="Heading" initialOpen={false}>
+							<PanelRow>
+								<ColorPalette onChange={onChangeTextColor} />
+							</PanelRow>
+						</PanelBody>
+						<PanelBody title="Text" initialOpen={false}>
+							<PanelRow>
+								<ColorPalette onChange={handleTextColor} />
+							</PanelRow>
+						</PanelBody>
+
+						<PanelBody
+							title="FontSizePicker Component"
+							initialOpen={false}
+						>
+							<FontSizePicker
+								__nextHasNoMarginBottom
+								fontSizes={fontSizes}
+								value={fontSize}
+								fallbackFontSize={fallbackFontSize}
+								onChange={(newFontSize) => {
+									setFontSize(newFontSize);
+								}}
+							/>
+						</PanelBody>
+					</Panel>
 				</div>
 			</InspectorControls>
 
-			{/* Rich Text control */}
-			<RichText
-				{...blockProps}
-				tagName="p"
+			<div
+				className="container gts__blurb__container"
 				style={{
-					background: attributes.bg_color,
-					color: attributes.text_color,
 					textAlign: attributes.alignment,
+					background: attributes.blurb_bg_color,
 				}}
-				onChange={onChangeContent}
-				value={attributes.newcontent}
-				placeholder="this is rich text editor"
-			/>
-			<div>
-				{/* Text Control */}
-				<TextControl
+			>
+				{/* Rich Text control */}
+				<RichText
+					// {...blockProps}
+					tagName="h2"
+					style={{
+						// background: attributes.bg_color,
+						color: attributes.text_color,
+					}}
+					onChange={onChangeContent}
+					value={attributes.newcontent}
+					placeholder="this is rich text editor"
+				/>
+				<RichText
+					tagName="p"
+					style={{
+						// background: attributes.bg_color,
+						color: attributes.content_color,
+						// textAlign: attributes.alignment,
+					}}
 					onChange={(val) => setAttributes({ newmessage: val })}
 					value={attributes.newmessage}
 					placeholder="hello text control"
 				/>
+				<div className="gts__blurb__button">
+					<InnerBlocks
+						template={MY_TEMPLATE}
+						templateLock="all"
+						allowedBlocks={['core/button']}
+					/>
+				</div>
 			</div>
 		</div>
 	);
