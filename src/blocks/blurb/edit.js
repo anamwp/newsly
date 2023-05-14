@@ -22,31 +22,7 @@ import {
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 
-// const blockStyle = {
-// 	backgroundColor: '#900',
-// 	color: '#fff',
-// 	padding: '20px',
-// };
-
-const fontSizes = [
-	{
-		name: __('Small'),
-		slug: 'small',
-		size: 12,
-	},
-	{
-		name: __('Big'),
-		slug: 'big',
-		size: 26,
-	},
-];
-const fallbackFontSize = 16;
-const MY_TEMPLATE = [
-	// ['core/image', {}],
-	// ['core/heading', { placeholder: 'Book Title' }],
-	// ['core/paragraph', { placeholder: 'Summary' }],
-	['core/button', { placeholder: 'Book Your Demo' }],
-];
+const MY_TEMPLATE = [['core/button', { placeholder: 'Book Your Demo' }]];
 
 export default function edit({ attributes, setAttributes }) {
 	const [fontSize, setFontSize] = useState(12);
@@ -55,7 +31,6 @@ export default function edit({ attributes, setAttributes }) {
 	 */
 	const blockProps = useBlockProps({
 		className: 'gts__blurb',
-		// style: blockStyle,
 	});
 	/**
 	 *
@@ -75,25 +50,11 @@ export default function edit({ attributes, setAttributes }) {
 			text_color: newColor,
 		});
 	};
-	/**
-	 *
-	 * @param {*} newBGColor
-	 */
-	// const onChangeBGColor = (newBGColor) => {
-	// 	setAttributes({
-	// 		bg_color: newBGColor,
-	// 	});
-	// };
 	const handleTextColor = (newColor) => {
 		setAttributes({
 			content_color: newColor,
 		});
 	};
-	// const handleTextBackground = (newBGColor) => {
-	// 	setAttributes({
-	// 		content_bg_color: newBGColor,
-	// 	});
-	// };
 	/**
 	 *
 	 * @param {*} newAlignment
@@ -175,10 +136,8 @@ export default function edit({ attributes, setAttributes }) {
 			>
 				{/* Rich Text control */}
 				<RichText
-					// {...blockProps}
 					tagName="h2"
 					style={{
-						// background: attributes.bg_color,
 						color: attributes.text_color,
 					}}
 					onChange={onChangeContent}
@@ -188,9 +147,7 @@ export default function edit({ attributes, setAttributes }) {
 				<RichText
 					tagName="p"
 					style={{
-						// background: attributes.bg_color,
 						color: attributes.content_color,
-						// textAlign: attributes.alignment,
 					}}
 					onChange={(val) => setAttributes({ newmessage: val })}
 					value={attributes.newmessage}
