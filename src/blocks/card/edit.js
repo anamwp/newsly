@@ -24,14 +24,28 @@ import classnames from 'classnames';
 
 export default function edit(props) {
 	const { attributes, setAttributes, className, isSelected } = props;
-
+	const blockProps = useBlockProps({
+		className: 'gts__card',
+	});
 	return (
-		<div {...useBlockProps()}>
-			<div className="card">
-				<div className="card__img">this is card</div>
-				<div className="card__title">this is card title</div>
+		<div {...blockProps}>
+			<div className="">
+				{/* <div className="card__img">this is card</div> */}
+				<div className="card__title">
+					<RichText
+						tagName="h2"
+						value={attributes.title}
+						allowedFormats={['core/bold', 'core/italic']}
+						onChange={(title) => setAttributes({ title })}
+					/>
+				</div>
 				<div className="card__description">
-					this is card description
+					<RichText
+						tagName="p"
+						value={attributes.content}
+						allowedFormats={['core/bold', 'core/italic']}
+						onChange={(content) => setAttributes({ content })}
+					/>
 				</div>
 			</div>
 		</div>
