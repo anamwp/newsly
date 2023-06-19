@@ -21,6 +21,7 @@ import {
 	InnerBlocks,
 } from '@wordpress/block-editor';
 import classnames from 'classnames';
+import SidebarControl from './sidebarControl';
 
 export default function edit(props) {
 	const { attributes, setAttributes, className, isSelected } = props;
@@ -29,6 +30,7 @@ export default function edit(props) {
 	});
 	return (
 		<div {...blockProps}>
+			<SidebarControl props={props} />
 			<div className="">
 				{/* <div className="card__img">this is card</div> */}
 				<div className="card__title">
