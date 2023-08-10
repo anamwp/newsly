@@ -7,6 +7,7 @@ import {
 	PanelBody,
 	PanelRow,
 	FontSizePicker,
+	CheckboxControl,
 } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { more } from '@wordpress/icons';
@@ -24,8 +25,25 @@ import {
 
 const MY_TEMPLATE = [['core/button', { placeholder: 'Book Your Demo' }]];
 
+const fontSizes = [
+	{
+		name: __('Small'),
+		slug: 'small',
+		size: 12,
+	},
+	{
+		name: __('Big'),
+		slug: 'big',
+		size: 26,
+	},
+];
+const fallbackFontSize = 16;
+
 export default function edit({ attributes, setAttributes }) {
 	const [fontSize, setFontSize] = useState(12);
+	const [isChecked, setChecked] = useState(true);
+	console.log('attributes', attributes);
+	console.log('fontSize', fontSize);
 	/**
 	 * pass style through useBlockProps()
 	 */
@@ -116,17 +134,29 @@ export default function edit({ attributes, setAttributes }) {
 							<FontSizePicker
 								__nextHasNoMarginBottom
 								fontSizes={fontSizes}
-								value={fontSize}
+								value={attributes.font_size}
 								fallbackFontSize={fallbackFontSize}
+								// onChange={(newFontSize) => {
+								// 	setFontSize(newFontSize);
+								// }}
 								onChange={(newFontSize) => {
-									setFontSize(newFontSize);
+									setAttributes({
+										font_size: newFontSize,
+									});
 								}}
+							/>
+							<CheckboxControl
+								label="Is author"
+								help="Is the user a author or not?"
+								checked={isChecked}
+								onChange={setChecked}
 							/>
 						</PanelBody>
 					</Panel>
 				</div>
 			</InspectorControls>
 
+			{/* View */}
 			<div
 				className="container gts__blurb__container"
 				style={{

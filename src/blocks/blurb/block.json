@@ -16,6 +16,10 @@
 			"type": "string",
 			"default": "none"
 		},
+		"font_size": {
+			"type": "number",
+			"default": "none"
+		},
 		"text_color": {
 			"type": "string",
 			"default": "#000"
