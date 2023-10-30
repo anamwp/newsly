@@ -31,6 +31,10 @@
 		"blurb_bg_color": {
 			"type": "string",
 			"default": "#eee"
+		},
+		"product_obj": {
+			"type": "object",
+			"default": ""
 		}
 	}
 }
