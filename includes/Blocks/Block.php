@@ -97,6 +97,16 @@ class Block {
 				'render_callback' => array( $this, 'single_post_render_frontend_callback' ),
 			)
 		);
+		register_block_type(
+			'anam-guternberg-starter-block/recent-product',
+			array(
+				'api_version'     => 2,
+				'editor_script'   => 'starter-script',
+				'editor_style'    => 'starter-editor-style',
+				'style'           => 'starter-frontend-style',
+				'render_callback' => array( $this, 'recent_product_render_frontend_callback' ),
+			)
+		);
 	}
 
 	public function single_post_render_frontend_callback( $block_attributes, $content ) {
@@ -198,6 +208,48 @@ class Block {
 			endif;
 			$output = ob_get_clean();
 			return $output;
+	}
+	public function recent_product_render_frontend_callback( $block_attributes, $content ) {
+
+		$args = array(
+			'post_type'      => 'product',
+			'posts_per_page' => 3
+		);
+	
+		$loop = new \WP_Query( $args );
+	
+		
+	
+		
+		ob_start();
+		?>
+		<h2>Recent Products</h2>
+		<div class="row">
+		<?php	
+		while ( $loop->have_posts() ) : $loop->the_post();
+			$product = wc_get_product( get_the_ID() );
+			?>
+			<div class="col-md-3">
+				<h2>
+					<a href="<?php the_permalink(); ?>">
+						<?php the_title(); ?>
+					</a>
+
+				</h2>
+				<p class="product_price">
+					<?php echo $product->get_price_html() ?>
+				</p>
+			</div>
+			<?php
+			
+		endwhile;
+		wp_reset_query();
+		?>
+		</div>
+		<?php
+		
+		$output = ob_get_clean();
+		return $output;
 	}
 }
 
