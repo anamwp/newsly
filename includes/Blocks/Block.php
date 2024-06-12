@@ -97,19 +97,38 @@ class Block {
 				'render_callback' => array( $this, 'single_post_render_frontend_callback' ),
 			)
 		);
+		/**
+		 * 
+		 */
 		register_block_type(
-			'anam-guternberg-starter-block/recent-product',
+			'anam-gutenberg-starter-block/post-lists-tab',
 			array(
 				'api_version'     => 2,
 				'editor_script'   => 'starter-script',
 				'editor_style'    => 'starter-editor-style',
 				'style'           => 'starter-frontend-style',
-				'render_callback' => array( $this, 'recent_product_render_frontend_callback' ),
+				'render_callback' => array( $this, 'post_lists_tab_render_frontend_callback' ),
 			)
 		);
+		
+		if ( class_exists( 'woocommerce' ) ) :
+			register_block_type(
+				'anam-guternberg-starter-block/recent-product',
+				array(
+					'api_version'     => 2,
+					'editor_script'   => 'starter-script',
+					'editor_style'    => 'starter-editor-style',
+					'style'           => 'starter-frontend-style',
+					'render_callback' => array( $this, 'recent_product_render_frontend_callback' ),
+				)
+			);
+		endif;
 	}
 
 	public function single_post_render_frontend_callback( $block_attributes, $content ) {
+		echo '<pre>';
+		var_dump('hello');
+		echo '</pre>';
 		/**
 		 * assign post id from
 		 * block attributes array
@@ -248,6 +267,18 @@ class Block {
 		</div>
 		<?php
 		
+		$output = ob_get_clean();
+		return $output;
+	}
+	public function post_lists_tab_render_frontend_callback( $block_attributes, $content ){
+		ob_start();
+		$args = array(
+			'post_type'      => 'post',
+			'posts_per_page' => 3
+		);
+		echo '<pre>';
+		var_dump($args);
+		echo '</pre>';
 		$output = ob_get_clean();
 		return $output;
 	}
