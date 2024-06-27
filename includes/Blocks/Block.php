@@ -21,14 +21,20 @@ class Block {
 	}
 	public $movie_list_callback_instance;
 	/**
-	 * Undocumented function
+	 * Initiate Class
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_starter_blocks' ) );
+		/**
+		 * Initiniating Movie List Callback File
+		 */
 		$this->movie_list_callback_instance = Inc\Class_Movie_List_Callback::init();
 	}
-	
-
+	/**
+	 * Register Starter Blocks
+	 *
+	 * @return void
+	 */
 	public function register_starter_blocks() {
 		// $asset_file = require(ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.asset.php');
 		$asset_file = include ANAM_GUTENBERG_STARTER_PATH . '/build/index.asset.php';
@@ -140,7 +146,13 @@ class Block {
 			);
 		endif;
 	}
-
+	/**
+	 * Single Post Block Frontend Render Callback
+	 *
+	 * @param [type] $block_attributes
+	 * @param [type] $content
+	 * @return void
+	 */
 	public function single_post_render_frontend_callback( $block_attributes, $content ) {
 		echo '<pre>';
 		var_dump('hello');
@@ -244,6 +256,13 @@ class Block {
 			$output = ob_get_clean();
 			return $output;
 	}
+	/**
+	 * Recent Product Block Frontend Render Callback
+	 *
+	 * @param [type] $block_attributes
+	 * @param [type] $content
+	 * @return void
+	 */
 	public function recent_product_render_frontend_callback( $block_attributes, $content ) {
 
 		$args = array(
@@ -282,6 +301,13 @@ class Block {
 		$output = ob_get_clean();
 		return $output;
 	}
+	/**
+	 * Post Lists Tab Block Frontend Render callback
+	 *
+	 * @param [type] $block_attributes
+	 * @param [type] $content
+	 * @return void
+	 */
 	public function post_lists_tab_render_frontend_callback( $block_attributes, $content ){
 		ob_start();
 		$args = array(
@@ -294,6 +320,13 @@ class Block {
 		$output = ob_get_clean();
 		return $output;
 	}
+	/**
+	 * Movie List Block Frontend Render Callback
+	 *
+	 * @param [type] $block_attributes
+	 * @param [type] $content
+	 * @return void
+	 */
 	public function movie_lists_render_frontend_callback($block_attributes, $content){
 		ob_start();
 		$this->movie_list_callback_instance->handle_movie_list_block_content_from_api($block_attributes, $content);
