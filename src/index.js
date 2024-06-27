@@ -8,3 +8,4 @@ import './blocks/call-to-action/index';
 import './blocks/single-post/index';
 import './blocks/recent-product/index';
 import './blocks/post-lists-tab/index';
+import './blocks/movie-lists/index';
