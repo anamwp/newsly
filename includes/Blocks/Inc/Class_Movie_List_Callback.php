@@ -13,6 +13,7 @@ class Class_Movie_List_Callback {
 	 */
 	private static $instance;
 	public $block_attributes;
+	public $new_genres = [];
 	public $content;
 
 	/**
@@ -72,7 +73,7 @@ class Class_Movie_List_Callback {
 						// Return null if 'page' parameter is not found
 						return null;
 					}
-					$(document).on('click', '.cgl-ajax-number-pagination a', function(e){
+					$(document).on('click', '.movie-list-ajax-number-pagination a', function(e){
 						e.preventDefault();
 						var page = $(this).attr('href');
 						var pageNumber = getPageNumberFromUrl(page);
@@ -85,6 +86,8 @@ class Class_Movie_List_Callback {
 							},
 							success: function(response){
 								console.log('response', response);
+								$('.movie-list').empty().append(response);
+								$(window).scrollTop(0);
 							}
 						});
 					});
@@ -99,22 +102,23 @@ class Class_Movie_List_Callback {
 	 * @return void
 	 */
 	public function handle_movie_list_block_ajax_pagination(){
-		$pagination_body = '';
+		$requested_movie_content = '';
 		$total_pages = '';
 
 		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page='. $_POST['pageNumber'] );
 
 		if ( is_array( $get_movie_data ) && ! is_wp_error( $get_movie_data ) ) {
 			// $headers = $get_movie_data['headers']; // array of http header lines
-			$pagination_body    = json_decode($get_movie_data['body']); // use the content
-			$total_pages = $pagination_body->total_pages;
+			$requested_movie_content    = json_decode($get_movie_data['body']); // use the content
+			// $total_pages = $requested_movie_content->total_pages;
+			$total_pages = 10000;
 		}
 
-		if($pagination_body):
+		if($requested_movie_content):
 		?>
 			<!-- <div class="movie-list"> -->
 			<?php 
-				foreach($pagination_body->results as $movie):
+				foreach($requested_movie_content->results as $movie):
 			?>
 				<div class="movie-card">
 					<div class="movie-image">
@@ -135,15 +139,15 @@ class Class_Movie_List_Callback {
 		$total_pages = ceil( $total_pages / 20 );
 		?>
 		</div>
-		<div class="cgl-ajax-number-pagination">
+		<div class="movie-list-ajax-number-pagination">
 			<?php
 				echo paginate_links( array(
 					// 'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
 					'base' => 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US'.'%_%',
 					'format' => '&page=%#%',
 					'number' => 3,
-					// 'current' => max( 1, get_query_var('paged') ),
-					'current' => $anniversary_paged,
+					'current' => max( 1, $anniversary_paged ),
+					// 'current' => $anniversary_paged,
 					'total' =>  $total_pages,
 				) );
 			?>
@@ -162,19 +166,42 @@ class Class_Movie_List_Callback {
 	public function handle_movie_list_block_content_from_api($block_attributes, $content) {
 		$this->block_attributes = $block_attributes;
 		$this->content = $content;
+
+		echo '<pre>';
+		// var_dump($arr2);
+		// var_dump($this->block_attributes['genres']);
+		echo '</pre>';
 		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1' );
-		$body = '';
+		$movie_api_data = '';
 		$total_pages = '';
 		if ( is_array( $get_movie_data ) && ! is_wp_error( $get_movie_data ) ) {
 			$headers = $get_movie_data['headers']; // array of http header lines
-			$body    = json_decode($get_movie_data['body']); // use the content
-			$total_pages = $body->total_pages;
+			$movie_api_data    = json_decode($get_movie_data['body']); // use the content
+			// $total_pages = $movie_api_data->total_pages;
+			$total_pages = 10000;
 		}
-		if($body):
+		$column = array_key_exists('movieColumn', $this->block_attributes) ? $this->block_attributes['movieColumn'] : 4;
+		/**
+		 * Create new genres array with id as key
+		 */
+		foreach($this->block_attributes['genres'] as $key => $value){
+			$this->new_genres[$value['id']] = $value;
+		}
+		
+		if($movie_api_data):
 		?>
+			<style>
+				.movie-list{
+					grid-template-columns: repeat(<?php echo $column; ?>, 1fr);
+				}
+				.movie-list-ajax-number-pagination{
+					grid-column-start: 1;
+					grid-column-end: <?php echo +$column + 1; ?>
+				}
+			</style>
 			<div class="movie-list">
 				<?php 
-					foreach($body->results as $movie):
+					foreach($movie_api_data->results as $movie):
 				?>
 					<div class="movie-card">
 						<div class="movie-image">
@@ -184,32 +211,65 @@ class Class_Movie_List_Callback {
 							<h2><?php echo $movie->title; ?></h2>
 							<p class="overview"><?php echo $movie->overview; ?></p>
 						</div>
+						<div class="movie-footer">
+							<?php if(! array_key_exists('showGenre', $this->block_attributes)): ?>
+							<div className="genre">
+								<ul>
+								<?php
+									$get_details = $this->handle_genre_filter($movie->genre_ids);
+									foreach($get_details as $genre){
+										echo "<li>{$genre['name']}</li>";
+									}
+								?>
+								</ul>
+							</div>
+							<?php endif; ?>
+							<?php
+								if(! array_key_exists('showLanguage', $this->block_attributes)){
+									echo "<p>Language - {$movie->original_language}</p>";
+								}
+								if(! array_key_exists('showReleaseDate', $this->block_attributes)){
+									echo "<p>Release Date - {$movie->release_date}</p>";
+								}
+								if(! array_key_exists('showVoteCount', $this->block_attributes)){
+									echo "<p>Vote Count - {$movie->vote_count}</p>";
+								}
+								if(! array_key_exists('showVoteAverage', $this->block_attributes) ){
+									echo "<p>Vote Average - {$movie->vote_average}</p>";
+								}
+							?>
+						</div>
 					</div>
 				<?php
 					endforeach;
 				?>
+			
+				<?php
+					$anniversary_paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
+					// $total_pages = $total_pages;
+					$total_pages = ceil( $total_pages / 20 );
+				?>
+				<div class="movie-list-ajax-number-pagination">
+					<?php
+						echo paginate_links( array(
+							// 'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+							'base' => 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US'.'%_%',
+							'format' => '&page=%#%',
+							'number' => 3,
+							// 'current' => max( 1, get_query_var('paged') ),
+							'current' => $anniversary_paged,
+							'total' =>  $total_pages,
+						) );
+					?>
+				</div>
 			</div>
 		<?php
-		$anniversary_paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-		$total_pages = $total_pages;
-		$total_pages = ceil( $total_pages / 20 );
-		?>
-		</div>
-		<div class="cgl-ajax-number-pagination">
-			<?php
-				echo paginate_links( array(
-					// 'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-					'base' => 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US'.'%_%',
-					'format' => '&page=%#%',
-					'number' => 3,
-					// 'current' => max( 1, get_query_var('paged') ),
-					'current' => $anniversary_paged,
-					'total' =>  $total_pages,
-				) );
-			?>
-		</div>
-		<?php
 		endif;
+	}
+	public function handle_genre_filter($arr){
+		$new_arr_fill = array_fill_keys($arr, null);
+		$intersection_arr = array_intersect_key($this->new_genres, $new_arr_fill);
+		return $intersection_arr;
 	}
 
 }

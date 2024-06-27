@@ -328,6 +328,10 @@ class Block {
 	 * @return void
 	 */
 	public function movie_lists_render_frontend_callback($block_attributes, $content){
+		/**
+		 * $block_attributes is coming from attributes or block.json
+		 * $content is coming from save.js
+		 */
 		ob_start();
 		$this->movie_list_callback_instance->handle_movie_list_block_content_from_api($block_attributes, $content);
 		$output = ob_get_clean();
