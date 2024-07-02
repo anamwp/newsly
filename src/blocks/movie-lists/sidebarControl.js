@@ -60,22 +60,17 @@ export default function sidebarControl({
 	// Component: BorderControl
 	// Component: BorderBoxControl
 	const colors = [{ name: 'Blue 20', color: '#72aee6' }];
-	const MyBorderControl = () => {
-		const [border, setBorder] = useState();
-		return (
-			<BorderControl
-				colors={colors}
-				label={__('Border')}
-				onChange={setBorder}
-				value={border}
-			/>
-		);
-	};
+
 	const MyBorderBoxControl = () => {
 		const defaultBorder = {
 			color: '#72aee6',
 			style: 'dashed',
 			width: '1px',
+		};
+		const defaultTopBorder = {
+			color: '#72aee6',
+			style: 'solid',
+			width: '2px',
 		};
 		const [borders, setBorders] = useState({
 			top: defaultBorder,
@@ -86,30 +81,18 @@ export default function sidebarControl({
 		const onChange = (newBorders) => setBorders(newBorders);
 
 		return (
-			<BorderBoxControl
-				colors={colors}
-				label={__('Borders')}
-				onChange={onChange}
-				value={borders}
-			/>
+			<>
+				<p>Border Control</p>
+				<BorderBoxControl
+					colors={colors}
+					label={__('Borders')}
+					onChange={onChange}
+					value={borders}
+				/>
+			</>
 		);
 	};
-	// Component: BoxControl
-	const MyBoxControl = () => {
-		const [values, setValues] = useState({
-			top: '50px',
-			left: '10%',
-			right: '10%',
-			bottom: '50px',
-		});
 
-		return (
-			<BoxControl
-				values={values}
-				onChange={(nextValues) => setValues(nextValues)}
-			/>
-		);
-	};
 	// Component: CheckboxControl
 	const MyCheckboxControl = () => {
 		const [isChecked, setChecked] = useState(true);
@@ -122,13 +105,6 @@ export default function sidebarControl({
 			/>
 		);
 	};
-	// Component: ButtonGroup
-	const MyButtonGroup = () => (
-		<ButtonGroup>
-			<Button variant="primary">Button 1</Button>
-			<Button variant="primary">Button 2</Button>
-		</ButtonGroup>
-	);
 	// Component: ClipboardButton
 	const MyClipboardButton = () => {
 		const [hasCopied, setHasCopied] = useState(false);
@@ -147,7 +123,7 @@ export default function sidebarControl({
 	return (
 		<div>
 			<InspectorControls>
-				{/* Component: TabPanel */}
+				{/* settings: Column */}
 				<Panel>
 					<PanelBody
 						icon="welcome-widgets-menus"
@@ -168,7 +144,7 @@ export default function sidebarControl({
 						/>
 					</PanelBody>
 				</Panel>
-				{/* Component: CheckboxControl */}
+				{/* settings: Meta data */}
 				<Panel>
 					<PanelBody
 						icon="welcome-widgets-menus"
@@ -226,34 +202,12 @@ export default function sidebarControl({
 
 			{/* Style panel */}
 			<InspectorControls group="styles">
-				{/* Buttongroup */}
-				<Panel>
-					<PanelBody
-						icon="welcome-widgets-menus"
-						initialOpen={false}
-						title="Button"
-					>
-						<MyButtonGroup />
-					</PanelBody>
-				</Panel>
-
-				<Panel>
-					<PanelBody
-						icon="welcome-widgets-menus"
-						initialOpen={false}
-						title="Box Control"
-					>
-						<MyBoxControl />
-					</PanelBody>
-				</Panel>
-
 				<Panel>
 					<PanelBody
 						icon="welcome-widgets-menus"
 						initialOpen={false}
 						title="Border"
 					>
-						<MyBorderControl />
 						<MyBorderBoxControl />
 					</PanelBody>
 				</Panel>
