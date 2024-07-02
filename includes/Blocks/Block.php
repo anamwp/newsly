@@ -69,6 +69,9 @@ class Block {
 		/**
 		 * Register block type
 		 */
+		/**
+		 * Blurb Block
+		 */
 		register_block_type(
 			'anam-guternberg-starter-block/blurb',
 			array(
@@ -78,6 +81,21 @@ class Block {
 				'style'         => 'starter-frontend-style',
 			)
 		);
+		/**
+		 * Card Block
+		 */
+		register_block_type(
+			'anam-guternberg-starter-block/card',
+			array(
+				'api_version'   => 2,
+				'editor_script' => 'starter-script',
+				'editor_style'  => 'starter-editor-style',
+				'style'         => 'starter-frontend-style',
+			)
+		);
+		/**
+		 * Test Block
+		 */
 		register_block_type(
 			'anam-guternberg-starter-block/test',
 			array(
@@ -87,6 +105,9 @@ class Block {
 				'style'         => 'starter-frontend-style',
 			)
 		);
+		/**
+		 * Call to Action Block
+		 */
 		register_block_type(
 			'anam-guternberg-starter-block/call-to-action',
 			array(
@@ -96,6 +117,9 @@ class Block {
 				'style'         => 'starter-frontend-style',
 			)
 		);
+		/**
+		 * Single Post Block
+		 */
 		register_block_type(
 			'anam-gutenberg-starter-block/single-post',
 			array(
@@ -107,7 +131,7 @@ class Block {
 			)
 		);
 		/**
-		 * 
+		 * Post Lists Tab Block
 		 */
 		register_block_type(
 			'anam-gutenberg-starter-block/post-lists-tab',
@@ -132,7 +156,22 @@ class Block {
 				'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
 			)
 		);
-		
+		/**
+		 * Top rated movie lists block
+		 */
+		register_block_type(
+			'anam-gutenberg-starter-block/top-rated-movie-lists',
+			array(
+				'api_version'     => 2,
+				'editor_script'   => 'starter-script',
+				'editor_style'    => 'starter-editor-style',
+				'script'   => 'starter-script',
+				'style'           => 'starter-frontend-style',
+			)
+		);
+		/**
+		 * Recent Product Block
+		 */
 		if ( class_exists( 'woocommerce' ) ) :
 			register_block_type(
 				'anam-guternberg-starter-block/recent-product',
