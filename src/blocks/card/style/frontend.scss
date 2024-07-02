@@ -1,11 +1,20 @@
 .gts__card {
 	.card {
-		border: solid 1px red;
-		// &__title {
-		// 	background: green;
-		// }
-		// &__description {
-		// 	background: yellow;
-		// }
+		border: solid 1px #eee;
+		border-radius: 4px;
+		overflow: hidden;
+		&__img {
+			img {
+				width: 100%;
+			}
+		}
+		&__content {
+			padding: 30px;
+			&__title {
+				h2 {
+					margin-top: 0px;
+				}
+			}
+		}
 	}
 }
