@@ -9,3 +9,4 @@ import './blocks/single-post/index';
 import './blocks/recent-product/index';
 import './blocks/post-lists-tab/index';
 import './blocks/movie-lists/index';
+import './blocks/top-rated-movie-lists/index';
