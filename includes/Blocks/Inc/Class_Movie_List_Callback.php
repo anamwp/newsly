@@ -75,6 +75,7 @@ class Class_Movie_List_Callback {
 					}
 					$(document).on('click', '.movie-list-ajax-number-pagination a', function(e){
 						e.preventDefault();
+						debugger;
 						var page = $(this).attr('href');
 						var pageNumber = getPageNumberFromUrl(page);
 						$.ajax({
@@ -121,10 +122,32 @@ class Class_Movie_List_Callback {
 				foreach($requested_movie_content->results as $movie):
 			?>
 				<div class="movie-card">
-					<div class="movie-image">
+					<div class="movie-card__image">
 						<img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->poster_path; ?>" alt="<?php echo $movie->title; ?>">
+						<div class="meta">
+							<div class="language-date">
+							<?php 
+							// if(! array_key_exists('showLanguage', $this->block_attributes)){
+								echo "<span class='language'>{$movie->original_language}</span>";
+							// }
+							// if(! array_key_exists('showReleaseDate', $this->block_attributes)){
+								echo "<span class='date'>{$movie->release_date}</span>";
+							// }
+							?>
+							</div>
+							<div class="vote">
+								<?php
+								// if(! array_key_exists('showVoteAverage', $this->block_attributes) ){
+									echo "<span class='vote-average'>{$movie->vote_average}</span>";
+								// }
+								// if(! array_key_exists('showVoteCount', $this->block_attributes)){
+									echo " / <span class='vote-count'>{$movie->vote_count}</span>";
+								// }
+								?>
+							</div>
+						</div>
 					</div>
-					<div class="movie-content">
+					<div class="movie-card__content">
 						<h2><?php echo $movie->title; ?></h2>
 						<p class="overview"><?php echo $movie->overview; ?></p>
 					</div>
@@ -167,10 +190,10 @@ class Class_Movie_List_Callback {
 		$this->block_attributes = $block_attributes;
 		$this->content = $content;
 
-		echo '<pre>';
+		// echo '<pre>';
 		// var_dump($arr2);
 		// var_dump($this->block_attributes['genres']);
-		echo '</pre>';
+		// echo '</pre>';
 		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1' );
 		$movie_api_data = '';
 		$total_pages = '';
@@ -204,40 +227,52 @@ class Class_Movie_List_Callback {
 					foreach($movie_api_data->results as $movie):
 				?>
 					<div class="movie-card">
-						<div class="movie-image">
+						<div class="movie-card__image">
 							<img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->poster_path; ?>" alt="<?php echo $movie->title; ?>">
-						</div>
-						<div class="movie-content">
-							<h2><?php echo $movie->title; ?></h2>
-							<p class="overview"><?php echo $movie->overview; ?></p>
-						</div>
-						<div class="movie-footer">
-							<?php if(! array_key_exists('showGenre', $this->block_attributes)): ?>
-							<div className="genre">
-								<ul>
-								<?php
-									$get_details = $this->handle_genre_filter($movie->genre_ids);
-									foreach($get_details as $genre){
-										echo "<li>{$genre['name']}</li>";
-									}
-								?>
-								</ul>
-							</div>
-							<?php endif; ?>
-							<?php
+							<div class="meta">
+								<div class="language-date">
+								<?php 
 								if(! array_key_exists('showLanguage', $this->block_attributes)){
-									echo "<p>Language - {$movie->original_language}</p>";
+									echo "<span class='language'>{$movie->original_language}</span>";
 								}
 								if(! array_key_exists('showReleaseDate', $this->block_attributes)){
-									echo "<p>Release Date - {$movie->release_date}</p>";
+									echo "<span class='date'>{$movie->release_date}</span>";
 								}
-								if(! array_key_exists('showVoteCount', $this->block_attributes)){
-									echo "<p>Vote Count - {$movie->vote_count}</p>";
-								}
-								if(! array_key_exists('showVoteAverage', $this->block_attributes) ){
-									echo "<p>Vote Average - {$movie->vote_average}</p>";
-								}
-							?>
+								?>
+								</div>
+								<div class="vote">
+									<?php
+									if(! array_key_exists('showVoteAverage', $this->block_attributes) ){
+										echo "<span class='vote-average'>{$movie->vote_average}</span>";
+									}
+									if(! array_key_exists('showVoteCount', $this->block_attributes)){
+										echo " / <span class='vote-count'>{$movie->vote_count}</span>";
+									}
+									?>
+								</div>
+							</div>
+						</div>
+						<div class="movie-card__content">
+							
+							<h2><?php echo $movie->title; ?></h2>
+							<p class="overview"><?php echo $movie->overview; ?></p>
+							<div class="movie-card__content__footer">
+								<?php if(! array_key_exists('showGenre', $this->block_attributes)): ?>
+								<div class="genre">
+									<ul>
+									<?php
+										$get_details = $this->handle_genre_filter($movie->genre_ids);
+										foreach($get_details as $genre){
+											echo "<li>{$genre['name']}</li>";
+										}
+									?>
+									</ul>
+								</div>
+								<?php endif; ?>
+								<?php
+									
+								?>
+							</div>
 						</div>
 					</div>
 				<?php
