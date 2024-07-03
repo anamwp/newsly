@@ -48,6 +48,17 @@ const HandleGenreRender = ({ genreIDArr, attributes }) => {
 	// console.log('getGenre', newGenreArr);
 	// console.log('is found', isFound);
 };
+const HandleRoundNumber = (number, decimal_digit) => {
+	let powerOften = Math.pow(10, decimal_digit);
+	let result = Math.round(number * powerOften) / powerOften;
+	return result;
+};
+const HandleDate = (date) => {
+	let dateParseString = Date.parse(date);
+	let newDate = new Date(dateParseString);
+	let getYear = newDate.getFullYear();
+	return getYear;
+};
 /**
  * Movie Card Component
  * @param {*} param0
@@ -61,13 +72,37 @@ const MovieCard = ({ movie, attributes }) => {
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 					alt={movie.title}
 				/>
+				<div className="rating-point">
+					{attributes.showVoteAverage && (
+						<span className="vote-point">
+							{HandleRoundNumber(movie.vote_average, 1)}
+						</span>
+					)}
+					{attributes.showVoteCount && (
+						<span class="vote-count">{movie.vote_count}</span>
+					)}
+				</div>
+				<div className="language-and-yeaer">
+					{attributes.showLanguage && (
+						<span className="language">
+							{movie.original_language}
+						</span>
+					)}
+					{attributes.showReleaseDate && (
+						<span className="year">
+							{HandleDate(movie.release_date)}
+						</span>
+					)}
+				</div>
 			</div>
 			<div class="card__header">
 				<h2>{movie.title}</h2>
 			</div>
-			<div className="card__body">
-				<p>{movie.overview}</p>
-			</div>
+			{attributes.showDescription && (
+				<div className="card__body">
+					<p>{movie.overview}</p>
+				</div>
+			)}
 			<div className="card__footer">
 				{attributes.showGenre && (
 					<div className="genre">
@@ -76,19 +111,6 @@ const MovieCard = ({ movie, attributes }) => {
 							attributes={attributes}
 						/>
 					</div>
-				)}
-				{attributes.showLanguage && (
-					<p>Language - {movie.original_language}</p>
-				)}
-				{attributes.showReleaseDate && (
-					<p>Release Date - {movie.release_date}</p>
-				)}
-				{attributes.showVoteCount && (
-					<p>Vote Count - {movie.vote_count}</p>
-				)}
-
-				{attributes.showVoteAverage && (
-					<p>Vote Average - {movie.vote_average}</p>
 				)}
 			</div>
 		</div>

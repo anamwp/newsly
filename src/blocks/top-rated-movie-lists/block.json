@@ -28,6 +28,10 @@
 			"type": "number",
 			"default": 4
 		},
+		"showDescription": {
+			"type": "boolean",
+			"default": true
+		},
 		"showGenre": {
 			"type": "boolean",
 			"default": true
@@ -47,6 +51,10 @@
 		"showVoteAverage": {
 			"type": "boolean",
 			"default": true
+		},
+		"cardGradient": {
+			"type": "string",
+			"default": "linear-gradient(180deg, rgba(255,255,255,0.) 0%, rgba(0,0,0,0.6) 100%)"
 		}
 	}
 }

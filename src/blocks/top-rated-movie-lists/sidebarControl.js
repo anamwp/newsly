@@ -14,6 +14,7 @@ import {
 	ButtonGroup,
 	CheckboxControl,
 	ClipboardButton,
+	GradientPicker,
 	__experimentalBoxControl as BoxControl,
 	__experimentalBorderControl as BorderControl,
 	__experimentalBorderBoxControl as BorderBoxControl,
@@ -61,38 +62,6 @@ export default function sidebarControl({
 	// Component: BorderBoxControl
 	const colors = [{ name: 'Blue 20', color: '#72aee6' }];
 
-	const MyBorderBoxControl = () => {
-		const defaultBorder = {
-			color: '#72aee6',
-			style: 'dashed',
-			width: '1px',
-		};
-		const defaultTopBorder = {
-			color: '#72aee6',
-			style: 'solid',
-			width: '2px',
-		};
-		const [borders, setBorders] = useState({
-			top: defaultBorder,
-			right: defaultBorder,
-			bottom: defaultBorder,
-			left: defaultBorder,
-		});
-		const onChange = (newBorders) => setBorders(newBorders);
-
-		return (
-			<>
-				<p>Border Control</p>
-				<BorderBoxControl
-					colors={colors}
-					label={__('Borders')}
-					onChange={onChange}
-					value={borders}
-				/>
-			</>
-		);
-	};
-
 	// Component: CheckboxControl
 	const MyCheckboxControl = () => {
 		const [isChecked, setChecked] = useState(true);
@@ -105,18 +74,37 @@ export default function sidebarControl({
 			/>
 		);
 	};
-	// Component: ClipboardButton
-	const MyClipboardButton = () => {
-		const [hasCopied, setHasCopied] = useState(false);
+	const CardGradientPicker = () => {
+		// const [gradient, setGradient] = useState(null);
+		// console.log('gradient', gradient);
+
 		return (
-			<ClipboardButton
-				variant="primary"
-				text="Text to be copied."
-				onCopy={() => setHasCopied(true)}
-				onFinishCopy={() => setHasCopied(false)}
-			>
-				{hasCopied ? 'Copied!' : 'Copy Text'}
-			</ClipboardButton>
+			<GradientPicker
+				value={attributes.cardGradient}
+				onChange={(currentGradient) =>
+					setAttributes({ cardGradient: currentGradient })
+				}
+				gradients={[
+					{
+						name: 'Black White',
+						gradient:
+							'linear-gradient(180deg,rgba(255, 255, 255, 0) 0%,rgba(0, 0, 0, 0.6) 100%)',
+						slug: 'jshine',
+					},
+					{
+						name: 'Moonlit Asteroid',
+						gradient:
+							'linear-gradient(180deg,#0F202700 0%, #2c5364 100%)',
+						slug: 'moonlit-asteroid',
+					},
+					{
+						name: 'Rastafarie',
+						gradient:
+							'linear-gradient(180deg,#1E960000 0%, #FFF200 0%, #FF0000 100%)',
+						slug: 'rastafari',
+					},
+				]}
+			/>
 		);
 	};
 
@@ -126,7 +114,7 @@ export default function sidebarControl({
 				{/* settings: Column */}
 				<Panel>
 					<PanelBody
-						icon="welcome-widgets-menus"
+						// icon="welcome-widgets-menus"
 						initialOpen={true}
 						title="Block Structure"
 					>
@@ -147,10 +135,19 @@ export default function sidebarControl({
 				{/* settings: Meta data */}
 				<Panel>
 					<PanelBody
-						icon="welcome-widgets-menus"
+						// icon="welcome-widgets-menus"
 						initialOpen={true}
 						title="Meta Information"
 					>
+						{/* Genre */}
+						<CheckboxControl
+							label="Description"
+							help="Show description of the movie in the card."
+							checked={attributes.showDescription}
+							onChange={(newValue) => {
+								setAttributes({ showDescription: newValue });
+							}}
+						/>
 						{/* Genre */}
 						<CheckboxControl
 							label="Genre"
@@ -204,40 +201,11 @@ export default function sidebarControl({
 			<InspectorControls group="styles">
 				<Panel>
 					<PanelBody
-						icon="welcome-widgets-menus"
-						initialOpen={false}
-						title="Border"
+						// icon="welcome-widgets-menus"
+						initialOpen={true}
+						title="Gradient"
 					>
-						<MyBorderBoxControl />
-					</PanelBody>
-				</Panel>
-
-				<Panel>
-					<PanelBody
-						icon="welcome-widgets-menus"
-						initialOpen={false}
-						title="My Block Settings"
-					>
-						<PanelRow>My Panel Inputs and Labels</PanelRow>
-					</PanelBody>
-				</Panel>
-
-				<Panel>
-					<PanelBody
-						title={__('Block Styles', 'anam-gutenberg-starter')}
-						initialOpen={false}
-					>
-						<ColorPicker
-							color={color}
-							onChange={setColor}
-							enableAlpha
-							defaultValue="#000"
-						/>
-						<DateTimePicker
-							currentDate={date}
-							onChange={(newDate) => setDate(newDate)}
-							is12Hour={true}
-						/>
+						<CardGradientPicker />
 					</PanelBody>
 				</Panel>
 			</InspectorControls>
