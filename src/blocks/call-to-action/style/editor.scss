@@ -1,7 +1,19 @@
-[data-type="anam-gutenberg-starter-block/call-to-action"]{
-    .call-to-action-button{
-        div[data-type="core/button"]{
-            display:block;
-        }
-    }
+// [data-type='anam-gutenberg-starter-block/call-to-action'] {
+// 	.call-to-action-button {
+// 		div[data-type='core/button'] {
+// 			display: block;
+// 		}
+// 	}
+// 	background: red;
+// }
+
+.call-to-action {
+	background: rebeccapurple;
+	// .call-to-action-media-wrapper {
+	// 	border: solid 1px red;
+	// 	img {
+	// 		display: inline-block;
+	// 		width: 100%;
+	// 	}
+	// }
 }

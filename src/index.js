@@ -10,3 +10,5 @@ import './blocks/recent-product/index';
 import './blocks/post-lists-tab/index';
 import './blocks/movie-lists/index';
 import './blocks/top-rated-movie-lists/index';
+import './blocks/upcoming-movies/index';
+import './blocks/theatres-movies/index';

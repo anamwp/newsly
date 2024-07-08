@@ -1,8 +1,13 @@
 .gts__blurb {
 	&__container {
-		padding: 50px 100px;
+		padding: 30px;
+		h2{
+			margin-top: 0px;
+			margin-bottom: 10px;
+		}
 	}
 	&__button {
 		display: inline-block;
+		margin-top: 10px;
 	}
 }

@@ -106,9 +106,9 @@ export default function edit({ attributes, setAttributes }) {
 							initialOpen={true}
 						>
 							<PanelRow>
-								Set the total block background color
+								Set the blurb background color
 							</PanelRow>
-							<ColorPicker
+							<ColorPalette
 								onChange={(newFontSize) => {
 									setAttributes({
 										blurb_bg_color: newFontSize,
@@ -125,32 +125,6 @@ export default function edit({ attributes, setAttributes }) {
 							<PanelRow>
 								<ColorPalette onChange={handleTextColor} />
 							</PanelRow>
-						</PanelBody>
-
-						<PanelBody
-							title="FontSizePicker Component"
-							initialOpen={false}
-						>
-							<FontSizePicker
-								__nextHasNoMarginBottom
-								fontSizes={fontSizes}
-								value={attributes.font_size}
-								fallbackFontSize={fallbackFontSize}
-								// onChange={(newFontSize) => {
-								// 	setFontSize(newFontSize);
-								// }}
-								onChange={(newFontSize) => {
-									setAttributes({
-										font_size: newFontSize,
-									});
-								}}
-							/>
-							<CheckboxControl
-								label="Is author"
-								help="Is the user a author or not?"
-								checked={isChecked}
-								onChange={setChecked}
-							/>
 						</PanelBody>
 					</Panel>
 				</div>

@@ -1,13 +1,24 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "anam-gutenberg-starter-block/top-rated-movie-lists",
+	"name": "anam-gutenberg-starter-block/upcoming-movies",
 	"version": "0.1.0",
-	"title": "Top Rated Movie Lists",
+	"title": "Upcoming Movies",
 	"category": "anam-starter",
 	"icon": "media-interactive",
 	"description": "",
 	"example": {},
+	"supports": {
+		"interactivity": true,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"html": false,
+		"typography": {
+			"fontSize": true
+		}
+	},
 	"attributes": {
 		"postId": {
 			"type": "number",
@@ -39,7 +50,7 @@
 		},
 		"showDescription": {
 			"type": "boolean",
-			"default": true
+			"default": false
 		},
 		"showGenre": {
 			"type": "boolean",

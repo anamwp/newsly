@@ -108,6 +108,12 @@ final class Anam_Gutenberg_Starter {
 		new Anam\GutenbergStarter\Init();
 	}
 }
+function create_block_starter_block_init() {
+	register_block_type_from_metadata( __DIR__ . '/build/blocks/theatres-movies' );
+	register_block_type_from_metadata( __DIR__ . '/build/blocks/upcoming-movies' );
+	register_block_type_from_metadata( __DIR__ . '/build/blocks/top-rated-movie-lists' );
+}
+add_action( 'init', 'create_block_starter_block_init' );
 
 /**
  * Initilize the main plugin

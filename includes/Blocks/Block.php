@@ -37,38 +37,50 @@ class Block {
 	 */
 	public function register_starter_blocks() {
 		// $asset_file = require(ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.asset.php');
-		$asset_file = include ANAM_GUTENBERG_STARTER_PATH . '/build/index.asset.php';
+		// $asset_file = include ANAM_GUTENBERG_STARTER_PATH . '/build/index.asset.php';
 		/**
 		 * register block script
 		 */
-		wp_register_script(
-			'starter-script',
-			ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.js',
-			$asset_file['dependencies'],
-			$asset_file['version']
-		);
+		// wp_register_script(
+		// 	'starter-script',
+		// 	ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.js',
+		// 	$asset_file['dependencies'],
+		// 	$asset_file['version']
+		// );
 		/**
 		 * register blocks editor style
 		 */
-		wp_register_style(
-			'starter-editor-style',
-			ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.css',
-			array(),
-			$asset_file['version']
-		);
+		// wp_register_style(
+		// 	'starter-editor-style',
+		// 	ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.css',
+		// 	array(),
+		// 	$asset_file['version']
+		// );
 		/**
 		 * Register blocks frontend style
 		 */
-		wp_register_style(
-			'starter-frontend-style',
-			ANAM_GUTENBERG_STARTER_DIR_URL . 'build/style-index.css',
-			array(),
-			$asset_file['version']
-		);
+		// wp_register_style(
+		// 	'starter-frontend-style',
+		// 	ANAM_GUTENBERG_STARTER_DIR_URL . 'build/style-index.css',
+		// 	array(),
+		// 	$asset_file['version']
+		// );
 
 		/**
 		 * Register block type
 		 */
+		/**
+		 * Test Block
+		 */
+		register_block_type(
+			'anam-guternberg-starter-block/test',
+			array(
+				'api_version'   => 2,
+				'editor_script' => 'starter-script',
+				'editor_style'  => 'starter-editor-style',
+				'style'         => 'starter-frontend-style',
+			)
+		);
 		/**
 		 * Blurb Block
 		 */
@@ -86,18 +98,6 @@ class Block {
 		 */
 		register_block_type(
 			'anam-guternberg-starter-block/card',
-			array(
-				'api_version'   => 2,
-				'editor_script' => 'starter-script',
-				'editor_style'  => 'starter-editor-style',
-				'style'         => 'starter-frontend-style',
-			)
-		);
-		/**
-		 * Test Block
-		 */
-		register_block_type(
-			'anam-guternberg-starter-block/test',
 			array(
 				'api_version'   => 2,
 				'editor_script' => 'starter-script',
@@ -159,16 +159,42 @@ class Block {
 		/**
 		 * Top rated movie lists block
 		 */
-		register_block_type(
-			'anam-gutenberg-starter-block/top-rated-movie-lists',
-			array(
-				'api_version'     => 2,
-				'editor_script'   => 'starter-script',
-				'editor_style'    => 'starter-editor-style',
-				'script'   => 'starter-script',
-				'style'           => 'starter-frontend-style',
-			)
-		);
+		// register_block_type(
+		// 	'anam-gutenberg-starter-block/top-rated-movie-lists',
+		// 	array(
+		// 		'api_version'     => 2,
+		// 		'editor_script'   => 'starter-script',
+		// 		'editor_style'    => 'starter-editor-style',
+		// 		'script'   => 'starter-script',
+		// 		'style'           => 'starter-frontend-style',
+		// 	)
+		// );
+		/**
+		 * Upcoming movie lists block
+		 */
+		// register_block_type(
+		// 	'anam-gutenberg-starter-block/upcoming-movies',
+		// 	array(
+		// 		'api_version'     => 2,
+		// 		'editor_script'   => 'starter-script',
+		// 		'editor_style'    => 'starter-editor-style',
+		// 		'script'   => 'starter-script',
+		// 		'style'           => 'starter-frontend-style',
+		// 	)
+		// );
+		/**
+		 * Theatres movies lists block
+		 */
+		// register_block_type(
+		// 	'anam-gutenberg-starter-block/theatres-movies',
+		// 	array(
+		// 		'api_version'     => 3,
+		// 		// 'editor_script'   => 'starter-script',
+		// 		// 'editor_style'    => 'starter-editor-style',
+		// 		// 'script'   	=> 'starter-script',
+		// 		// 'style'           => 'starter-frontend-style',
+		// 	)
+		// );
 		/**
 		 * Recent Product Block
 		 */
@@ -193,9 +219,6 @@ class Block {
 	 * @return void
 	 */
 	public function single_post_render_frontend_callback( $block_attributes, $content ) {
-		echo '<pre>';
-		var_dump('hello');
-		echo '</pre>';
 		/**
 		 * assign post id from
 		 * block attributes array

@@ -28,24 +28,13 @@ export default function edit(props) {
 	console.log('edit props ', props);
 	const { attributes, setAttributes, className, isSelected } = props;
 
-	const onChangeTitle = (newTitle) => {
-		setAttributes({
-			title: newTitle,
-		});
-	};
-	const onChangeContent = (newContent) => {
-		setAttributes({
-			content: newContent,
-		});
-	};
-	const onChangeAlignment = (newAlignment) => {
-		setAttributes({
-			alignment: 'undefined' === newAlignment ? none : newAlignment,
-		});
-	};
+	const blockProps = useBlockProps({
+		className: 'gts__call-to-action',
+	});
+
 	const onSelectImage = (imageObj) => {
-		debugger;
-		console.log('imageObj', imageObj);
+		// debugger;
+		// console.log('imageObj', imageObj);
 		setAttributes({
 			media: imageObj,
 			mediaId: imageObj.id,
@@ -71,7 +60,7 @@ export default function edit(props) {
 					}}
 					onSelect={(imageEntity) => {
 						// debugger;
-						console.log(imageEntity);
+						// console.log(imageEntity);
 						if (isBlobURL(imageEntity?.url)) {
 							return;
 						}
@@ -82,7 +71,7 @@ export default function edit(props) {
 							mediaId: imageEntity?.id,
 							mediaUrl: imageEntity?.url,
 						});
-						console.log('updated attributes ', props.attributes);
+						// console.log('updated attributes ', props.attributes);
 						// debugger;
 					}}
 				/>
@@ -90,9 +79,9 @@ export default function edit(props) {
 		);
 	};
 	const renderImage = () => {
-		console.log('render image', attributes);
+		// console.log('render image', attributes);
 		const { focalPoint } = attributes;
-		console.log('focalPoint', focalPoint);
+		// console.log('focalPoint', focalPoint);
 		const classes = classnames('call-to-action-image-wrapper', {
 			'is-selected': isSelected,
 		});
@@ -120,7 +109,7 @@ export default function edit(props) {
 						)}
 					</div>
 					<div
-						className="from-edit call-to-action-media-wrapper"
+						className="call-to-action__media-wrapper"
 						style={{ textAlign: props.attributes.alignment }}
 					>
 						{props.attributes.media && (
@@ -142,16 +131,21 @@ export default function edit(props) {
 		);
 	};
 	return (
-		<div {...useBlockProps()}>
+		<div {...blockProps}>
 			<SidebarControl
 				data={props}
 				onSelectImage={onSelectImage}
 				removeImage={removeImage}
-				onChangeAlignment={onChangeAlignment}
+				onChangeAlignment={(newAlignment) => {
+					setAttributes({
+						alignment:
+							'undefined' === newAlignment ? none : newAlignment,
+					});
+				}}
 			/>
 
-			<div>
-				{/* <MediaUploadCheck>
+			{/* <div> */}
+			{/* <MediaUploadCheck>
 					{!props.attributes.media && (
 						<MediaUpload
 							onSelect={onSelectImage}
@@ -172,64 +166,69 @@ export default function edit(props) {
 					)}
 				</MediaUploadCheck> */}
 
-				<div className="call-to-action">
-					<div
-						className="call-to-action-media-wrapper"
-						style={{ textAlign: props.attributes.alignment }}
-					>
-						{/* {props.attributes.media && (
+			<div className="call-to-action">
+				<div
+					className="call-to-action__media-wrapper"
+					style={{ textAlign: props.attributes.alignment }}
+				>
+					{/* {props.attributes.media && (
 							<img src={props.attributes.mediaUrl} alt="" />
 						)} */}
-						{props.attributes.showImage
-							? props.attributes.media
-								? renderImage()
-								: renderPlaceholderForImage()
-							: false}
-					</div>
-					<div className="call-to-action-title">
-						<RichText
-							style={{ textAlign: props.attributes.alignment }}
-							tagName="h3"
-							onChange={onChangeTitle}
-							value={
-								props.attributes.title && props.attributes.title
-							}
-						/>
-					</div>
-					<div className="call-to-action-content">
-						<RichText
-							style={{ textAlign: props.attributes.alignment }}
-							tagName="p"
-							onChange={onChangeContent}
-							value={
-								props.attributes.content &&
-								props.attributes.content
-							}
-						/>
-					</div>
-					<div
-						className="call-to-action-button"
+					{/* {props.attributes.showImage
+						? props.attributes.media
+							? renderImage()
+							: renderPlaceholderForImage()
+						: false} */}
+				</div>
+				<div className="call-to-action__title">
+					<RichText
 						style={{ textAlign: props.attributes.alignment }}
-					>
-						<InnerBlocks
-							template={[
-								[
-									'core/button',
-									{
-										placeholder: __(
-											'Action Link',
-											'anam-gutenberg-starter'
-										),
-									},
-								],
-							]}
-							allowedBlocks={['core/button']}
-							templateInsertUpdatesSelection={true}
-							__experimentalCaptureToolbars={true}
-						/>
-					</div>
+						tagName="h3"
+						onChange={(newTitle) => {
+							setAttributes({
+								title: newTitle,
+							});
+						}}
+						value={props.attributes.title && props.attributes.title}
+					/>
+				</div>
+				<div className="call-to-action__content">
+					<RichText
+						style={{ textAlign: props.attributes.alignment }}
+						tagName="p"
+						onChange={(newContent) => {
+							setAttributes({
+								content: newContent,
+							});
+						}}
+						value={
+							props.attributes.content && props.attributes.content
+						}
+					/>
+				</div>
+				<div
+					className="call-to-action__button"
+					style={{ textAlign: props.attributes.alignment }}
+				>
+					<InnerBlocks
+						template={[
+							[
+								'core/button',
+								{
+									placeholder: __(
+										'Action Link',
+										'anam-gutenberg-starter'
+									),
+								},
+							],
+						]}
+						allowedBlocks={['core/button']}
+						templateInsertUpdatesSelection={true}
+						__experimentalCaptureToolbars={true}
+					/>
 				</div>
 			</div>
+			{/* </div> */}
 		</div>
 	);
 }
