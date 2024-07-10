@@ -39,6 +39,13 @@ class Block {
 			// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
 			// 	include_once($file);
 			// }
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/test' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/single-post' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/card' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/call-to-action' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/blurb' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/recent-product' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/post-lists-tab' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/theatres-movies' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/top-rated-movie-lists' );

@@ -1,4 +1,18 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anam-gutenberg-starter-block/blurb",
+	"version": "0.1.0",
+	"title": "Blurb",
+	"category": "anam-starter",
+	"icon": "media-interactive",
+	"description": "",
+	"example": {
+		"attributes": {
+			"content": "Hello World",
+			"alignment": "right"
+		}
+	},
 	"attributes": {
 		"newcontent": {
 			"type": "string",
@@ -32,5 +46,9 @@
 			"type": "string",
 			"default": "#eee"
 		}
-	}
+	},
+	"textdomain": "anam-gutenberg-starter",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
 }

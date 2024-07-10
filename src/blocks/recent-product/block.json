@@ -1,4 +1,18 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anam-gutenberg-starter-block/recent-product",
+	"version": "0.1.0",
+	"title": "Recent Product",
+	"category": "anam-starter",
+	"icon": "media-interactive",
+	"description": "",
+	"example": {
+		"attributes": {
+			"content": "Hello World",
+			"alignment": "right"
+		}
+	},
 	"attributes": {
 		"newcontent": {
 			"type": "string",
@@ -36,5 +50,7 @@
 			"type": "object",
 			"default": ""
 		}
-	}
+	},
+	"textdomain": "anam-gutenberg-starter",
+	"editorScript": "file:./index.js"
 }

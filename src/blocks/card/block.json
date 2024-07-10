@@ -1,4 +1,13 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anam-gutenberg-starter-block/card",
+	"version": "0.1.0",
+	"title": "Card",
+	"category": "anam-starter",
+	"icon": "media-interactive",
+	"description": "",
+	"example": {},
 	"attributes": {
 		"imageUrl": {
 			"type": "string",
@@ -32,5 +41,9 @@
 			"type": "number",
 			"default": 16
 		}
-	}
+	},
+	"textdomain": "anam-gutenberg-starter",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
 }

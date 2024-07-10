@@ -3,14 +3,16 @@ import { registerBlockType } from '@wordpress/blocks';
 import metadata from './block.json';
 import edit from './edit';
 import save from './save';
-const { attributes } = metadata;
+import './editor.scss';
+import './style.scss';
+// const { attributes } = metadata;
 
-registerBlockType('anam-gutenberg-starter-block/post-lists-tab', {
-	apiVersion: 2,
-	title: __('Post Lists Tab', 'anam-gutenberg-starter'),
-	icon: 'admin-post',
-	category: 'anam-starter',
-	attributes,
+registerBlockType(metadata.name, {
+	// apiVersion: 2,
+	// title: __('Post Lists Tab', 'anam-gutenberg-starter'),
+	// icon: 'admin-post',
+	// category: 'anam-starter',
+	// attributes,
 	edit,
 	save,
 });

@@ -1,4 +1,13 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anam-gutenberg-starter-block/call-to-action",
+	"version": "0.1.0",
+	"title": "Call to Action",
+	"category": "anam-starter",
+	"icon": "media-interactive",
+	"description": "",
+	"example": {},
 	"attributes": {
 		"title": {
 			"type": "array",
@@ -49,5 +58,9 @@
 			"type": "boolean",
 			"default": true
 		}
-	}
+	},
+	"textdomain": "anam-gutenberg-starter",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
 }
