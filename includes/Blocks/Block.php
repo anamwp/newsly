@@ -24,11 +24,29 @@ class Block {
 	 * Initiate Class
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'register_starter_blocks' ) );
+		add_action( 'init', array( $this, 'register_block' ) );
+		// add_action( 'init', array( $this, 'register_starter_blocks' ) );
 		/**
 		 * Initiniating Movie List Callback File
 		 */
 		$this->movie_list_callback_instance = Inc\Class_Movie_List_Callback::init();
+	}
+	public function register_block(){
+		// dump(ANAM_GUTENBERG_STARTER_PATH);
+		// dump(plugins_url());
+		// dump(__DIR__);
+		// function create_block_starter_block_init() {
+			// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
+			// 	include_once($file);
+			// }
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/theatres-movies' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/top-rated-movie-lists' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/movie-lists' , array(
+				'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
+			));
+		// }
+		
 	}
 	/**
 	 * Register Starter Blocks
@@ -146,16 +164,16 @@ class Block {
 		/**
 		 * Movie lists block
 		 */
-		register_block_type(
-			'anam-gutenberg-starter-block/movie-lists',
-			array(
-				'api_version'     => 2,
-				'editor_script'   => 'starter-script',
-				'editor_style'    => 'starter-editor-style',
-				'style'           => 'starter-frontend-style',
-				'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
-			)
-		);
+		// register_block_type(
+		// 	'anam-gutenberg-starter-block/movie-lists',
+		// 	array(
+		// 		'api_version'     => 2,
+		// 		'editor_script'   => 'starter-script',
+		// 		'editor_style'    => 'starter-editor-style',
+		// 		'style'           => 'starter-frontend-style',
+		// 		'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
+		// 	)
+		// );
 		/**
 		 * Top rated movie lists block
 		 */
@@ -389,13 +407,13 @@ class Block {
 	 * @param [type] $content
 	 * @return void
 	 */
-	public function movie_lists_render_frontend_callback($block_attributes, $content){
+	public function movie_lists_render_frontend_callback($block_attributes, $content, $block){
 		/**
 		 * $block_attributes is coming from attributes or block.json
 		 * $content is coming from save.js
 		 */
 		ob_start();
-		$this->movie_list_callback_instance->handle_movie_list_block_content_from_api($block_attributes, $content);
+		$this->movie_list_callback_instance->handle_movie_list_block_content_from_api($block_attributes, $content, $block);
 		$output = ob_get_clean();
 		return $output;
 	}

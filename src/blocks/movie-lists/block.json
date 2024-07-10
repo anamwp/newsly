@@ -1,4 +1,13 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anam-gutenberg-starter-block/movie-lists",
+	"version": "0.1.0",
+	"title": "Movie Lists",
+	"category": "anam-starter",
+	"icon": "media-interactive",
+	"description": "",
+	"example": {},
 	"attributes": {
 		"postId": {
 			"type": "number",
@@ -48,5 +57,10 @@
 			"type": "boolean",
 			"default": true
 		}
-	}
+	},
+	"textdomain": "anam-gutenberg-starter",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }
