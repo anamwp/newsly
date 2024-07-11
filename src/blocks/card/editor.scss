@@ -1,19 +1,32 @@
+// .gts__card {
+// 	.card {
+// 		border: solid 1px #eee;
+// 		border-radius: 4px;
+// 		overflow: hidden;
+// 		&__img {
+// 			img {
+// 				width: 100%;
+// 			}
+// 		}
+// 		&__content {
+// 			padding: 30px;
+// 			&__title {
+// 				h2 {
+// 					margin-top: 0px;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
 .gts__card {
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
 	.card {
-		border: solid 1px #eee;
-		border-radius: 4px;
-		overflow: hidden;
-		&__img {
-			img {
-				width: 100%;
-			}
-		}
-		&__content {
-			padding: 30px;
-			&__title {
-				h2 {
-					margin-top: 0px;
-				}
+		&__footer {
+			.wp-block-button__link {
+				@apply text-white rounded-md mt-5;
 			}
 		}
 	}

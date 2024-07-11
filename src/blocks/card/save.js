@@ -8,12 +8,12 @@ export default function save({ attributes, props }) {
 	console.log('save attributes', attributes);
 	return (
 		<div {...blockProps}>
-			<div className="card">
+			<div className="card shadow-md hover:shadow-lg rounded border-solid border-black-400 border-2 p-8">
 				{attributes.imageId && (
-					<div className="card__img">
+					<div className="card__img rounded">
 						<img
 							className={
-								'achievement-image wp-image-' +
+								'shadow-md hover:shadow-lg inline-block transition-all w-full rounded achievement-image wp-image-' +
 								attributes.imageId
 							}
 							src={attributes.imageUrl}
@@ -27,20 +27,25 @@ export default function save({ attributes, props }) {
 					<div className="card__content__title">
 						<RichText.Content
 							tagName="h2"
+							className="mt-8 mb-3 font-poppins text-2xl text-slate-700 font-medium"
 							value={attributes.title}
 							style={{
 								fontSize: attributes.titleFontSize + 'px',
 							}}
 						/>
 					</div>
-					<div className="card__content__description">
+					<div className="card__content__description font-roboto">
 						<RichText.Content
 							tagName="p"
+							className="text-slate-600"
 							value={attributes.content}
 							style={{
 								fontSize: attributes.contentFontSize + 'px',
 							}}
 						/>
+					</div>
+					<div className="card__footer">
+						<InnerBlocks.Content />
 					</div>
 				</div>
 			</div>

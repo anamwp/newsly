@@ -8,6 +8,9 @@
 	"icon": "media-interactive",
 	"description": "",
 	"example": {},
+	"supports": {
+		"html": true
+	},
 	"attributes": {
 		"imageUrl": {
 			"type": "string",
