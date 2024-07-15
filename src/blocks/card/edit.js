@@ -29,6 +29,7 @@ const CARD_FOOTER_TEMPLATE = [
 		{
 			text: 'Read More',
 			placeholder: 'Book Your Demo',
+			customClass: 'inline-block mt-6',
 		},
 	],
 ];

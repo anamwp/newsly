@@ -26,7 +26,9 @@
 	.card {
 		&__footer {
 			.wp-block-button__link {
-				@apply text-white rounded-md mt-5;
+				// @apply text-white bg-slate-700 border-black hover:bg-white hover:text-black hover:border-slate-700;
+				border: solid 2px theme('colors.slate.700');
+				transition: all 0.3s ease;
 			}
 		}
 	}
