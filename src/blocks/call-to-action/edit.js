@@ -5,8 +5,10 @@ import {
 	ResponsiveWrapper,
 	PanelBody,
 	ButtonGroup,
+	ToolbarGroup,
+	ToolbarItem,
 } from '@wordpress/components';
-import { closeSmall, image as icon } from '@wordpress/icons';
+import { closeSmall, color, image as icon } from '@wordpress/icons';
 import SidebarControl from './sidebarControl';
 import { isBlobURL } from '@wordpress/blob';
 import {
@@ -20,6 +22,10 @@ import {
 	RichText,
 	MediaPlaceholder,
 	InnerBlocks,
+	BlockControls,
+	// URLInput,
+	// URLInputButton,
+	// URLPopover,
 } from '@wordpress/block-editor';
 import classnames from 'classnames';
 
@@ -90,22 +96,25 @@ export default function edit(props) {
 				<div className={classes}>
 					<div className="button-group">
 						{isSelected && (
-							<ButtonGroup className="block-library-gallery-item__inline-menu is-right is-visible">
-								<Button
-									icon={closeSmall}
-									onClick={() => {
-										setAttributes({
-											media: '',
-											mediaUrl: '',
-										});
-									}}
-									label={__(
-										'Remove Imagee',
-										'anam-gutenberg-starter'
-									)}
-									disabled={!isSelected}
-								/>
-							</ButtonGroup>
+							<>
+								<ButtonGroup className="">
+									<Button
+										icon={closeSmall}
+										onClick={() => {
+											setAttributes({
+												media: '',
+												mediaUrl: '',
+											});
+										}}
+										label={__(
+											'Remove Imagee',
+											'anam-gutenberg-starter'
+										)}
+										text="Remove Imagee"
+										disabled={!isSelected}
+									/>
+								</ButtonGroup>
+							</>
 						)}
 					</div>
 					<div
@@ -114,7 +123,7 @@ export default function edit(props) {
 					>
 						{props.attributes.media && (
 							<img
-								src={props.attributes.mediaUrl}
+								src={props.attributes.media.sizes.large.url}
 								alt=""
 								style={{
 									objectPosition: focalPoint
@@ -130,6 +139,7 @@ export default function edit(props) {
 			</>
 		);
 	};
+
 	return (
 		<div {...blockProps}>
 			<SidebarControl
@@ -143,9 +153,36 @@ export default function edit(props) {
 					});
 				}}
 			/>
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarItem as={Button}>I am a toolbar button</ToolbarItem>
+					{/* <URLInputButton
+						url="#"
+						// url={url}
+						// onChange={(url, post) =>
+						// 	setAttributes({
+						// 		url,
+						// 		title: (post && post.title) || __('Click here'),
+						// 	})
+						// }
+					/>
 
-			{/* <div> */}
-			{/* <MediaUploadCheck>
+					<URLInput
+						className={className}
+						value="#"
+						// value={url}
+						// onChange={(url, post) =>
+						// 	setAttributes({
+						// 		url,
+						// 		text: (post && post.title) || 'Click here',
+						// 	})
+						// }
+					/> */}
+				</ToolbarGroup>
+			</BlockControls>
+
+			<div>
+				{/* <MediaUploadCheck>
 					{!props.attributes.media && (
 						<MediaUpload
 							onSelect={onSelectImage}
@@ -166,69 +203,101 @@ export default function edit(props) {
 					)}
 				</MediaUploadCheck> */}
 
-			<div className="call-to-action">
 				<div
-					className="call-to-action__media-wrapper"
-					style={{ textAlign: props.attributes.alignment }}
+					className={`call-to-action flex flex-row ${
+						props.attributes.imageLayoutPosition === 'right'
+							? 'flex-row-reverse'
+							: ''
+					} font-roboto items-center shadow-md rounded-md overflow-hidden`}
 				>
-					{/* {props.attributes.media && (
+					<div className="call-to-action__left basis-1/2">
+						<div
+							className="call-to-action__media-wrapper"
+							style={{ textAlign: props.attributes.alignment }}
+						>
+							{/* {props.attributes.media && (
 							<img src={props.attributes.mediaUrl} alt="" />
 						)} */}
-					{/* {props.attributes.showImage
-						? props.attributes.media
-							? renderImage()
-							: renderPlaceholderForImage()
-						: false} */}
-				</div>
-				<div className="call-to-action__title">
-					<RichText
-						style={{ textAlign: props.attributes.alignment }}
-						tagName="h3"
-						onChange={(newTitle) => {
-							setAttributes({
-								title: newTitle,
-							});
-						}}
-						value={props.attributes.title && props.attributes.title}
-					/>
-				</div>
-				<div className="call-to-action__content">
-					<RichText
-						style={{ textAlign: props.attributes.alignment }}
-						tagName="p"
-						onChange={(newContent) => {
-							setAttributes({
-								content: newContent,
-							});
-						}}
-						value={
-							props.attributes.content && props.attributes.content
-						}
-					/>
-				</div>
-				<div
-					className="call-to-action__button"
-					style={{ textAlign: props.attributes.alignment }}
-				>
-					<InnerBlocks
-						template={[
-							[
-								'core/button',
-								{
-									placeholder: __(
-										'Action Link',
-										'anam-gutenberg-starter'
-									),
-								},
-							],
-						]}
-						allowedBlocks={['core/button']}
-						templateInsertUpdatesSelection={true}
-						__experimentalCaptureToolbars={true}
-					/>
+							{props.attributes.showImage
+								? props.attributes.media
+									? renderImage()
+									: renderPlaceholderForImage()
+								: false}
+						</div>
+					</div>
+					<div className="call-to-action__right basis-1/2 p-10">
+						<div className="call-to-action__title">
+							<RichText
+								style={{
+									textAlign: props.attributes.alignment,
+								}}
+								className="text-3xl font-medium text-slate-900 font-poppins"
+								tagName="h3"
+								onChange={(newTitle) => {
+									setAttributes({
+										title: newTitle,
+									});
+								}}
+								value={
+									props.attributes.title &&
+									props.attributes.title
+								}
+							/>
+						</div>
+						<div className="call-to-action__content mt-5 font-roboto">
+							<RichText
+								style={{
+									textAlign: props.attributes.alignment,
+								}}
+								tagName="p"
+								onChange={(newContent) => {
+									setAttributes({
+										content: newContent,
+									});
+								}}
+								value={
+									props.attributes.content &&
+									props.attributes.content
+								}
+							/>
+						</div>
+
+						<div
+							className="call-to-action__button mt-8 font-roboto font-medium"
+							style={{ textAlign: props.attributes.alignment }}
+						>
+							<InnerBlocks
+								template={[
+									[
+										'core/button',
+										{
+											text: __(
+												'Read More',
+												'anam-gutenberg-starter'
+											),
+											placeholder: __(
+												'Action Link',
+												'anam-gutenberg-starter'
+											),
+											className: 'inline-block',
+											// backgroundColor: 'black',
+											// url: 'google.com',
+											// textAlign: 'center',
+											// textColor: 'red-500',
+											// styles: {
+											// 	fontSize: '2.5rem',
+											// },
+										},
+									],
+								]}
+								allowedBlocks={['core/button']}
+								templateInsertUpdatesSelection={true}
+								__experimentalCaptureToolbars={true}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
-			{/* </div> */}
 		</div>
 	);
 }

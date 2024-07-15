@@ -57,6 +57,10 @@
 		"showImage": {
 			"type": "boolean",
 			"default": true
+		},
+		"imageLayoutPosition": {
+			"type": "string",
+			"default": "left"
 		}
 	},
 	"textdomain": "anam-gutenberg-starter",
