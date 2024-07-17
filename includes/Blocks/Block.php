@@ -48,6 +48,7 @@ class Block {
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/post-lists-tab' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/theatres-movies' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );
+			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movie-slider' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/top-rated-movie-lists' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/movie-lists' , array(
 				'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
