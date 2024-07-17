@@ -306,7 +306,13 @@ export default function edit(props) {
 			{/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
             /> */}
-			<nav>
+			<nav className="tab mb-10 flex gap-2 p-4 pl-0">
+				<a
+					href=""
+					className="active tablinks px-4 py-2 font-semibold text-sm bg-emerald-800 transition-all text-white rounded-full shadow-sm"
+				>
+					All
+				</a>
 				{attributes.categories.length > 0 &&
 					attributes.categories.map((cat, index) => {
 						return (
@@ -314,23 +320,25 @@ export default function edit(props) {
 								style={{ margin: '0px 10px' }}
 								href="#"
 								key={index}
+								className="tablinks px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-800 transition-all text-white rounded-full shadow-sm"
 							>
 								{cat.label}
 							</a>
 						);
 					})}
 			</nav>
-			<div className="post-lists">
+			<div className="post-lists grid grid-cols-3 gap-4">
 				{isLoading ? <p>Loading...</p> : null}
 				{attributes.fetchedPosts.length > 0 &&
 					attributes.fetchedPosts.map((post, index) => {
 						return (
 							<div
 								key={index}
-								style={{
-									border: 'solid 1px',
-									marginBottom: '30px',
-								}}
+								// style={{
+								// 	border: 'solid 1px',
+								// 	marginBottom: '30px',
+								// }}
+								className="card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8"
 							>
 								{attributes.showFeaturedImage &&
 									post.featured_media !== 0 && (
@@ -338,7 +346,9 @@ export default function edit(props) {
 											postId={post.featured_media}
 										/>
 									)}
-								<h3>{post.title.rendered}</h3>
+								<h2 class="mt-4 inline-block font-poppins text-2xl text-slate-900 hover:text-emerald-600	transition font-medium">
+									{post.title.rendered}
+								</h2>
 								{attributes.showCategory && (
 									<RenderPostCategoryData
 										catArr={post.categories}
@@ -349,6 +359,7 @@ export default function edit(props) {
 									dangerouslySetInnerHTML={{
 										__html: post.excerpt.rendered,
 									}}
+									className="text-slate-600 mt-2"
 								/>
 							</div>
 						);

@@ -8,7 +8,14 @@
 	"icon": "media-interactive",
 	"description": "",
 	"example": {},
+	"supports": {
+		"interactivity": true
+	},
 	"attributes": {
+		"label": {
+			"type": "string",
+			"default": "hello from label"
+		},
 		"postId": {
 			"type": "number",
 			"default": null
@@ -53,5 +60,7 @@
 	"textdomain": "anam-gutenberg-starter",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"viewScriptModule": "file:./view.js"
 }
