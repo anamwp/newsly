@@ -22,8 +22,9 @@ import {
 	InspectorControls,
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
+import classNames from 'classnames';
 
-const MY_TEMPLATE = [['core/button', { placeholder: 'Book Your Demo' }]];
+const MY_TEMPLATE = [['core/button', { text: 'Book Your Demo', placeholder: 'Book Your Demo', customClass: 'inline-block mt-6', }]];
 
 const fontSizes = [
 	{
@@ -132,7 +133,7 @@ export default function edit({ attributes, setAttributes }) {
 
 			{/* View */}
 			<div
-				className="container gts__blurb__container"
+				className="p-10 container gts__blurb__container rounded-md w-full max-w-full"
 				style={{
 					textAlign: attributes.alignment,
 					background: attributes.blurb_bg_color,
@@ -144,6 +145,7 @@ export default function edit({ attributes, setAttributes }) {
 					style={{
 						color: attributes.text_color,
 					}}
+					className='mt-0 mb-3 font-poppins text-2xl text-slate-700 font-medium'
 					onChange={onChangeContent}
 					value={attributes.newcontent}
 					placeholder="this is rich text editor"
@@ -153,11 +155,12 @@ export default function edit({ attributes, setAttributes }) {
 					style={{
 						color: attributes.content_color,
 					}}
+					className='text-slate-600'
 					onChange={(val) => setAttributes({ newmessage: val })}
 					value={attributes.newmessage}
 					placeholder="hello text control"
 				/>
-				<div className="gts__blurb__button">
+				<div className="gts__blurb__button pt-6">
 					<InnerBlocks
 						template={MY_TEMPLATE}
 						templateLock="all"
