@@ -13,24 +13,23 @@ import { registerBlockType } from '@wordpress/blocks';
  *
  * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
  */
-import './editor.scss';
 import './style.scss';
+import './editor.scss';
 
 /**
  * Internal dependencies
  */
-import edit from './edit';
+import Edit from './edit';
 import metadata from './block.json';
-// import save from './save';
 
 /**
  * Every block starts by registering a new block type definition.
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType(metadata.name, {
+registerBlockType( metadata.name, {
 	/**
 	 * @see ./edit.js
 	 */
-	edit,
-});
+	edit: Edit,
+} );

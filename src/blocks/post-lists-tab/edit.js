@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
 
 export default function edit(props) {
 	const blockProps = useBlockProps();
-	console.log('props before fetch', props);
+	// console.log('props before fetch', props);
 
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +55,7 @@ export default function edit(props) {
 			})
 			.catch((err) => console.log('err', err));
 	}, []);
-	console.log('props after fetch', props);
+	// console.log('props after fetch', props);
 	/**
 	 * set posts while change the category
 	 * @param {*} selectedCatId
@@ -306,6 +306,7 @@ export default function edit(props) {
 			{/* <ServerSideRender
                 block="anam-gutenberg-starter-block/single-post"
             /> */}
+
 			<nav className="tab mb-10 flex gap-2 p-4 pl-0">
 				<a
 					href=""

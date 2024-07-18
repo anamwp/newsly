@@ -18,20 +18,36 @@ $fetchedPosts = $attributes['fetchedPosts'];
 $fetchedCategories = $attributes['categories'];
 // dump($fetchedCategories);
 // dump($fetchedPosts);
+$post_context = array(
+	'text' => 'Hello World',
+	'price' => 15,
+	'burgerCount' => 0,
+	'burgerDonationCount' => 0,
+	'burgerTotalPrice' => 0,
+	'burgerDonationTotalPrice' => 0,
+	'totalPrice' => 0,
+	'hideDecreaseOrder' => true,
+	'hideDecreaseDonationOrder' => true,
+);
+
 ?>
-<div <?php echo get_block_wrapper_attributes(); ?>
-		data-wp-interactive="postlisttab"
-		<?php //echo wp_interactivity_data_wp_context($context); ?>
-	>
+
+<div 
+	<?php echo get_block_wrapper_attributes(); ?>
+	data-wp-interactive="anam-gutenberg-starter-block/postlisttab"
+	<?php echo wp_interactivity_data_wp_context($post_context); ?>
+>
+
 	<?php if ( count($fetchedCategories) > 0 ) : ?>
 		<div class="tab mb-10 flex gap-2 p-4 pl-0">
-			<button class="active tablinks px-4 py-2 font-semibold text-sm bg-emerald-800 transition-all text-white rounded-full shadow-sm" ><?php echo esc_html('All', 'anam-starter'); ?></button>
+			<button data-wp-on--click="actions.fetchCategoryPosts" class="active tablinks px-4 py-2 font-semibold text-sm bg-emerald-800 transition-all text-white rounded-full shadow-sm" ><?php echo esc_html('All', 'anam-starter'); ?></button>
 			<?php foreach ($fetchedCategories as $key => $category) : ?>
 				<!-- <button class="tablinks" onclick="openTab(event, '<?php //echo $category->slug; ?>')"><?php //echo $category->name; ?></button> -->
-				<button class="tablinks px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-800 transition-all text-white rounded-full shadow-sm" ><?php echo $category['label']; ?></button>
+				<button data-wp-on--click="actions.fetchCategoryPosts" class="tablinks px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-800 transition-all text-white rounded-full shadow-sm" ><?php echo $category['label']; ?></button>
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
+
 	<div class="grid grid-cols-3 gap-4">
 	<?php if ( count($fetchedPosts) > 0 ) : ?>
 		<?php foreach($fetchedPosts as $key => $value): ?>
@@ -57,4 +73,5 @@ $fetchedCategories = $attributes['categories'];
 		<?php endforeach; ?>
 	<?php endif; ?>
 	</div>
+	
 </div>

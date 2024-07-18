@@ -129,6 +129,12 @@ function handle_google_fonts(){
 }
 add_action( 'enqueue_block_editor_assets', 'handle_google_fonts' );
 add_action( 'wp_enqueue_scripts', 'handle_google_fonts' );
+function handle_script_module(){
+	wp_enqueue_script( 'handleScriptModule', plugins_url( 'build/post-list-tab/view.js', __FILE__ ), array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ), '1.0', true );
+	wp_scripts()->add_data('handleScriptModule-js', 'type', 'module');
+}
+// add_action( 'wp_enqueue_scripts', 'handle_script_module' );
+
 
 /**
  * Initilize the main plugin
