@@ -1,0 +1,44 @@
+{
+  "attributes": {
+    "postId": {
+      "type": "number",
+      "default": null
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "selectedCategroyId": {
+      "type": "string",
+      "default": ""
+    },
+    "selectedPostId": {
+      "type": "string",
+      "default": ""
+    },
+    "selectedCategoryPosts": {
+      "type": "array",
+      "default": []
+    },
+    "fetchedMovies": {
+      "type": "array",
+      "default": []
+    },
+    "fetchedPostCategoryData": {
+      "type": "array",
+      "default": []
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCategory": {
+      "type": "boolean",
+      "default": true
+    },
+    "showFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
