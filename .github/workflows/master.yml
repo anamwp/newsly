@@ -15,8 +15,8 @@ jobs:
         WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }} 
         WPE_ENV: falconhunter
         # Deploy Options
-        SRC_PATH: "wp-content/plugins/gutenberg-starter/"
-        REMOTE_PATH: "wp-content/plugins/gutenberg-starter/"
+        SRC_PATH: "wp-content/plugins/gutenberg-starter"
+        REMOTE_PATH: "wp-content/plugins/gutenberg-starter"
         # PHP_LINT: TRUE
         # FLAGS: -azvr --inplace --delete --exclude=".*" --exclude-from=.deployignore
         # SCRIPT: "path/yourscript.sh"
