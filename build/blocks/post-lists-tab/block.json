@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "anam-gutenberg-starter-block/post-lists-tab",
+  "version": "0.1.0",
+  "title": "Post Lists Tab",
+  "category": "anam-starter",
+  "icon": "media-interactive",
+  "description": "",
+  "example": {},
+  "supports": {
+    "interactivity": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "hello from label"
+    },
+    "postId": {
+      "type": "number",
+      "default": null
+    },
+    "categories": {
+      "type": "array",
+      "default": []
+    },
+    "selectedCategroyId": {
+      "type": "string",
+      "default": ""
+    },
+    "selectedPostId": {
+      "type": "string",
+      "default": ""
+    },
+    "selectedCategoryPosts": {
+      "type": "array",
+      "default": []
+    },
+    "fetchedPosts": {
+      "type": "array",
+      "default": []
+    },
+    "fetchedPostCategoryData": {
+      "type": "array",
+      "default": []
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": true
+    },
+    "showCategory": {
+      "type": "boolean",
+      "default": true
+    },
+    "showFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "anam-gutenberg-starter",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScriptModule": [
+    "file:./view.js"
+  ]
+}

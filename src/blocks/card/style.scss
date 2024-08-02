@@ -1,0 +1,68 @@
+// .gts__card {
+// 	.card {
+// 		border: solid 1px #eee;
+// 		border-radius: 4px;
+// 		overflow: hidden;
+// 		&__img {
+// 			img {
+// 				width: 100%;
+// 			}
+// 		}
+// 		&__content {
+// 			padding: 30px;
+// 			&__title {
+// 				h2 {
+// 					margin-top: 0px;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+.gts__card {
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+
+	// @css {
+	// 	.card {
+	// 		@apply text-2xl;
+	// 		&__footer {
+	// 			.wp-block-button__link {
+	// 				@apply text-2xl;
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// @import 'tailwindcss/base';
+	// @import 'tailwindcss/components';
+	// @import 'tailwindcss/utilities';
+	.card {
+		transition: all 0.3s ease;
+		&__footer {
+			.wp-block-button {
+				&.is-style-outline {
+					&:hover {
+						.wp-block-button__link {
+							background-color: theme('colors.slate.700');
+							color: theme('colors.white');
+						}
+					}
+				}
+				.wp-block-button__link {
+					// @apply text-white bg-slate-700 border-black hover:bg-white hover:text-black hover:border-slate-700;
+					border: solid 2px theme('colors.slate.700');
+					transition: all 0.3s ease;
+					color: theme('colors.white');
+					background-color: theme('colors.slate.700');
+					&:hover {
+						background-color: theme('colors.white');
+						color: theme('colors.black');
+						border-color: theme('colors.slate.700');
+					}
+				}
+			}
+		}
+	}
+	// @config "./tailwind.config.js";
+}

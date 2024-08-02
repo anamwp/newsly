@@ -1,0 +1,32 @@
+@import './style/accessible-slick-theme';
+@import './style/slick';
+.movie-list {
+	// display: grid;
+	// grid-template-columns: repeat(4, 1fr);
+	// gap: 20px;
+	.movie-card,
+	.components-card,
+	.card {
+		img {
+			width: 100%;
+			display: inline-block;
+		}
+		h2 {
+			font-size: 24px;
+			font-weight: bold;
+		}
+		.overview,
+		.components-text {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 4; /* number of lines to show */
+			line-clamp: 4;
+			-webkit-box-orient: vertical;
+		}
+		&__footer {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+}

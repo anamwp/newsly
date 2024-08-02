@@ -14,7 +14,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+/**
+ * Autoload vendor folder
+ */
 require_once __DIR__ . '/vendor/autoload.php';
 
 final class Anam_Gutenberg_Starter {
@@ -108,6 +110,33 @@ final class Anam_Gutenberg_Starter {
 		new Anam\GutenbergStarter\Init();
 	}
 }
+// function create_block_starter_block_init() {
+// 	// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
+// 	// 	include_once($file);
+// 	// }
+// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/theatres-movies' );
+// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/upcoming-movies' );
+// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/top-rated-movie-lists' );
+// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/movie-lists' );
+// }
+// add_action( 'init', 'create_block_starter_block_init' );
+
+/**
+ * Undocumented function
+ * ref: https://developer.wordpress.org/block-editor/how-to-guides/enqueueing-assets-in-the-editor/
+ * @return void
+ */
+function handle_google_fonts(){
+	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap', array(), null );
+}
+add_action( 'enqueue_block_editor_assets', 'handle_google_fonts' );
+add_action( 'wp_enqueue_scripts', 'handle_google_fonts' );
+function handle_script_module(){
+	wp_enqueue_script( 'handleScriptModule', plugins_url( 'build/post-list-tab/view.js', __FILE__ ), array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ), '1.0', true );
+	wp_scripts()->add_data('handleScriptModule-js', 'type', 'module');
+}
+// add_action( 'wp_enqueue_scripts', 'handle_script_module' );
+
 
 /**
  * Initilize the main plugin
@@ -122,4 +151,23 @@ function anam_gutenberg_starter() {
  */
 anam_gutenberg_starter();
 
+/**
+ * Create custom category of CGL block in gutenberg editor
+ *
+ * @param [type] $categories Custom category name.
+ * @return Array
+ */
+function prefix_register_layout_category_handler( $categories ) {
+	$categories[] = array(
+		'slug'  => 'anam-starter',
+		'title' => 'Anam Starter',
+	);
+	return $categories;
+}
+
+if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
+	add_filter( 'block_categories_all', 'prefix_register_layout_category_handler' );
+} else {
+	add_filter( 'block_categories', 'prefix_register_layout_category_handler' );
+}
 

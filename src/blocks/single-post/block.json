@@ -1,44 +1,57 @@
 {
-    "attributes": {
-        "postId": {
-            "type": "number",
-            "default": null
-        },
-        "categories": {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "anam-gutenberg-starter-block/single-post",
+	"version": "0.1.0",
+	"title": "Single Post",
+	"category": "anam-starter",
+	"icon": "media-interactive",
+	"description": "",
+	"example": {},
+	"attributes": {
+		"postId": {
+			"type": "number",
+			"default": null
+		},
+		"categories": {
 			"type": "array",
 			"default": []
 		},
-        "selectedCategroyId": {
-            "type": "string",
-            "default": ""
-        },
-        "selectedPostId": {
-            "type": "string",
-            "default": ""
-        },
-        "selectedCategoryPosts": {
-            "type": "array",
-            "default": []
-        },
-        "fetchedPosts": {
-            "type": "array",
-            "default": []
-        },
-        "fetchedPostCategoryData": {
-            "type": "array",
-            "default": []
-        },
-        "showExcerpt": {
-            "type": "boolean",
-            "default": true
-        },
-        "showCategory": {
-            "type": "boolean",
-            "default": true
-        },
-        "showFeaturedImage": {
-            "type": "boolean",
-            "default": true
-        }
-    }
+		"selectedCategroyId": {
+			"type": "string",
+			"default": ""
+		},
+		"selectedPostId": {
+			"type": "string",
+			"default": ""
+		},
+		"selectedCategoryPosts": {
+			"type": "array",
+			"default": []
+		},
+		"fetchedPosts": {
+			"type": "array",
+			"default": []
+		},
+		"fetchedPostCategoryData": {
+			"type": "array",
+			"default": []
+		},
+		"showExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"showCategory": {
+			"type": "boolean",
+			"default": true
+		},
+		"showFeaturedImage": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"textdomain": "anam-gutenberg-starter",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
 }

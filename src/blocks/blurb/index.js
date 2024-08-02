@@ -1,22 +1,21 @@
-import {registerBlockType} from "@wordpress/blocks";
-import metadata from "./block.json";
+import { registerBlockType } from '@wordpress/blocks';
+import metadata from './block.json';
 import edit from './edit';
 import save from './save';
+import './editor.scss';
+import './style.scss';
 
-const {attributes} = metadata;
+// const { attributes } = metadata;
 
-registerBlockType('anam-guternberg-starter-block/blurb', {
-    apiVersion: 2,
-    title: 'Blurb', 
-    icon: 'smiley',
-    category: 'design', 
-    attributes,
-    example: {
-        attributes: {
-            content: 'Hello World',
-            alignment: 'right'
-        },
-    },
-    edit,
-    save    
+registerBlockType(metadata.name, {
+	// apiVersion: 2,
+	// title: 'Blurb',
+	// icon: 'admin-post',
+	// category: 'anam-starter',
+	// attributes,
+	// example: {
+
+	// },
+	edit,
+	save,
 });
