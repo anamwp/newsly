@@ -14,7 +14,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
+/**
+ * Autoload vendor folder
+ */
 require_once __DIR__ . '/vendor/autoload.php';
 
 final class Anam_Gutenberg_Starter {
