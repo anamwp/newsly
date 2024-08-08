@@ -76,7 +76,7 @@ class Demo {
 			'label'               => __( 'Demo ', 'wp-plugin-starter' ),
 			'description'         => __( 'Add and manage Demo information', 'wp-plugin-starter' ),
 			'labels'              => $labels,
-			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments' ),
 			'taxonomies'          => array(),
 			'hierarchical'        => false,
 			'public'              => true,
