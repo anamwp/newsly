@@ -567,6 +567,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   margin-bottom: 0.75rem;
 }
 
+.gts__card .mt-0 {
+  margin-top: 0px;
+}
+
 .gts__card .mt-2 {
   margin-top: 0.5rem;
 }
@@ -585,10 +589,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__card .mt-8 {
   margin-top: 2rem;
-}
-
-.gts__card .mt-0 {
-  margin-top: 0px;
 }
 
 .gts__card .block {
@@ -740,10 +740,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__card .pl-0 {
   padding-right: 0px;
-}
-
-.gts__card .pt-2 {
-  padding-top: 0.5rem;
 }
 
 .gts__card .pt-6 {
