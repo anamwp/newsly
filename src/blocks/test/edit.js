@@ -8,8 +8,10 @@ import {
 	PanelRow,
 	FontSizePicker,
 } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import { more } from '@wordpress/icons';
+import apiFetch from '@wordpress/api-fetch';
+
 
 import {
 	useBlockProps,
@@ -49,6 +51,30 @@ const MY_TEMPLATE = [
 ];
 
 export default function edit({ attributes, setAttributes }) {
+	/**
+	 * Create a new post
+	 */
+	// useEffect(() => {
+	// 	apiFetch( {
+	// 		path: '/wp/v2/comments',
+	// 		method: 'POST',
+	// 		data: { 
+	// 			title: 'New Post Title 2',
+	// 			author: 1,
+	// 			status: 'publish',
+	// 			content: 'This is the content of',
+	// 			author_name: 'Gaurav Tiwari',
+	// 			post: 1, // Replace with your post ID
+	// 			author_email: 'rishi.shah@multidots.com',
+	// 			type: 'comment_review',
+	// 		},
+	// 	} ).then( ( res ) => {
+	// 		console.log( res );
+	// 	} );
+	// }, []);
+	
+
+
 	const [fontSize, setFontSize] = useState(12);
 	/**
 	 * pass style through useBlockProps()
