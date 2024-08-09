@@ -10,11 +10,11 @@
 	"example": {},
 	"supports": {
 		"interactivity": true,
+		"html": false,
 		"color": {
 			"background": true,
 			"text": true
 		},
-		"html": false,
 		"typography": {
 			"fontSize": true
 		}
