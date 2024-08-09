@@ -32,19 +32,27 @@
     },
     "headingColor": {
       "type": "string",
-      "default": "#000"
+      "default": ""
     },
     "linkColor": {
       "type": "string",
-      "default": "#000"
+      "default": ""
     },
     "linkHoverColor": {
       "type": "string",
-      "default": "#000"
+      "default": ""
     },
     "contentColor": {
       "type": "string",
-      "default": "#000"
+      "default": ""
+    },
+    "contentLinkColor": {
+      "type": "string",
+      "default": ""
+    },
+    "contentLinkHoverColor": {
+      "type": "string",
+      "default": ""
     },
     "titleFontSize": {
       "type": "number",

@@ -105,7 +105,7 @@ function edit(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("style", {
-      children: `.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};}`
+      children: `.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};} .card__content__description a{color: ${attributes.contentLinkColor}} .card__content__description a:hover{color: ${attributes.contentLinkHoverColor}}`
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_6__["default"], {
       props: props
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -143,7 +143,8 @@ function edit(props) {
             value: attributes.content,
             className: "text-slate-600",
             style: {
-              fontSize: attributes.contentFontSize + 'px'
+              fontSize: attributes.contentFontSize + 'px',
+              color: attributes.contentColor
             }
             // allowedFormats={['core/bold', 'core/italic']}
             ,
@@ -228,7 +229,7 @@ function save({
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("style", {
-      children: `.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};}`
+      children: `.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};} .card__content__description a{color: ${attributes.contentLinkColor}} .card__content__description a:hover{color: ${attributes.contentLinkHoverColor}}`
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
       className: "card shadow-md hover:shadow-lg rounded border-solid border-black-400 border-2 p-8",
       children: [attributes.imageId && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -260,7 +261,8 @@ function save({
             className: "text-slate-600",
             value: attributes.content,
             style: {
-              fontSize: attributes.contentFontSize + 'px'
+              fontSize: attributes.contentFontSize + 'px',
+              color: attributes.contentColor
             }
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -377,10 +379,10 @@ function sidebarControl({
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.InspectorControls, {
       group: "styles",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.Panel, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
           initialOpen: true,
-          title: "Color",
+          title: "Heading",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_TabPanelForHeadingColor__WEBPACK_IMPORTED_MODULE_5__["default"], {
             attributes: attributes,
             setAttributes: setAttributes,
@@ -388,7 +390,17 @@ function sidebarControl({
             linkColorAttribute: "linkColor",
             linkHoverColorAttribute: "linkHoverColor"
           })
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_6__.PanelBody, {
+          initialOpen: false,
+          title: "Content",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_TabPanelForHeadingColor__WEBPACK_IMPORTED_MODULE_5__["default"], {
+            attributes: attributes,
+            setAttributes: setAttributes,
+            textColorAttribute: "contentColor",
+            linkColorAttribute: "contentLinkColor",
+            linkHoverColorAttribute: "contentLinkHoverColor"
+          })
+        })]
       })
     })]
   });
@@ -740,7 +752,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/card","version":"0.1.0","title":"Card","category":"anam-starter","icon":"media-interactive","description":"","example":{},"supports":{"html":false},"attributes":{"imageUrl":{"type":"string","default":""},"imageId":{"type":"number","default":null},"editorPreviewUrl":{"type":"string","default":""},"title":{"type":"string","source":"html","selector":"h2","default":"This is rich text editor content"},"headingColor":{"type":"string","default":"#000"},"linkColor":{"type":"string","default":"#000"},"linkHoverColor":{"type":"string","default":"#000"},"contentColor":{"type":"string","default":"#000"},"titleFontSize":{"type":"number","default":26},"content":{"type":"string","source":"html","selector":"p","default":"The select media function will functionally be exactly the same as WordPress’ featured image function. We will inside Inspector add a panel that consist of a button to choose an image."},"contentFontSize":{"type":"number","default":16}},"textdomain":"anam-gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/card","version":"0.1.0","title":"Card","category":"anam-starter","icon":"media-interactive","description":"","example":{},"supports":{"html":false},"attributes":{"imageUrl":{"type":"string","default":""},"imageId":{"type":"number","default":null},"editorPreviewUrl":{"type":"string","default":""},"title":{"type":"string","source":"html","selector":"h2","default":"This is rich text editor content"},"headingColor":{"type":"string","default":""},"linkColor":{"type":"string","default":""},"linkHoverColor":{"type":"string","default":""},"contentColor":{"type":"string","default":""},"contentLinkColor":{"type":"string","default":""},"contentLinkHoverColor":{"type":"string","default":""},"titleFontSize":{"type":"number","default":26},"content":{"type":"string","source":"html","selector":"p","default":"The select media function will functionally be exactly the same as WordPress’ featured image function. We will inside Inspector add a panel that consist of a button to choose an image."},"contentFontSize":{"type":"number","default":16}},"textdomain":"anam-gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ })
 

@@ -96,7 +96,7 @@ export default function sidebarControl({ props }) {
 			</InspectorControls>
 			<InspectorControls group="styles">
 				<Panel>
-					<PanelBody initialOpen={true} title="Color">
+					<PanelBody initialOpen={true} title="Heading">
 						{/* <PanelRow>My Panel Inputs and Labels</PanelRow> */}
 						<TabPanelForHeadingColor
 							attributes={attributes}
@@ -104,6 +104,16 @@ export default function sidebarControl({ props }) {
 							textColorAttribute="headingColor"
 							linkColorAttribute="linkColor"
 							linkHoverColorAttribute="linkHoverColor"
+						/>
+					</PanelBody>
+					<PanelBody initialOpen={false} title="Content">
+						{/* <PanelRow>My Panel Inputs and Labels</PanelRow> */}
+						<TabPanelForHeadingColor
+							attributes={attributes}
+							setAttributes={setAttributes}
+							textColorAttribute="contentColor"
+							linkColorAttribute="contentLinkColor"
+							linkHoverColorAttribute="contentLinkHoverColor"
 						/>
 					</PanelBody>
 				</Panel>

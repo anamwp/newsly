@@ -11,7 +11,7 @@ export default function save({ attributes, props }) {
 	console.log('attributes form save', attributes);
 	return (
 		<div {...blockProps}>
-			<style>{`.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};}`}</style>
+			<style>{`.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};} .card__content__description a{color: ${attributes.contentLinkColor}} .card__content__description a:hover{color: ${attributes.contentLinkHoverColor}}`}</style>
 			<div className="card shadow-md hover:shadow-lg rounded border-solid border-black-400 border-2 p-8">
 				{/* image */}
 				{attributes.imageId && (
@@ -50,6 +50,7 @@ export default function save({ attributes, props }) {
 							value={attributes.content}
 							style={{
 								fontSize: attributes.contentFontSize + 'px',
+								color: attributes.contentColor,
 							}}
 						/>
 					</div>

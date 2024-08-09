@@ -91,7 +91,7 @@ export default function edit(props) {
 	});
 	return (
 		<div {...blockProps}>
-			<style>{`.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};}`}</style>
+			<style>{`.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};} .card__content__description a{color: ${attributes.contentLinkColor}} .card__content__description a:hover{color: ${attributes.contentLinkHoverColor}}`}</style>
 			{/* Sidebar Control */}
 			<SidebarControl props={props} />
 
@@ -130,6 +130,7 @@ export default function edit(props) {
 							className="text-slate-600"
 							style={{
 								fontSize: attributes.contentFontSize + 'px',
+								color: attributes.contentColor,
 							}}
 							// allowedFormats={['core/bold', 'core/italic']}
 							onChange={(content) => setAttributes({ content })}
