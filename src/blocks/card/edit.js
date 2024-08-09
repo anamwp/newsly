@@ -23,6 +23,10 @@ import {
 } from '@wordpress/block-editor';
 import classnames from 'classnames';
 import SidebarControl from './sidebarControl';
+/**
+ * Internal dependencies
+ * Template to insert core blocks
+ */
 const CARD_FOOTER_TEMPLATE = [
 	[
 		'core/button',
@@ -33,6 +37,11 @@ const CARD_FOOTER_TEMPLATE = [
 		},
 	],
 ];
+/**
+ * File upload component
+ * @param {*} Attributes
+ * @returns
+ */
 const MyFormFileUpload = ({ attributes, setAttributes }) => {
 	const mediaPreviewHandle = !!attributes.editorPreviewUrl && (
 		<img
@@ -64,24 +73,39 @@ const MyFormFileUpload = ({ attributes, setAttributes }) => {
 		/>
 	);
 };
-
+/**
+ * Edit component
+ * @param {*} props
+ * @returns
+ */
 export default function edit(props) {
+	/**
+	 * Destructuring props
+	 */
 	const { attributes, setAttributes, className, isSelected } = props;
+	/**
+	 * Set classname
+	 */
 	const blockProps = useBlockProps({
 		className: 'gts__card',
 	});
-	console.log('edit attributes', blockProps);
 	return (
 		<div {...blockProps}>
+			{/* Sidebar Control */}
 			<SidebarControl props={props} />
+
+			{/* Editor panel content */}
 			<div className="card shadow-md hover:shadow-lg rounded border-solid border-black-400 border-2 p-8">
+				{/* Image */}
 				<div className="card__img rounded">
 					<MyFormFileUpload
 						attributes={attributes}
 						setAttributes={setAttributes}
 					/>
 				</div>
+				{/* card content */}
 				<div className="card__content">
+					{/* title */}
 					<div className="card__content__title">
 						<RichText
 							tagName="h2"
@@ -90,12 +114,13 @@ export default function edit(props) {
 							style={{
 								fontSize: attributes.titleFontSize + 'px',
 							}}
-							allowedFormats={['core/bold', 'core/italic']}
+							// allowedFormats={['core/bold', 'core/italic']}
 							onChange={(title) => setAttributes({ title })}
 							multiline={false}
 							placeholder={__('Heading...')}
 						/>
 					</div>
+					{/* content */}
 					<div className="card__content__description font-roboto">
 						<RichText
 							tagName="p"
@@ -104,11 +129,12 @@ export default function edit(props) {
 							style={{
 								fontSize: attributes.contentFontSize + 'px',
 							}}
-							allowedFormats={['core/bold', 'core/italic']}
+							// allowedFormats={['core/bold', 'core/italic']}
 							onChange={(content) => setAttributes({ content })}
 						/>
 					</div>
-					<div className="card__footer">
+					{/* footer */}
+					<div className="card__footer mt-5">
 						<InnerBlocks
 							template={CARD_FOOTER_TEMPLATE}
 							templateLock="all"
