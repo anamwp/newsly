@@ -9,7 +9,7 @@
   "description": "",
   "example": {},
   "supports": {
-    "html": true
+    "html": false
   },
   "attributes": {
     "imageUrl": {
@@ -29,6 +29,14 @@
       "source": "html",
       "selector": "h2",
       "default": "This is rich text editor content"
+    },
+    "headingColor": {
+      "type": "string",
+      "default": "#000"
+    },
+    "contentColor": {
+      "type": "string",
+      "default": "#000"
     },
     "titleFontSize": {
       "type": "number",

@@ -2108,21 +2108,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const {
-  attributes
-} = _block_json__WEBPACK_IMPORTED_MODULE_2__;
 
 
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_2__.name, {
-  // apiVersion: 2,
-  // title: __('Movie Lists', 'anam-gutenberg-starter'),
-  // icon: 'admin-post',
-  // category: 'anam-starter',
-  // attributes,
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
-// save
 
 /***/ }),
 

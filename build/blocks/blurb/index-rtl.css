@@ -711,6 +711,11 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   background-color: rgb(6 95 70 / var(--tw-bg-opacity));
 }
 
+.gts__blurb .bg-violet-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(109 40 217 / var(--tw-bg-opacity));
+}
+
 .gts__blurb .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
