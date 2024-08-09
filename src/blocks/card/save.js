@@ -8,8 +8,10 @@ export default function save({ attributes, props }) {
 	const blockProps = useBlockProps.save({
 		className: 'gts__card',
 	});
+	console.log('attributes form save', attributes);
 	return (
 		<div {...blockProps}>
+			<style>{`.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};}`}</style>
 			<div className="card shadow-md hover:shadow-lg rounded border-solid border-black-400 border-2 p-8">
 				{/* image */}
 				{attributes.imageId && (
@@ -36,6 +38,7 @@ export default function save({ attributes, props }) {
 							value={attributes.title}
 							style={{
 								fontSize: attributes.titleFontSize + 'px',
+								color: attributes.headingColor,
 							}}
 						/>
 					</div>

@@ -7,7 +7,7 @@ import {
 	ButtonGroup,
 	FormFileUpload,
 } from '@wordpress/components';
-import { closeSmall, image as icon } from '@wordpress/icons';
+import { closeSmall, color, image as icon } from '@wordpress/icons';
 import { isBlobURL } from '@wordpress/blob';
 import {
 	MediaUpload,
@@ -91,6 +91,7 @@ export default function edit(props) {
 	});
 	return (
 		<div {...blockProps}>
+			<style>{`.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};}`}</style>
 			{/* Sidebar Control */}
 			<SidebarControl props={props} />
 
@@ -113,6 +114,7 @@ export default function edit(props) {
 							value={attributes.title}
 							style={{
 								fontSize: attributes.titleFontSize + 'px',
+								color: attributes.headingColor,
 							}}
 							// allowedFormats={['core/bold', 'core/italic']}
 							onChange={(title) => setAttributes({ title })}
