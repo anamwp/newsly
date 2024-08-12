@@ -9,7 +9,7 @@ import {
 	GradientPicker,
 } from '@wordpress/components';
 
-export default function TabPanelForHeadingColor({
+export default function TabPanelForTextAndLink({
 	attributes,
 	setAttributes,
 	textColorAttribute,

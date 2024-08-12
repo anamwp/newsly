@@ -3,7 +3,7 @@ import React from 'react';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import { useSelect, withSelect, select } from '@wordpress/data';
 import { InspectorControls } from '@wordpress/block-editor';
-import TabPanelForHeadingColor from '../components/TabPanelForHeadingColor';
+import TabPanelForTextAndLink from '../components/TabPanelForTextAndLink';
 import {
 	Panel,
 	PanelBody,
@@ -98,7 +98,7 @@ export default function sidebarControl({ props }) {
 				<Panel>
 					<PanelBody initialOpen={true} title="Heading">
 						{/* <PanelRow>My Panel Inputs and Labels</PanelRow> */}
-						<TabPanelForHeadingColor
+						<TabPanelForTextAndLink
 							attributes={attributes}
 							setAttributes={setAttributes}
 							textColorAttribute="headingColor"
@@ -108,7 +108,7 @@ export default function sidebarControl({ props }) {
 					</PanelBody>
 					<PanelBody initialOpen={false} title="Content">
 						{/* <PanelRow>My Panel Inputs and Labels</PanelRow> */}
-						<TabPanelForHeadingColor
+						<TabPanelForTextAndLink
 							attributes={attributes}
 							setAttributes={setAttributes}
 							textColorAttribute="contentColor"
