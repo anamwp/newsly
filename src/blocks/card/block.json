@@ -12,6 +12,18 @@
 		"html": false
 	},
 	"attributes": {
+		"blockId": {
+			"type": "string",
+			"default": ""
+		},
+		"blockAlignContent": {
+			"type": "string",
+			"default": "left"
+		},
+		"showImage": {
+			"type": "boolean",
+			"default": true
+		},
 		"imageUrl": {
 			"type": "string",
 			"default": ""

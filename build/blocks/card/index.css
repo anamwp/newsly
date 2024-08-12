@@ -555,8 +555,24 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   position: fixed;
 }
 
+.gts__card .absolute {
+  position: absolute;
+}
+
 .gts__card .relative {
   position: relative;
+}
+
+.gts__card .right-4 {
+  right: 1rem;
+}
+
+.gts__card .top-5 {
+  top: 1.25rem;
+}
+
+.gts__card .z-10 {
+  z-index: 10;
 }
 
 .gts__card .mb-10 {
@@ -839,6 +855,9 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .gts__card .card__footer .wp-block-button__link {
   border: solid 2px #334155;
   transition: all 0.3s ease;
+}
+.gts__card .components-placeholder__instructions {
+  display: block !important;
 }
 .hover\:bg-emerald-800:hover {
   --tw-bg-opacity: 1;

@@ -555,8 +555,24 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   position: fixed;
 }
 
+.gts__card .absolute {
+  position: absolute;
+}
+
 .gts__card .relative {
   position: relative;
+}
+
+.gts__card .right-4 {
+  left: 1rem;
+}
+
+.gts__card .top-5 {
+  top: 1.25rem;
+}
+
+.gts__card .z-10 {
+  z-index: 10;
 }
 
 .gts__card .mb-10 {

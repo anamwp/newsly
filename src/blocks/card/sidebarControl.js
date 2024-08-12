@@ -25,6 +25,7 @@ import {
 	__experimentalBorderControl as BorderControl,
 	__experimentalBorderBoxControl as BorderBoxControl,
 } from '@wordpress/components';
+import { AlignmentControl } from '@wordpress/block-editor';
 
 export default function sidebarControl({ props }) {
 	const { attributes, setAttributes } = props;
@@ -56,9 +57,31 @@ export default function sidebarControl({ props }) {
 		<div>
 			<InspectorControls>
 				<Panel>
+					<PanelBody initialOpen={true} title="Layout">
+						<ToggleControl
+							label="Show Image"
+							help={attributes.showImage ? 'Yes' : 'No'}
+							checked={attributes.showImage}
+							onChange={(newValue) => {
+								setAttributes({
+									showImage: newValue,
+								});
+							}}
+						/>
+						<PanelRow>Block Alignment</PanelRow>
+						<AlignmentControl
+							label="Alignment"
+							value={attributes.blockAlignContent}
+							onChange={(nextAlign) => {
+								setAttributes({ blockAlignContent: nextAlign });
+							}}
+						/>
+					</PanelBody>
+				</Panel>
+				<Panel>
 					<PanelBody
-						title={__('Title', 'anam-gutenberg-starter')}
-						initialOpen={true}
+						title={__('Heading', 'anam-gutenberg-starter')}
+						initialOpen={false}
 					>
 						<PanelRow>Choose Title Font Size</PanelRow>
 						<FontSizePicker

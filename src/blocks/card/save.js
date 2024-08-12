@@ -6,15 +6,23 @@ export default function save({ attributes, props }) {
 	 * Set classname
 	 */
 	const blockProps = useBlockProps.save({
-		className: 'gts__card',
+		className: `gts__card gts__card__${attributes.blockId}`,
 	});
-	console.log('attributes form save', attributes);
+
 	return (
-		<div {...blockProps}>
-			<style>{`.card__content__title h2 a {color: ${attributes.linkColor};} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};} .card__content__description a{color: ${attributes.contentLinkColor}} .card__content__description a:hover{color: ${attributes.contentLinkHoverColor}}`}</style>
+		<div
+			{...blockProps}
+			style={{
+				textAlign: attributes.blockAlignContent,
+			}}
+		>
+			{/* style */}
+			<style>{`.gts__card__${attributes.blockId} .card__content__title h2 a {color: ${attributes.linkColor};} .gts__card__${attributes.blockId} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};} .gts__card__${attributes.blockId} .card__content__description a{color: ${attributes.contentLinkColor}} .gts__card__${attributes.blockId} .card__content__description a:hover{color: ${attributes.contentLinkHoverColor}}`}</style>
+
+			{/* view */}
 			<div className="card shadow-md hover:shadow-lg rounded border-solid border-black-400 border-2 p-8">
 				{/* image */}
-				{attributes.imageId && (
+				{attributes.showImage && attributes.imageId && (
 					<div className="card__img rounded">
 						<img
 							className={
@@ -55,7 +63,7 @@ export default function save({ attributes, props }) {
 						/>
 					</div>
 					{/* footer */}
-					<div className="card__footer mt-5">
+					<div className="card__footer mt-5 inline-block">
 						<InnerBlocks.Content />
 					</div>
 				</div>

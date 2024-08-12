@@ -555,8 +555,24 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   position: fixed;
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .absolute {
+  position: absolute;
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .relative {
   position: relative;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .right-4 {
+  left: 1rem;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .top-5 {
+  top: 1.25rem;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .z-10 {
+  z-index: 10;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .mb-10 {
