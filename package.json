@@ -2,7 +2,7 @@
 	"name": "anam-gutenberg-starter",
 	"version": "1.0.0",
 	"description": "",
-	"main": "gulpfile.js",
+	"main": "build/index.js",
 	"scripts": {
 		"tailwindwatch": "tailwindcss -i ./src/*.js -o ./build/style.css --watch --postcss --minify",
 		"test": "echo \"Error: no test specified\" && exit 1",
@@ -22,8 +22,9 @@
 		"stream": "^0.0.3"
 	},
 	"devDependencies": {
-		"@wordpress/interactivity": "^6.3.0",
-		"@wordpress/scripts": "^28.2.0",
+		"@wordpress/babel-preset-default": "^8.5.0",
+		"@wordpress/interactivity": "^6.5.0",
+		"@wordpress/scripts": "^28.5.0",
 		"cypress": "^13.11.0",
 		"postcss-import": "^16.1.0",
 		"postcss-nesting": "^12.1.5",

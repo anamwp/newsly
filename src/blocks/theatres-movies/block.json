@@ -9,15 +9,7 @@
 	"description": "An interactive block with the Interactivity API",
 	"example": {},
 	"supports": {
-		"interactivity": true,
-		"html": false,
-		"color": {
-			"background": true,
-			"text": true
-		},
-		"typography": {
-			"fontSize": true
-		}
+		"html": false
 	},
 	"attributes": {
 		"postId": {
