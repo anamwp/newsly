@@ -24,6 +24,7 @@ import {
 import classnames from 'classnames';
 import SidebarControl from './sidebarControl';
 import EditorImageUploader from '../components/EditorImageUploader';
+import { useEffect } from '@wordpress/element';
 import { useInstanceId } from '@wordpress/compose';
 
 /**
@@ -51,10 +52,22 @@ export default function edit(props) {
 	 * Destructuring props
 	 */
 	const { attributes, setAttributes, className, isSelected } = props;
+
+	const { blockId } = attributes;
 	const instanceId = useInstanceId(edit);
-	setAttributes({
-		blockId: instanceId,
-	});
+
+	useEffect(() => {
+		/**
+		 * Set block id
+		 */
+		// if (!attributes.blockId) {
+		// const instanceId = useInstanceId('editor-card');
+		setAttributes({
+			blockId: instanceId,
+		});
+		// }
+	}, [blockId, instanceId]);
+
 	/**
 	 * Set classname
 	 */

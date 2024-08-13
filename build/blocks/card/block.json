@@ -13,7 +13,7 @@
   },
   "attributes": {
     "blockId": {
-      "type": "string",
+      "type": "number",
       "default": ""
     },
     "blockAlignContent": {
