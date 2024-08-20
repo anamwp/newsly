@@ -1,5 +1,9 @@
 import React from 'react';
-import { useBlockProps } from '@wordpress/block-editor';
+// import { useBlockProps } from '@wordpress/block-editor';
+import { useSelect, withSelect, select } from '@wordpress/data';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
+import SidebarControl from './sidebarControl';
+import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
 import { __ } from '@wordpress/i18n';
 
@@ -27,9 +31,9 @@ const HandleDate = (date) => {
 };
 
 const MovieCard = ({ movie, attributes }) => {
-	console.log('attributes', attributes);
+	// console.log('top rated movie save attributes', attributes);
 	return (
-		<div className="card">
+		<div className="card" data-movieId={movie.id}>
 			<div className="card__image">
 				<img
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -86,6 +90,10 @@ export default function save({ attributes }) {
 
 	return (
 		<div {...blockProps}>
+			<div id="popup-modal-for-movie-card" style={{ display: 'none' }}>
+				<div id="close-modal">close</div>
+				<div id="fetched-movie-content"></div>
+			</div>
 			<div
 				className="movie-list"
 				style={{

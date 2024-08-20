@@ -635,8 +635,29 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 20rem;
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .h-96 {
+  height: 24rem;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .h-full {
+  height: 100%;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .w-full {
   width: 100%;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .w-64 {
+  width: 16rem;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .w-1\/2 {
+  width: 50%;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .max-w-full {
@@ -667,6 +688,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   flex-direction: row-reverse;
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .flex-col {
+  flex-direction: column;
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .items-center {
   align-items: center;
 }
@@ -679,8 +704,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   gap: 1rem;
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .gap-5 {
+  gap: 1.25rem;
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .overflow-hidden {
   overflow: hidden;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .overflow-scroll {
+  overflow: scroll;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .rounded {
@@ -767,6 +800,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-top: 1.5rem;
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .align-top {
+  vertical-align: top;
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .font-poppins {
   font-family: Poppins, sans-serif;
 }
@@ -796,6 +833,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .font-semibold {
   font-weight: 600;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .font-bold {
+  font-weight: 700;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .capitalize {
+  text-transform: capitalize;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .text-slate-600 {

@@ -635,8 +635,29 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 20rem;
 }
 
+.gts__blurb .h-96 {
+  height: 24rem;
+}
+
+.gts__blurb .h-full {
+  height: 100%;
+}
+
+.gts__blurb .h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .gts__blurb .w-full {
   width: 100%;
+}
+
+.gts__blurb .w-64 {
+  width: 16rem;
+}
+
+.gts__blurb .w-1\/2 {
+  width: 50%;
 }
 
 .gts__blurb .max-w-full {
@@ -667,6 +688,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   flex-direction: row-reverse;
 }
 
+.gts__blurb .flex-col {
+  flex-direction: column;
+}
+
 .gts__blurb .items-center {
   align-items: center;
 }
@@ -679,8 +704,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   gap: 1rem;
 }
 
+.gts__blurb .gap-5 {
+  gap: 1.25rem;
+}
+
 .gts__blurb .overflow-hidden {
   overflow: hidden;
+}
+
+.gts__blurb .overflow-scroll {
+  overflow: scroll;
 }
 
 .gts__blurb .rounded {
@@ -767,6 +800,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-top: 1.5rem;
 }
 
+.gts__blurb .align-top {
+  vertical-align: top;
+}
+
 .gts__blurb .font-poppins {
   font-family: Poppins, sans-serif;
 }
@@ -796,6 +833,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__blurb .font-semibold {
   font-weight: 600;
+}
+
+.gts__blurb .font-bold {
+  font-weight: 700;
+}
+
+.gts__blurb .capitalize {
+  text-transform: capitalize;
 }
 
 .gts__blurb .text-slate-600 {

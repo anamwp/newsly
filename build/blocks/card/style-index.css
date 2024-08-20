@@ -635,8 +635,29 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 20rem;
 }
 
+.gts__card .h-96 {
+  height: 24rem;
+}
+
+.gts__card .h-full {
+  height: 100%;
+}
+
+.gts__card .h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .gts__card .w-full {
   width: 100%;
+}
+
+.gts__card .w-64 {
+  width: 16rem;
+}
+
+.gts__card .w-1\/2 {
+  width: 50%;
 }
 
 .gts__card .max-w-full {
@@ -667,6 +688,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   flex-direction: row-reverse;
 }
 
+.gts__card .flex-col {
+  flex-direction: column;
+}
+
 .gts__card .items-center {
   align-items: center;
 }
@@ -679,8 +704,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   gap: 1rem;
 }
 
+.gts__card .gap-5 {
+  gap: 1.25rem;
+}
+
 .gts__card .overflow-hidden {
   overflow: hidden;
+}
+
+.gts__card .overflow-scroll {
+  overflow: scroll;
 }
 
 .gts__card .rounded {
@@ -767,6 +800,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-top: 1.5rem;
 }
 
+.gts__card .align-top {
+  vertical-align: top;
+}
+
 .gts__card .font-poppins {
   font-family: Poppins, sans-serif;
 }
@@ -796,6 +833,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__card .font-semibold {
   font-weight: 600;
+}
+
+.gts__card .font-bold {
+  font-weight: 700;
+}
+
+.gts__card .capitalize {
+  text-transform: capitalize;
 }
 
 .gts__card .text-slate-600 {

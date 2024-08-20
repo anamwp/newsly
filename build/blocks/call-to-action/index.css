@@ -635,8 +635,29 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 20rem;
 }
 
+.gts__call-to-action .h-96 {
+  height: 24rem;
+}
+
+.gts__call-to-action .h-full {
+  height: 100%;
+}
+
+.gts__call-to-action .h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
 .gts__call-to-action .w-full {
   width: 100%;
+}
+
+.gts__call-to-action .w-64 {
+  width: 16rem;
+}
+
+.gts__call-to-action .w-1\/2 {
+  width: 50%;
 }
 
 .gts__call-to-action .max-w-full {
@@ -667,6 +688,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   flex-direction: row-reverse;
 }
 
+.gts__call-to-action .flex-col {
+  flex-direction: column;
+}
+
 .gts__call-to-action .items-center {
   align-items: center;
 }
@@ -679,8 +704,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   gap: 1rem;
 }
 
+.gts__call-to-action .gap-5 {
+  gap: 1.25rem;
+}
+
 .gts__call-to-action .overflow-hidden {
   overflow: hidden;
+}
+
+.gts__call-to-action .overflow-scroll {
+  overflow: scroll;
 }
 
 .gts__call-to-action .rounded {
@@ -767,6 +800,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   padding-top: 1.5rem;
 }
 
+.gts__call-to-action .align-top {
+  vertical-align: top;
+}
+
 .gts__call-to-action .font-poppins {
   font-family: Poppins, sans-serif;
 }
@@ -796,6 +833,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__call-to-action .font-semibold {
   font-weight: 600;
+}
+
+.gts__call-to-action .font-bold {
+  font-weight: 700;
+}
+
+.gts__call-to-action .capitalize {
+  text-transform: capitalize;
 }
 
 .gts__call-to-action .text-slate-600 {
