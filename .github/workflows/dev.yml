@@ -1,4 +1,4 @@
-name: Deploy to WP Engine
+name: Deploy to dev WP Engine
 on:
     push:
         branches:
@@ -13,7 +13,7 @@ jobs:
               with:
                   # Deploy vars
                   WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
-                  WPE_ENV: falconhunter
+                  WPE_ENV: falconhunterdev
                   # Deploy Options
                   # SRC_PATH: "wp-content/plugins/"
                   REMOTE_PATH: 'wp-content/plugins/gutenberg-starter/'
