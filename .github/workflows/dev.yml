@@ -13,7 +13,7 @@ jobs:
               with:
                   # Deploy vars
                   WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
-                  WPE_ENV: falconhunterdev
+                  WPE_ENV: falconhuntdev
                   # Deploy Options
                   # SRC_PATH: "wp-content/plugins/"
                   REMOTE_PATH: 'wp-content/plugins/gutenberg-starter/'
