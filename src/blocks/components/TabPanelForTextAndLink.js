@@ -9,6 +9,33 @@ import {
 	GradientPicker,
 } from '@wordpress/components';
 
+/**
+ * How to use 
+ * [textColorAttribute] = text color attributes name from block json file
+ * [linkColorAttribute] = text color attributes name from block json file
+ * [linkHoverColorAttribute] = text color attributes name from block json file
+ * this values are passed from parent component
+ * and needs to reuse through style ={{color: attributes[textColorAttribute]}} tag
+ * ==========
+<TabPanelForTextAndLink
+	attributes={attributes}
+	setAttributes={setAttributes}
+	textColorAttribute="headingColor"
+	linkColorAttribute="linkColor"
+	linkHoverColorAttribute="linkHoverColor"
+/>
+ *
+ */
+
+/**
+ *
+ * @param {*} attributes Object
+ * @param {*} setAttributes function
+ * @param {*} textColorAttribute string
+ * @param {*} linkColorAttribute string
+ * @param {*} linkHoverColorAttribute string
+ * @returns HTML
+ */
 export default function TabPanelForTextAndLink({
 	attributes,
 	setAttributes,
@@ -45,7 +72,8 @@ export default function TabPanelForTextAndLink({
 	};
 	/**
 	 * Color picker component
-	 * @param {*} param0
+	 * @param {*} attributeValue String
+	 * @param {*} attributeName String
 	 * @returns
 	 */
 	const HandleColorPanel = ({ attributeValue, attributeName }) => {

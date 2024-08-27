@@ -85,7 +85,20 @@ const MovieCard = ({ movie, attributes }) => {
 				/>
 			</CardMedia>
 			<CardHeader>
-				<Heading level={2}>{movie.title}</Heading>
+				<Heading
+					style={{
+						fontSize: `${attributes.titleFontSize}px`,
+						fontWeight: attributes.titleFontWeight,
+						letterSpacing: `${attributes.titleLetterSpacing}px`,
+						lineHeight: `${attributes.titleLineHeight}`,
+						fontStyle: attributes.titleStyle,
+						textTransform: attributes.titleTransform,
+						textDecoration: attributes.titleDecoration,
+					}}
+					level={2}
+				>
+					{movie.title}
+				</Heading>
 			</CardHeader>
 			<CardBody>
 				<Text>{movie.overview}</Text>

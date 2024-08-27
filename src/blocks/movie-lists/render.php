@@ -225,6 +225,15 @@ class Class_Movie_List_Render_Callback {
 					grid-column-start: 1;
 					grid-column-end: <?php echo +$column + 1; ?>
 				}
+				h2{
+					font-size: <?php echo $this->block_attributes['titleFontSize'] . 'px'; ?>;
+					font-weight: <?php echo $this->block_attributes['titleFontWeight']; ?>;
+					letter-spacing: <?php echo $this->block_attributes['titleLetterSpacing'].'px';?>;
+					line-height: <?php echo $this->block_attributes['titleLineHeight'];?>;
+					font-style: <?php echo $this->block_attributes['titleStyle']; ?>;
+					text-transform: <?php echo $this->block_attributes['titleTransform']; ?>;
+					text-decoration: <?php echo $this->block_attributes['titleDecoration']; ?>;
+				}
 			</style>
 			<div class="movie-list">
 				<?php 

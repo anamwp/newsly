@@ -635,29 +635,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 20rem;
 }
 
-.wp-block-anam-gutenberg-starter-block-post-lists-tab .h-96 {
-  height: 24rem;
-}
-
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .h-full {
   height: 100%;
 }
 
-.wp-block-anam-gutenberg-starter-block-post-lists-tab .h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .w-1\/2 {
+  width: 50%;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .w-full {
   width: 100%;
-}
-
-.wp-block-anam-gutenberg-starter-block-post-lists-tab .w-64 {
-  width: 16rem;
-}
-
-.wp-block-anam-gutenberg-starter-block-post-lists-tab .w-1\/2 {
-  width: 50%;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .max-w-full {
@@ -686,10 +673,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .flex-row-reverse {
   flex-direction: row-reverse;
-}
-
-.wp-block-anam-gutenberg-starter-block-post-lists-tab .flex-col {
-  flex-direction: column;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .items-center {
@@ -827,6 +810,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   line-height: 1.25rem;
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .font-bold {
+  font-weight: 700;
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .font-medium {
   font-weight: 500;
 }
@@ -835,12 +822,20 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   font-weight: 600;
 }
 
-.wp-block-anam-gutenberg-starter-block-post-lists-tab .font-bold {
-  font-weight: 700;
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .uppercase {
+  text-transform: uppercase;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .lowercase {
+  text-transform: lowercase;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .capitalize {
   text-transform: capitalize;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .italic {
+  font-style: italic;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .text-slate-600 {
@@ -861,6 +856,18 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .underline {
+  text-decoration-line: underline;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .overline {
+  text-decoration-line: overline;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .line-through {
+  text-decoration-line: line-through;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .shadow-md {

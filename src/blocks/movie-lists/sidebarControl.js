@@ -1,6 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { useSelect, withSelect, select } from '@wordpress/data';
 import { InspectorControls } from '@wordpress/block-editor';
+import TypographyControl from '../components/TypographyControl';
+// import TabPanelForTextAndLink from '../components/TabPanelForTextAndLink';
 import {
 	Panel,
 	PanelBody,
@@ -203,12 +205,18 @@ export default function sidebarControl({
 			{/* Style panel */}
 			<InspectorControls group="styles">
 				<Panel>
-					<PanelBody
-						icon="welcome-widgets-menus"
-						initialOpen={false}
-						title="Border"
-					>
-						<MyBorderBoxControl />
+					<PanelBody initialOpen={true} title="Title">
+						<TypographyControl
+							attributes={attributes}
+							setAttributes={setAttributes}
+							titleFontWeightAttr="titleFontWeight"
+							titleFontSizeAttr="titleFontSize"
+							titleLetterSpacingAttr="titleLetterSpacing"
+							titleLineHeightAttr="titleLineHeight"
+							titleStyleAttr="titleStyle"
+							titleDecorationAttr="titleDecoration"
+							titleTransformAttr="titleTransform"
+						/>
 					</PanelBody>
 				</Panel>
 

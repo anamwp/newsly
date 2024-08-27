@@ -635,29 +635,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 20rem;
 }
 
-.gts__card .h-96 {
-  height: 24rem;
-}
-
 .gts__card .h-full {
   height: 100%;
 }
 
-.gts__card .h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
+.gts__card .w-1\/2 {
+  width: 50%;
 }
 
 .gts__card .w-full {
   width: 100%;
-}
-
-.gts__card .w-64 {
-  width: 16rem;
-}
-
-.gts__card .w-1\/2 {
-  width: 50%;
 }
 
 .gts__card .max-w-full {
@@ -686,10 +673,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__card .flex-row-reverse {
   flex-direction: row-reverse;
-}
-
-.gts__card .flex-col {
-  flex-direction: column;
 }
 
 .gts__card .items-center {
@@ -827,6 +810,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   line-height: 1.25rem;
 }
 
+.gts__card .font-bold {
+  font-weight: 700;
+}
+
 .gts__card .font-medium {
   font-weight: 500;
 }
@@ -835,12 +822,20 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   font-weight: 600;
 }
 
-.gts__card .font-bold {
-  font-weight: 700;
+.gts__card .uppercase {
+  text-transform: uppercase;
+}
+
+.gts__card .lowercase {
+  text-transform: lowercase;
 }
 
 .gts__card .capitalize {
   text-transform: capitalize;
+}
+
+.gts__card .italic {
+  font-style: italic;
 }
 
 .gts__card .text-slate-600 {
@@ -861,6 +856,18 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .gts__card .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.gts__card .underline {
+  text-decoration-line: underline;
+}
+
+.gts__card .overline {
+  text-decoration-line: overline;
+}
+
+.gts__card .line-through {
+  text-decoration-line: line-through;
 }
 
 .gts__card .shadow-md {

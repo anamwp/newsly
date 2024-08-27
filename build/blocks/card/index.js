@@ -561,6 +561,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * How to use 
+ * [textColorAttribute] = text color attributes name from block json file
+ * [linkColorAttribute] = text color attributes name from block json file
+ * [linkHoverColorAttribute] = text color attributes name from block json file
+ * this values are passed from parent component
+ * and needs to reuse through style ={{color: attributes[textColorAttribute]}} tag
+ * ==========
+<TabPanelForTextAndLink
+	attributes={attributes}
+	setAttributes={setAttributes}
+	textColorAttribute="headingColor"
+	linkColorAttribute="linkColor"
+	linkHoverColorAttribute="linkHoverColor"
+/>
+ *
+ */
+
+/**
+ *
+ * @param {*} attributes Object
+ * @param {*} setAttributes function
+ * @param {*} textColorAttribute string
+ * @param {*} linkColorAttribute string
+ * @param {*} linkHoverColorAttribute string
+ * @returns HTML
+ */
+
 function TabPanelForTextAndLink({
   attributes,
   setAttributes,
@@ -602,7 +630,8 @@ function TabPanelForTextAndLink({
   };
   /**
    * Color picker component
-   * @param {*} param0
+   * @param {*} attributeValue String
+   * @param {*} attributeName String
    * @returns
    */
   const HandleColorPanel = ({

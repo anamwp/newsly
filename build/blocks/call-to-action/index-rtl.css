@@ -635,29 +635,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 20rem;
 }
 
-.gts__call-to-action .h-96 {
-  height: 24rem;
-}
-
 .gts__call-to-action .h-full {
   height: 100%;
 }
 
-.gts__call-to-action .h-fit {
-  height: -moz-fit-content;
-  height: fit-content;
+.gts__call-to-action .w-1\/2 {
+  width: 50%;
 }
 
 .gts__call-to-action .w-full {
   width: 100%;
-}
-
-.gts__call-to-action .w-64 {
-  width: 16rem;
-}
-
-.gts__call-to-action .w-1\/2 {
-  width: 50%;
 }
 
 .gts__call-to-action .max-w-full {
@@ -686,10 +673,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__call-to-action .flex-row-reverse {
   flex-direction: row-reverse;
-}
-
-.gts__call-to-action .flex-col {
-  flex-direction: column;
 }
 
 .gts__call-to-action .items-center {
@@ -827,6 +810,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   line-height: 1.25rem;
 }
 
+.gts__call-to-action .font-bold {
+  font-weight: 700;
+}
+
 .gts__call-to-action .font-medium {
   font-weight: 500;
 }
@@ -835,12 +822,20 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   font-weight: 600;
 }
 
-.gts__call-to-action .font-bold {
-  font-weight: 700;
+.gts__call-to-action .uppercase {
+  text-transform: uppercase;
+}
+
+.gts__call-to-action .lowercase {
+  text-transform: lowercase;
 }
 
 .gts__call-to-action .capitalize {
   text-transform: capitalize;
+}
+
+.gts__call-to-action .italic {
+  font-style: italic;
 }
 
 .gts__call-to-action .text-slate-600 {
@@ -861,6 +856,18 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .gts__call-to-action .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.gts__call-to-action .underline {
+  text-decoration-line: underline;
+}
+
+.gts__call-to-action .overline {
+  text-decoration-line: overline;
+}
+
+.gts__call-to-action .line-through {
+  text-decoration-line: line-through;
 }
 
 .gts__call-to-action .shadow-md {

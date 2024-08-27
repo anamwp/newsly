@@ -56,6 +56,34 @@
     "showVoteAverage": {
       "type": "boolean",
       "default": true
+    },
+    "titleFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "titleFontSize": {
+      "type": "number",
+      "default": 20
+    },
+    "titleLetterSpacing": {
+      "type": "number",
+      "default": 0
+    },
+    "titleLineHeight": {
+      "type": "number",
+      "default": 1.5
+    },
+    "titleStyle": {
+      "type": "string",
+      "default": "normal"
+    },
+    "titleDecoration": {
+      "type": "string",
+      "default": "none"
+    },
+    "titleTransform": {
+      "type": "string",
+      "default": "none"
     }
   },
   "textdomain": "anam-gutenberg-starter",

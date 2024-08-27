@@ -822,8 +822,20 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   font-weight: 600;
 }
 
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .uppercase {
+  text-transform: uppercase;
+}
+
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .lowercase {
+  text-transform: lowercase;
+}
+
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .capitalize {
   text-transform: capitalize;
+}
+
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .italic {
+  font-style: italic;
 }
 
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .text-slate-600 {
@@ -844,6 +856,18 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .underline {
+  text-decoration-line: underline;
+}
+
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .overline {
+  text-decoration-line: overline;
+}
+
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .line-through {
+  text-decoration-line: line-through;
 }
 
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .shadow-md {

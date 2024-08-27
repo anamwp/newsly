@@ -1787,6 +1787,229 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./src/blocks/components/TypographyControl.js":
+/*!****************************************************!*\
+  !*** ./src/blocks/components/TypographyControl.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ TypographyControl)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+/**
+ * How to use 
+ * [textColorAttribute] = text color attributes name from block json file
+ * [linkColorAttribute] = text color attributes name from block json file
+ * [linkHoverColorAttribute] = text color attributes name from block json file
+ * this values are passed from parent component
+ * and needs to reuse through style ={{color: attributes[textColorAttribute]}} tag
+ * ==========
+<TabPanelForTextAndLink
+	attributes={attributes}
+	setAttributes={setAttributes}
+	textColorAttribute="headingColor"
+	linkColorAttribute="linkColor"
+	linkHoverColorAttribute="linkHoverColor"
+/>
+ *
+ */
+
+/**
+ *
+ * @param {*} param0
+ * @returns
+ */
+
+function TypographyControl({
+  attributes,
+  setAttributes,
+  titleFontWeightAttr,
+  titleFontSizeAttr,
+  titleLetterSpacingAttr,
+  titleLineHeightAttr,
+  titleStyleAttr,
+  titleDecorationAttr,
+  titleTransformAttr
+}) {
+  /**
+   * Font size options
+   */
+  const fontSizes = [{
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Small'),
+    slug: 'small',
+    size: 16
+  }, {
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Medium'),
+    slug: 'medium',
+    size: 22
+  }, {
+    name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Big'),
+    slug: 'big',
+    size: 26
+  }];
+  /**
+   * Fallback font size
+   */
+  const fallbackFontSize = 26;
+  /**
+   * Set default color options
+   */
+  const fontWeightVariationOptions = [{
+    value: '400',
+    label: '400'
+  }, {
+    value: '100',
+    label: '100'
+  }, {
+    value: '200',
+    label: '200'
+  }, {
+    value: '300',
+    label: '300'
+  }, {
+    value: '500',
+    label: '500'
+  }, {
+    value: '600',
+    label: '600'
+  }, {
+    value: '700',
+    label: '700'
+  }, {
+    value: '800',
+    label: '800'
+  }, {
+    value: '900',
+    label: '900'
+  }];
+  const styleVariationOptions = [{
+    value: 'normal',
+    label: 'Default'
+  }, {
+    value: 'italic',
+    label: 'Italic'
+  }, {
+    value: 'oblique',
+    label: 'Oblique'
+  }];
+  const defcorationVariationOptions = [{
+    value: 'none',
+    label: 'Default'
+  }, {
+    value: 'overline',
+    label: 'Overline'
+  }, {
+    value: 'underline',
+    label: 'Underline'
+  }, {
+    value: 'line-through',
+    label: 'Line Through'
+  }];
+  const transformVariationOptions = [{
+    value: 'none',
+    label: 'Default'
+  }, {
+    value: 'capitalize',
+    label: 'Capitalize'
+  }, {
+    value: 'uppercase',
+    label: 'Uppercase'
+  }, {
+    value: 'lowercase',
+    label: 'Lowercase'
+  }];
+  /**
+   * Handle color change and set attributes value
+   * @param {*} attrName
+   * @returns
+   */
+  const handleSelectControl = attrName => {
+    return newValue => {
+      setAttributes({
+        [attrName]: newValue
+      });
+    };
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    class: "gts__typography-panel",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Font Weight'),
+      options: fontWeightVariationOptions,
+      value: attributes[titleFontWeightAttr],
+      onChange: handleSelectControl(titleFontWeightAttr)
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FontSizePicker, {
+      fontSizes: fontSizes,
+      value: attributes[titleFontSizeAttr],
+      fallbackFontSize: fallbackFontSize,
+      withReset: true,
+      withSlider: true
+      // units={['px', 'em', 'rem']}
+      ,
+      onChange: titleFontSize => {
+        setAttributes({
+          [titleFontSizeAttr]: titleFontSize
+        });
+      }
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+      __nextHasNoMarginBottom: true,
+      label: "Letter Spacing",
+      value: attributes[titleLetterSpacingAttr],
+      onChange: value => setAttributes({
+        [titleLetterSpacingAttr]: value
+      }),
+      min: 1,
+      max: 10,
+      allowReset: true,
+      step: 0.1
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+      __nextHasNoMarginBottom: true,
+      label: "Line Height",
+      value: attributes[titleLineHeightAttr],
+      onChange: value => setAttributes({
+        [titleLineHeightAttr]: value
+      }),
+      min: 1,
+      max: 10,
+      allowReset: true,
+      step: 0.1
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Style'),
+      value: attributes[titleStyleAttr],
+      options: styleVariationOptions,
+      onChange: handleSelectControl(titleStyleAttr)
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Decoration'),
+      value: attributes[titleDecorationAttr],
+      options: defcorationVariationOptions,
+      onChange: handleSelectControl(titleDecorationAttr)
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Transform'),
+      value: attributes[titleTransformAttr],
+      options: transformVariationOptions,
+      onChange: handleSelectControl(titleTransformAttr)
+    })]
+  });
+}
+
+/***/ }),
+
 /***/ "./src/blocks/movie-lists/components.js":
 /*!**********************************************!*\
   !*** ./src/blocks/movie-lists/components.js ***!
@@ -1946,6 +2169,15 @@ const MovieCard = ({
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.CardHeader, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.__experimentalHeading, {
+        style: {
+          fontSize: `${attributes.titleFontSize}px`,
+          fontWeight: attributes.titleFontWeight,
+          letterSpacing: `${attributes.titleLetterSpacing}px`,
+          lineHeight: `${attributes.titleLineHeight}`,
+          fontStyle: attributes.titleStyle,
+          textTransform: attributes.titleTransform,
+          textDecoration: attributes.titleDecoration
+        },
         level: 2,
         children: movie.title
       })
@@ -2160,17 +2392,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_TypographyControl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/TypographyControl */ "./src/blocks/components/TypographyControl.js");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
+
+// import TabPanelForTextAndLink from '../components/TabPanelForTextAndLink';
 
 
 
@@ -2188,15 +2423,15 @@ function sidebarControl({
     attributes,
     setAttributes
   } = props;
-  const [hasFixedBackground, setHasFixedBackground] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
-  const [hasFixedBg, setHasFixedBg] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
-  const [color, setColor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)();
-  const [date, setDate] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(new Date());
+  const [hasFixedBackground, setHasFixedBackground] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
+  const [hasFixedBg, setHasFixedBg] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
+  const [color, setColor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)();
+  const [date, setDate] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(new Date());
   const onSelect = tabName => {
     console.log('Selecting tab', tabName);
   };
   const MyCustomTabContent = () => {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ToggleControl, {
       label: "Fixed Background",
       help: hasFixedBg ? 'Has fixed background.' : 'No fixed background.',
       checked: hasFixedBg,
@@ -2223,17 +2458,17 @@ function sidebarControl({
       style: 'solid',
       width: '2px'
     };
-    const [borders, setBorders] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)({
+    const [borders, setBorders] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)({
       top: defaultBorder,
       right: defaultBorder,
       bottom: defaultBorder,
       left: defaultBorder
     });
     const onChange = newBorders => setBorders(newBorders);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
         children: "Border Control"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalBorderBoxControl, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.__experimentalBorderBoxControl, {
         colors: colors,
         label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Borders'),
         onChange: onChange,
@@ -2244,8 +2479,8 @@ function sidebarControl({
 
   // Component: CheckboxControl
   const MyCheckboxControl = () => {
-    const [isChecked, setChecked] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(true);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+    const [isChecked, setChecked] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(true);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
       label: "Is author",
       help: "Is the user a author or not?",
       checked: isChecked,
@@ -2254,8 +2489,8 @@ function sidebarControl({
   };
   // Component: ClipboardButton
   const MyClipboardButton = () => {
-    const [hasCopied, setHasCopied] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ClipboardButton, {
+    const [hasCopied, setHasCopied] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ClipboardButton, {
       variant: "primary",
       text: "Text to be copied.",
       onCopy: () => setHasCopied(true),
@@ -2263,14 +2498,14 @@ function sidebarControl({
       children: hasCopied ? 'Copied!' : 'Copy Text'
     });
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
           icon: "welcome-widgets-menus",
           initialOpen: true,
           title: "Block Structure",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
             label: "Choose Column",
             value: attributes.movieColumn,
             options: [{
@@ -2290,12 +2525,12 @@ function sidebarControl({
             }
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
           icon: "welcome-widgets-menus",
           initialOpen: true,
           title: "Meta Information",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
             label: "Genre",
             help: "Show genre of the movie in the card.",
             checked: attributes.showGenre,
@@ -2304,7 +2539,7 @@ function sidebarControl({
                 showGenre: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
             label: "Language",
             help: "Show Language of the movie in the card.",
             checked: attributes.showLanguage,
@@ -2313,7 +2548,7 @@ function sidebarControl({
                 showLanguage: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
             label: "Release Date",
             help: "Show release date of the movie in the card.",
             checked: attributes.showReleaseDate,
@@ -2322,7 +2557,7 @@ function sidebarControl({
                 showReleaseDate: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
             label: "Vote Count",
             help: "Show vote count of the movie in the card.",
             checked: attributes.showVoteCount,
@@ -2331,7 +2566,7 @@ function sidebarControl({
                 showVoteCount: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.CheckboxControl, {
             label: "Vote Average",
             help: "Show vote average of the movie in the card.",
             checked: attributes.showVoteAverage,
@@ -2343,34 +2578,43 @@ function sidebarControl({
           })]
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
       group: "styles",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-          icon: "welcome-widgets-menus",
-          initialOpen: false,
-          title: "Border",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(MyBorderBoxControl, {})
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+          initialOpen: true,
+          title: "Title",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_TypographyControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            attributes: attributes,
+            setAttributes: setAttributes,
+            titleFontWeightAttr: "titleFontWeight",
+            titleFontSizeAttr: "titleFontSize",
+            titleLetterSpacingAttr: "titleLetterSpacing",
+            titleLineHeightAttr: "titleLineHeight",
+            titleStyleAttr: "titleStyle",
+            titleDecorationAttr: "titleDecoration",
+            titleTransformAttr: "titleTransform"
+          })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
           icon: "welcome-widgets-menus",
           initialOpen: false,
           title: "My Block Settings",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
             children: "My Panel Inputs and Labels"
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
           title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Block Styles', 'anam-gutenberg-starter'),
           initialOpen: false,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.ColorPicker, {
             color: color,
             onChange: setColor,
             enableAlpha: true,
             defaultValue: "#000"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.DateTimePicker, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.DateTimePicker, {
             currentDate: date,
             onChange: newDate => setDate(newDate),
             is12Hour: true
@@ -2537,7 +2781,7 @@ module.exports = window["wp"]["url"];
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/movie-lists","version":"0.1.0","title":"Movie Lists","category":"anam-starter","icon":"media-interactive","description":"","example":{},"attributes":{"postId":{"type":"number","default":null},"genres":{"type":"array","default":[]},"selectedCategroyId":{"type":"string","default":""},"selectedPostId":{"type":"string","default":""},"selectedCategoryPosts":{"type":"array","default":[]},"fetchedMovies":{"type":"array","default":[]},"movieColumn":{"type":"number","default":4},"showGenre":{"type":"boolean","default":true},"showLanguage":{"type":"boolean","default":true},"showReleaseDate":{"type":"boolean","default":true},"showVoteCount":{"type":"boolean","default":true},"showVoteAverage":{"type":"boolean","default":true}},"textdomain":"anam-gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/movie-lists","version":"0.1.0","title":"Movie Lists","category":"anam-starter","icon":"media-interactive","description":"","example":{},"attributes":{"postId":{"type":"number","default":null},"genres":{"type":"array","default":[]},"selectedCategroyId":{"type":"string","default":""},"selectedPostId":{"type":"string","default":""},"selectedCategoryPosts":{"type":"array","default":[]},"fetchedMovies":{"type":"array","default":[]},"movieColumn":{"type":"number","default":4},"showGenre":{"type":"boolean","default":true},"showLanguage":{"type":"boolean","default":true},"showReleaseDate":{"type":"boolean","default":true},"showVoteCount":{"type":"boolean","default":true},"showVoteAverage":{"type":"boolean","default":true},"titleFontWeight":{"type":"string","default":"400"},"titleFontSize":{"type":"number","default":20},"titleLetterSpacing":{"type":"number","default":0},"titleLineHeight":{"type":"number","default":1.5},"titleStyle":{"type":"string","default":"normal"},"titleDecoration":{"type":"string","default":"none"},"titleTransform":{"type":"string","default":"none"}},"textdomain":"anam-gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
