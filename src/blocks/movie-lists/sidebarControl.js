@@ -209,13 +209,13 @@ export default function sidebarControl({
 						<TypographyControl
 							attributes={attributes}
 							setAttributes={setAttributes}
-							titleFontWeightAttr="titleFontWeight"
-							titleFontSizeAttr="titleFontSize"
-							titleLetterSpacingAttr="titleLetterSpacing"
-							titleLineHeightAttr="titleLineHeight"
-							titleStyleAttr="titleStyle"
-							titleDecorationAttr="titleDecoration"
-							titleTransformAttr="titleTransform"
+							textFontWeightAttr="titleFontWeight"
+							textFontSizeAttr="titleFontSize"
+							textLetterSpacingAttr="titleLetterSpacing"
+							textLineHeightAttr="titleLineHeight"
+							textStyleAttr="titleStyle"
+							textDecorationAttr="titleDecoration"
+							textTransformAttr="titleTransform"
 						/>
 					</PanelBody>
 				</Panel>

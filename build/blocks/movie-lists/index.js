@@ -1815,41 +1815,57 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * How to use 
- * [textColorAttribute] = text color attributes name from block json file
- * [linkColorAttribute] = text color attributes name from block json file
- * [linkHoverColorAttribute] = text color attributes name from block json file
+ * [textFontWeightAttr] = font weight attributes name from block json file
+ * [textFontSizeAttr] = font size attributes name from block json file
+ * [textLetterSpacingAttr] = letter spacing attributes name from block json file
+ * [textLineHeightAttr] = line height attributes name from block json file
+ * [textStyleAttr] = font style attributes name from block json file
+ * [textDecorationAttr] = text decoration attributes name from block json file
+ * [textTransformAttr] = text transform attributes name from block json file
  * this values are passed from parent component
  * and needs to reuse through style ={{color: attributes[textColorAttribute]}} tag
  * ==========
-<TabPanelForTextAndLink
+<TypographyControl
 	attributes={attributes}
 	setAttributes={setAttributes}
-	textColorAttribute="headingColor"
-	linkColorAttribute="linkColor"
-	linkHoverColorAttribute="linkHoverColor"
+	textFontWeightAttr = "respection-key-value-from-block.json-file"
+	textFontSizeAttr = "respection-key-value-from-block.json-file"
+	textLetterSpacingAttr = "respection-key-value-from-block.json-file"
+	textLineHeightAttr = "respection-key-value-from-block.json-file"
+	textStyleAttr = "respection-key-value-from-block.json-file"
+	textDecorationAttr = "respection-key-value-from-block.json-file"
+	textTransformAttr = "respection-key-value-from-block.json-file"
 />
  *
  */
 
 /**
  *
- * @param {*} param0
- * @returns
+ * @param {*} attributes object
+ * @param {*} setAttributes function
+ * @param {*} textFontWeightAttr string
+ * @param {*} textFontSizeAttr number
+ * @param {*} textLetterSpacingAttr number
+ * @param {*} textLineHeightAttr number
+ * @param {*} textStyleAttr string
+ * @param {*} textDecorationAttr string
+ * @param {*} textTransformAttr string
+ * @returns HTML
  */
 
 function TypographyControl({
   attributes,
   setAttributes,
-  titleFontWeightAttr,
-  titleFontSizeAttr,
-  titleLetterSpacingAttr,
-  titleLineHeightAttr,
-  titleStyleAttr,
-  titleDecorationAttr,
-  titleTransformAttr
+  textFontWeightAttr,
+  textFontSizeAttr,
+  textLetterSpacingAttr,
+  textLineHeightAttr,
+  textStyleAttr,
+  textDecorationAttr,
+  textTransformAttr
 }) {
   /**
-   * Font size options
+   * Font size default options
    */
   const fontSizes = [{
     name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Small'),
@@ -1865,11 +1881,11 @@ function TypographyControl({
     size: 26
   }];
   /**
-   * Fallback font size
+   * Fallback default font size
    */
   const fallbackFontSize = 26;
   /**
-   * Set default color options
+   * Set default font weight options
    */
   const fontWeightVariationOptions = [{
     value: '400',
@@ -1899,6 +1915,9 @@ function TypographyControl({
     value: '900',
     label: '900'
   }];
+  /**
+   * Default style options
+   */
   const styleVariationOptions = [{
     value: 'normal',
     label: 'Default'
@@ -1909,6 +1928,9 @@ function TypographyControl({
     value: 'oblique',
     label: 'Oblique'
   }];
+  /**
+   * Default decoration options
+   */
   const defcorationVariationOptions = [{
     value: 'none',
     label: 'Default'
@@ -1922,6 +1944,9 @@ function TypographyControl({
     value: 'line-through',
     label: 'Line Through'
   }];
+  /**
+   * Default transform options
+   */
   const transformVariationOptions = [{
     value: 'none',
     label: 'Default'
@@ -1937,7 +1962,7 @@ function TypographyControl({
   }];
   /**
    * Handle color change and set attributes value
-   * @param {*} attrName
+   * @param {*} attrName string
    * @returns
    */
   const handleSelectControl = attrName => {
@@ -1952,11 +1977,11 @@ function TypographyControl({
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Font Weight'),
       options: fontWeightVariationOptions,
-      value: attributes[titleFontWeightAttr],
-      onChange: handleSelectControl(titleFontWeightAttr)
+      value: attributes[textFontWeightAttr],
+      onChange: handleSelectControl(textFontWeightAttr)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FontSizePicker, {
       fontSizes: fontSizes,
-      value: attributes[titleFontSizeAttr],
+      value: attributes[textFontSizeAttr],
       fallbackFontSize: fallbackFontSize,
       withReset: true,
       withSlider: true
@@ -1964,15 +1989,15 @@ function TypographyControl({
       ,
       onChange: titleFontSize => {
         setAttributes({
-          [titleFontSizeAttr]: titleFontSize
+          [textFontSizeAttr]: titleFontSize
         });
       }
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
       __nextHasNoMarginBottom: true,
       label: "Letter Spacing",
-      value: attributes[titleLetterSpacingAttr],
+      value: attributes[textLetterSpacingAttr],
       onChange: value => setAttributes({
-        [titleLetterSpacingAttr]: value
+        [textLetterSpacingAttr]: value
       }),
       min: 1,
       max: 10,
@@ -1981,9 +2006,9 @@ function TypographyControl({
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
       __nextHasNoMarginBottom: true,
       label: "Line Height",
-      value: attributes[titleLineHeightAttr],
+      value: attributes[textLineHeightAttr],
       onChange: value => setAttributes({
-        [titleLineHeightAttr]: value
+        [textLineHeightAttr]: value
       }),
       min: 1,
       max: 10,
@@ -1991,71 +2016,19 @@ function TypographyControl({
       step: 0.1
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Style'),
-      value: attributes[titleStyleAttr],
+      value: attributes[textStyleAttr],
       options: styleVariationOptions,
-      onChange: handleSelectControl(titleStyleAttr)
+      onChange: handleSelectControl(textStyleAttr)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Decoration'),
-      value: attributes[titleDecorationAttr],
+      value: attributes[textDecorationAttr],
       options: defcorationVariationOptions,
-      onChange: handleSelectControl(titleDecorationAttr)
+      onChange: handleSelectControl(textDecorationAttr)
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
       label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Transform'),
-      value: attributes[titleTransformAttr],
+      value: attributes[textTransformAttr],
       options: transformVariationOptions,
-      onChange: handleSelectControl(titleTransformAttr)
-    })]
-  });
-}
-
-/***/ }),
-
-/***/ "./src/blocks/movie-lists/components.js":
-/*!**********************************************!*\
-  !*** ./src/blocks/movie-lists/components.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ RenderPostCategoryData)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
-
-
-
-
-function RenderPostCategoryData(props) {
-  let postArr = props.catArr.toString();
-  const [catData, setCatData] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useState)();
-  // const {attributes, setAttributes} = props.parentProps;
-
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_2__.useEffect)(() => {
-    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_1___default()({
-      path: `/wp/v2/categories?include=${postArr}`
-    }).then(res => {
-      setCatData(res);
-    }).catch(err => console.log(err));
-  }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    children: [!catData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-      children: "Fetching Data"
-    }), catData && catData.map(singleCat => {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-        href: singleCat.link,
-        style: {
-          marginRight: '10px'
-        },
-        children: singleCat.name
-      });
+      onChange: handleSelectControl(textTransformAttr)
     })]
   });
 }
@@ -2087,17 +2060,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components */ "./src/blocks/movie-lists/components.js");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
-/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/url */ "@wordpress/url");
+/* harmony import */ var _wordpress_url__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_url__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
@@ -2111,6 +2083,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+/**
+ * Handle API call to
+ * Get popular movies from the API
+ * @returns JSON
+ */
 
 const GetPopularMovies = async () => {
   const movieAPIUrl = 'https://api.themoviedb.org/3/movie/popular';
@@ -2122,6 +2099,11 @@ const GetPopularMovies = async () => {
   }
   return apiResponseJSON;
 };
+/**
+ * Handle API call to
+ * Get movie genres from the API
+ * @returns JSON
+ */
 const GetMovieGenres = async () => {
   const options = {
     method: 'GET',
@@ -2138,6 +2120,12 @@ const GetMovieGenres = async () => {
   }
   return getGenreResponseJSON;
 };
+/**
+ * Handle movie genre component
+ * @param {*} genreIDArr array
+ * @param {*} attributes object
+ * @returns HTML
+ */
 const HandleGenreRender = ({
   genreIDArr,
   attributes
@@ -2146,9 +2134,9 @@ const HandleGenreRender = ({
   let getGenre = attributes.genres;
   // let isFound = getGenre.some((ai) => genreIDArr.includes(ai));
   let newGenreArr = getGenre.filter(ai => genreIDArr.includes(ai.id));
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("ul", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("ul", {
     children: newGenreArr.map(genre => {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("li", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("li", {
         children: genre.name
       }, genre.id);
     })
@@ -2157,18 +2145,24 @@ const HandleGenreRender = ({
   // console.log('getGenre', newGenreArr);
   // console.log('is found', isFound);
 };
+/**
+ * MovieCard component
+ * @param {*} move object
+ * @param {*} attributes object
+ * @returns
+ */
 const MovieCard = ({
   movie,
   attributes
 }) => {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.Card, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.CardMedia, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("img", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Card, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardMedia, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("img", {
         src: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
         alt: movie.title
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.CardHeader, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.__experimentalHeading, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardHeader, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.__experimentalHeading, {
         style: {
           fontSize: `${attributes.titleFontSize}px`,
           fontWeight: attributes.titleFontWeight,
@@ -2181,24 +2175,24 @@ const MovieCard = ({
         level: 2,
         children: movie.title
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.CardBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.__experimentalText, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.__experimentalText, {
         children: movie.overview
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.CardFooter, {
-      children: [attributes.showGenre && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardFooter, {
+      children: [attributes.showGenre && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
         className: "genre",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(HandleGenreRender, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(HandleGenreRender, {
           genreIDArr: movie.genre_ids,
           attributes: attributes
         })
-      }), attributes.showLanguage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("p", {
+      }), attributes.showLanguage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("p", {
         children: ["Language - ", movie.original_language]
-      }), attributes.showReleaseDate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("p", {
+      }), attributes.showReleaseDate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("p", {
         children: ["Release Date - ", movie.release_date]
-      }), attributes.showVoteCount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("p", {
+      }), attributes.showVoteCount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("p", {
         children: ["Vote Count - ", movie.vote_count]
-      }), attributes.showVoteAverage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("p", {
+      }), attributes.showVoteAverage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("p", {
         children: ["Vote Average - ", movie.vote_average]
       })]
     })]
@@ -2206,22 +2200,25 @@ const MovieCard = ({
 };
 function edit(props) {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  console.log('props before fetch', props);
+  // console.log('props before fetch', props);
   const {
     attributes,
     setAttributes
   } = props;
   const [isLoading, setIsLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
   const [movies, setMovies] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]);
-  console.log('attributes', attributes);
+  // console.log('attributes', attributes);
+  /**
+   * Fetch movie and genre from the API
+   */
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
-    console.log('fetchedMovies', attributes.fetchedMovies.length);
+    // console.log('fetchedMovies', attributes.fetchedMovies.length);
     /**
      * Fetch genres from the API
      * and set the attributes with the fetched genres
      */
     attributes.genres.length < 1 && GetMovieGenres().then(res => {
-      console.log('res', res);
+      // console.log('res', res);
       setAttributes({
         genres: res.genres
       });
@@ -2247,18 +2244,18 @@ function edit(props) {
   }, []);
   // console.log('movies', movies);
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
     ...blockProps,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
       props: props
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
       className: "movie-list",
       style: {
         gridTemplateColumns: `repeat(
 						${attributes.movieColumn}, 1fr
 					)`
       },
-      children: movies && movies.map(movie => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(MovieCard, {
+      children: movies && movies.map(movie => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(MovieCard, {
         movie: movie,
         attributes: attributes
       }, movie.id))
@@ -2587,13 +2584,13 @@ function sidebarControl({
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_TypographyControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
             attributes: attributes,
             setAttributes: setAttributes,
-            titleFontWeightAttr: "titleFontWeight",
-            titleFontSizeAttr: "titleFontSize",
-            titleLetterSpacingAttr: "titleLetterSpacing",
-            titleLineHeightAttr: "titleLineHeight",
-            titleStyleAttr: "titleStyle",
-            titleDecorationAttr: "titleDecoration",
-            titleTransformAttr: "titleTransform"
+            textFontWeightAttr: "titleFontWeight",
+            textFontSizeAttr: "titleFontSize",
+            textLetterSpacingAttr: "titleLetterSpacing",
+            textLineHeightAttr: "titleLineHeight",
+            textStyleAttr: "titleStyle",
+            textDecorationAttr: "titleDecoration",
+            textTransformAttr: "titleTransform"
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Panel, {

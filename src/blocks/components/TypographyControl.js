@@ -10,40 +10,56 @@ import {
 
 /**
  * How to use 
- * [textColorAttribute] = text color attributes name from block json file
- * [linkColorAttribute] = text color attributes name from block json file
- * [linkHoverColorAttribute] = text color attributes name from block json file
+ * [textFontWeightAttr] = font weight attributes name from block json file
+ * [textFontSizeAttr] = font size attributes name from block json file
+ * [textLetterSpacingAttr] = letter spacing attributes name from block json file
+ * [textLineHeightAttr] = line height attributes name from block json file
+ * [textStyleAttr] = font style attributes name from block json file
+ * [textDecorationAttr] = text decoration attributes name from block json file
+ * [textTransformAttr] = text transform attributes name from block json file
  * this values are passed from parent component
  * and needs to reuse through style ={{color: attributes[textColorAttribute]}} tag
  * ==========
-<TabPanelForTextAndLink
+<TypographyControl
 	attributes={attributes}
 	setAttributes={setAttributes}
-	textColorAttribute="headingColor"
-	linkColorAttribute="linkColor"
-	linkHoverColorAttribute="linkHoverColor"
+	textFontWeightAttr = "respection-key-value-from-block.json-file"
+	textFontSizeAttr = "respection-key-value-from-block.json-file"
+	textLetterSpacingAttr = "respection-key-value-from-block.json-file"
+	textLineHeightAttr = "respection-key-value-from-block.json-file"
+	textStyleAttr = "respection-key-value-from-block.json-file"
+	textDecorationAttr = "respection-key-value-from-block.json-file"
+	textTransformAttr = "respection-key-value-from-block.json-file"
 />
  *
  */
 
 /**
  *
- * @param {*} param0
- * @returns
+ * @param {*} attributes object
+ * @param {*} setAttributes function
+ * @param {*} textFontWeightAttr string
+ * @param {*} textFontSizeAttr number
+ * @param {*} textLetterSpacingAttr number
+ * @param {*} textLineHeightAttr number
+ * @param {*} textStyleAttr string
+ * @param {*} textDecorationAttr string
+ * @param {*} textTransformAttr string
+ * @returns HTML
  */
 export default function TypographyControl({
 	attributes,
 	setAttributes,
-	titleFontWeightAttr,
-	titleFontSizeAttr,
-	titleLetterSpacingAttr,
-	titleLineHeightAttr,
-	titleStyleAttr,
-	titleDecorationAttr,
-	titleTransformAttr,
+	textFontWeightAttr,
+	textFontSizeAttr,
+	textLetterSpacingAttr,
+	textLineHeightAttr,
+	textStyleAttr,
+	textDecorationAttr,
+	textTransformAttr,
 }) {
 	/**
-	 * Font size options
+	 * Font size default options
 	 */
 	const fontSizes = [
 		{
@@ -63,11 +79,11 @@ export default function TypographyControl({
 		},
 	];
 	/**
-	 * Fallback font size
+	 * Fallback default font size
 	 */
 	const fallbackFontSize = 26;
 	/**
-	 * Set default color options
+	 * Set default font weight options
 	 */
 	const fontWeightVariationOptions = [
 		{ value: '400', label: '400' },
@@ -80,17 +96,26 @@ export default function TypographyControl({
 		{ value: '800', label: '800' },
 		{ value: '900', label: '900' },
 	];
+	/**
+	 * Default style options
+	 */
 	const styleVariationOptions = [
 		{ value: 'normal', label: 'Default' },
 		{ value: 'italic', label: 'Italic' },
 		{ value: 'oblique', label: 'Oblique' },
 	];
+	/**
+	 * Default decoration options
+	 */
 	const defcorationVariationOptions = [
 		{ value: 'none', label: 'Default' },
 		{ value: 'overline', label: 'Overline' },
 		{ value: 'underline', label: 'Underline' },
 		{ value: 'line-through', label: 'Line Through' },
 	];
+	/**
+	 * Default transform options
+	 */
 	const transformVariationOptions = [
 		{ value: 'none', label: 'Default' },
 		{ value: 'capitalize', label: 'Capitalize' },
@@ -99,7 +124,7 @@ export default function TypographyControl({
 	];
 	/**
 	 * Handle color change and set attributes value
-	 * @param {*} attrName
+	 * @param {*} attrName string
 	 * @returns
 	 */
 	const handleSelectControl = (attrName) => {
@@ -115,29 +140,29 @@ export default function TypographyControl({
 			<SelectControl
 				label={__('Font Weight')}
 				options={fontWeightVariationOptions}
-				value={attributes[titleFontWeightAttr]}
-				onChange={handleSelectControl(titleFontWeightAttr)}
+				value={attributes[textFontWeightAttr]}
+				onChange={handleSelectControl(textFontWeightAttr)}
 			/>
 			<FontSizePicker
 				fontSizes={fontSizes}
-				value={attributes[titleFontSizeAttr]}
+				value={attributes[textFontSizeAttr]}
 				fallbackFontSize={fallbackFontSize}
 				withReset={true}
 				withSlider={true}
 				// units={['px', 'em', 'rem']}
 				onChange={(titleFontSize) => {
 					setAttributes({
-						[titleFontSizeAttr]: titleFontSize,
+						[textFontSizeAttr]: titleFontSize,
 					});
 				}}
 			/>
 			<RangeControl
 				__nextHasNoMarginBottom
 				label="Letter Spacing"
-				value={attributes[titleLetterSpacingAttr]}
+				value={attributes[textLetterSpacingAttr]}
 				onChange={(value) =>
 					setAttributes({
-						[titleLetterSpacingAttr]: value,
+						[textLetterSpacingAttr]: value,
 					})
 				}
 				min={1}
@@ -148,10 +173,10 @@ export default function TypographyControl({
 			<RangeControl
 				__nextHasNoMarginBottom
 				label="Line Height"
-				value={attributes[titleLineHeightAttr]}
+				value={attributes[textLineHeightAttr]}
 				onChange={(value) =>
 					setAttributes({
-						[titleLineHeightAttr]: value,
+						[textLineHeightAttr]: value,
 					})
 				}
 				min={1}
@@ -161,21 +186,21 @@ export default function TypographyControl({
 			/>
 			<SelectControl
 				label={__('Style')}
-				value={attributes[titleStyleAttr]}
+				value={attributes[textStyleAttr]}
 				options={styleVariationOptions}
-				onChange={handleSelectControl(titleStyleAttr)}
+				onChange={handleSelectControl(textStyleAttr)}
 			/>
 			<SelectControl
 				label={__('Decoration')}
-				value={attributes[titleDecorationAttr]}
+				value={attributes[textDecorationAttr]}
 				options={defcorationVariationOptions}
-				onChange={handleSelectControl(titleDecorationAttr)}
+				onChange={handleSelectControl(textDecorationAttr)}
 			/>
 			<SelectControl
 				label={__('Transform')}
-				value={attributes[titleTransformAttr]}
+				value={attributes[textTransformAttr]}
 				options={transformVariationOptions}
-				onChange={handleSelectControl(titleTransformAttr)}
+				onChange={handleSelectControl(textTransformAttr)}
 			/>
 		</div>
 	);

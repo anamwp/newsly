@@ -7,7 +7,6 @@ import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
-import RenderPostCategoryData from './components';
 import {
 	Disabled,
 	Animate,
@@ -25,6 +24,11 @@ import axios from 'axios';
 
 import { __ } from '@wordpress/i18n';
 
+/**
+ * Handle API call to
+ * Get popular movies from the API
+ * @returns JSON
+ */
 const GetPopularMovies = async () => {
 	const movieAPIUrl = 'https://api.themoviedb.org/3/movie/popular';
 	const apiKey = '94413492db5e2e4ca5e93402ca623fca';
@@ -37,6 +41,11 @@ const GetPopularMovies = async () => {
 	}
 	return apiResponseJSON;
 };
+/**
+ * Handle API call to
+ * Get movie genres from the API
+ * @returns JSON
+ */
 const GetMovieGenres = async () => {
 	const options = {
 		method: 'GET',
@@ -57,7 +66,12 @@ const GetMovieGenres = async () => {
 	}
 	return getGenreResponseJSON;
 };
-
+/**
+ * Handle movie genre component
+ * @param {*} genreIDArr array
+ * @param {*} attributes object
+ * @returns HTML
+ */
 const HandleGenreRender = ({ genreIDArr, attributes }) => {
 	// console.log('IDs', genreIDArr);
 	let getGenre = attributes.genres;
@@ -74,7 +88,12 @@ const HandleGenreRender = ({ genreIDArr, attributes }) => {
 	// console.log('getGenre', newGenreArr);
 	// console.log('is found', isFound);
 };
-
+/**
+ * MovieCard component
+ * @param {*} move object
+ * @param {*} attributes object
+ * @returns
+ */
 const MovieCard = ({ movie, attributes }) => {
 	return (
 		<Card>
@@ -132,14 +151,16 @@ const MovieCard = ({ movie, attributes }) => {
 
 export default function edit(props) {
 	const blockProps = useBlockProps();
-	console.log('props before fetch', props);
+	// console.log('props before fetch', props);
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
-	console.log('attributes', attributes);
-
+	// console.log('attributes', attributes);
+	/**
+	 * Fetch movie and genre from the API
+	 */
 	useEffect(() => {
-		console.log('fetchedMovies', attributes.fetchedMovies.length);
+		// console.log('fetchedMovies', attributes.fetchedMovies.length);
 		/**
 		 * Fetch genres from the API
 		 * and set the attributes with the fetched genres
@@ -147,7 +168,7 @@ export default function edit(props) {
 		attributes.genres.length < 1 &&
 			GetMovieGenres()
 				.then((res) => {
-					console.log('res', res);
+					// console.log('res', res);
 					setAttributes({ genres: res.genres });
 				})
 				.catch((err) => console.log('genre err', err));
