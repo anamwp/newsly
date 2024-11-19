@@ -17,6 +17,10 @@ class Init {
 		 * gutenberg block
 		 */
 		Blocks\Block::init();
+		/**
+		 * Plugin Option Panel
+		 */
+		Admin\Options::init();
 	}
 }
 
