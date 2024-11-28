@@ -259,7 +259,7 @@ class Class_Movie_List_Callback {
 					grid-column-start: 1;
 					grid-column-end: <?php echo +$column + 1; ?>
 				}
-				h2{
+				.movie-list h2{
 					font-size: <?php echo $this->block_attributes['titleFontSize'] . 'px'; ?>;
 					font-weight: <?php echo $this->block_attributes['titleFontWeight']; ?>;
 					letter-spacing: <?php echo $this->block_attributes['titleLetterSpacing'].'px';?>;

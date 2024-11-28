@@ -6,7 +6,22 @@ import {
 	SelectControl,
 	FontSizePicker,
 	RangeControl,
+	__experimentalHeading as Heading,
+	Flex,
+	FlexItem,
+	// GrayBox,
 } from '@wordpress/components';
+import {
+	Icon,
+	more,
+	arrowLeft,
+	arrowRight,
+	arrowUp,
+	arrowDown,
+	trash,
+	settings,
+	typography,
+} from '@wordpress/icons';
 
 /**
  * How to use 
@@ -134,10 +149,108 @@ export default function TypographyControl({
 			});
 		};
 	};
+	const [isVisible, setIsVisible] = useState(false);
+	const toggleVisible = () => {
+		setIsVisible((state) => !state);
+	};
 
 	return (
 		<div class="gts__typography-panel">
-			<SelectControl
+			<Flex>
+				<FlexItem>
+					<strong>Typography</strong>
+					{/* <GrayBox>Typography</GrayBox> */}
+				</FlexItem>
+				<FlexItem>
+					<button
+						class="components-button is-primary"
+						onClick={toggleVisible}
+					>
+						{isVisible ? (
+							<Icon icon={settings} />
+						) : (
+							<Icon icon={typography} />
+							// <Icon icon={arrowRight} />
+						)}
+					</button>
+				</FlexItem>
+			</Flex>
+			{isVisible && (
+				<div
+					style={{
+						background: '#f0f0f0',
+						padding: '15px',
+						marginTop: '15px',
+					}}
+				>
+					<SelectControl
+						label={__('Font Weight')}
+						options={fontWeightVariationOptions}
+						value={attributes[textFontWeightAttr]}
+						onChange={handleSelectControl(textFontWeightAttr)}
+					/>
+					<FontSizePicker
+						fontSizes={fontSizes}
+						value={attributes[textFontSizeAttr]}
+						fallbackFontSize={fallbackFontSize}
+						withReset={true}
+						withSlider={true}
+						// units={['px', 'em', 'rem']}
+						onChange={(titleFontSize) => {
+							setAttributes({
+								[textFontSizeAttr]: titleFontSize,
+							});
+						}}
+					/>
+					<RangeControl
+						__nextHasNoMarginBottom
+						label="Letter Spacing"
+						value={attributes[textLetterSpacingAttr]}
+						onChange={(value) =>
+							setAttributes({
+								[textLetterSpacingAttr]: value,
+							})
+						}
+						min={1}
+						max={10}
+						allowReset={true}
+						step={0.1}
+					/>
+					<RangeControl
+						__nextHasNoMarginBottom
+						label="Line Height"
+						value={attributes[textLineHeightAttr]}
+						onChange={(value) =>
+							setAttributes({
+								[textLineHeightAttr]: value,
+							})
+						}
+						min={1}
+						max={10}
+						allowReset={true}
+						step={0.1}
+					/>
+					<SelectControl
+						label={__('Style')}
+						value={attributes[textStyleAttr]}
+						options={styleVariationOptions}
+						onChange={handleSelectControl(textStyleAttr)}
+					/>
+					<SelectControl
+						label={__('Decoration')}
+						value={attributes[textDecorationAttr]}
+						options={defcorationVariationOptions}
+						onChange={handleSelectControl(textDecorationAttr)}
+					/>
+					<SelectControl
+						label={__('Transform')}
+						value={attributes[textTransformAttr]}
+						options={transformVariationOptions}
+						onChange={handleSelectControl(textTransformAttr)}
+					/>
+				</div>
+			)}
+			{/* <SelectControl
 				label={__('Font Weight')}
 				options={fontWeightVariationOptions}
 				value={attributes[textFontWeightAttr]}
@@ -155,8 +268,8 @@ export default function TypographyControl({
 						[textFontSizeAttr]: titleFontSize,
 					});
 				}}
-			/>
-			<RangeControl
+			/> */}
+			{/* <RangeControl
 				__nextHasNoMarginBottom
 				label="Letter Spacing"
 				value={attributes[textLetterSpacingAttr]}
@@ -201,7 +314,7 @@ export default function TypographyControl({
 				value={attributes[textTransformAttr]}
 				options={transformVariationOptions}
 				onChange={handleSelectControl(textTransformAttr)}
-			/>
+			/> */}
 		</div>
 	);
 }
