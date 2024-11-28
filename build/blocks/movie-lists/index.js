@@ -2674,7 +2674,7 @@ __webpack_require__.r(__webpack_exports__);
 function save() {
   // console.log('hello from save.js');
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    children: "Render.php is responsible for the frontend view."
+    children: "wp-content/plugins/gutenberg-starter/includes/Blocks/Inc/Class_Movie_List_Callback.php is responsible for the frontend view and ajax content."
   });
 }
 

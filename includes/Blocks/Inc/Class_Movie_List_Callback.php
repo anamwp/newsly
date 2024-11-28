@@ -135,7 +135,7 @@ class Class_Movie_List_Callback {
 			<?php 
 				foreach($requested_movie_content->results as $movie):
 			?>
-				<div class="movie-card">
+				<div class="movie-card" data-movieid="<?php echo $movie->id; ?>">
 					<div class="movie-card__image">
 						<img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->poster_path; ?>" alt="<?php echo $movie->title; ?>">
 						<div class="meta">
@@ -222,15 +222,6 @@ class Class_Movie_List_Callback {
 	public function handle_movie_list_block_content_from_api($block_attributes, $content, $block) {
 		$this->block_attributes = $block_attributes;
 		$this->content = $content;
-		// dump(get_the_ID());
-		// dump($block);
-		// echo '<pre>';
-		// var_dump($block);
-		// echo '</pre>';
-		// echo '<pre>';
-		// var_dump($arr2);
-		// var_dump($this->block_attributes['genres']);
-		// echo '</pre>';
 		
 		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1' );
 		$movie_api_data = '';
@@ -251,6 +242,7 @@ class Class_Movie_List_Callback {
 		
 		if($movie_api_data):
 		?>
+		<div class="new-movie-list-block">
 			<style>
 				.movie-list{
 					grid-template-columns: repeat(<?php echo $column; ?>, 1fr);
@@ -269,11 +261,15 @@ class Class_Movie_List_Callback {
 					text-decoration: <?php echo $this->block_attributes['titleDecoration']; ?>;
 				}
 			</style>
+			<div id="popup-modal-for-movie-card" style='display: none;'>
+				<div id="close-modal">close</div>
+				<div id="fetched-movie-content"></div>
+			</div>
 			<div class="movie-list">
 				<?php 
 					foreach($movie_api_data->results as $movie):
 				?>
-					<div class="movie-card">
+					<div class="movie-card" data-movieid="<?php echo $movie->id; ?>">
 						<div class="movie-card__image">
 							<img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->poster_path; ?>" alt="<?php echo $movie->title; ?>">
 							<div class="meta">
@@ -348,6 +344,7 @@ class Class_Movie_List_Callback {
 					?>
 				</div>
 			</div>
+		</div>
 		<?php
 		endif;
 	}

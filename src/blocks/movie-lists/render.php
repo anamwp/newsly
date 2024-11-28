@@ -62,46 +62,6 @@ class Class_Movie_List_Render_Callback {
 	 * @return void
 	 */
 	public function handle_script_for_movie_list_block(){
-		?>
-		<script>
-			// (function($){
-			// 	$(document).ready(function(){
-			// 		function getPageNumberFromUrl(url) {
-			// 			// Extract query parameters from the URL
-			// 			// var queryParams = getPageNumberFromUrl(anchor.href)
-			// 			var queryParams = url.split('&');
-			// 			// Iterate through query parameters to find 'page' parameter
-			// 			for (var i = 0; i < queryParams.length; i++) {
-			// 				var param = queryParams[i].split('=');
-			// 				if (param[0] === 'page') {
-			// 					return param[1];
-			// 				}
-			// 			}
-			// 			// Return null if 'page' parameter is not found
-			// 			return null;
-			// 		}
-			// 		$(document).on('click', '.movie-list-ajax-number-pagination a', function(e){
-			// 			e.preventDefault();
-			// 			var page = $(this).attr('href');
-			// 			var pageNumber = getPageNumberFromUrl(page);
-			// 			$.ajax({
-			// 				url: anamajaxpagination.ajaxurl,
-			// 				type: 'get',
-			// 				data: {
-			// 					action: 'popular_movie_pagination',
-			// 					pageNumber: pageNumber,
-			// 				},
-			// 				success: function(response){
-			// 					console.log('response', response);
-			// 					$('.movie-list').empty().append(response);
-			// 					$(window).scrollTop(0);
-			// 				}
-			// 			});
-			// 		});
-			// 	});
-			// })(jQuery);
-		</script>
-		<?php
 	}
 	/**
 	 * Movie list block ajax callback from pagination
@@ -127,7 +87,7 @@ class Class_Movie_List_Render_Callback {
 			<?php 
 				foreach($requested_movie_content->results as $movie):
 			?>
-				<div class="movie-card">
+				<div class="movie-card" data-movieid="<?php echo $movie->id; ?>">
 					<div class="movie-card__image">
 						<img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->poster_path; ?>" alt="<?php echo $movie->title; ?>">
 						<div class="meta">
@@ -257,11 +217,18 @@ class Class_Movie_List_Render_Callback {
 					padding: <?php echo $titlePadding; ?>;
 				}
 			</style>
+			<div id="popup-modal-for-movie-card" style='display: none;'>
+				<div id="close-modal">close</div>
+				<div id="fetched-movie-content"></div>
+			</div>
 			<div class="movie-list">
 				<?php 
 					foreach($movie_api_data->results as $movie):
+						echo '<pre>';
+						var_dump($movie);
+						echo '</pre>';
 				?>
-					<div class="movie-card">
+					<div class="movie-card" data-movieid="<?php echo $movie->id; ?>">
 						<div class="movie-card__image">
 							<img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->poster_path; ?>" alt="<?php echo $movie->title; ?>">
 							<div class="meta">
@@ -345,9 +312,9 @@ class Class_Movie_List_Render_Callback {
 }
 
 $popular_movie_list_class = new Class_Movie_List_Render_Callback();
-echo '<pre>';
-var_dump($popular_movie_list_class);
-echo '</pre>';
+// echo '<pre>';
+// var_dump($popular_movie_list_class);
+// echo '</pre>';
 // $popular_movie_list_class->init_resources();
 /**
  * var_dump($attributes);
@@ -357,7 +324,7 @@ echo '</pre>';
  * var_dump($block);
  * $block The instance of the WP_Block class that represents the rendered block
  */
-$popular_movie_list_class->handle_movie_list_block_content_from_api($attributes, $content);
+// $popular_movie_list_class->handle_movie_list_block_content_from_api($attributes, $content);
 
 // add_action('init', function(){
 // 	dump('init');
