@@ -95,6 +95,7 @@ const HandleGenreRender = ({ genreIDArr, attributes }) => {
  * @returns
  */
 const MovieCard = ({ movie, attributes }) => {
+	var headingPadding = attributes.titlePaddingAttr;
 	return (
 		<Card>
 			<CardMedia>
@@ -113,16 +114,25 @@ const MovieCard = ({ movie, attributes }) => {
 						fontStyle: attributes.titleStyle,
 						textTransform: attributes.titleTransform,
 						textDecoration: attributes.titleDecoration,
+						padding: `${headingPadding?.top} ${headingPadding?.right} ${headingPadding?.bottom} ${headingPadding?.left}`,
 					}}
 					level={2}
 				>
 					{movie.title}
 				</Heading>
 			</CardHeader>
-			<CardBody>
+			<CardBody
+				style={{
+					padding: `${attributes.contentPaddingAttr.top} ${attributes.contentPaddingAttr.right} ${attributes.contentPaddingAttr.bottom} ${attributes.contentPaddingAttr.left}`,
+				}}
+			>
 				<Text>{movie.overview}</Text>
 			</CardBody>
-			<CardFooter>
+			<CardFooter
+				style={{
+					padding: `${attributes.contentPaddingAttr.top} ${attributes.contentPaddingAttr.right} ${attributes.contentPaddingAttr.bottom} ${attributes.contentPaddingAttr.left}`,
+				}}
+			>
 				{attributes.showGenre && (
 					<div className="genre">
 						<HandleGenreRender

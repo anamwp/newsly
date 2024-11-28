@@ -84,6 +84,24 @@
 		"titleTransform": {
 			"type": "string",
 			"default": "none"
+		},
+		"titlePaddingAttr": {
+			"type": "object",
+			"default": {
+				"top": "0px",
+				"right": "0px",
+				"bottom": "0px",
+				"left": "0px"
+			}
+		},
+		"contentPaddingAttr": {
+			"type": "object",
+			"default": {
+				"top": "0px",
+				"right": "0px",
+				"bottom": "0px",
+				"left": "0px"
+			}
 		}
 	},
 	"textdomain": "anam-gutenberg-starter",

@@ -16,12 +16,17 @@ import {
 	ButtonGroup,
 	CheckboxControl,
 	ClipboardButton,
+	Popover,
+	MenuGroup,
+	MenuItem,
 	__experimentalBoxControl as BoxControl,
 	__experimentalBorderControl as BorderControl,
 	__experimentalBorderBoxControl as BorderBoxControl,
+	__experimentalSpacer as Spacer,
 } from '@wordpress/components';
 import React from 'react';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
+import GSPaddingControl from '../components/GSPaddingControl';
 
 export default function sidebarControl({
 	props,
@@ -121,6 +126,11 @@ export default function sidebarControl({
 			</ClipboardButton>
 		);
 	};
+	const buttonRef = useRef();
+	const [isVisible, setIsVisible] = useState(false);
+	const toggleVisible = () => {
+		setIsVisible((state) => !state);
+	};
 
 	return (
 		<div>
@@ -206,6 +216,15 @@ export default function sidebarControl({
 			<InspectorControls group="styles">
 				<Panel>
 					<PanelBody initialOpen={true} title="Title">
+						<GSPaddingControl
+							attributes={attributes}
+							setAttributes={setAttributes}
+							paddingAttr="titlePaddingAttr"
+						/>
+						<Spacer
+							style={{ border: 'solid 1px #f0f0f0' }}
+							margin="10px 0px"
+						/>
 						<TypographyControl
 							attributes={attributes}
 							setAttributes={setAttributes}
@@ -219,32 +238,27 @@ export default function sidebarControl({
 						/>
 					</PanelBody>
 				</Panel>
-
 				<Panel>
-					<PanelBody
-						icon="welcome-widgets-menus"
-						initialOpen={false}
-						title="My Block Settings"
-					>
-						<PanelRow>My Panel Inputs and Labels</PanelRow>
-					</PanelBody>
-				</Panel>
-
-				<Panel>
-					<PanelBody
-						title={__('Block Styles', 'anam-gutenberg-starter')}
-						initialOpen={false}
-					>
-						<ColorPicker
-							color={color}
-							onChange={setColor}
-							enableAlpha
-							defaultValue="#000"
+					<PanelBody initialOpen={true} title="Content">
+						<GSPaddingControl
+							attributes={attributes}
+							setAttributes={setAttributes}
+							paddingAttr="contentPaddingAttr"
 						/>
-						<DateTimePicker
-							currentDate={date}
-							onChange={(newDate) => setDate(newDate)}
-							is12Hour={true}
+						<Spacer
+							style={{ border: 'solid 1px #f0f0f0' }}
+							margin="10px 0px"
+						/>
+						<TypographyControl
+							attributes={attributes}
+							setAttributes={setAttributes}
+							textFontWeightAttr="titleFontWeight"
+							textFontSizeAttr="titleFontSize"
+							textLetterSpacingAttr="titleLetterSpacing"
+							textLineHeightAttr="titleLineHeight"
+							textStyleAttr="titleStyle"
+							textDecorationAttr="titleDecoration"
+							textTransformAttr="titleTransform"
 						/>
 					</PanelBody>
 				</Panel>

@@ -194,7 +194,6 @@ class Class_Movie_List_Render_Callback {
 	 */
 	public function handle_movie_list_block_content_from_api($block_attributes, $content) {
 		$this->block_attributes = $block_attributes;
-		// dump($this->block_attributes);
 		// dump($this->$block_attributes);
 		$this->content = $content;
 		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1' );
@@ -213,6 +212,28 @@ class Class_Movie_List_Render_Callback {
 		foreach($this->block_attributes['genres'] as $key => $value){
 			$this->new_genres[$value['id']] = $value;
 		}
+		// Default box values if not provided
+		$title_padding_values = wp_parse_args( 
+			$this->block_attributes['titlePaddingAttr'] ?? [], 
+			[
+				'top' => '0px',
+				'right' => '0px',
+				'bottom' => '0px',
+				'left' => '0px',
+			]
+		);
+	
+		// Generate inline style
+		$titlePadding = sprintf(
+			'padding: %s %s %s %s;',
+			esc_attr( $title_padding_values['top'] ),
+			esc_attr( $title_padding_values['right'] ),
+			esc_attr( $title_padding_values['bottom'] ),
+			esc_attr( $title_padding_values['left'] )
+		);
+		echo '<pre>';
+		var_dump($titlePadding);
+		echo '</pre>';
 		// dump(array_key_exists('showLanguage', $this->block_attributes));
 		// dump($this->block_attributes);
 		if($movie_api_data):
@@ -233,6 +254,7 @@ class Class_Movie_List_Render_Callback {
 					font-style: <?php echo $this->block_attributes['titleStyle']; ?>;
 					text-transform: <?php echo $this->block_attributes['titleTransform']; ?>;
 					text-decoration: <?php echo $this->block_attributes['titleDecoration']; ?>;
+					padding: <?php echo $titlePadding; ?>;
 				}
 			</style>
 			<div class="movie-list">
@@ -323,6 +345,9 @@ class Class_Movie_List_Render_Callback {
 }
 
 $popular_movie_list_class = new Class_Movie_List_Render_Callback();
+echo '<pre>';
+var_dump($popular_movie_list_class);
+echo '</pre>';
 // $popular_movie_list_class->init_resources();
 /**
  * var_dump($attributes);
