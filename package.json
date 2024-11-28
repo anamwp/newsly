@@ -6,7 +6,7 @@
 	"scripts": {
 		"tailwindwatch": "tailwindcss -i ./src/*.js -o ./build/style.css --watch --postcss --minify",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "wp-scripts start && tailwindwatch --experimental-modules",
+		"start": "cross-env NODE_ENV=development wp-scripts start && tailwindwatch --experimental-modules",
 		"build": "wp-scripts build --experimental-modules",
 		"start-modules": "wp-scripts start --experimental-modules"
 	},
@@ -25,6 +25,7 @@
 		"@wordpress/babel-preset-default": "^8.5.0",
 		"@wordpress/interactivity": "^6.5.0",
 		"@wordpress/scripts": "^28.5.0",
+		"cross-env": "^7.0.3",
 		"cypress": "^13.11.0",
 		"postcss-import": "^16.1.0",
 		"postcss-nesting": "^12.1.5",
