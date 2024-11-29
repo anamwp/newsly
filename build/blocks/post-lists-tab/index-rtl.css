@@ -679,6 +679,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   align-items: center;
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .justify-center {
+  justify-content: center;
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .gap-2 {
   gap: 0.5rem;
 }
@@ -748,6 +752,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   background-color: rgb(109 40 217 / var(--tw-bg-opacity));
 }
 
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .bg-slate-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -785,6 +799,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .align-top {
   vertical-align: top;
+}
+
+.wp-block-anam-gutenberg-starter-block-post-lists-tab .align-middle {
+  vertical-align: middle;
 }
 
 .wp-block-anam-gutenberg-starter-block-post-lists-tab .font-poppins {

@@ -121,6 +121,7 @@ let cardElement = document.querySelectorAll('.movie-card');
 var modlCardElement = document.querySelectorAll('#popup-modal-for-movie-card');
 var modalCloseElement = document.querySelectorAll('#close-modal');
 var fetchedMovieContent = document.getElementById('fetched-movie-content');
+
 /**
  * Hide the modal
  */
@@ -146,6 +147,7 @@ const GetAPIResponseFromUrl = async (url = '') => {
     }
   };
   const getMovieAPIResponse = await fetch(url, options);
+  console.log('getMovieAPIResponse', getMovieAPIResponse);
   const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
   if (getMovieAPIResponseJSON.success === false) {
     throw new Error(getMovieAPIResponseJSON.status_message);
@@ -153,8 +155,23 @@ const GetAPIResponseFromUrl = async (url = '') => {
   return getMovieAPIResponseJSON;
 };
 const LoadingState = () => {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    children: "Loading..."
+  const style = {
+    width: '100%',
+    height: '100%'
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    class: "flex flex-row align-top h-full p-10 gap-5 overflow-hidden",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "left w-1/2 h-full",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+        class: "bg-slate-300 flex items-center justify-center text-2xl",
+        style: style,
+        children: "Image is loading."
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      className: "right w-1/2 overflow-scroll items-center justify-center flex text-2xl",
+      children: "Data is loading. Please wait..."
+    })]
   });
 };
 const HandleMovieContentRender = props => {
@@ -315,7 +332,12 @@ const HandleMovieContentRender = props => {
   function handleMovieModelOpen(movieID) {
     $('#popup-modal-for-movie-card').css('display', 'flex');
     let movieId = movieID;
+    var loading = true;
+    if (loading) {
+      (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createRoot)(fetchedMovieContent).render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(LoadingState, {}));
+    }
     GetAPIResponseFromUrl(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`).then(res => {
+      loading = false;
       (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createRoot)(fetchedMovieContent).render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(HandleMovieContentRender, {
         data: res
       }));

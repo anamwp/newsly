@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, useState } from 'react';
 import { createRoot } from '@wordpress/element';
 /**
  * Select elements
@@ -7,6 +7,7 @@ let cardElement = document.querySelectorAll('.movie-card');
 var modlCardElement = document.querySelectorAll('#popup-modal-for-movie-card');
 var modalCloseElement = document.querySelectorAll('#close-modal');
 var fetchedMovieContent = document.getElementById('fetched-movie-content');
+
 /**
  * Hide the modal
  */
@@ -33,6 +34,7 @@ const GetAPIResponseFromUrl = async (url = '') => {
 		},
 	};
 	const getMovieAPIResponse = await fetch(url, options);
+	console.log('getMovieAPIResponse', getMovieAPIResponse);
 	const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
 	if (getMovieAPIResponseJSON.success === false) {
 		throw new Error(getMovieAPIResponseJSON.status_message);
@@ -41,7 +43,25 @@ const GetAPIResponseFromUrl = async (url = '') => {
 };
 
 const LoadingState = () => {
-	return <div>Loading...</div>;
+	const style = {
+		width: '100%',
+		height: '100%',
+	};
+	return (
+		<div class="flex flex-row align-top h-full p-10 gap-5 overflow-hidden">
+			<div className="left w-1/2 h-full">
+				<span
+					class="bg-slate-300 flex items-center justify-center text-2xl"
+					style={style}
+				>
+					Image is loading.
+				</span>
+			</div>
+			<div className="right w-1/2 overflow-scroll items-center justify-center flex text-2xl">
+				Data is loading. Please wait...
+			</div>
+		</div>
+	);
 };
 
 const HandleMovieContentRender = (props) => {
@@ -229,10 +249,15 @@ const HandleMovieContentRender = (props) => {
 	function handleMovieModelOpen(movieID) {
 		$('#popup-modal-for-movie-card').css('display', 'flex');
 		let movieId = movieID;
+		var loading = true;
+		if (loading) {
+			createRoot(fetchedMovieContent).render(<LoadingState />);
+		}
 		GetAPIResponseFromUrl(
 			`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`
 		)
 			.then((res) => {
+				loading = false;
 				createRoot(fetchedMovieContent).render(
 					<HandleMovieContentRender data={res} />
 				);

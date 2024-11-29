@@ -679,6 +679,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   align-items: center;
 }
 
+.gts__card .justify-center {
+  justify-content: center;
+}
+
 .gts__card .gap-2 {
   gap: 0.5rem;
 }
@@ -748,6 +752,16 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   background-color: rgb(109 40 217 / var(--tw-bg-opacity));
 }
 
+.gts__card .bg-slate-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
+}
+
+.gts__card .bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
 .gts__card .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
@@ -785,6 +799,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__card .align-top {
   vertical-align: top;
+}
+
+.gts__card .align-middle {
+  vertical-align: middle;
 }
 
 .gts__card .font-poppins {
