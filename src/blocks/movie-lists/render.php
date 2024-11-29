@@ -32,15 +32,7 @@ class Class_Movie_List_Render_Callback {
 	 * Construct of Class
 	 */
 	public function __construct() {
-		// $this->init_resources();
-		// dump($this);
-		// $this->handle_movie_list_block_content_from_api();
 		add_action('wp_head', array($this, 'init_resources'));
-		// add_action('wp_head', array( $this, 'handle_script_for_movie_list_block' ));
-		add_action( 'wp_ajax_nopriv_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
-		add_action( 'wp_ajax_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
-	}
-	public function handlAjax(){
 		add_action( 'wp_ajax_nopriv_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
 		add_action( 'wp_ajax_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
 	}
@@ -55,13 +47,6 @@ class Class_Movie_List_Render_Callback {
 		wp_localize_script( 'jquery', 'anamajaxpagination', array(
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		));
-	}
-	/**
-	 * Javascript for Movie List Block
-	 *
-	 * @return void
-	 */
-	public function handle_script_for_movie_list_block(){
 	}
 	/**
 	 * Movie list block ajax callback from pagination
@@ -154,7 +139,6 @@ class Class_Movie_List_Render_Callback {
 	 */
 	public function handle_movie_list_block_content_from_api($block_attributes, $content) {
 		$this->block_attributes = $block_attributes;
-		// dump($this->$block_attributes);
 		$this->content = $content;
 		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1' );
 		$movie_api_data = '';
@@ -191,11 +175,6 @@ class Class_Movie_List_Render_Callback {
 			esc_attr( $title_padding_values['bottom'] ),
 			esc_attr( $title_padding_values['left'] )
 		);
-		echo '<pre>';
-		var_dump($titlePadding);
-		echo '</pre>';
-		// dump(array_key_exists('showLanguage', $this->block_attributes));
-		// dump($this->block_attributes);
 		if($movie_api_data):
 		?>
 			<style>
@@ -224,9 +203,6 @@ class Class_Movie_List_Render_Callback {
 			<div class="movie-list">
 				<?php 
 					foreach($movie_api_data->results as $movie):
-						echo '<pre>';
-						var_dump($movie);
-						echo '</pre>';
 				?>
 					<div class="movie-card" data-movieid="<?php echo $movie->id; ?>">
 						<div class="movie-card__image">
@@ -255,7 +231,6 @@ class Class_Movie_List_Render_Callback {
 							</div>
 						</div>
 						<div class="movie-card__content">
-							
 							<h2><?php echo $movie->title; ?></h2>
 							<p class="overview"><?php echo $movie->overview; ?></p>
 							<div class="movie-card__content__footer">
@@ -271,16 +246,12 @@ class Class_Movie_List_Render_Callback {
 									</ul>
 								</div>
 								<?php endif; ?>
-								<?php
-									
-								?>
 							</div>
 						</div>
 					</div>
 				<?php
 					endforeach;
 				?>
-			
 				<?php
 					$anniversary_paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
 					// $total_pages = $total_pages;
@@ -312,20 +283,4 @@ class Class_Movie_List_Render_Callback {
 }
 
 $popular_movie_list_class = new Class_Movie_List_Render_Callback();
-// echo '<pre>';
-// var_dump($popular_movie_list_class);
-// echo '</pre>';
-// $popular_movie_list_class->init_resources();
-/**
- * var_dump($attributes);
- * $attributes is coming from block.json attributes
- * var_dump($content);
- * $content The markup of the block as stored in the database
- * var_dump($block);
- * $block The instance of the WP_Block class that represents the rendered block
- */
-// $popular_movie_list_class->handle_movie_list_block_content_from_api($attributes, $content);
-
-// add_action('init', function(){
-// 	dump('init');
-// });
+$popular_movie_list_class->handle_movie_list_block_content_from_api($attributes, $content);

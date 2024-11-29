@@ -113,17 +113,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
 
 
-
 /**
  * Select elements
  */
 
 let cardElement = document.querySelectorAll('.movie-card');
-console.log(cardElement);
 var modlCardElement = document.querySelectorAll('#popup-modal-for-movie-card');
 var modalCloseElement = document.querySelectorAll('#close-modal');
 var fetchedMovieContent = document.getElementById('fetched-movie-content');
-console.log('fetchedMovieContent', fetchedMovieContent);
 /**
  * Hide the modal
  */
@@ -135,6 +132,11 @@ modalCloseElement[0].addEventListener('click', function () {
   modlCardElement[0].style.display = 'none';
   fetchedMovieContent.innerHTML = '';
 });
+/**
+ * Fetch data from the API
+ * @param {string} url url to fetch data from
+ * @returns Promise
+ */
 const GetAPIResponseFromUrl = async (url = '') => {
   const options = {
     method: 'GET',
@@ -151,7 +153,6 @@ const GetAPIResponseFromUrl = async (url = '') => {
   return getMovieAPIResponseJSON;
 };
 const LoadingState = () => {
-  console.log('hello');
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     children: "Loading..."
   });
@@ -260,43 +261,6 @@ const HandleMovieContentRender = props => {
     })]
   });
 };
-/**
- * Open the modal
- */
-// cardElement.forEach((element) => {
-// 	element.addEventListener('click', function () {
-// 		modlCardElement[0].style.display = 'flex';
-// 		let movieId = this.getAttribute('data-movieId');
-// 		console.log('movieId', movieId);
-// 		GetAPIResponseFromUrl(
-// 			`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`
-// 		)
-// 			.then((res) => {
-// 				console.log('res from api', res);
-// 				// setAttributes({ genres: res.genres });
-// 				// fetchedMovieContent.append(res);
-// 				// var NewContent = ;
-// 				// NewContent.then((res) => {
-// 				// 	console.log('resss', res);
-// 				// });
-// 				// console.log(JSON.stringify(NewContent));
-// 				createRoot(fetchedMovieContent).render(
-// 					<HandleMovieContentRender data={res} />
-// 				);
-
-// 				// fetchedMovieContent.render(<h1>Hello world</h1>);
-// 			})
-// 			.catch((err) => console.log('genre err', err));
-// 	});
-// });
-
-// document
-// 	.querySelector('.new-movie-list-block .movie-list .movie-card')
-// 	.addEventListener('click', function (e) {
-// 		e.preventDefault();
-// 		console.log('mov id', this.getAttribute('data-movieid'));
-// 	});
-
 (function ($) {
   $(document).ready(function () {
     function getPageNumberFromUrl(url) {
@@ -336,31 +300,25 @@ const HandleMovieContentRender = props => {
       });
     });
   });
+  /**
+   * Handle click on movie card
+   */
   $(document).on('click', '.new-movie-list-block .movie-list .movie-card', function (e) {
     e.preventDefault();
-    // console.log('mov id', this.getAttribute('data-movieid'));
     var movieId = this.getAttribute('data-movieid');
-    handleModelOpen(movieId);
+    handleMovieModelOpen(movieId);
   });
-  function handleModelOpen(movieID) {
+  /**
+   * Handle fetch data regarding single movie
+   * @param {string} movieID ID of the single movie
+   */
+  function handleMovieModelOpen(movieID) {
     $('#popup-modal-for-movie-card').css('display', 'flex');
-    // modlCardElement[0].style.display = 'flex';
     let movieId = movieID;
-    // console.log('movieId', movieId);
     GetAPIResponseFromUrl(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`).then(res => {
-      // console.log('res from api', res);
-      // setAttributes({ genres: res.genres });
-      // fetchedMovieContent.append(res);
-      // var NewContent = ;
-      // NewContent.then((res) => {
-      // 	console.log('resss', res);
-      // });
-      // console.log(JSON.stringify(NewContent));
       (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_1__.createRoot)(fetchedMovieContent).render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(HandleMovieContentRender, {
         data: res
       }));
-
-      // fetchedMovieContent.render(<h1>Hello world</h1>);
     }).catch(err => console.log('genre err', err));
   }
 })(jQuery);

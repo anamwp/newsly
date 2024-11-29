@@ -1,15 +1,12 @@
 import React from 'react';
 import { createRoot } from '@wordpress/element';
-
 /**
  * Select elements
  */
 let cardElement = document.querySelectorAll('.movie-card');
-console.log(cardElement);
 var modlCardElement = document.querySelectorAll('#popup-modal-for-movie-card');
 var modalCloseElement = document.querySelectorAll('#close-modal');
 var fetchedMovieContent = document.getElementById('fetched-movie-content');
-console.log('fetchedMovieContent', fetchedMovieContent);
 /**
  * Hide the modal
  */
@@ -21,6 +18,11 @@ modalCloseElement[0].addEventListener('click', function () {
 	modlCardElement[0].style.display = 'none';
 	fetchedMovieContent.innerHTML = '';
 });
+/**
+ * Fetch data from the API
+ * @param {string} url url to fetch data from
+ * @returns Promise
+ */
 const GetAPIResponseFromUrl = async (url = '') => {
 	const options = {
 		method: 'GET',
@@ -37,10 +39,11 @@ const GetAPIResponseFromUrl = async (url = '') => {
 	}
 	return getMovieAPIResponseJSON;
 };
+
 const LoadingState = () => {
-	console.log('hello');
 	return <div>Loading...</div>;
 };
+
 const HandleMovieContentRender = (props) => {
 	return (
 		<div class="flex flex-row align-top h-full p-10 gap-5 overflow-hidden">
@@ -162,42 +165,6 @@ const HandleMovieContentRender = (props) => {
 		</div>
 	);
 };
-/**
- * Open the modal
- */
-// cardElement.forEach((element) => {
-// 	element.addEventListener('click', function () {
-// 		modlCardElement[0].style.display = 'flex';
-// 		let movieId = this.getAttribute('data-movieId');
-// 		console.log('movieId', movieId);
-// 		GetAPIResponseFromUrl(
-// 			`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`
-// 		)
-// 			.then((res) => {
-// 				console.log('res from api', res);
-// 				// setAttributes({ genres: res.genres });
-// 				// fetchedMovieContent.append(res);
-// 				// var NewContent = ;
-// 				// NewContent.then((res) => {
-// 				// 	console.log('resss', res);
-// 				// });
-// 				// console.log(JSON.stringify(NewContent));
-// 				createRoot(fetchedMovieContent).render(
-// 					<HandleMovieContentRender data={res} />
-// 				);
-
-// 				// fetchedMovieContent.render(<h1>Hello world</h1>);
-// 			})
-// 			.catch((err) => console.log('genre err', err));
-// 	});
-// });
-
-// document
-// 	.querySelector('.new-movie-list-block .movie-list .movie-card')
-// 	.addEventListener('click', function (e) {
-// 		e.preventDefault();
-// 		console.log('mov id', this.getAttribute('data-movieid'));
-// 	});
 
 (function ($) {
 	$(document).ready(function () {
@@ -243,38 +210,32 @@ const HandleMovieContentRender = (props) => {
 			}
 		);
 	});
+	/**
+	 * Handle click on movie card
+	 */
 	$(document).on(
 		'click',
 		'.new-movie-list-block .movie-list .movie-card',
 		function (e) {
 			e.preventDefault();
-			// console.log('mov id', this.getAttribute('data-movieid'));
 			var movieId = this.getAttribute('data-movieid');
-			handleModelOpen(movieId);
+			handleMovieModelOpen(movieId);
 		}
 	);
-	function handleModelOpen(movieID) {
+	/**
+	 * Handle fetch data regarding single movie
+	 * @param {string} movieID ID of the single movie
+	 */
+	function handleMovieModelOpen(movieID) {
 		$('#popup-modal-for-movie-card').css('display', 'flex');
-		// modlCardElement[0].style.display = 'flex';
 		let movieId = movieID;
-		// console.log('movieId', movieId);
 		GetAPIResponseFromUrl(
 			`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`
 		)
 			.then((res) => {
-				// console.log('res from api', res);
-				// setAttributes({ genres: res.genres });
-				// fetchedMovieContent.append(res);
-				// var NewContent = ;
-				// NewContent.then((res) => {
-				// 	console.log('resss', res);
-				// });
-				// console.log(JSON.stringify(NewContent));
 				createRoot(fetchedMovieContent).render(
 					<HandleMovieContentRender data={res} />
 				);
-
-				// fetchedMovieContent.render(<h1>Hello world</h1>);
 			})
 			.catch((err) => console.log('genre err', err));
 	}
