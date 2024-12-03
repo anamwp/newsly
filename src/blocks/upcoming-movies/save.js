@@ -30,6 +30,12 @@ const HandleDate = (date) => {
 	let getYear = newDate.getFullYear();
 	return getYear;
 };
+const handleFullDate = (date) => {
+	let dateParseString = Date.parse(date);
+	let newDate = new Date(dateParseString);
+	let fullDateString = newDate.toDateString();
+	return fullDateString;
+};
 
 const MovieCard = ({ movie, attributes }) => {
 	console.log('attributes', attributes);
@@ -58,12 +64,12 @@ const MovieCard = ({ movie, attributes }) => {
 					)}
 					{attributes.showReleaseDate && (
 						<span className="year">
-							{HandleDate(movie.release_date)}
+							{handleFullDate(movie.release_date)}
 						</span>
 					)}
 				</div>
 			</div>
-			<div class="card__header">
+			<div class="card__header mt-3">
 				<h2>{movie.title}</h2>
 			</div>
 			{attributes.showDescription && (
@@ -72,6 +78,10 @@ const MovieCard = ({ movie, attributes }) => {
 				</div>
 			)}
 			<div className="card__footer">
+				{/* <div class="release-full-date text-sm">
+					{attributes.showReleaseDate &&
+						handleFullDate(movie.release_date)}
+				</div> */}
 				{attributes.showGenre && (
 					<div className="genre">
 						<HandleGenreRender

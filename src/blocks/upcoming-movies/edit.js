@@ -5,11 +5,6 @@ import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
 import { __ } from '@wordpress/i18n';
-import styled from 'styled-components';
-
-// const Wrapper = styled.div`
-// 	background: red;
-// `;
 
 /**
  * Function to fetch API response from URL
@@ -58,11 +53,22 @@ const HandleRoundNumber = (number, decimal_digit) => {
 	let result = Math.round(number * powerOften) / powerOften;
 	return result;
 };
+/**
+ * Show release date
+ * @param {string} date incoming string is like - 2024-06-11
+ * @returns
+ */
 const HandleDate = (date) => {
 	let dateParseString = Date.parse(date);
 	let newDate = new Date(dateParseString);
 	let getYear = newDate.getFullYear();
 	return getYear;
+};
+const handleFullDate = (date) => {
+	let dateParseString = Date.parse(date);
+	let newDate = new Date(dateParseString);
+	let fullDateString = newDate.toDateString();
+	return fullDateString;
 };
 /**
  * Movie Card Component
@@ -95,12 +101,12 @@ const MovieCard = ({ movie, attributes }) => {
 					)}
 					{attributes.showReleaseDate && (
 						<span className="year">
-							{HandleDate(movie.release_date)}
+							{handleFullDate(movie.release_date)}
 						</span>
 					)}
 				</div>
 			</div>
-			<div class="card__header">
+			<div class="card__header mt-3">
 				<h2>{movie.title}</h2>
 			</div>
 			{attributes.showDescription && (
@@ -109,6 +115,10 @@ const MovieCard = ({ movie, attributes }) => {
 				</div>
 			)}
 			<div className="card__footer">
+				{/* <div class="release-full-date text-sm">
+					{attributes.showReleaseDate &&
+						handleFullDate(movie.release_date)}
+				</div> */}
 				{attributes.showGenre && (
 					<div className="genre">
 						<HandleGenreRender

@@ -32,11 +32,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// const Wrapper = styled.div`
-// 	background: red;
-// `;
-
 /**
  * Function to fetch API response from URL
  * @param {url} url API URL
@@ -87,11 +82,22 @@ const HandleRoundNumber = (number, decimal_digit) => {
   let result = Math.round(number * powerOften) / powerOften;
   return result;
 };
+/**
+ * Show release date
+ * @param {string} date incoming string is like - 2024-06-11
+ * @returns
+ */
 const HandleDate = date => {
   let dateParseString = Date.parse(date);
   let newDate = new Date(dateParseString);
   let getYear = newDate.getFullYear();
   return getYear;
+};
+const handleFullDate = date => {
+  let dateParseString = Date.parse(date);
+  let newDate = new Date(dateParseString);
+  let fullDateString = newDate.toDateString();
+  return fullDateString;
 };
 /**
  * Movie Card Component
@@ -125,11 +131,11 @@ const MovieCard = ({
           children: movie.original_language
         }), attributes.showReleaseDate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "year",
-          children: HandleDate(movie.release_date)
+          children: handleFullDate(movie.release_date)
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      class: "card__header",
+      class: "card__header mt-3",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
         children: movie.title
       })
@@ -299,6 +305,12 @@ const HandleDate = date => {
   let getYear = newDate.getFullYear();
   return getYear;
 };
+const handleFullDate = date => {
+  let dateParseString = Date.parse(date);
+  let newDate = new Date(dateParseString);
+  let fullDateString = newDate.toDateString();
+  return fullDateString;
+};
 const MovieCard = ({
   movie,
   attributes
@@ -327,11 +339,11 @@ const MovieCard = ({
           children: movie.original_language
         }), attributes.showReleaseDate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
           className: "year",
-          children: HandleDate(movie.release_date)
+          children: handleFullDate(movie.release_date)
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      class: "card__header",
+      class: "card__header mt-3",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
         children: movie.title
       })

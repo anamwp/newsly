@@ -607,6 +607,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   margin-top: 2rem;
 }
 
+.gts__call-to-action .mt-3 {
+  margin-top: 0.75rem;
+}
+
 .gts__call-to-action .block {
   display: block;
 }
@@ -747,19 +751,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   background-color: rgb(6 95 70 / var(--tw-bg-opacity));
 }
 
-.gts__call-to-action .bg-violet-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(109 40 217 / var(--tw-bg-opacity));
-}
-
-.gts__call-to-action .bg-slate-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
-}
-
 .gts__call-to-action .bg-slate-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
+.gts__call-to-action .bg-violet-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(109 40 217 / var(--tw-bg-opacity));
 }
 
 .gts__call-to-action .object-cover {
@@ -799,10 +798,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__call-to-action .align-top {
   vertical-align: top;
-}
-
-.gts__call-to-action .align-middle {
-  vertical-align: middle;
 }
 
 .gts__call-to-action .font-poppins {

@@ -607,6 +607,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   margin-top: 2rem;
 }
 
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .mt-3 {
+  margin-top: 0.75rem;
+}
+
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .block {
   display: block;
 }
@@ -747,19 +751,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   background-color: rgb(6 95 70 / var(--tw-bg-opacity));
 }
 
-.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .bg-violet-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(109 40 217 / var(--tw-bg-opacity));
-}
-
-.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .bg-slate-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
-}
-
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .bg-slate-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
+}
+
+.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .bg-violet-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(109 40 217 / var(--tw-bg-opacity));
 }
 
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .object-cover {
@@ -799,10 +798,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .align-top {
   vertical-align: top;
-}
-
-.wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .align-middle {
-  vertical-align: middle;
 }
 
 .wp-block-anam-gutenberg-starter-block-top-rated-movie-lists .font-poppins {
