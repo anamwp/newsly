@@ -591,6 +591,10 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   margin-top: 0.5rem;
 }
 
+.gts__call-to-action .mt-3 {
+  margin-top: 0.75rem;
+}
+
 .gts__call-to-action .mt-4 {
   margin-top: 1rem;
 }
@@ -605,10 +609,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 
 .gts__call-to-action .mt-8 {
   margin-top: 2rem;
-}
-
-.gts__call-to-action .mt-3 {
-  margin-top: 0.75rem;
 }
 
 .gts__call-to-action .block {

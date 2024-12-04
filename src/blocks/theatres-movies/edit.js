@@ -123,6 +123,10 @@ export default function edit(props) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
 
+	const handleMovieUpdateForView = (newMovies) => {
+		setMovies(newMovies);
+	};
+
 	useEffect(() => {
 		/**
 		 * Fetch genres from the API
@@ -165,7 +169,10 @@ export default function edit(props) {
 
 	return (
 		<div {...blockProps}>
-			<SidebarControl props={props} />
+			<SidebarControl
+				props={props}
+				handleMovieUpdateForView={handleMovieUpdateForView}
+			/>
 			<div
 				className="movie-list"
 				style={{

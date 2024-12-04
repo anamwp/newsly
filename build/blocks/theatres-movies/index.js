@@ -2,6 +2,35 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/blocks/components/FetchMovie.js":
+/*!*********************************************!*\
+  !*** ./src/blocks/components/FetchMovie.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const FetchMovie = async (url = '') => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA'
+    }
+  };
+  const getMovieAPIResponse = await fetch(url, options);
+  const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
+  if (getMovieAPIResponseJSON.success === false) {
+    throw new Error(getMovieAPIResponseJSON.status_message);
+  }
+  return getMovieAPIResponseJSON;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FetchMovie);
+
+/***/ }),
+
 /***/ "./src/blocks/theatres-movies/edit.js":
 /*!********************************************!*\
   !*** ./src/blocks/theatres-movies/edit.js ***!
@@ -153,6 +182,9 @@ function edit(props) {
   } = props;
   const [isLoading, setIsLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(false);
   const [movies, setMovies] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)([]);
+  const handleMovieUpdateForView = newMovies => {
+    setMovies(newMovies);
+  };
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
     /**
      * Fetch genres from the API
@@ -187,7 +219,8 @@ function edit(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      props: props
+      props: props,
+      handleMovieUpdateForView: handleMovieUpdateForView
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
       className: "movie-list",
       style: {
@@ -391,8 +424,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_FetchMovie__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/FetchMovie */ "./src/blocks/components/FetchMovie.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -401,13 +436,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function sidebarControl({
-  props
+  props,
   // categories,
   // handleCategoryChange,
   // handleSelectedPostData,
   // handleCategoryToggleControl,
   // handleExcerptToggleControl,
   // handleFeaturedImageToggleControl,
+  handleMovieUpdateForView
 }) {
   const {
     attributes,
@@ -417,11 +453,16 @@ function sidebarControl({
   const [hasFixedBg, setHasFixedBg] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
   const [color, setColor] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)();
   const [date, setDate] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(new Date());
+  const [checkUpdateLoader, setCheckUpdateLoader] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+  const [updateAttrLoader, setUpdateAttrLoader] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+  const [updateAvailable, setUpdateAvailable] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(false);
+  const [newUpdatedMovie, setNewUpdatedMovie] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)([]);
+  const [checkUpdateMessage, setCheckUpdateMessage] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)('');
   const onSelect = tabName => {
     console.log('Selecting tab', tabName);
   };
   const MyCustomTabContent = () => {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
       label: "Fixed Background",
       help: hasFixedBg ? 'Has fixed background.' : 'No fixed background.',
       checked: hasFixedBg,
@@ -441,7 +482,7 @@ function sidebarControl({
   // Component: CheckboxControl
   const MyCheckboxControl = () => {
     const [isChecked, setChecked] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_5__.useState)(true);
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
       label: "Is author",
       help: "Is the user a author or not?",
       checked: isChecked,
@@ -452,7 +493,7 @@ function sidebarControl({
     // const [gradient, setGradient] = useState(null);
     // console.log('gradient', gradient);
 
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.GradientPicker, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.GradientPicker, {
       value: attributes.cardGradient,
       onChange: currentGradient => setAttributes({
         cardGradient: currentGradient
@@ -472,15 +513,106 @@ function sidebarControl({
       }]
     });
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody
+  const handleCheckForMovieUpdate = (attributes, setAttributes, remoteUrl = '') => {
+    setCheckUpdateLoader(true);
+    let oldTheatreMovies = attributes.fetchedMovies;
+    var newTheatreMovies = [];
+    var isChanged;
+    let url = remoteUrl;
+    let updatedDataPromise = (0,_components_FetchMovie__WEBPACK_IMPORTED_MODULE_6__["default"])(url);
+    updatedDataPromise.then(res => {
+      newTheatreMovies = res.results;
+      /**
+       * Check if the data is changed
+       */
+      isChanged = JSON.stringify(newTheatreMovies) !== JSON.stringify(oldTheatreMovies);
+      if (isChanged) {
+        setUpdateAvailable(true);
+        setCheckUpdateMessage('New movies available');
+      } else {
+        setUpdateAvailable(false);
+        setCheckUpdateMessage('No new movies available');
+      }
+      setCheckUpdateLoader(false);
+      setNewUpdatedMovie(newTheatreMovies);
+    }).catch(e => console.log(e));
+    /**
+     * Todo:
+     * 1. Fetch the latest movie data from the API
+     * 2. Update the movie data in the block
+     * 3. Show a success message
+     * 4. Show an error message if the update fails
+     * 5. Show a loading spinner while the update is in progress
+     * 6. Show a message if the movie data is already up-to-date
+     * 7. Show a message if the movie data is not available
+     * 8. Show a message if the API request fails
+     * 9. Show a message if the API request is unauthorized
+     * 10. Show a message if the API request is forbidden
+     *
+     */
+  };
+  const handleMovieUpdate = () => {
+    setUpdateAttrLoader(true);
+    /**
+     * Update the movie data in the block attribute
+     */
+    setAttributes({
+      fetchedMovies: newUpdatedMovie
+    });
+    /**
+     * Update parent component with the new movie data
+     */
+    handleMovieUpdateForView(newUpdatedMovie);
+    setTimeout(() => {
+      setUpdateAttrLoader(false);
+    }, 5000);
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+          initialOpen: true,
+          title: "Update",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelRow, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+              style: {
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px'
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                onClick: () => handleCheckForMovieUpdate(attributes, setAttributes, 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1'),
+                variant: "primary",
+                children: checkUpdateLoader ? 'Loading' : 'Check for Update'
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+                style: {
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '10px'
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
+                  style: {
+                    color: updateAvailable ? 'green' : 'black'
+                  },
+                  children: checkUpdateMessage
+                }), updateAvailable && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                  variant: "secondary",
+                  onClick: () => {
+                    handleMovieUpdate();
+                  },
+                  children: updateAttrLoader ? 'Updating' : 'Update'
+                })]
+              })]
+            })
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody
         // icon="welcome-widgets-menus"
         , {
           initialOpen: true,
           title: "Block Structure",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
             label: "Choose Column",
             value: attributes.movieColumn,
             options: [{
@@ -500,13 +632,13 @@ function sidebarControl({
             }
           })
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody
         // icon="welcome-widgets-menus"
         , {
           initialOpen: true,
           title: "Meta Information",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
             label: "Description",
             help: "Show description of the movie in the card.",
             checked: attributes.showDescription,
@@ -515,7 +647,7 @@ function sidebarControl({
                 showDescription: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
             label: "Genre",
             help: "Show genre of the movie in the card.",
             checked: attributes.showGenre,
@@ -524,7 +656,7 @@ function sidebarControl({
                 showGenre: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
             label: "Language",
             help: "Show Language of the movie in the card.",
             checked: attributes.showLanguage,
@@ -533,7 +665,7 @@ function sidebarControl({
                 showLanguage: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
             label: "Release Date",
             help: "Show release date of the movie in the card.",
             checked: attributes.showReleaseDate,
@@ -542,7 +674,7 @@ function sidebarControl({
                 showReleaseDate: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
             label: "Vote Count",
             help: "Show vote count of the movie in the card.",
             checked: attributes.showVoteCount,
@@ -551,7 +683,7 @@ function sidebarControl({
                 showVoteCount: newValue
               });
             }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.CheckboxControl, {
             label: "Vote Average",
             help: "Show vote average of the movie in the card.",
             checked: attributes.showVoteAverage,
@@ -563,15 +695,15 @@ function sidebarControl({
           })]
         })
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
       group: "styles",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody
         // icon="welcome-widgets-menus"
         , {
           initialOpen: true,
           title: "Gradient",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(CardGradientPicker, {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(CardGradientPicker, {})
         })
       })
     })]
