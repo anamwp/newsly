@@ -29,7 +29,7 @@ export default function save(props) {
 		<div {...blockProps}>
 			<div className="container gts_block__recent_product__container">
 				<h2>Recent Products</h2>
-				{/* <div className="row">
+				<div className="row">
 					{props.attributes.product_obj &&
 						props.attributes.product_obj.map(function (p, index) {
 							let onSale = p.on_sale;
@@ -47,7 +47,7 @@ export default function save(props) {
 								</div>
 							);
 						})}
-				</div> */}
+				</div>
 			</div>
 		</div>
 	);
