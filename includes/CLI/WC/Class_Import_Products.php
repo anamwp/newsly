@@ -28,7 +28,7 @@ class Class_Import_Products {
 	 *
 	 * @return void
 	 */
-	public function fetch_product_from_api(){
+	public function gs_fetch_product_from_api(){
 		$response = wp_remote_get( self::$api_url );
 		if ( is_wp_error( $response ) ) {
 			\WP_CLI::error('Failed to fetch data from the API');
@@ -52,7 +52,7 @@ class Class_Import_Products {
 	 * @param [string] $sku - product sku.
 	 * @return void
 	 */
-	public function check_product_exists( $sku ){
+	public function gs_check_product_exists( $sku ){
 		global $wpdb;
 		/**
 		 * get post id by meta key and value
@@ -75,11 +75,11 @@ class Class_Import_Products {
 	 * @param [array] $product - product array.
 	 * @return void
 	 */
-	public function manage_products_in_woocommerce( $product ){
+	public function gs_manage_products_in_woocommerce( $product ){
 		/**
 		 * Check if product already exists
 		 */
-		$product_exists = $this->check_product_exists( 'gs-dummy-'.$product['sku'] );
+		$product_exists = $this->gs_check_product_exists( 'gs-dummy-'.$product['sku'] );
 		if($product_exists['product_status']){
 			dump($product['dimensions']['depth']);
 			\WP_CLI::warning('Product already exists: '.$product['title']);
@@ -173,7 +173,7 @@ class Class_Import_Products {
 			 * Add featured image
 			 */
             if (!empty($product['thumbnail'])) {
-                $featured_image_id = $this->download_image($product['thumbnail'], $product_id);
+                $featured_image_id = $this->gs_download_image($product['thumbnail'], $product_id);
                 if ($featured_image_id) {
                     set_post_thumbnail($product_id, $featured_image_id, true);
 					\WP_CLI::log('Featured image added on - '.$product['title']);
@@ -186,7 +186,7 @@ class Class_Import_Products {
             if (!empty($product['images'])) {
                 $gallery_ids = [];
                 foreach ($product['images'] as $image_url) {
-                    $image_id = $this->download_image($image_url, $product_id, true);
+                    $image_id = $this->gs_download_image($image_url, $product_id, true);
                     if ($image_id) {
                         $gallery_ids[] = $image_id;
                     }
@@ -235,7 +235,7 @@ class Class_Import_Products {
 			// Add reviews
             if (!empty($product['reviews'])) {
                 foreach ($product['reviews'] as $review) {
-                    $this->add_product_review($product_id, $review);
+                    $this->gs_add_product_review($product_id, $review);
                 }
             }
 			/**
@@ -244,10 +244,13 @@ class Class_Import_Products {
 			\WP_CLI::success('Product inserted: '.$product['title']);
 		}
 	}
-	public function manage_attributes(){
-
-	}
-	private function add_product_review($product_id, $review_data) {
+	/**
+	 * Add product review
+	 *
+	 * @param [string] $product_id - product id.
+	 * @param [array] $review_data - review data.
+	 */
+	private function gs_add_product_review($product_id, $review_data) {
 		$comment_data = [
 			'comment_post_ID' => $product_id,
 			'comment_author' => $review_data['reviewerName'] ?? 'Anonymous',
@@ -267,18 +270,35 @@ class Class_Import_Products {
 			\WP_CLI::warning("Failed to add review for product ID {$product_id}");
 		}
 	}
-	private function download_image($image_url, $post_id, $show_loading = false) {
+	/**
+	 * Download image and attach to post
+	 *
+	 * @param [string] $image_url - image url to download.
+	 * @param [string] $post_id - post id to attach image.
+	 * @param boolean $show_loading - show loading message.
+	 * @return void
+	 */
+	private function gs_download_image($image_url, $post_id, $show_loading = false) {
+		/**
+		 * Show loading message
+		 */	
 		if ($show_loading) {
-			// Simulate loading animation
-			$this->show_loading_message("Downloading image...");
+			$this->gs_show_loading_message("Downloading image...");
 		}
+		/**
+		 * Download image from the URL
+		 */
 		$temp_file = download_url($image_url);
-
+		/**
+		 * If failed to download image then return false and show warning in the wp-cli
+		 */
 		if (is_wp_error($temp_file)) {
 			\WP_CLI::warning("Failed to download image: $image_url");
 			return false;
 		}
-
+		/**
+		 * Prepare file info to attach image
+		 */
 		$file_info = [
 			'name'     => basename($image_url),
 			'type'     => mime_content_type($temp_file),
@@ -286,50 +306,70 @@ class Class_Import_Products {
 			'error'    => 0,
 			'size'     => filesize($temp_file),
 		];
-
+		/**
+		 * Attach image to product
+		 */
 		$attachment_id = media_handle_sideload($file_info, $post_id);
+		/**
+		 * Remove temp file
+		 */
 		@unlink($temp_file);
-
+		/**
+		 * If failed to attach image then return false and show warning in the wp-cli
+		 */
 		if (is_wp_error($attachment_id)) {
 			\WP_CLI::warning("Failed to attach image: $image_url");
 			return false;
 		}
+		/**
+		 * If image attached successfully then show success message in the wp-cli
+		 */
 		if ($show_loading) {
 			\WP_CLI::log("Image downloaded and attached successfully!");
 		}
-
+		/**
+		 * Return attachment id
+		 */
 		return $attachment_id;
 	}
-	private function show_loading_message($message) {
-		// Display a loading message with animation
+	/**
+	 * Show loading message
+	 *
+	 * @param [string] $message - message to show.
+	 * @return void
+	 */
+	private function gs_show_loading_message($message) {
+		// Display a loading message with animation.
 		$dots = '';
 		for ($i = 0; $i < 3; $i++) {
 			$dots .= '.';
 			\WP_CLI::line("$message$dots");
-			sleep(1); // Simulate loading delay
+			sleep(1); // Simulate loading delay.
 		}
 	}
 	/**
-	 * CLI function to import products
+	 * Main CLI function to import products.
 	 * 
 	 * @return void
 	 */
 	public function import_products(){
-		$product_arr = $this->fetch_product_from_api();
+		$product_arr = $this->gs_fetch_product_from_api();
 		/**
 		 * Loop through the products and insert or update in woocommerce
 		 */
 		if ( ! empty( $product_arr ) ) {
 			foreach ( $product_arr as $product ) {
 				if($product){
-					$this->manage_products_in_woocommerce( $product );
+					$this->gs_manage_products_in_woocommerce( $product );
 				}
 			}
 		}
 	}
-
+	/**
+	 * Main CLI function to delete products.
+	 */
 	public function delete_products(){
-		$product_arr = $this->fetch_product_from_api();
+		$product_arr = $this->gs_fetch_product_from_api();
 		/**
 		 * Loop through the products and delete from woocommerce
 		 */
@@ -337,16 +377,16 @@ class Class_Import_Products {
 			foreach ( $product_arr as $product ) {
 				if($product){
 					$product_sku = 'gs-dummy-'.$product['sku'];
-					$product_available_status_arr = $this->check_product_exists( $product_sku );
+					$product_available_status_arr = $this->gs_check_product_exists( $product_sku );
 					$product_id = $product_available_status_arr['product_id'] ?? false;
 					if (!$product_id) {
 						\WP_CLI::error("Invalid product ID.");
 						return;
 					}
 					if($product_available_status_arr['product_status']){
-						// Remove attached featured and gallery images
-						$this->remove_attached_images($product_id);
-						$this->delete_inserted_product($product_available_status_arr['product_id']);
+						// Remove attached featured and gallery images.
+						$this->gs_remove_attached_images($product_id);
+						$this->gs_delete_inserted_product($product_available_status_arr['product_id']);
 					}else{
 						\WP_CLI::warning('Product not found: '.$product['title']);
 					}
@@ -354,7 +394,12 @@ class Class_Import_Products {
 			}
 		}
 	}
-	private function remove_attached_images($product_id) {
+	/**
+	 * Manage to remove attached images for a product
+	 *
+	 * @param [string] $product_id - product id.
+	 */
+	private function gs_remove_attached_images($product_id) {
 		// Remove featured image
 		$featured_image_id = get_post_thumbnail_id($product_id);
 		if ($featured_image_id) {
@@ -372,8 +417,13 @@ class Class_Import_Products {
 			}
 		}
 	}
-
-	public function delete_inserted_product($product_id){
+	/**
+	 * Delete inserted product
+	 *
+	 * @param [string] $product_id - product id.
+	 * @return void
+	 */
+	public function gs_delete_inserted_product($product_id){
 		wp_delete_post( $product_id, true );
 		\WP_CLI::success('Product deleted: '.$product_id);
 	}
