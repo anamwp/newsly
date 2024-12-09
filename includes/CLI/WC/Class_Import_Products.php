@@ -150,16 +150,94 @@ class Class_Import_Products {
 
 			\WP_CLI::log("Meta information added for product - {$product['title']}");
 
+			// Add categories and tags
+            if (!empty($product['category'])) {
+                $cat_assign_status = wp_set_object_terms($product_id, $product['category'], 'product_cat');
+				if( is_wp_error( $cat_assign_status ) ){
+					\WP_CLI::warning('Failed to assign category: '.$product['category']);
+				}else{
+					\WP_CLI::log('Category assigned on - '.$product['title']);
+				}
+            }
+
+            if (!empty($product['tags'])) {
+                $tag_assign_status = wp_set_object_terms($product_id, $product['tags'], 'product_tag');
+				if( is_wp_error( $tag_assign_status ) ){
+					\WP_CLI::warning('Failed to assign tags: '.$product['category']);
+				}else{
+					\WP_CLI::log('Tag assigned on - '.$product['title']);
+				}
+            }
+
+			/**
+			 * Add featured image
+			 */
+            if (!empty($product['thumbnail'])) {
+                $featured_image_id = $this->download_image($product['thumbnail'], $product_id);
+                if ($featured_image_id) {
+                    set_post_thumbnail($product_id, $featured_image_id, true);
+					\WP_CLI::log('Featured image added on - '.$product['title']);
+                }
+            }
+
+            /**
+			 * Add product gallery images
+			 */
+            if (!empty($product['images'])) {
+                $gallery_ids = [];
+                foreach ($product['images'] as $image_url) {
+                    $image_id = $this->download_image($image_url, $product_id, true);
+                    if ($image_id) {
+                        $gallery_ids[] = $image_id;
+                    }
+                }
+                if (!empty($gallery_ids)) {
+                    update_post_meta($product_id, '_product_image_gallery', implode(',', $gallery_ids));
+					\WP_CLI::log('Gallery images added on - '.$product['title']);
+                }
+            }
+
+
+			// Add categories
+			// if (!empty($product['categories'])) {
+			// 	$categories = [];
+			// 	foreach ($product['categories'] as $category) {
+			// 		$term = term_exists($category, 'product_cat');
+			// 		if ($term) {
+			// 			$categories[] = $term['term_id'];
+			// 		} else {
+			// 			$term = wp_insert_term($category, 'product_cat');
+			// 			if (!is_wp_error($term)) {
+			// 				$categories[] = $term['term_id'];
+			// 			}
+			// 		}
+			// 	}
+			// 	wp_set_object_terms($product_id, $categories, 'product_cat');
+			// }
+
+			// // Add tags
+			// if (!empty($product['tags'])) {
+			// 	$tags = [];
+			// 	foreach ($product['tags'] as $tag) {
+			// 		$term = term_exists($tag, 'product_tag');
+			// 		if ($term) {
+			// 			$tags[] = $term['term_id'];
+			// 		} else {
+			// 			$term = wp_insert_term($tag, 'product_tag');
+			// 			if (!is_wp_error($term)) {
+			// 				$tags[] = $term['term_id'];
+			// 			}
+			// 		}
+			// 	}
+			// 	wp_set_object_terms($product_id, $tags, 'product_tag');
+			// }
+
 			// Add reviews
             if (!empty($product['reviews'])) {
                 foreach ($product['reviews'] as $review) {
                     $this->add_product_review($product_id, $review);
                 }
             }
-
-			/**
-			 * Add featured image
-			 */
 			/**
 			 * Log the info in the wp-cli
 			 */
@@ -187,6 +265,48 @@ class Class_Import_Products {
 			\WP_CLI::log("Review added for product ID {$product_id} (Review ID: {$comment_id})");
 		} else {
 			\WP_CLI::warning("Failed to add review for product ID {$product_id}");
+		}
+	}
+	private function download_image($image_url, $post_id, $show_loading = false) {
+		if ($show_loading) {
+			// Simulate loading animation
+			$this->show_loading_message("Downloading image...");
+		}
+		$temp_file = download_url($image_url);
+
+		if (is_wp_error($temp_file)) {
+			\WP_CLI::warning("Failed to download image: $image_url");
+			return false;
+		}
+
+		$file_info = [
+			'name'     => basename($image_url),
+			'type'     => mime_content_type($temp_file),
+			'tmp_name' => $temp_file,
+			'error'    => 0,
+			'size'     => filesize($temp_file),
+		];
+
+		$attachment_id = media_handle_sideload($file_info, $post_id);
+		@unlink($temp_file);
+
+		if (is_wp_error($attachment_id)) {
+			\WP_CLI::warning("Failed to attach image: $image_url");
+			return false;
+		}
+		if ($show_loading) {
+			\WP_CLI::log("Image downloaded and attached successfully!");
+		}
+
+		return $attachment_id;
+	}
+	private function show_loading_message($message) {
+		// Display a loading message with animation
+		$dots = '';
+		for ($i = 0; $i < 3; $i++) {
+			$dots .= '.';
+			\WP_CLI::line("$message$dots");
+			sleep(1); // Simulate loading delay
 		}
 	}
 	/**
@@ -218,7 +338,14 @@ class Class_Import_Products {
 				if($product){
 					$product_sku = 'gs-dummy-'.$product['sku'];
 					$product_available_status_arr = $this->check_product_exists( $product_sku );
+					$product_id = $product_available_status_arr['product_id'] ?? false;
+					if (!$product_id) {
+						\WP_CLI::error("Invalid product ID.");
+						return;
+					}
 					if($product_available_status_arr['product_status']){
+						// Remove attached featured and gallery images
+						$this->remove_attached_images($product_id);
 						$this->delete_inserted_product($product_available_status_arr['product_id']);
 					}else{
 						\WP_CLI::warning('Product not found: '.$product['title']);
@@ -227,10 +354,29 @@ class Class_Import_Products {
 			}
 		}
 	}
+	private function remove_attached_images($product_id) {
+		// Remove featured image
+		$featured_image_id = get_post_thumbnail_id($product_id);
+		if ($featured_image_id) {
+			wp_delete_attachment($featured_image_id, true);
+			\WP_CLI::log("Deleted featured image (ID: $featured_image_id) for product ID - $product_id.");
+		}
+
+		// Remove gallery images
+		$gallery_image_ids = get_post_meta($product_id, '_product_image_gallery', true);
+		if (!empty($gallery_image_ids)) {
+			$gallery_image_ids = explode(',', $gallery_image_ids);
+			foreach ($gallery_image_ids as $image_id) {
+				wp_delete_attachment($image_id, true);
+				\WP_CLI::log("Deleted gallery image (ID: $image_id) for product ID - $product_id.");
+			}
+		}
+	}
 
 	public function delete_inserted_product($product_id){
 		wp_delete_post( $product_id, true );
 		\WP_CLI::success('Product deleted: '.$product_id);
 	}
+
 
 }
