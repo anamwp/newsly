@@ -141,8 +141,4 @@ class Demo {
 		 */
 		register_taxonomy( $this->taxonomy, $this->post_type, $args );
 	}
-
-
 }
-
-

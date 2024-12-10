@@ -37,11 +37,9 @@ class Init {
 		}
 	}
 
-	public static function init_wc_cli(){
+	public static function init_wc_cli() {
 		$wc_cli_instance = CLI\WC\Class_Import_Products::init();
 		WP_CLI::add_command( 'gs import-products', array( $wc_cli_instance, 'import_products' ) );
 		WP_CLI::add_command( 'gs delete-products', array( $wc_cli_instance, 'delete_products' ) );
 	}
 }
-
-

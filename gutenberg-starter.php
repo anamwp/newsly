@@ -86,7 +86,6 @@ final class Anam_Gutenberg_Starter {
 		 */
 		define( 'ANAM_GUTENBERG_STARTER_ASSETS', ANAM_GUTENBERG_STARTER_URL . '/build' );
 		define( 'ANAM_GUTENBERG_STARTER_DIR_ASSETS', ANAM_GUTENBERG_STARTER_DIR_URL . 'build' );
-
 	}
 	/**
 	 * add installation time
@@ -111,29 +110,30 @@ final class Anam_Gutenberg_Starter {
 	}
 }
 // function create_block_starter_block_init() {
-// 	// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
-// 	// 	include_once($file);
-// 	// }
-// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/theatres-movies' );
-// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/upcoming-movies' );
-// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/top-rated-movie-lists' );
-// 	register_block_type_from_metadata( __DIR__ . '/build/blocks/movie-lists' );
+// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
+// include_once($file);
+// }
+// register_block_type_from_metadata( __DIR__ . '/build/blocks/theatres-movies' );
+// register_block_type_from_metadata( __DIR__ . '/build/blocks/upcoming-movies' );
+// register_block_type_from_metadata( __DIR__ . '/build/blocks/top-rated-movie-lists' );
+// register_block_type_from_metadata( __DIR__ . '/build/blocks/movie-lists' );
 // }
 // add_action( 'init', 'create_block_starter_block_init' );
 
 /**
  * Undocumented function
  * ref: https://developer.wordpress.org/block-editor/how-to-guides/enqueueing-assets-in-the-editor/
+ *
  * @return void
  */
-function handle_google_fonts(){
+function handle_google_fonts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap', array(), null );
 }
 add_action( 'enqueue_block_editor_assets', 'handle_google_fonts' );
 add_action( 'wp_enqueue_scripts', 'handle_google_fonts' );
-function handle_script_module(){
+function handle_script_module() {
 	wp_enqueue_script( 'handleScriptModule', plugins_url( 'build/post-list-tab/view.js', __FILE__ ), array( 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ), '1.0', true );
-	wp_scripts()->add_data('handleScriptModule-js', 'type', 'module');
+	wp_scripts()->add_data( 'handleScriptModule-js', 'type', 'module' );
 }
 // add_action( 'wp_enqueue_scripts', 'handle_script_module' );
 
@@ -144,7 +144,7 @@ function handle_script_module(){
  * @return \Guest_Post_Submission
  */
 function anam_gutenberg_starter() {
-	 return anam_gutenberg_Starter::init();
+	return anam_gutenberg_Starter::init();
 }
 /**
  * kick start the plugin
@@ -170,4 +170,3 @@ if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
 } else {
 	add_filter( 'block_categories', 'prefix_register_layout_category_handler' );
 }
-

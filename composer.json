@@ -1,22 +1,35 @@
 {
-    "name": "theanamhossain/anam-gutenberg-starter",
-    "description": "A starter plugin to start your next big idea",
-    "type": "wordpress-plugin",
-    "license": "GPLv2",
-    "authors": [
-        {
-            "name": "anamwp",
-            "email": "theanamhossain@gmail.com"
-        }
-    ],
-    "minimum-stability": "dev",
-    "autoload": {
-        "psr-4": {
-            "Anam\\GutenbergStarter\\": "includes/"
-        },
-        "files": []
-    },
-    "require-dev": {
-        "phpunit/phpunit": "7.5.9"
-    }
+	"name": "theanamhossain/anam-gutenberg-starter",
+	"description": "A starter plugin to start your next big idea",
+	"type": "wordpress-plugin",
+	"license": "GPLv2",
+	"authors": [
+		{
+			"name": "anamwp",
+			"email": "theanamhossain@gmail.com"
+		}
+	],
+	"minimum-stability": "dev",
+	"autoload": {
+		"psr-4": {
+			"Anam\\GutenbergStarter\\": "includes/"
+		},
+		"files": []
+	},
+	"require-dev": {
+		"composer/composer": "^2.0",
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.4.1 || ^0.5 || ^0.6.2 || ^0.7",
+		"wp-coding-standards/wpcs": "^3.1.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"scripts": {
+		"set_default": "phpcs --config-set default_standard WordPress",
+		"phpcs_i": "phpcs -i",
+		"phpcs": "phpcs includes/CLI/* --standard=./phpcs.xml *",
+		"phpcbf": "phpcbf includes/CLI/* --standard=./phpcbf.xml *"
+	}
 }

@@ -1,6 +1,7 @@
-<?php 
+<?php
 
 namespace Anam\GutenbergStarter\Admin;
+
 /**
  * Plugin Option Panel.
  *
@@ -37,6 +38,5 @@ class Options {
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam quam dicta consequatur labore, libero veniam suscipit obcaecati eligendi architecto veritatis, illum tempore harum quos assumenda ab, ut in consectetur aspernatur dolor at vel! Magni, accusamus?</p>
 		<?php
 	}
-
 }
 

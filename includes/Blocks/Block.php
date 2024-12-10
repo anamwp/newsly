@@ -31,13 +31,13 @@ class Block {
 		 */
 		$this->movie_list_callback_instance = Inc\Class_Movie_List_Callback::init();
 	}
-	public function register_block(){
+	public function register_block() {
 		// dump(ANAM_GUTENBERG_STARTER_PATH);
 		// dump(plugins_url());
 		// dump(__DIR__);
 		// function create_block_starter_block_init() {
 			// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
-			// 	include_once($file);
+			// include_once($file);
 			// }
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/test' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/single-post' );
@@ -50,11 +50,13 @@ class Block {
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movie-slider' );
 			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/top-rated-movie-lists' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/movie-lists' , array(
-				'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
-			));
+			register_block_type_from_metadata(
+				ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/movie-lists',
+				array(
+					'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
+				)
+			);
 		// }
-		
 	}
 	/**
 	 * Register Starter Blocks
@@ -68,28 +70,28 @@ class Block {
 		 * register block script
 		 */
 		// wp_register_script(
-		// 	'starter-script',
-		// 	ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.js',
-		// 	$asset_file['dependencies'],
-		// 	$asset_file['version']
+		// 'starter-script',
+		// ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.js',
+		// $asset_file['dependencies'],
+		// $asset_file['version']
 		// );
 		/**
 		 * register blocks editor style
 		 */
 		// wp_register_style(
-		// 	'starter-editor-style',
-		// 	ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.css',
-		// 	array(),
-		// 	$asset_file['version']
+		// 'starter-editor-style',
+		// ANAM_GUTENBERG_STARTER_DIR_URL . 'build/index.css',
+		// array(),
+		// $asset_file['version']
 		// );
 		/**
 		 * Register blocks frontend style
 		 */
 		// wp_register_style(
-		// 	'starter-frontend-style',
-		// 	ANAM_GUTENBERG_STARTER_DIR_URL . 'build/style-index.css',
-		// 	array(),
-		// 	$asset_file['version']
+		// 'starter-frontend-style',
+		// ANAM_GUTENBERG_STARTER_DIR_URL . 'build/style-index.css',
+		// array(),
+		// $asset_file['version']
 		// );
 
 		/**
@@ -173,53 +175,53 @@ class Block {
 		 * Movie lists block
 		 */
 		// register_block_type(
-		// 	'anam-gutenberg-starter-block/movie-lists',
-		// 	array(
-		// 		'api_version'     => 2,
-		// 		'editor_script'   => 'starter-script',
-		// 		'editor_style'    => 'starter-editor-style',
-		// 		'style'           => 'starter-frontend-style',
-		// 		'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
-		// 	)
+		// 'anam-gutenberg-starter-block/movie-lists',
+		// array(
+		// 'api_version'     => 2,
+		// 'editor_script'   => 'starter-script',
+		// 'editor_style'    => 'starter-editor-style',
+		// 'style'           => 'starter-frontend-style',
+		// 'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
+		// )
 		// );
 		/**
 		 * Top rated movie lists block
 		 */
 		// register_block_type(
-		// 	'anam-gutenberg-starter-block/top-rated-movie-lists',
-		// 	array(
-		// 		'api_version'     => 2,
-		// 		'editor_script'   => 'starter-script',
-		// 		'editor_style'    => 'starter-editor-style',
-		// 		'script'   => 'starter-script',
-		// 		'style'           => 'starter-frontend-style',
-		// 	)
+		// 'anam-gutenberg-starter-block/top-rated-movie-lists',
+		// array(
+		// 'api_version'     => 2,
+		// 'editor_script'   => 'starter-script',
+		// 'editor_style'    => 'starter-editor-style',
+		// 'script'   => 'starter-script',
+		// 'style'           => 'starter-frontend-style',
+		// )
 		// );
 		/**
 		 * Upcoming movie lists block
 		 */
 		// register_block_type(
-		// 	'anam-gutenberg-starter-block/upcoming-movies',
-		// 	array(
-		// 		'api_version'     => 2,
-		// 		'editor_script'   => 'starter-script',
-		// 		'editor_style'    => 'starter-editor-style',
-		// 		'script'   => 'starter-script',
-		// 		'style'           => 'starter-frontend-style',
-		// 	)
+		// 'anam-gutenberg-starter-block/upcoming-movies',
+		// array(
+		// 'api_version'     => 2,
+		// 'editor_script'   => 'starter-script',
+		// 'editor_style'    => 'starter-editor-style',
+		// 'script'   => 'starter-script',
+		// 'style'           => 'starter-frontend-style',
+		// )
 		// );
 		/**
 		 * Theatres movies lists block
 		 */
 		// register_block_type(
-		// 	'anam-gutenberg-starter-block/theatres-movies',
-		// 	array(
-		// 		'api_version'     => 3,
-		// 		// 'editor_script'   => 'starter-script',
-		// 		// 'editor_style'    => 'starter-editor-style',
-		// 		// 'script'   	=> 'starter-script',
-		// 		// 'style'           => 'starter-frontend-style',
-		// 	)
+		// 'anam-gutenberg-starter-block/theatres-movies',
+		// array(
+		// 'api_version'     => 3,
+		// 'editor_script'   => 'starter-script',
+		// 'editor_style'    => 'starter-editor-style',
+		// 'script'     => 'starter-script',
+		// 'style'           => 'starter-frontend-style',
+		// )
 		// );
 		/**
 		 * Recent Product Block
@@ -266,8 +268,7 @@ class Block {
 		 */
 		if ( array_key_exists( 'fetchedPosts', $block_attributes ) ) :
 			$recent_posts = $block_attributes['fetchedPosts'][0];
-			else :
-				if ( array_key_exists( 'selectedPostId', $block_attributes ) && $selected_post_ID ) :
+			elseif ( array_key_exists( 'selectedPostId', $block_attributes ) && $selected_post_ID ) :
 					$recent_posts = wp_get_recent_posts(
 						array(
 							'numberposts' => -1,
@@ -278,31 +279,30 @@ class Block {
 					);
 				else :
 					return 'No post found to display';
-				endif;
 			endif;
-			/**
-			 * if no post found
-			 * return fall back message
-			 */
-			if ( count( $recent_posts ) === 0 ) {
-				return 'No posts found';
-			}
-			ob_start();
-			/**
-			 * get the category array of a post
-			 * then fetch those data
-			 */
-			if ( ! array_key_exists( 'showCategory', $block_attributes ) ) :
-				$single_post_cat_arr  = $recent_posts['categories'];
-				$single_post_cat_data = get_terms(
-					'category',
-					array(
-						'include' => $recent_posts['categories'],
-					)
-				);
+				/**
+				 * if no post found
+				 * return fall back message
+				 */
+				if ( count( $recent_posts ) === 0 ) {
+					return 'No posts found';
+				}
+				ob_start();
+				/**
+				 * get the category array of a post
+				 * then fetch those data
+				 */
+				if ( ! array_key_exists( 'showCategory', $block_attributes ) ) :
+					$single_post_cat_arr  = $recent_posts['categories'];
+					$single_post_cat_data = get_terms(
+						'category',
+						array(
+							'include' => $recent_posts['categories'],
+						)
+					);
 			endif;
-			if ( array_key_exists( 'selectedCategroyId', $block_attributes ) ) :
-				?>
+				if ( array_key_exists( 'selectedCategroyId', $block_attributes ) ) :
+					?>
 				<div class="single-post-card">
 					<?php if ( ! array_key_exists( 'showFeaturedImage', $block_attributes ) ) : ?>
 					<div class="featured-image">
@@ -311,7 +311,7 @@ class Block {
 						?>
 					</div>
 					<?php endif; ?>
-					<?php if ( ! array_key_exists( 'showCategory', $block_attributes ) ) : ?>
+						<?php if ( ! array_key_exists( 'showCategory', $block_attributes ) ) : ?>
 						<div>
 							<?php foreach ( $single_post_cat_data as $cat_data ) : ?>
 								<a href="<?php echo get_term_link( $cat_data->term_id ); ?>">
@@ -325,7 +325,7 @@ class Block {
 							<?php echo get_the_title( $recent_posts['id'] ); ?>
 						</a>
 					</h3>
-					<?php if ( ! array_key_exists( 'showExcerpt', $block_attributes ) ) : ?>
+						<?php if ( ! array_key_exists( 'showExcerpt', $block_attributes ) ) : ?>
 						<div>
 							<?php
 							echo $recent_posts['excerpt']['rendered'];
@@ -333,7 +333,7 @@ class Block {
 						</div>
 					<?php endif; ?>
 				</div>
-				<?php
+					<?php
 			else :
 				?>
 				<div>
@@ -355,16 +355,17 @@ class Block {
 
 		$args = array(
 			'post_type'      => 'product',
-			'posts_per_page' => 3
+			'posts_per_page' => 3,
 		);
-	
+
 		$loop = new \WP_Query( $args );
 		ob_start();
 		?>
 		<h2>Recent Products</h2>
 		<div class="row">
-		<?php	
-		while ( $loop->have_posts() ) : $loop->the_post();
+		<?php
+		while ( $loop->have_posts() ) :
+			$loop->the_post();
 			$product = wc_get_product( get_the_ID() );
 			?>
 			<div class="col-md-3">
@@ -375,17 +376,17 @@ class Block {
 
 				</h2>
 				<p class="product_price">
-					<?php echo $product->get_price_html() ?>
+					<?php echo $product->get_price_html(); ?>
 				</p>
 			</div>
 			<?php
-			
+
 		endwhile;
 		wp_reset_query();
 		?>
 		</div>
 		<?php
-		
+
 		$output = ob_get_clean();
 		return $output;
 	}
@@ -396,14 +397,14 @@ class Block {
 	 * @param [type] $content
 	 * @return void
 	 */
-	public function post_lists_tab_render_frontend_callback( $block_attributes, $content ){
+	public function post_lists_tab_render_frontend_callback( $block_attributes, $content ) {
 		ob_start();
 		$args = array(
 			'post_type'      => 'post',
-			'posts_per_page' => 3
+			'posts_per_page' => 3,
 		);
 		echo '<pre>';
-		var_dump($args);
+		var_dump( $args );
 		echo '</pre>';
 		$output = ob_get_clean();
 		return $output;
@@ -415,17 +416,16 @@ class Block {
 	 * @param [type] $content
 	 * @return void
 	 */
-	public function movie_lists_render_frontend_callback($block_attributes, $content, $block){
+	public function movie_lists_render_frontend_callback( $block_attributes, $content, $block ) {
 		/**
 		 * $block_attributes is coming from attributes or block.json
 		 * $content is coming from save.js
 		 */
 		ob_start();
-		$this->movie_list_callback_instance->handle_movie_list_block_content_from_api($block_attributes, $content, $block);
+		$this->movie_list_callback_instance->handle_movie_list_block_content_from_api( $block_attributes, $content, $block );
 		$output = ob_get_clean();
 		return $output;
 	}
-	
 }
 
 ?>
