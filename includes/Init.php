@@ -34,6 +34,7 @@ class Init {
 		 */
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			self::init_wc_cli();
+			self::init_post_cli();
 		}
 	}
 
@@ -41,5 +42,10 @@ class Init {
 		$wc_cli_instance = CLI\WC\Class_Import_Products::init();
 		WP_CLI::add_command( 'gs import-products', array( $wc_cli_instance, 'import_products' ) );
 		WP_CLI::add_command( 'gs delete-products', array( $wc_cli_instance, 'delete_products' ) );
+	}
+	public static function init_post_cli() {
+		$post_cli_instance = CLI\POST\Class_Import_Posts::init();
+		WP_CLI::add_command( 'gs import-posts', array( $post_cli_instance, 'import_posts' ) );
+		WP_CLI::add_command( 'gs delete-posts', array( $post_cli_instance, 'delete_posts' ) );
 	}
 }
