@@ -47,5 +47,9 @@ class Init {
 		$post_cli_instance = CLI\POST\Class_Import_Posts::init();
 		WP_CLI::add_command( 'gs import-posts', array( $post_cli_instance, 'import_posts' ) );
 		WP_CLI::add_command( 'gs delete-posts', array( $post_cli_instance, 'delete_posts' ) );
+
+		$post_cli_instance = CLI\POST\Class_Import_All_Posts::init();
+		WP_CLI::add_command( 'gs import-all-posts', array( $post_cli_instance, 'import_posts' ) );
+		WP_CLI::add_command( 'gs delete-all-posts', array( $post_cli_instance, 'delete_posts' ) );
 	}
 }
