@@ -195,6 +195,6 @@ class Class_Import_All_Posts {
 	}
 	private function manage_delete_posts( $post_id ) {
 		wp_delete_post( $post_id, true );
-		\WP_CLI::success( 'Product deleted: ' . $post_id );
+		\WP_CLI::success( 'Post deleted: ' . $post_id );
 	}
 }
