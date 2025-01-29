@@ -33,8 +33,8 @@ class Init {
 		 * @return void
 		 */
 		if ( defined( 'WP_CLI' ) && WP_CLI ) {
-			self::init_wc_cli();
-			self::init_post_cli();
+			// self::init_wc_cli();
+			// self::init_post_cli();
 		}
 	}
 
