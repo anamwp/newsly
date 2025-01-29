@@ -12,32 +12,34 @@
 global $post;
 // Generate unique id for aria-controls.
 // $unique_id = wp_unique_id( 'p-' );
-$context = array(
-	'price' => $attributes['price'],
+$context        = array(
+	'price'        => $attributes['price'],
 	'contribution' => 0,
-	'attributes' => $attributes
+	'attributes'   => $attributes,
 );
 $burger_context = array(
-	'price' => 15,
-	'burgerCount' => 0,
-	'burgerDonationCount' => 0,
-	'burgerTotalPrice' => 0,
-	'burgerDonationTotalPrice' => 0,
-	'totalPrice' => 0,
-	'hideDecreaseOrder' => true,
+	'price'                     => 15,
+	'burgerCount'               => 0,
+	'burgerDonationCount'       => 0,
+	'burgerTotalPrice'          => 0,
+	'burgerDonationTotalPrice'  => 0,
+	'totalPrice'                => 0,
+	'hideDecreaseOrder'         => true,
 	'hideDecreaseDonationOrder' => true,
 );
 ?>
 <div
 	<?php echo get_block_wrapper_attributes(); ?>
 	data-wp-interactive="burger"
-	<?php echo wp_interactivity_data_wp_context($burger_context); ?>
+	<?php echo wp_interactivity_data_wp_context( $burger_context ); ?>
 >
 	<p>
-		<?php echo sprintf(
-			'A burger costs $%s, you can order for yourself and donate for hungry people.', 
+		<?php
+		printf(
+			'A burger costs $%s, you can order for yourself and donate for hungry people.',
 			'<span data-wp-text="context.price"></span>'
-		) ?>
+		)
+		?>
 	</p>
 	<div style="border:solid 2px; padding:10px;margin-bottom:20px;">
 		Total
@@ -75,15 +77,15 @@ $burger_context = array(
 </div>
 <!-- donation calculator -->
 <div 
-	<?php echo get_block_wrapper_attributes();?>
+	<?php echo get_block_wrapper_attributes(); ?>
 	data-wp-interactive="donation-calculator"
-	<?php echo wp_interactivity_data_wp_context($context); ?>
+	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 >	
 	<form 
-	aria-label="<?php esc_attr_e('Calculate the impact of your donation');?>" 
+	aria-label="<?php esc_attr_e( 'Calculate the impact of your donation' ); ?>" 
 	class="calculator">
 		<label for="contribution-value" class="calculator-label">
-			<?php esc_html_e('check impact of your donation'); ?>
+			<?php esc_html_e( 'check impact of your donation' ); ?>
 		</label>
 		<div class="calculator-input">$
 			<input 
@@ -98,13 +100,13 @@ $burger_context = array(
 			class="calculator-output"
 			data-wp-class--show="state.show"
 		>
-			<?php 
-				echo sprintf(
-					esc_html__('Your %s donation will enable us to plant %s trees.'),
+			<?php
+				printf(
+					esc_html__( 'Your %1$s donation will enable us to plant %2$s trees.' ),
 					'<span data-wp-text="state.donation" ></span>',
 					'<span data-wp-text="state.trees" ></span>'
 				)
-			?>
+				?>
 		</output>
 	</form>
 	
@@ -114,8 +116,8 @@ $burger_context = array(
 <!-- wp context -->
 <!-- Let's make this element and its children interactive and set the namespace -->
 <div
-    data-wp-interactive="myPlugin2"
-    data-wp-context='{ "myColor" : "red", "myBgColor": "yellow" }'
+	data-wp-interactive="myPlugin2"
+	data-wp-context='{ "myColor" : "red", "myBgColor": "yellow" }'
 >
 	<p>I'm interactive now, <span data-wp-style--background-color="context.myBgColor">>and I can use directives!</span></p>
 	<div>
@@ -127,10 +129,10 @@ $burger_context = array(
 <h2>Practise from wp interactive API wp developer doc</h2>
 <!-- This is also valid -->
 <div
-  	data-wp-interactive='{ "namespace": "myPlugin" }'
-  	data-wp-context='{ "myColor" : "red", "myBgColor": "yellow" }'
+		data-wp-interactive='{ "namespace": "myPlugin" }'
+		data-wp-context='{ "myColor" : "red", "myBgColor": "yellow" }'
 >
-  	<p>I'm interactisve now, <span data-wp-style--background-color="context.myBgColor">>and I cans use directives!</span></p>
+		<p>I'm interactisve now, <span data-wp-style--background-color="context.myBgColor">>and I cans use directives!</span></p>
 	<span data-wp-text="donation-calculator::state.sampleText"></span>
 	<span data-wp-style--background-color="myPlugin2::context.myBgColor" data-wp-text="donation-calculator::state.sampleText"></span>
 	<div>
