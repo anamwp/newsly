@@ -66,7 +66,7 @@ const HandleDate = (date) => {
  */
 const MovieCard = ({ movie, attributes }) => {
 	return (
-		<div className="card">
+		<div className="card" data-movieid={movie.id}>
 			<div className="card__image">
 				<img
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -173,8 +173,13 @@ export default function edit(props) {
 				props={props}
 				handleMovieUpdateForView={handleMovieUpdateForView}
 			/>
+			<div id="popup-modal-for-movie-card" style={{ display: 'none' }}>
+				<div id="close-modal">close</div>
+				<div id="fetched-movie-content"></div>
+			</div>
 			<div
-				className="movie-list"
+				id="theatres-movies-block"
+				className="movie-list theatres-movies-block"
 				style={{
 					gridTemplateColumns: `repeat(
 						${attributes.movieColumn}, 1fr

@@ -128,6 +128,7 @@ const MovieCard = ({
 }) => {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "card",
+    "data-movieid": movie.id,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
       className: "card__image",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
@@ -221,8 +222,20 @@ function edit(props) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
       props: props,
       handleMovieUpdateForView: handleMovieUpdateForView
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      id: "popup-modal-for-movie-card",
+      style: {
+        display: 'none'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        id: "close-modal",
+        children: "close"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        id: "fetched-movie-content"
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "movie-list",
+      id: "theatres-movies-block",
+      className: "movie-list theatres-movies-block",
       style: {
         gridTemplateColumns: `repeat(
 						${attributes.movieColumn}, 1fr
@@ -332,6 +345,7 @@ const MovieCard = ({
   // console.log('attributes', attributes);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "card",
+    "data-movieid": movie.id,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "card__image",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
@@ -381,12 +395,26 @@ const MovieCard = ({
 function save({
   attributes
 }) {
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save();
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+    className: 'gs-theatres-movie-block'
+  });
   const fetchedMovies = attributes.fetchedMovies;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     ...blockProps,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "movie-list",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      id: "popup-modal-for-movie-card",
+      style: {
+        display: 'none'
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        id: "close-modal",
+        children: "close"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        id: "fetched-movie-content"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      id: "theatres-movies-block",
+      className: "movie-list theatres-movies-block",
       style: {
         gridTemplateColumns: `repeat(
 						${attributes.movieColumn}, 1fr
@@ -396,7 +424,7 @@ function save({
         movie: movie,
         attributes: attributes
       }, movie.id))
-    })
+    })]
   });
 }
 

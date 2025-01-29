@@ -77,7 +77,7 @@ const handleFullDate = (date) => {
  */
 const MovieCard = ({ movie, attributes }) => {
 	return (
-		<div className="card">
+		<div className="card" data-movieid={movie.id}>
 			<div className="card__image">
 				<img
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -133,7 +133,7 @@ const MovieCard = ({ movie, attributes }) => {
 };
 
 export default function edit(props) {
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({ className: 'gs-upcoming-movie-block' });
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
@@ -181,7 +181,12 @@ export default function edit(props) {
 	return (
 		<div {...blockProps}>
 			<SidebarControl props={props} />
+			<div id="popup-modal-for-movie-card" style={{ display: 'none' }}>
+				<div id="close-modal">close</div>
+				<div id="fetched-movie-content"></div>
+			</div>
 			<div
+				id="upcoming-movies-block"
 				className="movie-list"
 				style={{
 					gridTemplateColumns: `repeat(

@@ -8,17 +8,17 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
-.movie-list *,
-.movie-list ::before,
-.movie-list ::after {
+.gs-upcoming-movie-block *,
+.gs-upcoming-movie-block ::before,
+.gs-upcoming-movie-block ::after {
   box-sizing: border-box; /* 1 */
   border-width: 0; /* 2 */
   border-style: solid; /* 2 */
   border-color: #e5e7eb; /* 2 */
 }
 
-.movie-list ::before,
-.movie-list ::after {
+.gs-upcoming-movie-block ::before,
+.gs-upcoming-movie-block ::after {
   --tw-content: '';
 }
 
@@ -32,8 +32,8 @@
 7. Disable tap highlights on iOS
 */
 
-.movie-list html,
-.movie-list :host {
+.gs-upcoming-movie-block html,
+.gs-upcoming-movie-block :host {
   line-height: 1.5; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
   -moz-tab-size: 4; /* 3 */
@@ -50,7 +50,7 @@
 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
 */
 
-.movie-list body {
+.gs-upcoming-movie-block body {
   margin: 0; /* 1 */
   line-height: inherit; /* 2 */
 }
@@ -61,7 +61,7 @@
 3. Ensure horizontal rules are visible by default.
 */
 
-.movie-list hr {
+.gs-upcoming-movie-block hr {
   height: 0; /* 1 */
   color: inherit; /* 2 */
   border-top-width: 1px; /* 3 */
@@ -71,7 +71,7 @@
 Add the correct text decoration in Chrome, Edge, and Safari.
 */
 
-.movie-list abbr:where([title]) {
+.gs-upcoming-movie-block abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
           text-decoration: underline dotted;
 }
@@ -80,12 +80,12 @@ Add the correct text decoration in Chrome, Edge, and Safari.
 Remove the default font size and weight for headings.
 */
 
-.movie-list h1,
-.movie-list h2,
-.movie-list h3,
-.movie-list h4,
-.movie-list h5,
-.movie-list h6 {
+.gs-upcoming-movie-block h1,
+.gs-upcoming-movie-block h2,
+.gs-upcoming-movie-block h3,
+.gs-upcoming-movie-block h4,
+.gs-upcoming-movie-block h5,
+.gs-upcoming-movie-block h6 {
   font-size: inherit;
   font-weight: inherit;
 }
@@ -94,7 +94,7 @@ Remove the default font size and weight for headings.
 Reset links to optimize for opt-in styling instead of opt-out.
 */
 
-.movie-list a {
+.gs-upcoming-movie-block a {
   color: inherit;
   text-decoration: inherit;
 }
@@ -103,8 +103,8 @@ Reset links to optimize for opt-in styling instead of opt-out.
 Add the correct font weight in Edge and Safari.
 */
 
-.movie-list b,
-.movie-list strong {
+.gs-upcoming-movie-block b,
+.gs-upcoming-movie-block strong {
   font-weight: bolder;
 }
 
@@ -115,10 +115,10 @@ Add the correct font weight in Edge and Safari.
 4. Correct the odd `em` font sizing in all browsers.
 */
 
-.movie-list code,
-.movie-list kbd,
-.movie-list samp,
-.movie-list pre {
+.gs-upcoming-movie-block code,
+.gs-upcoming-movie-block kbd,
+.gs-upcoming-movie-block samp,
+.gs-upcoming-movie-block pre {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
   font-feature-settings: normal; /* 2 */
   font-variation-settings: normal; /* 3 */
@@ -129,7 +129,7 @@ Add the correct font weight in Edge and Safari.
 Add the correct font size in all browsers.
 */
 
-.movie-list small {
+.gs-upcoming-movie-block small {
   font-size: 80%;
 }
 
@@ -137,19 +137,19 @@ Add the correct font size in all browsers.
 Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 */
 
-.movie-list sub,
-.movie-list sup {
+.gs-upcoming-movie-block sub,
+.gs-upcoming-movie-block sup {
   font-size: 75%;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
 
-.movie-list sub {
+.gs-upcoming-movie-block sub {
   bottom: -0.25em;
 }
 
-.movie-list sup {
+.gs-upcoming-movie-block sup {
   top: -0.5em;
 }
 
@@ -159,7 +159,7 @@ Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 3. Remove gaps between table borders by default.
 */
 
-.movie-list table {
+.gs-upcoming-movie-block table {
   text-indent: 0; /* 1 */
   border-color: inherit; /* 2 */
   border-collapse: collapse; /* 3 */
@@ -171,11 +171,11 @@ Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 3. Remove default padding in all browsers.
 */
 
-.movie-list button,
-.movie-list input,
-.movie-list optgroup,
-.movie-list select,
-.movie-list textarea {
+.gs-upcoming-movie-block button,
+.gs-upcoming-movie-block input,
+.gs-upcoming-movie-block optgroup,
+.gs-upcoming-movie-block select,
+.gs-upcoming-movie-block textarea {
   font-family: inherit; /* 1 */
   font-feature-settings: inherit; /* 1 */
   font-variation-settings: inherit; /* 1 */
@@ -192,8 +192,8 @@ Prevent `sub` and `sup` elements from affecting the line height in all browsers.
 Remove the inheritance of text transform in Edge and Firefox.
 */
 
-.movie-list button,
-.movie-list select {
+.gs-upcoming-movie-block button,
+.gs-upcoming-movie-block select {
   text-transform: none;
 }
 
@@ -202,10 +202,10 @@ Remove the inheritance of text transform in Edge and Firefox.
 2. Remove default button styles.
 */
 
-.movie-list button,
-.movie-list input:where([type='button']),
-.movie-list input:where([type='reset']),
-.movie-list input:where([type='submit']) {
+.gs-upcoming-movie-block button,
+.gs-upcoming-movie-block input:where([type='button']),
+.gs-upcoming-movie-block input:where([type='reset']),
+.gs-upcoming-movie-block input:where([type='submit']) {
   -webkit-appearance: button; /* 1 */
   background-color: transparent; /* 2 */
   background-image: none; /* 2 */
@@ -215,7 +215,7 @@ Remove the inheritance of text transform in Edge and Firefox.
 Use the modern Firefox focus style for all focusable elements.
 */
 
-.movie-list :-moz-focusring {
+.gs-upcoming-movie-block :-moz-focusring {
   outline: auto;
 }
 
@@ -223,7 +223,7 @@ Use the modern Firefox focus style for all focusable elements.
 Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
 */
 
-.movie-list :-moz-ui-invalid {
+.gs-upcoming-movie-block :-moz-ui-invalid {
   box-shadow: none;
 }
 
@@ -231,7 +231,7 @@ Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/
 Add the correct vertical alignment in Chrome and Firefox.
 */
 
-.movie-list progress {
+.gs-upcoming-movie-block progress {
   vertical-align: baseline;
 }
 
@@ -239,8 +239,8 @@ Add the correct vertical alignment in Chrome and Firefox.
 Correct the cursor style of increment and decrement buttons in Safari.
 */
 
-.movie-list ::-webkit-inner-spin-button,
-.movie-list ::-webkit-outer-spin-button {
+.gs-upcoming-movie-block ::-webkit-inner-spin-button,
+.gs-upcoming-movie-block ::-webkit-outer-spin-button {
   height: auto;
 }
 
@@ -249,7 +249,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 2. Correct the outline style in Safari.
 */
 
-.movie-list [type='search'] {
+.gs-upcoming-movie-block [type='search'] {
   -webkit-appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
@@ -258,7 +258,7 @@ Correct the cursor style of increment and decrement buttons in Safari.
 Remove the inner padding in Chrome and Safari on macOS.
 */
 
-.movie-list ::-webkit-search-decoration {
+.gs-upcoming-movie-block ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -267,7 +267,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 2. Change font properties to `inherit` in Safari.
 */
 
-.movie-list ::-webkit-file-upload-button {
+.gs-upcoming-movie-block ::-webkit-file-upload-button {
   -webkit-appearance: button; /* 1 */
   font: inherit; /* 2 */
 }
@@ -276,7 +276,7 @@ Remove the inner padding in Chrome and Safari on macOS.
 Add the correct display in Chrome and Safari.
 */
 
-.movie-list summary {
+.gs-upcoming-movie-block summary {
   display: list-item;
 }
 
@@ -284,34 +284,34 @@ Add the correct display in Chrome and Safari.
 Removes the default spacing and border for appropriate elements.
 */
 
-.movie-list blockquote,
-.movie-list dl,
-.movie-list dd,
-.movie-list h1,
-.movie-list h2,
-.movie-list h3,
-.movie-list h4,
-.movie-list h5,
-.movie-list h6,
-.movie-list hr,
-.movie-list figure,
-.movie-list p,
-.movie-list pre {
+.gs-upcoming-movie-block blockquote,
+.gs-upcoming-movie-block dl,
+.gs-upcoming-movie-block dd,
+.gs-upcoming-movie-block h1,
+.gs-upcoming-movie-block h2,
+.gs-upcoming-movie-block h3,
+.gs-upcoming-movie-block h4,
+.gs-upcoming-movie-block h5,
+.gs-upcoming-movie-block h6,
+.gs-upcoming-movie-block hr,
+.gs-upcoming-movie-block figure,
+.gs-upcoming-movie-block p,
+.gs-upcoming-movie-block pre {
   margin: 0;
 }
 
-.movie-list fieldset {
+.gs-upcoming-movie-block fieldset {
   margin: 0;
   padding: 0;
 }
 
-.movie-list legend {
+.gs-upcoming-movie-block legend {
   padding: 0;
 }
 
-.movie-list ol,
-.movie-list ul,
-.movie-list menu {
+.gs-upcoming-movie-block ol,
+.gs-upcoming-movie-block ul,
+.gs-upcoming-movie-block menu {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -321,7 +321,7 @@ Removes the default spacing and border for appropriate elements.
 Reset default styling for dialogs.
 */
 
-.movie-list dialog {
+.gs-upcoming-movie-block dialog {
   padding: 0;
 }
 
@@ -329,7 +329,7 @@ Reset default styling for dialogs.
 Prevent resizing textareas horizontally by default.
 */
 
-.movie-list textarea {
+.gs-upcoming-movie-block textarea {
   resize: vertical;
 }
 
@@ -338,13 +338,13 @@ Prevent resizing textareas horizontally by default.
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
-.movie-list input::-moz-placeholder, .movie-list textarea::-moz-placeholder {
+.gs-upcoming-movie-block input::-moz-placeholder, .gs-upcoming-movie-block textarea::-moz-placeholder {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
 
-.movie-list input::placeholder,
-.movie-list textarea::placeholder {
+.gs-upcoming-movie-block input::placeholder,
+.gs-upcoming-movie-block textarea::placeholder {
   opacity: 1; /* 1 */
   color: #9ca3af; /* 2 */
 }
@@ -353,8 +353,8 @@ Prevent resizing textareas horizontally by default.
 Set the default cursor for buttons.
 */
 
-.movie-list button,
-.movie-list [role="button"] {
+.gs-upcoming-movie-block button,
+.gs-upcoming-movie-block [role="button"] {
   cursor: pointer;
 }
 
@@ -362,7 +362,7 @@ Set the default cursor for buttons.
 Make sure disabled buttons don't get the pointer cursor.
 */
 
-.movie-list :disabled {
+.gs-upcoming-movie-block :disabled {
   cursor: default;
 }
 
@@ -372,14 +372,14 @@ Make sure disabled buttons don't get the pointer cursor.
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
 
-.movie-list img,
-.movie-list svg,
-.movie-list video,
-.movie-list canvas,
-.movie-list audio,
-.movie-list iframe,
-.movie-list embed,
-.movie-list object {
+.gs-upcoming-movie-block img,
+.gs-upcoming-movie-block svg,
+.gs-upcoming-movie-block video,
+.gs-upcoming-movie-block canvas,
+.gs-upcoming-movie-block audio,
+.gs-upcoming-movie-block iframe,
+.gs-upcoming-movie-block embed,
+.gs-upcoming-movie-block object {
   display: block; /* 1 */
   vertical-align: middle; /* 2 */
 }
@@ -388,19 +388,19 @@ Make sure disabled buttons don't get the pointer cursor.
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
 
-.movie-list img,
-.movie-list video {
+.gs-upcoming-movie-block img,
+.gs-upcoming-movie-block video {
   max-width: 100%;
   height: auto;
 }
 
 /* Make elements with the HTML hidden attribute stay hidden by default */
 
-.movie-list [hidden] {
+.gs-upcoming-movie-block [hidden] {
   display: none;
 }
 
-.movie-list *, .movie-list ::before, .movie-list ::after {
+.gs-upcoming-movie-block *, .gs-upcoming-movie-block ::before, .gs-upcoming-movie-block ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -454,7 +454,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   --tw-contain-style:  ;
 }
 
-.movie-list ::backdrop {
+.gs-upcoming-movie-block ::backdrop {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -508,403 +508,403 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   --tw-contain-style:  ;
 }
 
-.movie-list .container {
+.gs-upcoming-movie-block .container {
   width: 100%;
 }
 
 @media (min-width: 640px) {
 
-  .movie-list .container {
+  .gs-upcoming-movie-block .container {
     max-width: 640px;
   }
 }
 
 @media (min-width: 768px) {
 
-  .movie-list .container {
+  .gs-upcoming-movie-block .container {
     max-width: 768px;
   }
 }
 
 @media (min-width: 1024px) {
 
-  .movie-list .container {
+  .gs-upcoming-movie-block .container {
     max-width: 1024px;
   }
 }
 
 @media (min-width: 1280px) {
 
-  .movie-list .container {
+  .gs-upcoming-movie-block .container {
     max-width: 1280px;
   }
 }
 
 @media (min-width: 1536px) {
 
-  .movie-list .container {
+  .gs-upcoming-movie-block .container {
     max-width: 1536px;
   }
 }
 
-.movie-list .static {
+.gs-upcoming-movie-block .static {
   position: static;
 }
 
-.movie-list .fixed {
+.gs-upcoming-movie-block .fixed {
   position: fixed;
 }
 
-.movie-list .absolute {
+.gs-upcoming-movie-block .absolute {
   position: absolute;
 }
 
-.movie-list .relative {
+.gs-upcoming-movie-block .relative {
   position: relative;
 }
 
-.movie-list .right-4 {
+.gs-upcoming-movie-block .right-4 {
   left: 1rem;
 }
 
-.movie-list .top-5 {
+.gs-upcoming-movie-block .top-5 {
   top: 1.25rem;
 }
 
-.movie-list .z-10 {
+.gs-upcoming-movie-block .z-10 {
   z-index: 10;
 }
 
-.movie-list .mb-10 {
+.gs-upcoming-movie-block .mb-10 {
   margin-bottom: 2.5rem;
 }
 
-.movie-list .mb-3 {
+.gs-upcoming-movie-block .mb-3 {
   margin-bottom: 0.75rem;
 }
 
-.movie-list .mt-0 {
+.gs-upcoming-movie-block .mt-0 {
   margin-top: 0px;
 }
 
-.movie-list .mt-2 {
+.gs-upcoming-movie-block .mt-2 {
   margin-top: 0.5rem;
 }
 
-.movie-list .mt-3 {
+.gs-upcoming-movie-block .mt-3 {
   margin-top: 0.75rem;
 }
 
-.movie-list .mt-4 {
+.gs-upcoming-movie-block .mt-4 {
   margin-top: 1rem;
 }
 
-.movie-list .mt-5 {
+.gs-upcoming-movie-block .mt-5 {
   margin-top: 1.25rem;
 }
 
-.movie-list .mt-6 {
+.gs-upcoming-movie-block .mt-6 {
   margin-top: 1.5rem;
 }
 
-.movie-list .mt-8 {
+.gs-upcoming-movie-block .mt-8 {
   margin-top: 2rem;
 }
 
-.movie-list .block {
+.gs-upcoming-movie-block .block {
   display: block;
 }
 
-.movie-list .inline-block {
+.gs-upcoming-movie-block .inline-block {
   display: inline-block;
 }
 
-.movie-list .inline {
+.gs-upcoming-movie-block .inline {
   display: inline;
 }
 
-.movie-list .flex {
+.gs-upcoming-movie-block .flex {
   display: flex;
 }
 
-.movie-list .grid {
+.gs-upcoming-movie-block .grid {
   display: grid;
 }
 
-.movie-list .hidden {
+.gs-upcoming-movie-block .hidden {
   display: none;
 }
 
-.movie-list .h-80 {
+.gs-upcoming-movie-block .h-80 {
   height: 20rem;
 }
 
-.movie-list .h-full {
+.gs-upcoming-movie-block .h-full {
   height: 100%;
 }
 
-.movie-list .w-1\/2 {
+.gs-upcoming-movie-block .w-1\/2 {
   width: 50%;
 }
 
-.movie-list .w-full {
+.gs-upcoming-movie-block .w-full {
   width: 100%;
 }
 
-.movie-list .max-w-full {
+.gs-upcoming-movie-block .max-w-full {
   max-width: 100%;
 }
 
-.movie-list .basis-1\/2 {
+.gs-upcoming-movie-block .basis-1\/2 {
   flex-basis: 50%;
 }
 
-.movie-list .transform {
+.gs-upcoming-movie-block .transform {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.movie-list .resize {
+.gs-upcoming-movie-block .resize {
   resize: both;
 }
 
-.movie-list .grid-cols-3 {
+.gs-upcoming-movie-block .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.movie-list .flex-row {
+.gs-upcoming-movie-block .flex-row {
   flex-direction: row;
 }
 
-.movie-list .flex-row-reverse {
+.gs-upcoming-movie-block .flex-row-reverse {
   flex-direction: row-reverse;
 }
 
-.movie-list .items-center {
+.gs-upcoming-movie-block .items-center {
   align-items: center;
 }
 
-.movie-list .justify-center {
+.gs-upcoming-movie-block .justify-center {
   justify-content: center;
 }
 
-.movie-list .gap-2 {
+.gs-upcoming-movie-block .gap-2 {
   gap: 0.5rem;
 }
 
-.movie-list .gap-4 {
+.gs-upcoming-movie-block .gap-4 {
   gap: 1rem;
 }
 
-.movie-list .gap-5 {
+.gs-upcoming-movie-block .gap-5 {
   gap: 1.25rem;
 }
 
-.movie-list .overflow-hidden {
+.gs-upcoming-movie-block .overflow-hidden {
   overflow: hidden;
 }
 
-.movie-list .overflow-scroll {
+.gs-upcoming-movie-block .overflow-scroll {
   overflow: scroll;
 }
 
-.movie-list .rounded {
+.gs-upcoming-movie-block .rounded {
   border-radius: 0.25rem;
 }
 
-.movie-list .rounded-full {
+.gs-upcoming-movie-block .rounded-full {
   border-radius: 9999px;
 }
 
-.movie-list .rounded-md {
+.gs-upcoming-movie-block .rounded-md {
   border-radius: 0.375rem;
 }
 
-.movie-list .border {
+.gs-upcoming-movie-block .border {
   border-width: 1px;
 }
 
-.movie-list .border-2 {
+.gs-upcoming-movie-block .border-2 {
   border-width: 2px;
 }
 
-.movie-list .border-x {
+.gs-upcoming-movie-block .border-x {
   border-right-width: 1px;
   border-left-width: 1px;
 }
 
-.movie-list .border-y {
+.gs-upcoming-movie-block .border-y {
   border-top-width: 1px;
   border-bottom-width: 1px;
 }
 
-.movie-list .border-solid {
+.gs-upcoming-movie-block .border-solid {
   border-style: solid;
 }
 
-.movie-list .bg-emerald-500 {
+.gs-upcoming-movie-block .bg-emerald-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(16 185 129 / var(--tw-bg-opacity));
 }
 
-.movie-list .bg-emerald-800 {
+.gs-upcoming-movie-block .bg-emerald-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(6 95 70 / var(--tw-bg-opacity));
 }
 
-.movie-list .bg-slate-300 {
+.gs-upcoming-movie-block .bg-slate-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
-.movie-list .bg-violet-700 {
+.gs-upcoming-movie-block .bg-violet-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(109 40 217 / var(--tw-bg-opacity));
 }
 
-.movie-list .object-cover {
+.gs-upcoming-movie-block .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.movie-list .p-10 {
+.gs-upcoming-movie-block .p-10 {
   padding: 2.5rem;
 }
 
-.movie-list .p-4 {
+.gs-upcoming-movie-block .p-4 {
   padding: 1rem;
 }
 
-.movie-list .p-8 {
+.gs-upcoming-movie-block .p-8 {
   padding: 2rem;
 }
 
-.movie-list .px-4 {
+.gs-upcoming-movie-block .px-4 {
   padding-right: 1rem;
   padding-left: 1rem;
 }
 
-.movie-list .py-2 {
+.gs-upcoming-movie-block .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
 
-.movie-list .pl-0 {
+.gs-upcoming-movie-block .pl-0 {
   padding-right: 0px;
 }
 
-.movie-list .pt-6 {
+.gs-upcoming-movie-block .pt-6 {
   padding-top: 1.5rem;
 }
 
-.movie-list .align-top {
+.gs-upcoming-movie-block .align-top {
   vertical-align: top;
 }
 
-.movie-list .font-poppins {
+.gs-upcoming-movie-block .font-poppins {
   font-family: Poppins, sans-serif;
 }
 
-.movie-list .font-roboto {
+.gs-upcoming-movie-block .font-roboto {
   font-family: Roboto, sans-serif;
 }
 
-.movie-list .text-2xl {
+.gs-upcoming-movie-block .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
 }
 
-.movie-list .text-3xl {
+.gs-upcoming-movie-block .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
 
-.movie-list .text-sm {
+.gs-upcoming-movie-block .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
-.movie-list .font-bold {
+.gs-upcoming-movie-block .font-bold {
   font-weight: 700;
 }
 
-.movie-list .font-medium {
+.gs-upcoming-movie-block .font-medium {
   font-weight: 500;
 }
 
-.movie-list .font-semibold {
+.gs-upcoming-movie-block .font-semibold {
   font-weight: 600;
 }
 
-.movie-list .uppercase {
+.gs-upcoming-movie-block .uppercase {
   text-transform: uppercase;
 }
 
-.movie-list .lowercase {
+.gs-upcoming-movie-block .lowercase {
   text-transform: lowercase;
 }
 
-.movie-list .capitalize {
+.gs-upcoming-movie-block .capitalize {
   text-transform: capitalize;
 }
 
-.movie-list .italic {
+.gs-upcoming-movie-block .italic {
   font-style: italic;
 }
 
-.movie-list .text-slate-600 {
+.gs-upcoming-movie-block .text-slate-600 {
   --tw-text-opacity: 1;
   color: rgb(71 85 105 / var(--tw-text-opacity));
 }
 
-.movie-list .text-slate-700 {
+.gs-upcoming-movie-block .text-slate-700 {
   --tw-text-opacity: 1;
   color: rgb(51 65 85 / var(--tw-text-opacity));
 }
 
-.movie-list .text-slate-900 {
+.gs-upcoming-movie-block .text-slate-900 {
   --tw-text-opacity: 1;
   color: rgb(15 23 42 / var(--tw-text-opacity));
 }
 
-.movie-list .text-white {
+.gs-upcoming-movie-block .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.movie-list .underline {
+.gs-upcoming-movie-block .underline {
   text-decoration-line: underline;
 }
 
-.movie-list .overline {
+.gs-upcoming-movie-block .overline {
   text-decoration-line: overline;
 }
 
-.movie-list .line-through {
+.gs-upcoming-movie-block .line-through {
   text-decoration-line: line-through;
 }
 
-.movie-list .shadow-md {
+.gs-upcoming-movie-block .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.movie-list .shadow-sm {
+.gs-upcoming-movie-block .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.movie-list .blur {
+.gs-upcoming-movie-block .blur {
   --tw-blur: blur(8px);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.movie-list .filter {
+.gs-upcoming-movie-block .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.movie-list .transition {
+.gs-upcoming-movie-block .transition {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
@@ -912,26 +912,56 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   transition-duration: 150ms;
 }
 
-.movie-list .transition-all {
+.gs-upcoming-movie-block .transition-all {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-
-.movie-list {
+.gs-upcoming-movie-block #popup-modal-for-movie-card {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gs-upcoming-movie-block #popup-modal-for-movie-card #close-modal {
+  position: absolute;
+  border: solid 2px white;
+  top: 50px;
+  left: 50px;
+  display: inline-block;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+.gs-upcoming-movie-block #popup-modal-for-movie-card #fetched-movie-content {
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+  background: white;
+  display: inline-block;
+  overflow: hidden;
+}
+.gs-upcoming-movie-block .movie-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
-.movie-list .movie-card__image,
-.movie-list .card__image {
+.gs-upcoming-movie-block .movie-list .movie-card__image,
+.gs-upcoming-movie-block .movie-list .card__image {
   position: relative;
   line-height: 0;
   border-radius: 4px;
   overflow: hidden;
 }
-.movie-list .movie-card__image::before,
-.movie-list .card__image::before {
+.gs-upcoming-movie-block .movie-list .movie-card__image::before,
+.gs-upcoming-movie-block .movie-list .card__image::before {
   content: "";
   display: block;
   position: absolute;
@@ -941,14 +971,14 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   height: 100%;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
 }
-.movie-list .movie-card__image img,
-.movie-list .card__image img {
+.gs-upcoming-movie-block .movie-list .movie-card__image img,
+.gs-upcoming-movie-block .movie-list .card__image img {
   width: 100%;
   display: inline-block;
   border-radius: 4px;
 }
-.movie-list .movie-card__image .rating-point,
-.movie-list .card__image .rating-point {
+.gs-upcoming-movie-block .movie-list .movie-card__image .rating-point,
+.gs-upcoming-movie-block .movie-list .card__image .rating-point {
   position: absolute;
   bottom: 15px;
   left: 20px;
@@ -960,20 +990,20 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   gap: 5px;
   line-height: 1;
 }
-.movie-list .movie-card__image .rating-point .vote-point,
-.movie-list .card__image .rating-point .vote-point {
+.gs-upcoming-movie-block .movie-list .movie-card__image .rating-point .vote-point,
+.gs-upcoming-movie-block .movie-list .card__image .rating-point .vote-point {
   font-size: 20px;
   color: white;
   font-weight: bold;
 }
-.movie-list .movie-card__image .rating-point .vote-count,
-.movie-list .card__image .rating-point .vote-count {
+.gs-upcoming-movie-block .movie-list .movie-card__image .rating-point .vote-count,
+.gs-upcoming-movie-block .movie-list .card__image .rating-point .vote-count {
   font-size: 10px;
   color: white;
   border-radius: 4px;
 }
-.movie-list .movie-card__image .language-and-yeaer,
-.movie-list .card__image .language-and-yeaer {
+.gs-upcoming-movie-block .movie-list .movie-card__image .language-and-yeaer,
+.gs-upcoming-movie-block .movie-list .card__image .language-and-yeaer {
   line-height: 1;
   position: absolute;
   bottom: 15px;
@@ -981,22 +1011,22 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   color: white;
   font-size: 10px;
 }
-.movie-list .movie-card__image .language-and-yeaer .language,
-.movie-list .card__image .language-and-yeaer .language {
+.gs-upcoming-movie-block .movie-list .movie-card__image .language-and-yeaer .language,
+.gs-upcoming-movie-block .movie-list .card__image .language-and-yeaer .language {
   text-transform: uppercase;
 }
-.movie-list .movie-card__image .language-and-yeaer .year,
-.movie-list .card__image .language-and-yeaer .year {
+.gs-upcoming-movie-block .movie-list .movie-card__image .language-and-yeaer .year,
+.gs-upcoming-movie-block .movie-list .card__image .language-and-yeaer .year {
   margin-right: 5px;
 }
-.movie-list .movie-card h2,
-.movie-list .card h2 {
+.gs-upcoming-movie-block .movie-list .movie-card h2,
+.gs-upcoming-movie-block .movie-list .card h2 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 5px;
 }
-.movie-list .movie-card .overview,
-.movie-list .card .overview {
+.gs-upcoming-movie-block .movie-list .movie-card .overview,
+.gs-upcoming-movie-block .movie-list .card .overview {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -1004,13 +1034,13 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-.movie-list .movie-card__footer .genre ul,
-.movie-list .card__footer .genre ul {
+.gs-upcoming-movie-block .movie-list .movie-card__footer .genre ul,
+.gs-upcoming-movie-block .movie-list .card__footer .genre ul {
   padding: 0;
   margin: 0;
 }
-.movie-list .movie-card__footer .genre li,
-.movie-list .card__footer .genre li {
+.gs-upcoming-movie-block .movie-list .movie-card__footer .genre li,
+.gs-upcoming-movie-block .movie-list .card__footer .genre li {
   list-style-type: none;
   display: inline-block;
   /* border: solid 1px; */

@@ -29,7 +29,7 @@ const HandleDate = (date) => {
 const MovieCard = ({ movie, attributes }) => {
 	// console.log('attributes', attributes);
 	return (
-		<div className="card">
+		<div className="card" data-movieid={movie.id}>
 			<div className="card__image">
 				<img
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -81,13 +81,20 @@ const MovieCard = ({ movie, attributes }) => {
 };
 
 export default function save({ attributes }) {
-	const blockProps = useBlockProps.save();
+	const blockProps = useBlockProps.save({
+		className: 'gs-theatres-movie-block',
+	});
 	const fetchedMovies = attributes.fetchedMovies;
 
 	return (
 		<div {...blockProps}>
+			<div id="popup-modal-for-movie-card" style={{ display: 'none' }}>
+				<div id="close-modal">close</div>
+				<div id="fetched-movie-content"></div>
+			</div>
 			<div
-				className="movie-list"
+				id="theatres-movies-block"
+				className="movie-list theatres-movies-block"
 				style={{
 					gridTemplateColumns: `repeat(
 						${attributes.movieColumn}, 1fr

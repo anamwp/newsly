@@ -323,7 +323,7 @@ module.exports = window["wp"]["element"];
 /************************************************************************/
 var __webpack_exports__ = {};
 /*!********************************************!*\
-  !*** ./src/blocks/theatres-movies/view.js ***!
+  !*** ./src/blocks/upcoming-movies/view.js ***!
   \********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HandleModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/HandleModal */ "./src/blocks/components/HandleModal.js");
@@ -335,7 +335,7 @@ __webpack_require__.r(__webpack_exports__);
 // var modalCloseElement = document.querySelectorAll('#close-modal');
 // var fetchedMovieContent = document.getElementById('fetched-movie-content');
 
-(0,_components_HandleModal__WEBPACK_IMPORTED_MODULE_0__["default"])('#theatres-movies-block.movie-list .card', '#popup-modal-for-movie-card');
+(0,_components_HandleModal__WEBPACK_IMPORTED_MODULE_0__["default"])('#upcoming-movies-block.movie-list .card', '#popup-modal-for-movie-card');
 
 // /**
 //  * Hide the modal

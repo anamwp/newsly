@@ -7,7 +7,7 @@ import HandleModal from '../components/HandleModal';
 // var fetchedMovieContent = document.getElementById('fetched-movie-content');
 
 HandleModal(
-	'#theatres-movies-block.movie-list .card',
+	'#upcoming-movies-block.movie-list .card',
 	'#popup-modal-for-movie-card'
 );
 
