@@ -2,6 +2,40 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/blocks/components/APIResponsePromise.js":
+/*!*****************************************************!*\
+  !*** ./src/blocks/components/APIResponsePromise.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Manage API response promise
+ * @param {string} url - URL of the API
+ * @returns
+ */
+const APIResponsePromise = async (url = '') => {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA'
+    }
+  };
+  const getMovieAPIResponse = await fetch(url, options);
+  const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
+  if (getMovieAPIResponseJSON.success === false) {
+    throw new Error(getMovieAPIResponseJSON.status_message);
+  }
+  return getMovieAPIResponseJSON;
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (APIResponsePromise);
+
+/***/ }),
+
 /***/ "./src/blocks/components/MovieCard.js":
 /*!********************************************!*\
   !*** ./src/blocks/components/MovieCard.js ***!
@@ -157,8 +191,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _components_MovieCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/MovieCard */ "./src/blocks/components/MovieCard.js");
 /* harmony import */ var _components_PopupModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/PopupModal */ "./src/blocks/components/PopupModal.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_APIResponsePromise__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/APIResponsePromise */ "./src/blocks/components/APIResponsePromise.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
 
 
 
@@ -168,27 +203,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/**
- * Function to fetch API response from URL
- * @param {url} url API URL
- * @returns
- */
 
-const GetAPIResponseFromUrl = async (url = '') => {
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA'
-    }
-  };
-  const getMovieAPIResponse = await fetch(url, options);
-  const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
-  if (getMovieAPIResponseJSON.success === false) {
-    throw new Error(getMovieAPIResponseJSON.status_message);
-  }
-  return getMovieAPIResponseJSON;
-};
 function edit(props) {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
     className: 'top-rated-movie-lists-block'
@@ -204,8 +219,7 @@ function edit(props) {
      * Fetch genres from the API
      * and set the attributes with the fetched genres
      */
-    attributes.genres.length < 1 && GetAPIResponseFromUrl('https://api.themoviedb.org/3/genre/movie/list?language=en').then(res => {
-      console.log('res', res);
+    attributes.genres.length < 1 && (0,_components_APIResponsePromise__WEBPACK_IMPORTED_MODULE_8__["default"])('https://api.themoviedb.org/3/genre/movie/list?language=en').then(res => {
       setAttributes({
         genres: res.genres
       });
@@ -216,8 +230,7 @@ function edit(props) {
      * with the fetched movies
      */
     attributes.fetchedMovies.length > 0 && setMovies(attributes.fetchedMovies);
-    attributes.fetchedMovies.length < 1 && GetAPIResponseFromUrl('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1').then(res => {
-      console.log('res', res);
+    attributes.fetchedMovies.length < 1 && (0,_components_APIResponsePromise__WEBPACK_IMPORTED_MODULE_8__["default"])('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1').then(res => {
       /**
        * Set state with the fetched movies
        */
@@ -230,11 +243,11 @@ function edit(props) {
       });
     }).catch(err => console.log('err', err));
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     ...blockProps,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_3__["default"], {
       props: props
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_PopupModal__WEBPACK_IMPORTED_MODULE_7__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_PopupModal__WEBPACK_IMPORTED_MODULE_7__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       id: "top-rated-movie-lists",
       className: "movie-list",
       style: {
@@ -242,7 +255,7 @@ function edit(props) {
 						${attributes.movieColumn}, 1fr
 					)`
       },
-      children: movies && movies.map(movie => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_MovieCard__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      children: movies && movies.map(movie => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_MovieCard__WEBPACK_IMPORTED_MODULE_6__["default"], {
         movie: movie,
         attributes: attributes
       }, movie.id))

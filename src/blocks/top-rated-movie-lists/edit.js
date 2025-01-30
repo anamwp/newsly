@@ -7,28 +7,7 @@ import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import MovieCard from '../components/MovieCard';
 import PopupModal from '../components/PopupModal';
-
-/**
- * Function to fetch API response from URL
- * @param {url} url API URL
- * @returns
- */
-const GetAPIResponseFromUrl = async (url = '') => {
-	const options = {
-		method: 'GET',
-		headers: {
-			accept: 'application/json',
-			Authorization:
-				'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA',
-		},
-	};
-	const getMovieAPIResponse = await fetch(url, options);
-	const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
-	if (getMovieAPIResponseJSON.success === false) {
-		throw new Error(getMovieAPIResponseJSON.status_message);
-	}
-	return getMovieAPIResponseJSON;
-};
+import APIResponsePromise from '../components/APIResponsePromise';
 
 export default function edit(props) {
 	const blockProps = useBlockProps({
@@ -44,11 +23,10 @@ export default function edit(props) {
 		 * and set the attributes with the fetched genres
 		 */
 		attributes.genres.length < 1 &&
-			GetAPIResponseFromUrl(
+			APIResponsePromise(
 				'https://api.themoviedb.org/3/genre/movie/list?language=en'
 			)
 				.then((res) => {
-					console.log('res', res);
 					setAttributes({ genres: res.genres });
 				})
 				.catch((err) => console.log('genre err', err));
@@ -61,11 +39,10 @@ export default function edit(props) {
 			setMovies(attributes.fetchedMovies);
 
 		attributes.fetchedMovies.length < 1 &&
-			GetAPIResponseFromUrl(
+			APIResponsePromise(
 				'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1'
 			)
 				.then((res) => {
-					console.log('res', res);
 					/**
 					 * Set state with the fetched movies
 					 */
