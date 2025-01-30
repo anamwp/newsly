@@ -22,6 +22,7 @@ import {
 import React from 'react';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import FetchMovie from '../components/FetchMovie';
+import HandleMovieUpdate from '../components/HandleMovieUpdate';
 
 export default function sidebarControl({
 	props,
@@ -82,9 +83,6 @@ export default function sidebarControl({
 		);
 	};
 	const CardGradientPicker = () => {
-		// const [gradient, setGradient] = useState(null);
-		// console.log('gradient', gradient);
-
 		return (
 			<GradientPicker
 				value={attributes.cardGradient}
@@ -179,10 +177,20 @@ export default function sidebarControl({
 	return (
 		<div>
 			<InspectorControls>
+				{/* Setting: Update */}
 				<Panel>
 					<PanelBody initialOpen={true} title="Update">
 						<PanelRow>
-							<div
+							<HandleMovieUpdate
+								attributes={attributes}
+								setAttributes={setAttributes}
+								movieAttributeKey="fetchedMovies"
+								movieAPIUrl="https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
+								fnHandleMovieUpdateForView={
+									handleMovieUpdateForView
+								}
+							/>
+							{/* <div
 								style={{
 									display: 'flex',
 									flexDirection: 'column',
@@ -233,7 +241,7 @@ export default function sidebarControl({
 										</Button>
 									)}
 								</div>
-							</div>
+							</div> */}
 						</PanelRow>
 					</PanelBody>
 				</Panel>

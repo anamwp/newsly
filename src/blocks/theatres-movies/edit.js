@@ -17,6 +17,8 @@ export default function edit(props) {
 
 	const handleMovieUpdateForView = (newMovies) => {
 		setMovies(newMovies);
+		setAttributes({ fetchedMovies: newMovies });
+		console.log('newMovies', newMovies);
 	};
 
 	useEffect(() => {
