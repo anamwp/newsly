@@ -5,120 +5,12 @@ import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
 import { __ } from '@wordpress/i18n';
-
-/**
- * Function to fetch API response from URL
- * @param {url} url API URL
- * @returns
- */
-const GetAPIResponseFromUrl = async (url = '') => {
-	const options = {
-		method: 'GET',
-		headers: {
-			accept: 'application/json',
-			Authorization:
-				'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA',
-		},
-	};
-	const getMovieAPIResponse = await fetch(url, options);
-	const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
-	if (getMovieAPIResponseJSON.success === false) {
-		throw new Error(getMovieAPIResponseJSON.status_message);
-	}
-	return getMovieAPIResponseJSON;
-};
-/**
- * Handle Genre Render
- * @param {*} param0
- * @returns
- */
-const HandleGenreRender = ({ genreIDArr, attributes }) => {
-	// console.log('IDs', genreIDArr);
-	let getGenre = attributes.genres;
-	// let isFound = getGenre.some((ai) => genreIDArr.includes(ai));
-	let newGenreArr = getGenre.filter((ai) => genreIDArr.includes(ai.id));
-	return (
-		<ul>
-			{newGenreArr.map((genre) => {
-				return <li key={genre.id}>{genre.name}</li>;
-			})}
-		</ul>
-	);
-	// return newGenreArr;
-	// console.log('getGenre', newGenreArr);
-	// console.log('is found', isFound);
-};
-const HandleRoundNumber = (number, decimal_digit) => {
-	let powerOften = Math.pow(10, decimal_digit);
-	let result = Math.round(number * powerOften) / powerOften;
-	return result;
-};
-const HandleDate = (date) => {
-	let dateParseString = Date.parse(date);
-	let newDate = new Date(dateParseString);
-	let getYear = newDate.getFullYear();
-	return getYear;
-};
-/**
- * Movie Card Component
- * @param {*} param0
- * @returns
- */
-const MovieCard = ({ movie, attributes }) => {
-	return (
-		<div className="card" data-movieid={movie.id}>
-			<div className="card__image">
-				<img
-					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-					alt={movie.title}
-				/>
-				<div className="rating-point">
-					{attributes.showVoteAverage && (
-						<span className="vote-point">
-							{HandleRoundNumber(movie.vote_average, 1)}
-						</span>
-					)}
-					{attributes.showVoteCount && (
-						<span class="vote-count">{movie.vote_count}</span>
-					)}
-				</div>
-				<div className="language-and-yeaer">
-					{attributes.showLanguage && (
-						<span className="language">
-							{movie.original_language}
-						</span>
-					)}
-					{attributes.showReleaseDate && (
-						<span className="year">
-							{HandleDate(movie.release_date)}
-						</span>
-					)}
-				</div>
-			</div>
-			<div class="card__header">
-				<h2>{movie.title}</h2>
-			</div>
-			{attributes.showDescription && (
-				<div className="card__body">
-					<p>{movie.overview}</p>
-				</div>
-			)}
-			<div className="card__footer">
-				{attributes.showGenre && (
-					<div className="genre">
-						<HandleGenreRender
-							genreIDArr={movie.genre_ids}
-							attributes={attributes}
-						/>
-					</div>
-				)}
-			</div>
-		</div>
-	);
-};
+import MovieCard from '../components/MovieCard';
+import PopupModal from '../components/PopupModal';
+import APIResponsePromise from '../components/APIResponsePromise';
 
 export default function edit(props) {
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({ className: 'gs-theatres-movie-block' });
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
@@ -133,11 +25,10 @@ export default function edit(props) {
 		 * and set the attributes with the fetched genres
 		 */
 		attributes.genres.length < 1 &&
-			GetAPIResponseFromUrl(
+			APIResponsePromise(
 				'https://api.themoviedb.org/3/genre/movie/list?language=en'
 			)
 				.then((res) => {
-					console.log('res', res);
 					setAttributes({ genres: res.genres });
 				})
 				.catch((err) => console.log('genre err', err));
@@ -150,11 +41,10 @@ export default function edit(props) {
 			setMovies(attributes.fetchedMovies);
 
 		attributes.fetchedMovies.length < 1 &&
-			GetAPIResponseFromUrl(
+			APIResponsePromise(
 				'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1'
 			)
 				.then((res) => {
-					console.log('res', res);
 					/**
 					 * Set state with the fetched movies
 					 */
@@ -173,10 +63,7 @@ export default function edit(props) {
 				props={props}
 				handleMovieUpdateForView={handleMovieUpdateForView}
 			/>
-			<div id="popup-modal-for-movie-card" style={{ display: 'none' }}>
-				<div id="close-modal">close</div>
-				<div id="fetched-movie-content"></div>
-			</div>
+			<PopupModal />
 			<div
 				id="theatres-movies-block"
 				className="movie-list theatres-movies-block"
