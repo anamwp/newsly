@@ -15,6 +15,12 @@ export default function edit(props) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
 
+	const handleMovieUpdateForView = (newMovies) => {
+		setMovies(newMovies);
+		setAttributes({ fetchedMovies: newMovies });
+		console.log('newMovies', newMovies);
+	};
+
 	useEffect(() => {
 		/**
 		 * Fetch genres from the API
@@ -55,7 +61,10 @@ export default function edit(props) {
 
 	return (
 		<div {...blockProps}>
-			<SidebarControl props={props} />
+			<SidebarControl
+				props={props}
+				handleMovieUpdateForView={handleMovieUpdateForView}
+			/>
 			<PopupModal />
 			<div
 				id="upcoming-movies-block"

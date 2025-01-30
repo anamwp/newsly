@@ -21,9 +21,11 @@ import {
 } from '@wordpress/components';
 import React from 'react';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
+import HandleMovieUpdate from '../components/HandleMovieUpdate';
 
 export default function sidebarControl({
 	props,
+	handleMovieUpdateForView,
 	// categories,
 	// handleCategoryChange,
 	// handleSelectedPostData,
@@ -111,6 +113,22 @@ export default function sidebarControl({
 	return (
 		<div>
 			<InspectorControls>
+				{/* Setting: Update */}
+				<Panel>
+					<PanelBody initialOpen={true} title="Update">
+						<PanelRow>
+							<HandleMovieUpdate
+								attributes={attributes}
+								setAttributes={setAttributes}
+								movieAttributeKey="fetchedMovies"
+								movieAPIUrl="https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1"
+								fnHandleMovieUpdateForView={
+									handleMovieUpdateForView
+								}
+							/>
+						</PanelRow>
+					</PanelBody>
+				</Panel>
 				{/* settings: Column */}
 				<Panel>
 					<PanelBody
