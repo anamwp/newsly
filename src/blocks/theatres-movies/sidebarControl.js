@@ -112,67 +112,6 @@ export default function sidebarControl({
 			/>
 		);
 	};
-	const handleCheckForMovieUpdate = (
-		attributes,
-		setAttributes,
-		remoteUrl = ''
-	) => {
-		setCheckUpdateLoader(true);
-		let oldTheatreMovies = attributes.fetchedMovies;
-		var newTheatreMovies = [];
-		var isChanged;
-		let url = remoteUrl;
-		let updatedDataPromise = FetchMovie(url);
-		updatedDataPromise
-			.then((res) => {
-				newTheatreMovies = res.results;
-				/**
-				 * Check if the data is changed
-				 */
-				isChanged =
-					JSON.stringify(newTheatreMovies) !==
-					JSON.stringify(oldTheatreMovies);
-				if (isChanged) {
-					setUpdateAvailable(true);
-					setCheckUpdateMessage('New movies available');
-				} else {
-					setUpdateAvailable(false);
-					setCheckUpdateMessage('No new movies available');
-				}
-				setCheckUpdateLoader(false);
-				setNewUpdatedMovie(newTheatreMovies);
-			})
-			.catch((e) => console.log(e));
-		/**
-		 * Todo:
-		 * 1. Fetch the latest movie data from the API
-		 * 2. Update the movie data in the block
-		 * 3. Show a success message
-		 * 4. Show an error message if the update fails
-		 * 5. Show a loading spinner while the update is in progress
-		 * 6. Show a message if the movie data is already up-to-date
-		 * 7. Show a message if the movie data is not available
-		 * 8. Show a message if the API request fails
-		 * 9. Show a message if the API request is unauthorized
-		 * 10. Show a message if the API request is forbidden
-		 *
-		 */
-	};
-
-	const handleMovieUpdate = () => {
-		setUpdateAttrLoader(true);
-		/**
-		 * Update the movie data in the block attribute
-		 */
-		setAttributes({ fetchedMovies: newUpdatedMovie });
-		/**
-		 * Update parent component with the new movie data
-		 */
-		handleMovieUpdateForView(newUpdatedMovie);
-		setTimeout(() => {
-			setUpdateAttrLoader(false);
-		}, 5000);
-	};
 
 	return (
 		<div>
@@ -190,58 +129,6 @@ export default function sidebarControl({
 									handleMovieUpdateForView
 								}
 							/>
-							{/* <div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									gap: '10px',
-								}}
-							>
-								<Button
-									onClick={() =>
-										handleCheckForMovieUpdate(
-											attributes,
-											setAttributes,
-											'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1'
-										)
-									}
-									variant="primary"
-								>
-									{checkUpdateLoader
-										? 'Loading'
-										: 'Check for Update'}
-								</Button>
-
-								<div
-									style={{
-										display: 'flex',
-										flexDirection: 'column',
-										gap: '10px',
-									}}
-								>
-									<span
-										style={{
-											color: updateAvailable
-												? 'green'
-												: 'black',
-										}}
-									>
-										{checkUpdateMessage}
-									</span>
-									{updateAvailable && (
-										<Button
-											variant="secondary"
-											onClick={() => {
-												handleMovieUpdate();
-											}}
-										>
-											{updateAttrLoader
-												? 'Updating'
-												: 'Update'}
-										</Button>
-									)}
-								</div>
-							</div> */}
 						</PanelRow>
 					</PanelBody>
 				</Panel>
