@@ -161,16 +161,13 @@ const MovieCard = ({ movie, attributes }) => {
 
 export default function edit(props) {
 	const blockProps = useBlockProps();
-	// console.log('props before fetch', props);
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
-	// console.log('attributes', attributes);
 	/**
 	 * Fetch movie and genre from the API
 	 */
 	useEffect(() => {
-		// console.log('fetchedMovies', attributes.fetchedMovies.length);
 		/**
 		 * Fetch genres from the API
 		 * and set the attributes with the fetched genres
@@ -178,7 +175,6 @@ export default function edit(props) {
 		attributes.genres.length < 1 &&
 			GetMovieGenres()
 				.then((res) => {
-					// console.log('res', res);
 					setAttributes({ genres: res.genres });
 				})
 				.catch((err) => console.log('genre err', err));
@@ -204,7 +200,6 @@ export default function edit(props) {
 				})
 				.catch((err) => console.log('err', err));
 	}, []);
-	// console.log('movies', movies);
 
 	return (
 		<div {...blockProps}>

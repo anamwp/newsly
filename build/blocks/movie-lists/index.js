@@ -2508,25 +2508,21 @@ const MovieCard = ({
 };
 function edit(props) {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
-  // console.log('props before fetch', props);
   const {
     attributes,
     setAttributes
   } = props;
   const [isLoading, setIsLoading] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false);
   const [movies, setMovies] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)([]);
-  // console.log('attributes', attributes);
   /**
    * Fetch movie and genre from the API
    */
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useEffect)(() => {
-    // console.log('fetchedMovies', attributes.fetchedMovies.length);
     /**
      * Fetch genres from the API
      * and set the attributes with the fetched genres
      */
     attributes.genres.length < 1 && GetMovieGenres().then(res => {
-      // console.log('res', res);
       setAttributes({
         genres: res.genres
       });
@@ -2550,8 +2546,6 @@ function edit(props) {
       });
     }).catch(err => console.log('err', err));
   }, []);
-  // console.log('movies', movies);
-
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
     ...blockProps,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
