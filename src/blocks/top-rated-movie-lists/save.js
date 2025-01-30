@@ -85,7 +85,9 @@ const MovieCard = ({ movie, attributes }) => {
 };
 
 export default function save({ attributes }) {
-	const blockProps = useBlockProps.save();
+	const blockProps = useBlockProps.save({
+		className: 'top-rated-movie-lists-block',
+	});
 	const fetchedMovies = attributes.fetchedMovies;
 
 	return (
@@ -95,6 +97,7 @@ export default function save({ attributes }) {
 				<div id="fetched-movie-content"></div>
 			</div>
 			<div
+				id="top-rated-movie-lists"
 				className="movie-list"
 				style={{
 					gridTemplateColumns: `repeat(

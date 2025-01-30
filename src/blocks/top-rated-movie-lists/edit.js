@@ -118,7 +118,9 @@ const MovieCard = ({ movie, attributes }) => {
 };
 
 export default function edit(props) {
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps({
+		className: 'top-rated-movie-lists-block',
+	});
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
@@ -171,6 +173,7 @@ export default function edit(props) {
 				<div id="fetched-movie-content"></div>
 			</div>
 			<div
+				id="top-rated-movie-lists"
 				className="movie-list"
 				style={{
 					gridTemplateColumns: `repeat(

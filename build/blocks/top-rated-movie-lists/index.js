@@ -147,7 +147,9 @@ const MovieCard = ({
   });
 };
 function edit(props) {
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
+    className: 'top-rated-movie-lists-block'
+  });
   const {
     attributes,
     setAttributes
@@ -201,6 +203,7 @@ function edit(props) {
         id: "fetched-movie-content"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      id: "top-rated-movie-lists",
       className: "movie-list",
       style: {
         gridTemplateColumns: `repeat(
@@ -368,7 +371,9 @@ const MovieCard = ({
 function save({
   attributes
 }) {
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save();
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
+    className: 'top-rated-movie-lists-block'
+  });
   const fetchedMovies = attributes.fetchedMovies;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     ...blockProps,
@@ -384,6 +389,7 @@ function save({
         id: "fetched-movie-content"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      id: "top-rated-movie-lists",
       className: "movie-list",
       style: {
         gridTemplateColumns: `repeat(
