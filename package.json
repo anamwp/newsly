@@ -6,7 +6,9 @@
 	"scripts": {
 		"tailwindwatch": "tailwindcss -i ./src/*.js -o ./build/style.css --watch --postcss --minify",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "cross-env NODE_ENV=development wp-scripts start && tailwindwatch --experimental-modules",
+		"watch-assets": "babel assets/js --out-dir dist/js --watch",
+		"watch-blocks": "cross-env NODE_ENV=development wp-scripts start && tailwindwatch --experimental-modules",
+		"start": "concurrently --kill-others-on-fail \"npm run watch-blocks\" \"npm run watch-assets\"",
 		"build": "wp-scripts build --experimental-modules",
 		"start-modules": "wp-scripts start --experimental-modules"
 	},
@@ -22,6 +24,14 @@
 		"stream": "^0.0.3"
 	},
 	"devDependencies": {
+		"@babel/cli": "^7.26.4",
+		"@babel/core": "^7.26.7",
+		"@babel/node": "^7.26.0",
+		"@babel/plugin-transform-runtime": "^7.25.9",
+		"@babel/preset-env": "^7.26.7",
+		"@babel/preset-react": "^7.26.3",
+		"@babel/register": "^7.25.9",
+		"@wordpress/babel-plugin-makepot": "^6.17.0",
 		"@wordpress/babel-preset-default": "^8.5.0",
 		"@wordpress/interactivity": "^6.5.0",
 		"@wordpress/scripts": "^28.5.0",

@@ -137,6 +137,24 @@ function handle_script_module() {
 }
 // add_action( 'wp_enqueue_scripts', 'handle_script_module' );
 
+function myplugin_enqueue_editor_assets() {
+    wp_enqueue_script(
+        'myplugin-block-monitor',
+        plugins_url( 'dist/js/main.js', __FILE__ ),
+        [ 'wp-plugins', 'wp-edit-post', 'wp-data', 'wp-element' ],
+        '1.0',
+        true
+    );
+
+    // Ensure the script is treated as an ES module
+    add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+        if ( 'myplugin-block-monitor' === $handle ) {
+            return str_replace( 'src=', 'type="module" src=', $tag );
+        }
+        return $tag;
+    }, 10, 2 );
+}
+add_action('enqueue_block_editor_assets', 'myplugin_enqueue_editor_assets');
 
 /**
  * Initilize the main plugin
