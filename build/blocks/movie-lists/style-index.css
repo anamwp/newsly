@@ -591,10 +591,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   margin-top: 0.5rem;
 }
 
-.new-movie-list-block .mt-3 {
-  margin-top: 0.75rem;
-}
-
 .new-movie-list-block .mt-4 {
   margin-top: 1rem;
 }

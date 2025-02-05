@@ -2155,27 +2155,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
-const WooCommerceRestApi = (__webpack_require__(/*! @woocommerce/woocommerce-rest-api */ "./node_modules/@woocommerce/woocommerce-rest-api/index.js")["default"]);
+var WooCommerceRestApi = (__webpack_require__(/*! @woocommerce/woocommerce-rest-api */ "./node_modules/@woocommerce/woocommerce-rest-api/index.js")["default"]);
 
 
 
 
 
-
-const MY_TEMPLATE = [['core/button', {
+var MY_TEMPLATE = [['core/button', {
   placeholder: 'Book Your Demo'
 }]];
-const api = new WooCommerceRestApi({
+var api = new WooCommerceRestApi({
   url: 'https://anamstarter.local/',
   consumerKey: 'ck_c891525480173c17a6be34e0ff34797271bee966',
   consumerSecret: 'cs_2960e30b1041ff1ddebae9746b95101c7e564f8a',
   version: 'wc/v3'
 });
-const fontSizes = [{
+var fontSizes = [{
   name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Small'),
   slug: 'small',
   size: 12
@@ -2184,25 +2187,33 @@ const fontSizes = [{
   slug: 'big',
   size: 26
 }];
-const fallbackFontSize = 16;
-function edit({
-  attributes,
-  setAttributes
-}) {
-  const [fontSize, setFontSize] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(12);
-  const [isChecked, setChecked] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(true);
-  const [product, setProduct] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)();
-  let productResponseData = '';
+var fallbackFontSize = 16;
+function edit(_ref) {
+  var attributes = _ref.attributes,
+    setAttributes = _ref.setAttributes;
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(12),
+    _useState2 = _slicedToArray(_useState, 2),
+    fontSize = _useState2[0],
+    setFontSize = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(true),
+    _useState4 = _slicedToArray(_useState3, 2),
+    isChecked = _useState4[0],
+    setChecked = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(),
+    _useState6 = _slicedToArray(_useState5, 2),
+    product = _useState6[0],
+    setProduct = _useState6[1];
+  var productResponseData = '';
   // console.log('process.env.WOO_CONSUMER_KEY', api);
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_3___default()({
       path: '/wp/v2/posts'
-    }).then(posts => {
+    }).then(function (posts) {
       console.log(posts);
     });
     api.get('products', {
       per_page: 3 // 20 products per page
-    }).then(response => {
+    }).then(function (response) {
       setProduct(response.data);
       setAttributes({
         product_obj: response.data
@@ -2213,12 +2224,12 @@ function edit({
       console.log('Response Data:', response.data);
       console.log('Total of pages:', response.headers['x-wp-totalpages']);
       console.log('Total of items:', response.headers['x-wp-total']);
-    }).catch(error => {
+    })["catch"](function (error) {
       // Invalid request, for 4xx and 5xx statuses
       console.log('Response Status:', error.response.status);
       console.log('Response Headers:', error.response.headers);
       console.log('Response Data:', error.response.data);
-    }).finally(() => {
+    })["finally"](function () {
       // Always executed.
     });
   }, []);
@@ -2228,14 +2239,14 @@ function edit({
   /**
    * pass style through useBlockProps()
    */
-  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps)({
     className: 'gts_block__recent_product'
   });
   /**
    *
    * @param {*} newContent
    */
-  const onChangeContent = newContent => {
+  var onChangeContent = function onChangeContent(newContent) {
     setAttributes({
       newcontent: newContent
     });
@@ -2244,12 +2255,12 @@ function edit({
    *
    * @param {*} newColor
    */
-  const onChangeTextColor = newColor => {
+  var onChangeTextColor = function onChangeTextColor(newColor) {
     setAttributes({
       text_color: newColor
     });
   };
-  const handleTextColor = newColor => {
+  var handleTextColor = function handleTextColor(newColor) {
     setAttributes({
       content_color: newColor
     });
@@ -2258,7 +2269,7 @@ function edit({
    *
    * @param {*} newAlignment
    */
-  const onChangeAlignment = newAlignment => {
+  var onChangeAlignment = function onChangeAlignment(newAlignment) {
     setAttributes({
       alignment: 'undefined' === newAlignment ? none : newAlignment
     });
@@ -2268,34 +2279,26 @@ function edit({
   /**
    * return edit content
    */
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-    ...blockProps,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.BlockControls, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, {}, 'settings'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      className: "container gts_block__recent_product__container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
-        children: "Recent Products"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "row",
-        children: product && product.map(function (p, index) {
-          let onSale = p.on_sale;
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "col-md-3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
-                href: p.permalink,
-                children: p.name
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
-              className: "product_price",
-              dangerouslySetInnerHTML: {
-                __html: p.price_html
-              }
-            })]
-          }, index);
-        })
-      })]
-    })]
-  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", blockProps, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.BlockControls, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InspectorControls, {
+    key: 'settings'
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "container gts_block__recent_product__container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Recent Products"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "row"
+  }, product && product.map(function (p, index) {
+    var onSale = p.on_sale;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+      key: index,
+      className: "col-md-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+      href: p.permalink
+    }, p.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+      className: "product_price",
+      dangerouslySetInnerHTML: {
+        __html: p.price_html
+      }
+    }));
+  }))));
 }
 
 /***/ }),
@@ -2319,9 +2322,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
-
 
 
 
@@ -2333,40 +2333,30 @@ function save(props) {
    * get block props and
    * assign it to a variable
    */
-  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps.save({
+  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.useBlockProps.save({
     className: 'gts_block__recent_product'
   });
   /**
    * return save data
    *  */
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    ...blockProps,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "container gts_block__recent_product__container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        children: "Recent Products"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "row",
-        children: props.attributes.product_obj && props.attributes.product_obj.map(function (p, index) {
-          let onSale = p.on_sale;
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "col-md-3",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-                href: p.permalink,
-                children: p.name
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-              className: "product_price",
-              dangerouslySetInnerHTML: {
-                __html: p.price_html
-              }
-            })]
-          }, index);
-        })
-      })]
-    })
-  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", blockProps, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "container gts_block__recent_product__container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Recent Products"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "row"
+  }, props.attributes.product_obj && props.attributes.product_obj.map(function (p, index) {
+    var onSale = p.on_sale;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+      key: index,
+      className: "col-md-3"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+      href: p.permalink
+    }, p.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+      className: "product_price",
+      dangerouslySetInnerHTML: {
+        __html: p.price_html
+      }
+    }));
+  }))));
 }
 
 /***/ }),
@@ -11474,17 +11464,6 @@ function config (name) {
 
 "use strict";
 module.exports = window["React"];
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = window["ReactJSXRuntime"];
 
 /***/ }),
 
