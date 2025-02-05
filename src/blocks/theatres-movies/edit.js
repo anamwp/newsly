@@ -10,6 +10,7 @@ import PopupModal from '../components/PopupModal';
 import APIResponsePromise from '../components/APIResponsePromise';
 
 export default function edit(props) {
+	console.log('props', props);
 	const blockProps = useBlockProps({ className: 'gs-theatres-movie-block' });
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
