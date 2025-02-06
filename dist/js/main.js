@@ -18,7 +18,6 @@ var BlockMonitor = function BlockMonitor() {
     _useState2 = _slicedToArray(_useState, 2),
     prevBlocks = _useState2[0],
     setPrevBlocks = _useState2[1];
-  console.log('prevBlocks and setPrevBlocks asdf');
   // Get all blocks in the editor
   var blocks = useSelect(function (select) {
     return select('core/block-editor').getBlocks();

@@ -433,7 +433,6 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 function edit(props) {
-  console.log('props', props);
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
     className: 'gs-theatres-movie-block'
   });

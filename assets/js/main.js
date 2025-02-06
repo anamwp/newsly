@@ -8,7 +8,6 @@ const { useEffect, useState } = wp.element;
 
 const BlockMonitor = () => {
 	const [prevBlocks, setPrevBlocks] = useState([]);
-	console.log('prevBlocks and setPrevBlocks asdf');
 	// Get all blocks in the editor
 	const blocks = useSelect((select) =>
 		select('core/block-editor').getBlocks()
