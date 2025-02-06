@@ -28,6 +28,10 @@ class Init {
 		 */
 		Admin\Product_Tab::init();
 		/**
+		 * REST API
+		 */
+		REST\Post::init();
+		/**
 		 * Undocumented function
 		 *
 		 * @return void
