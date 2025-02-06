@@ -432,9 +432,20 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
+
 function edit(props) {
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)({
     className: 'gs-theatres-movie-block'
+  });
+  // extract block name from props
+  var blockName = props.name;
+  if (!blockName) return null;
+  // split the block name to get the block slug
+  var blockSlug = blockName.split('/')[1];
+  var restRouteForAddMeta = '/wp-json/anam-gutenberg-starter-block/v1/add-meta';
+  // Get the current post ID
+  var postId = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
+    return select('core/editor').getCurrentPostId();
   });
   var attributes = props.attributes,
     setAttributes = props.setAttributes;
@@ -446,6 +457,46 @@ function edit(props) {
     _useState4 = _slicedToArray(_useState3, 2),
     movies = _useState4[0],
     setMovies = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(function () {
+      // Retrieve meta status from localStorage to prevent unnecessary API calls
+      var savedStatus = localStorage.getItem("meta_status_".concat(postId));
+      return savedStatus ? JSON.parse(savedStatus) : null;
+    }),
+    _useState6 = _slicedToArray(_useState5, 2),
+    metaInsertStatus = _useState6[0],
+    setMetaInsertStatus = _useState6[1];
+  /**
+   * Fetch meta status from the API
+   */
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+    if (!postId) return; // Ensure postId is available
+
+    if (metaInsertStatus && 200 === metaInsertStatus.data.status) {
+      return;
+    }
+    var metaInsertStatusPromise = fetch("".concat(restRouteForAddMeta, "/").concat(postId), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        blockSlug: blockSlug
+      })
+    });
+    metaInsertStatusPromise.then(function (response) {
+      if (!response.ok) {
+        throw new Error("HTTP error! Status: ".concat(response.status));
+      }
+      return response.json(); // Parse the response JSON
+    }).then(function (data) {
+      if (200 === data.data.status) {
+        setMetaInsertStatus(data);
+        localStorage.setItem("meta_status_".concat(postId), JSON.stringify(data));
+      }
+    })["catch"](function (error) {
+      console.error('Error adding meta:', error);
+    });
+  }, [postId]);
   var handleMovieUpdateForView = function handleMovieUpdateForView(newMovies) {
     setMovies(newMovies);
     setAttributes({

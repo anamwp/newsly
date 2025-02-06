@@ -57,31 +57,31 @@ class Post {
 		/**
 		 * Check if block name exists.
 		 */
-		if (!isset($body_params['blockName'])) {
+		if (!isset($body_params['blockSlug'])) {
 			return new \WP_Error('missing_data', 'Block name is required', ['status' => 400]);
 		}
 		// Todo: check if that block exists in the plugin or not
-		$block_name  = sanitize_text_field($body_params['blockName']);
+		$block_slug  = sanitize_text_field($body_params['blockSlug']);
 		// $another_key = isset($body_params['anotherKey']) ? sanitize_text_field($body_params['anotherKey']) : '';
 		
 		/**
 		 * Check if meta already exists.
 		 */
-		$block_meta_key = "_has_{$block_name}_block";
+		$block_meta_key = "_has_{$block_slug}_block";
 		$existing_meta = get_post_meta($post_id, $block_meta_key, true);
 		if ($existing_meta) {
-			return new \WP_Error('meta_exists', 'Meta already exists', ['status' => 400]);
+			return new \WP_Error('meta_exists', 'Meta already exists', ['status' => 200]);
 		}
 		
 		/**
 		 * Add meta to the post.
 		 */
-		if ($post_id && $block_name) {
+		if ($post_id && $block_slug) {
 			update_post_meta($post_id, $block_meta_key, true);
 			return new \WP_REST_Response([
 				'message' => 'Meta added successfully',
 				'post_id' => $post_id,
-				'block_name' => $block_name,
+				'block_slug' => $block_slug,
 			], 200);
 		}
 		// update_post_meta($post_id, '_myplugin_another_key', $another_key);

@@ -8,12 +8,66 @@ import { __ } from '@wordpress/i18n';
 import MovieCard from '../components/MovieCard';
 import PopupModal from '../components/PopupModal';
 import APIResponsePromise from '../components/APIResponsePromise';
+import { use } from 'react';
 
 export default function edit(props) {
 	const blockProps = useBlockProps({ className: 'gs-theatres-movie-block' });
+	// extract block name from props
+	const blockName = props.name;
+	if (!blockName) return null;
+	// split the block name to get the block slug
+	const blockSlug = blockName.split('/')[1];
+	const restRouteForAddMeta =
+		'/wp-json/anam-gutenberg-starter-block/v1/add-meta';
+	// Get the current post ID
+	const postId = useSelect((select) =>
+		select('core/editor').getCurrentPostId()
+	);
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
+	const [metaInsertStatus, setMetaInsertStatus] = useState(() => {
+		// Retrieve meta status from localStorage to prevent unnecessary API calls
+		const savedStatus = localStorage.getItem(`meta_status_${postId}`);
+		return savedStatus ? JSON.parse(savedStatus) : null;
+	});
+	/**
+	 * Fetch meta status from the API
+	 */
+	useEffect(() => {
+		if (!postId) return; // Ensure postId is available
+
+		if (metaInsertStatus && 200 === metaInsertStatus.data.status) {
+			return;
+		}
+		const metaInsertStatusPromise = fetch(
+			`${restRouteForAddMeta}/${postId}`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ blockSlug }),
+			}
+		);
+		metaInsertStatusPromise
+			.then((response) => {
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				return response.json(); // Parse the response JSON
+			})
+			.then((data) => {
+				if (200 === data.data.status) {
+					setMetaInsertStatus(data);
+					localStorage.setItem(
+						`meta_status_${postId}`,
+						JSON.stringify(data)
+					);
+				}
+			})
+			.catch((error) => {
+				console.error('Error adding meta:', error);
+			});
+	}, [postId]);
 
 	const handleMovieUpdateForView = (newMovies) => {
 		setMovies(newMovies);
