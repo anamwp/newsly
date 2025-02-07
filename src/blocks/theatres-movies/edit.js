@@ -34,10 +34,11 @@ export default function edit(props) {
 	/**
 	 * Fetch meta status from the API
 	 */
+	// console.log('metaInsertStatus', metaInsertStatus);
 	useEffect(() => {
 		if (!postId) return; // Ensure postId is available
 
-		if (metaInsertStatus && 200 === metaInsertStatus.data.status) {
+		if (metaInsertStatus && 200 === metaInsertStatus.status) {
 			return;
 		}
 		const metaInsertStatusPromise = fetch(
@@ -50,13 +51,14 @@ export default function edit(props) {
 		);
 		metaInsertStatusPromise
 			.then((response) => {
+				console.log(response);
 				if (!response.ok) {
 					throw new Error(`HTTP error! Status: ${response.status}`);
 				}
 				return response.json(); // Parse the response JSON
 			})
 			.then((data) => {
-				if (200 === data.data.status) {
+				if (200 === data.status) {
 					setMetaInsertStatus(data);
 					localStorage.setItem(
 						`meta_status_${postId}`,

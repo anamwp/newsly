@@ -468,10 +468,11 @@ function edit(props) {
   /**
    * Fetch meta status from the API
    */
+  // console.log('metaInsertStatus', metaInsertStatus);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
     if (!postId) return; // Ensure postId is available
 
-    if (metaInsertStatus && 200 === metaInsertStatus.data.status) {
+    if (metaInsertStatus && 200 === metaInsertStatus.status) {
       return;
     }
     var metaInsertStatusPromise = fetch("".concat(restRouteForAddMeta, "/").concat(postId), {
@@ -484,12 +485,13 @@ function edit(props) {
       })
     });
     metaInsertStatusPromise.then(function (response) {
+      console.log(response);
       if (!response.ok) {
         throw new Error("HTTP error! Status: ".concat(response.status));
       }
       return response.json(); // Parse the response JSON
     }).then(function (data) {
-      if (200 === data.data.status) {
+      if (200 === data.status) {
         setMetaInsertStatus(data);
         localStorage.setItem("meta_status_".concat(postId), JSON.stringify(data));
       }
