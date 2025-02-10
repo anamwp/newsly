@@ -61,6 +61,7 @@ class Block {
 	/**
 	 * Register Starter Blocks
 	 * this function is not in use
+	 *
 	 * @return void
 	 */
 	public function register_starter_blocks() {
@@ -242,7 +243,7 @@ class Block {
 	/**
 	 * Single Post Block Frontend Render Callback
 	 * This function not in use
-	 * 
+	 *
 	 * @param [type] $block_attributes
 	 * @param [type] $content
 	 * @return void
@@ -348,7 +349,7 @@ class Block {
 	/**
 	 * Recent Product Block Frontend Render Callback
 	 * This function not in use
-	 * 
+	 *
 	 * @param [type] $block_attributes
 	 * @param [type] $content
 	 * @return void
@@ -395,7 +396,7 @@ class Block {
 	/**
 	 * Post Lists Tab Block Frontend Render callback
 	 * This function not in use
-	 * 
+	 *
 	 * @param [type] $block_attributes
 	 * @param [type] $content
 	 * @return void
@@ -415,7 +416,7 @@ class Block {
 	/**
 	 * Movie List Block Frontend Render Callback
 	 * This function not in use
-	 * 
+	 *
 	 * @param [type] $block_attributes
 	 * @param [type] $content
 	 * @return void

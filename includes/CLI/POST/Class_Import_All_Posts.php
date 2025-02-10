@@ -32,9 +32,9 @@ class Class_Import_All_Posts {
 	 *
 	 * @return void
 	 */
-	public function gs_fetch_posts_from_api( $limit=30, $skip=0 ) {
-		$api_url_with_params = self::$api_url.'?limit='.$limit.'&skip='.$skip;  
-		$response = wp_remote_get( $api_url_with_params );
+	public function gs_fetch_posts_from_api( $limit = 30, $skip = 0 ) {
+		$api_url_with_params = self::$api_url . '?limit=' . $limit . '&skip=' . $skip;
+		$response            = wp_remote_get( $api_url_with_params );
 		if ( is_wp_error( $response ) ) {
 			\WP_CLI::error( 'Failed to fetch data from the API' );
 			return array();
@@ -49,10 +49,10 @@ class Class_Import_All_Posts {
 			\WP_CLI::error( 'No posts found' );
 			return array();
 		}
-		return [
+		return array(
 			'total' => $response_body_obj['total'],
 			'posts' => $post_arr,
-		];
+		);
 	}
 	/**
 	 * Check if product exists
@@ -133,11 +133,11 @@ class Class_Import_All_Posts {
 
 	public function import_posts() {
 		$total_fetched = 0;
-		$skip 		= 0;
-		$limit 		= 30;
-		while( true ){
+		$skip          = 0;
+		$limit         = 30;
+		while ( true ) {
 			\WP_CLI::line( "Fetching {$skip} posts..." );
-			$posts_arr = $this->gs_fetch_posts_from_api($limit, $skip);
+			$posts_arr = $this->gs_fetch_posts_from_api( $limit, $skip );
 			if ( empty( $posts_arr['posts'] ) ) {
 				\WP_CLI::success( "No more posts to fetch. Total fetched: {$total_fetched}" );
 				break;
@@ -146,7 +146,7 @@ class Class_Import_All_Posts {
 				if ( $post ) {
 					$this->gs_manage_posts( $post );
 				}
-				$total_fetched++;
+				++$total_fetched;
 			}
 			// Update the skip value for the next batch
 			$skip += $limit;
@@ -161,11 +161,11 @@ class Class_Import_All_Posts {
 
 	public function delete_posts() {
 		$total_deleted = 0;
-		$skip 		= 0;
-		$limit 		= 30;
-		while( true ){
+		$skip          = 0;
+		$limit         = 30;
+		while ( true ) {
 			\WP_CLI::line( "Fetching {$skip} posts..." );
-			$posts_arr = $this->gs_fetch_posts_from_api($limit, $skip);
+			$posts_arr = $this->gs_fetch_posts_from_api( $limit, $skip );
 			if ( empty( $posts_arr['posts'] ) ) {
 				\WP_CLI::success( "No more posts to delete. Total deleted: {$total_deleted}" );
 				break;
@@ -174,14 +174,14 @@ class Class_Import_All_Posts {
 			foreach ( $posts_arr['posts'] as $post ) {
 				if ( $post ) {
 					$post_exists = $this->gs_check_post_exists( $post['title'] );
-	
+
 					if ( $post_exists['post_status'] ) {
 						$this->manage_delete_posts( $post_exists['post_id'] );
 					} else {
 						\WP_CLI::warning( 'Post not found: ' . $post['title'] );
 					}
 				}
-				$total_deleted++;
+				++$total_deleted;
 			}
 			// Update the skip value for the next batch
 			$skip += $limit;
