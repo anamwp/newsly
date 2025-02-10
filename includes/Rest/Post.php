@@ -7,7 +7,12 @@
  * @since 1.0.0
  */
 class Post {
-	static $instance;
+	/**
+	 * Undocumented variable
+	 *
+	 * @var [type]
+	 */
+	private static $instance;
 	/**
 	 * Construct of Class
 	 */

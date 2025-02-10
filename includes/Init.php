@@ -32,6 +32,10 @@ class Init {
 		 */
 		REST\Post::init();
 		/**
+		 * Cron
+		 */
+		CRON\Movie::init();
+		/**
 		 * Undocumented function
 		 *
 		 * @return void
