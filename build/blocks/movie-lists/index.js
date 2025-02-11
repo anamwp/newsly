@@ -2499,10 +2499,30 @@ var MovieCard = function MovieCard(_ref4) {
   var movie = _ref4.movie,
     attributes = _ref4.attributes;
   var headingPadding = attributes.titlePaddingAttr;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Card, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardMedia, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "movie-card"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "movie-card__image"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "https://image.tmdb.org/t/p/w500".concat(movie.poster_path),
     alt: movie.title
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardHeader, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.__experimentalHeading, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "meta"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    "class": "language-date"
+  }, attributes.showLanguage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "language"
+  }, movie.original_language), attributes.showReleaseDate && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "date"
+  }, movie.release_date)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    "class": "vote"
+  }, attributes.showVoteAverage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "vote-average"
+  }, movie.vote_average), attributes.showVoteCount && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "vote-count"
+  }, movie.vote_count)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "movie-card__content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.__experimentalHeading, {
     style: {
       fontSize: "".concat(attributes.titleFontSize, "px"),
       fontWeight: attributes.titleFontWeight,
@@ -2514,11 +2534,13 @@ var MovieCard = function MovieCard(_ref4) {
       padding: "".concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.top, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.right, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.bottom, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.left)
     },
     level: 2
-  }, movie.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardBody, {
+  }, movie.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "movie-card__overview overview",
     style: {
       padding: "".concat(attributes.contentPaddingAttr.top, " ").concat(attributes.contentPaddingAttr.right, " ").concat(attributes.contentPaddingAttr.bottom, " ").concat(attributes.contentPaddingAttr.left)
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.__experimentalText, null, movie.overview)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.CardFooter, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.__experimentalText, null, movie.overview)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "movie-card__content__footer",
     style: {
       padding: "".concat(attributes.contentPaddingAttr.top, " ").concat(attributes.contentPaddingAttr.right, " ").concat(attributes.contentPaddingAttr.bottom, " ").concat(attributes.contentPaddingAttr.left)
     }
@@ -2527,7 +2549,7 @@ var MovieCard = function MovieCard(_ref4) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(HandleGenreRender, {
     genreIDArr: movie.genre_ids,
     attributes: attributes
-  })), attributes.showLanguage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Language - ", movie.original_language), attributes.showReleaseDate && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Release Date - ", movie.release_date), attributes.showVoteCount && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Vote Count - ", movie.vote_count), attributes.showVoteAverage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Vote Average - ", movie.vote_average)));
+  })))));
 };
 function edit(props) {
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();

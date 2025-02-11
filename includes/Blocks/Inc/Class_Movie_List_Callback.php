@@ -34,12 +34,9 @@ class Class_Movie_List_Callback {
 	 */
 	public function __construct() {
 		add_action( 'init', array( $this, 'init_resources' ) );
-		// add_action('wp_head', array( $this, 'handle_script_for_movie_list_block' ));
+		// phpcs:ignore add_action('wp_head', array( $this, 'handle_script_for_movie_list_block' ));
 		add_action( 'wp_ajax_nopriv_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
 		add_action( 'wp_ajax_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
-		// echo '<pre>';
-		// var_dump(($this->block_attributes));
-		// echo '</pre>';
 	}
 	/**
 	 * Init Block Resources
@@ -219,7 +216,7 @@ class Class_Movie_List_Callback {
 	}
 	/**
 	 * Manage Movie List Block Content from API for the first time
-	 *
+	 * Responsible for the primary view of the block
 	 * @param [type] $block_attributes
 	 * @param [type] $content
 	 * @return void
@@ -279,29 +276,28 @@ class Class_Movie_List_Callback {
 							<img src="https://image.tmdb.org/t/p/w500/<?php echo $movie->poster_path; ?>" alt="<?php echo $movie->title; ?>">
 							<div class="meta">
 								<div class="language-date">
-							<?php
-							if ( array_key_exists( 'showLanguage', $this->block_attributes ) && $this->block_attributes['showLanguage'] == 'true' ) {
-								echo "<span class='language'>{$movie->original_language}</span>";
-							}
-							if ( array_key_exists( 'showReleaseDate', $this->block_attributes ) && $this->block_attributes['showReleaseDate'] == 'true' ) {
-								echo "<span class='date'>{$movie->release_date}</span>";
-							}
-							?>
+									<?php
+									if ( array_key_exists( 'showLanguage', $this->block_attributes ) && $this->block_attributes['showLanguage'] == 'true' ) {
+										echo "<span class='language'>{$movie->original_language}</span>";
+									}
+									if ( array_key_exists( 'showReleaseDate', $this->block_attributes ) && $this->block_attributes['showReleaseDate'] == 'true' ) {
+										echo "<span class='date'>{$movie->release_date}</span>";
+									}
+									?>
 								</div>
 								<div class="vote">
-								<?php
-								if ( array_key_exists( 'showVoteAverage', $this->block_attributes ) && $this->block_attributes['showVoteAverage'] == 'true' ) {
-									echo "<span class='vote-average'>{$movie->vote_average}</span>";
-								}
-								if ( array_key_exists( 'showVoteCount', $this->block_attributes ) && $this->block_attributes['showVoteCount'] == 'true' ) {
-									echo " / <span class='vote-count'>{$movie->vote_count}</span>";
-								}
-								?>
+									<?php
+									if ( array_key_exists( 'showVoteAverage', $this->block_attributes ) && $this->block_attributes['showVoteAverage'] == 'true' ) {
+										echo "<span class='vote-average'>{$movie->vote_average}</span>";
+									}
+									if ( array_key_exists( 'showVoteCount', $this->block_attributes ) && $this->block_attributes['showVoteCount'] == 'true' ) {
+										echo " / <span class='vote-count'>{$movie->vote_count}</span>";
+									}
+									?>
 								</div>
 							</div>
 						</div>
 						<div class="movie-card__content">
-							
 							<h2><?php echo $movie->title; ?></h2>
 							<p class="overview"><?php echo $movie->overview; ?></p>
 							<div class="movie-card__content__footer">
@@ -352,6 +348,12 @@ class Class_Movie_List_Callback {
 			<?php
 		endif;
 	}
+	/**
+	 * Undocumented function
+	 *
+	 * @param [type] $arr
+	 * @return void
+	 */
 	public function handle_genre_filter( $arr ) {
 		$new_arr_fill     = array_fill_keys( $arr, null );
 		$intersection_arr = array_intersect_key( $this->new_genres, $new_arr_fill );

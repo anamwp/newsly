@@ -97,14 +97,38 @@ const HandleGenreRender = ({ genreIDArr, attributes }) => {
 const MovieCard = ({ movie, attributes }) => {
 	var headingPadding = attributes.titlePaddingAttr;
 	return (
-		<Card>
-			<CardMedia>
+		<div className="movie-card">
+			<div className="movie-card__image">
 				<img
 					src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
 					alt={movie.title}
 				/>
-			</CardMedia>
-			<CardHeader>
+				<div className="meta">
+					<div class="language-date">
+						{attributes.showLanguage && (
+							<span className="language">
+								{movie.original_language}
+							</span>
+						)}
+						{attributes.showReleaseDate && (
+							<span className="date">{movie.release_date}</span>
+						)}
+					</div>
+					<div class="vote">
+						{attributes.showVoteAverage && (
+							<span className="vote-average">
+								{movie.vote_average}
+							</span>
+						)}
+						{attributes.showVoteCount && (
+							<span className="vote-count">
+								{movie.vote_count}
+							</span>
+						)}
+					</div>
+				</div>
+			</div>
+			<div className="movie-card__content">
 				<Heading
 					style={{
 						fontSize: `${attributes.titleFontSize}px`,
@@ -120,42 +144,31 @@ const MovieCard = ({ movie, attributes }) => {
 				>
 					{movie.title}
 				</Heading>
-			</CardHeader>
-			<CardBody
-				style={{
-					padding: `${attributes.contentPaddingAttr.top} ${attributes.contentPaddingAttr.right} ${attributes.contentPaddingAttr.bottom} ${attributes.contentPaddingAttr.left}`,
-				}}
-			>
-				<Text>{movie.overview}</Text>
-			</CardBody>
-			<CardFooter
-				style={{
-					padding: `${attributes.contentPaddingAttr.top} ${attributes.contentPaddingAttr.right} ${attributes.contentPaddingAttr.bottom} ${attributes.contentPaddingAttr.left}`,
-				}}
-			>
-				{attributes.showGenre && (
-					<div className="genre">
-						<HandleGenreRender
-							genreIDArr={movie.genre_ids}
-							attributes={attributes}
-						/>
-					</div>
-				)}
-				{attributes.showLanguage && (
-					<p>Language - {movie.original_language}</p>
-				)}
-				{attributes.showReleaseDate && (
-					<p>Release Date - {movie.release_date}</p>
-				)}
-				{attributes.showVoteCount && (
-					<p>Vote Count - {movie.vote_count}</p>
-				)}
-
-				{attributes.showVoteAverage && (
-					<p>Vote Average - {movie.vote_average}</p>
-				)}
-			</CardFooter>
-		</Card>
+				<div
+					className="movie-card__overview overview"
+					style={{
+						padding: `${attributes.contentPaddingAttr.top} ${attributes.contentPaddingAttr.right} ${attributes.contentPaddingAttr.bottom} ${attributes.contentPaddingAttr.left}`,
+					}}
+				>
+					<Text>{movie.overview}</Text>
+				</div>
+				<div
+					className="movie-card__content__footer"
+					style={{
+						padding: `${attributes.contentPaddingAttr.top} ${attributes.contentPaddingAttr.right} ${attributes.contentPaddingAttr.bottom} ${attributes.contentPaddingAttr.left}`,
+					}}
+				>
+					{attributes.showGenre && (
+						<div className="genre">
+							<HandleGenreRender
+								genreIDArr={movie.genre_ids}
+								attributes={attributes}
+							/>
+						</div>
+					)}
+				</div>
+			</div>
+		</div>
 	);
 };
 
