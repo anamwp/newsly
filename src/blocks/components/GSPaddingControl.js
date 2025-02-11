@@ -53,7 +53,6 @@ export default function GSPaddingControl({
 			});
 		};
 	};
-	debugger;
 	return (
 		<div className="gts__spacing-control-panel">
 			<style>
@@ -91,13 +90,19 @@ export default function GSPaddingControl({
 					<BoxControl
 						label=""
 						// units={['px', '%', 'em', 'rem']}
-						// units={['px']}
-						values={attributes[paddingAttr]}
+						units={['px']}
+						values={
+							attributes[paddingAttr] || {
+								top: '',
+								right: '',
+								bottom: '',
+								left: '',
+							}
+						}
 						onChange={handleSelectControl(paddingAttr)}
-						// values={values}
-						// onChange={(nextValues) => setValues(nextValues)}
 						allowReset={true}
 					/>
+
 					<Spacer marginBottom="20px" />
 				</div>
 			)}

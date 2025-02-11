@@ -2016,7 +2016,6 @@ function GSPaddingControl(_ref) {
       setAttributes(_defineProperty({}, attrName, newValue));
     };
   };
-  debugger;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "gts__spacing-control-panel"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", null, ".gts__spacing-control-panel .components-base-control{\n\t\t\t\t\t\tmargin-bottom: 0px;\n\t\t\t\t\t}"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Flex, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Padding")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -2035,13 +2034,15 @@ function GSPaddingControl(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BoxControl, {
     label: ""
     // units={['px', '%', 'em', 'rem']}
-    // units={['px']}
     ,
-    values: attributes[paddingAttr],
-    onChange: handleSelectControl(paddingAttr)
-    // values={values}
-    // onChange={(nextValues) => setValues(nextValues)}
-    ,
+    units: ['px'],
+    values: attributes[paddingAttr] || {
+      top: '',
+      right: '',
+      bottom: '',
+      left: ''
+    },
+    onChange: handleSelectControl(paddingAttr),
     allowReset: true
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.__experimentalSpacer, {
     marginBottom: "20px"
