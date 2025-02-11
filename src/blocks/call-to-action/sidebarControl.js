@@ -48,7 +48,7 @@ export default function SidebarControl({
 						imageLayoutPosition: newSize,
 					})
 				}
-				__nextHasNoMarginBottom
+				__nextHasNoMarginBottom={true}
 			/>
 		);
 	};

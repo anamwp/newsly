@@ -423,7 +423,7 @@ function EditorImageUploader(_ref) {
    * Preview image after image upload
    */
   var mediaPreviewHandle = attributes[editorPreviewUrlAttribute] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    "class": "inline-block w-full shadow-md hover:shadow-lg transition-all rounded",
+    className: "inline-block w-full shadow-md hover:shadow-lg transition-all rounded",
     src: attributes[editorPreviewUrlAttribute]
   });
   /**
@@ -442,11 +442,11 @@ function EditorImageUploader(_ref) {
     react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUploadCheck, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaUpload, {
       render: function render() {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-          "class": "relative"
+          className: "relative"
         }, attributes[imageIdAttribute] && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "remove-image-button absolute right-4 top-5 z-10 "
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-          "class": "components-button is-primary",
+          className: "components-button is-primary",
           onClick: removeImage
         }, "Remove")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.MediaPlaceholder, {
           onSelect: function onSelect(el) {

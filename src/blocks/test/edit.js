@@ -12,7 +12,6 @@ import { useState, useEffect } from '@wordpress/element';
 import { more } from '@wordpress/icons';
 import apiFetch from '@wordpress/api-fetch';
 
-
 import {
 	useBlockProps,
 	RichText,
@@ -58,7 +57,7 @@ export default function edit({ attributes, setAttributes }) {
 	// 	apiFetch( {
 	// 		path: '/wp/v2/comments',
 	// 		method: 'POST',
-	// 		data: { 
+	// 		data: {
 	// 			title: 'New Post Title 2',
 	// 			author: 1,
 	// 			status: 'publish',
@@ -72,8 +71,6 @@ export default function edit({ attributes, setAttributes }) {
 	// 		console.log( res );
 	// 	} );
 	// }, []);
-	
-
 
 	const [fontSize, setFontSize] = useState(12);
 	/**
@@ -179,7 +176,7 @@ export default function edit({ attributes, setAttributes }) {
 							initialOpen={false}
 						>
 							<FontSizePicker
-								__nextHasNoMarginBottom
+								__nextHasNoMarginBottom={true}
 								fontSizes={fontSizes}
 								value={fontSize}
 								fallbackFontSize={fallbackFontSize}

@@ -26,7 +26,7 @@ export default function EditorImageUploader({
 	 */
 	const mediaPreviewHandle = attributes[editorPreviewUrlAttribute] && (
 		<img
-			class="inline-block w-full shadow-md hover:shadow-lg transition-all rounded"
+			className="inline-block w-full shadow-md hover:shadow-lg transition-all rounded"
 			src={attributes[editorPreviewUrlAttribute]}
 		/>
 	);
@@ -49,11 +49,11 @@ export default function EditorImageUploader({
 		<MediaUploadCheck>
 			<MediaUpload
 				render={() => (
-					<div class="relative">
+					<div className="relative">
 						{attributes[imageIdAttribute] && (
 							<div className="remove-image-button absolute right-4 top-5 z-10 ">
 								<button
-									class="components-button is-primary"
+									className="components-button is-primary"
 									onClick={removeImage}
 								>
 									Remove

@@ -53,8 +53,9 @@ export default function GSPaddingControl({
 			});
 		};
 	};
+	debugger;
 	return (
-		<div class="gts__spacing-control-panel">
+		<div className="gts__spacing-control-panel">
 			<style>
 				{`.gts__spacing-control-panel .components-base-control{
 						margin-bottom: 0px;
@@ -67,7 +68,7 @@ export default function GSPaddingControl({
 				</FlexItem>
 				<FlexItem>
 					<button
-						class="components-button is-primary"
+						className="components-button is-primary"
 						onClick={toggleVisible}
 					>
 						{isVisible ? (

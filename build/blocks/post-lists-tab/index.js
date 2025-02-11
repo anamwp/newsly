@@ -365,7 +365,7 @@ function edit(props) {
     }, attributes.showFeaturedImage && post.featured_media !== 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_getFeaturedImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
       postId: post.featured_media
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-      "class": "mt-4 inline-block font-poppins text-2xl text-slate-900 hover:text-emerald-600\ttransition font-medium"
+      className: "mt-4 inline-block font-poppins text-2xl text-slate-900 hover:text-emerald-600\ttransition font-medium"
     }, post.title.rendered), attributes.showCategory && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components__WEBPACK_IMPORTED_MODULE_7__["default"], {
       catArr: post.categories
       // parentProps={parentProps}
@@ -415,7 +415,7 @@ function getFeaturedImage(props) {
     // return <img src={data.source_url} alt="" />;
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
       src: data.media_details.sizes.thumbnail.source_url,
-      "class": "rounded h-80 object-cover w-full",
+      className: "rounded h-80 object-cover w-full",
       alt: ""
     });
   }) : 'Fetching Image');

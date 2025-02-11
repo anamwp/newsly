@@ -147,7 +147,7 @@ var MovieCard = function MovieCard(_ref3) {
   }, attributes.showVoteAverage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "vote-point"
   }, HandleRoundNumber(movie.vote_average, 1)), attributes.showVoteCount && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "vote-count"
+    className: "vote-count"
   }, movie.vote_count)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "language-and-yeaer"
   }, attributes.showLanguage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
@@ -155,7 +155,7 @@ var MovieCard = function MovieCard(_ref3) {
   }, movie.original_language), attributes.showReleaseDate && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "year"
   }, HandleDate(movie.release_date)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    "class": "card__header"
+    className: "card__header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, movie.title)), attributes.showDescription && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card__body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, movie.overview)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -350,7 +350,7 @@ var MovieCard = function MovieCard(_ref2) {
   }, attributes.showVoteAverage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "vote-point"
   }, HandleRoundNumber(movie.vote_average, 1)), attributes.showVoteCount && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "vote-count"
+    className: "vote-count"
   }, movie.vote_count)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "language-and-yeaer"
   }, attributes.showLanguage && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
@@ -358,7 +358,7 @@ var MovieCard = function MovieCard(_ref2) {
   }, movie.original_language), attributes.showReleaseDate && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "year"
   }, HandleDate(movie.release_date)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    "class": "card__header"
+    className: "card__header"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, movie.title)), attributes.showDescription && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "card__body"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, movie.overview)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

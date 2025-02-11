@@ -2016,10 +2016,11 @@ function GSPaddingControl(_ref) {
       setAttributes(_defineProperty({}, attrName, newValue));
     };
   };
+  debugger;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    "class": "gts__spacing-control-panel"
+    className: "gts__spacing-control-panel"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("style", null, ".gts__spacing-control-panel .components-base-control{\n\t\t\t\t\t\tmargin-bottom: 0px;\n\t\t\t\t\t}"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Flex, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Padding")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    "class": "components-button is-primary",
+    className: "components-button is-primary",
     onClick: toggleVisible
   }, isVisible ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"]
@@ -2252,9 +2253,9 @@ function TypographyControl(_ref) {
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    "class": "gts__typography-panel"
+    className: "gts__typography-panel"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Flex, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Typography")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.FlexItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    "class": "components-button is-primary",
+    className: "components-button is-primary",
     onClick: toggleVisible
   }, isVisible ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_wordpress_icons__WEBPACK_IMPORTED_MODULE_4__["default"], {
     icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_5__["default"]

@@ -179,11 +179,11 @@ var LoadingState = function LoadingState() {
     height: '100%'
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    "class": "flex flex-row align-top h-full p-10 gap-5 overflow-hidden"
+    className: "flex flex-row align-top h-full p-10 gap-5 overflow-hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "left w-1/2 h-full"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "bg-slate-300 flex items-center justify-center text-2xl",
+    className: "bg-slate-300 flex items-center justify-center text-2xl",
     style: style
   }, "Image is loading.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "right w-1/2 overflow-scroll items-center justify-center flex text-2xl"
@@ -191,57 +191,57 @@ var LoadingState = function LoadingState() {
 };
 var HandleMovieContentRender = function HandleMovieContentRender(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    "class": "flex flex-row align-top h-full p-10 gap-5 overflow-hidden"
+    className: "flex flex-row align-top h-full p-10 gap-5 overflow-hidden"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "left w-1/2 h-full"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    "class": "w-full object-cover h-full",
+    className: "w-full object-cover h-full",
     src: "https://image.tmdb.org/t/p/w500".concat(props.data.poster_path),
     alt: props.data.title
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "right w-1/2 overflow-scroll"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-    "class": "text-2xl font-bold font-poppins font-medium"
+    className: "text-2xl font-bold font-poppins font-medium"
   }, props.data.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "overview mb-3"
   }, props.data.overview), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "genres -", ' '), props.data.genres.map(function (genre) {
     return genre.name;
   }).join(', ')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "Production Companies -", ' '), props.data.production_companies.map(function (company) {
     return company.name;
   }).join(', ')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "Spoken Language -", ' '), props.data.spoken_languages.map(function (language) {
     return language.name;
   }).join(', ')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "ID"), ' ', "- ", props.data.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "Release Data"), ' ', "- ", props.data.release_date), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "Status"), ' ', "- ", props.data.status), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "tagline"), ' ', "- ", props.data.tagline), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "Original language"), ' ', "- ", props.data.original_language), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "IMDb ID"), ' ', "- ", props.data.imdb_id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "video"), ' ', "- ", props.data.video), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "vote_average"), ' ', "- ", props.data.vote_average), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "vote_count"), ' ', "- ", props.data.vote_count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "runtime"), ' ', "- ", props.data.runtime), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "revenue"), ' ', "- ", props.data.revenue), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "homepage"), ' ', "- ", props.data.homepage), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-    "class": "font-bold font-poppins capitalize"
+    className: "font-bold font-poppins capitalize"
   }, "budget"), ' ', "- ", props.data.budget))));
 };
 (function ($) {

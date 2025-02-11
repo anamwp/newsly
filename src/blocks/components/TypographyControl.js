@@ -155,7 +155,7 @@ export default function TypographyControl({
 	};
 
 	return (
-		<div class="gts__typography-panel">
+		<div className="gts__typography-panel">
 			<Flex>
 				<FlexItem>
 					<strong>Typography</strong>
@@ -163,7 +163,7 @@ export default function TypographyControl({
 				</FlexItem>
 				<FlexItem>
 					<button
-						class="components-button is-primary"
+						className="components-button is-primary"
 						onClick={toggleVisible}
 					>
 						{isVisible ? (
@@ -203,7 +203,7 @@ export default function TypographyControl({
 						}}
 					/>
 					<RangeControl
-						__nextHasNoMarginBottom
+						__nextHasNoMarginBottom={true}
 						label="Letter Spacing"
 						value={attributes[textLetterSpacingAttr]}
 						onChange={(value) =>
@@ -217,7 +217,7 @@ export default function TypographyControl({
 						step={0.1}
 					/>
 					<RangeControl
-						__nextHasNoMarginBottom
+						__nextHasNoMarginBottom={true}
 						label="Line Height"
 						value={attributes[textLineHeightAttr]}
 						onChange={(value) =>
@@ -270,7 +270,7 @@ export default function TypographyControl({
 				}}
 			/> */}
 			{/* <RangeControl
-				__nextHasNoMarginBottom
+				__nextHasNoMarginBottom={true}
 				label="Letter Spacing"
 				value={attributes[textLetterSpacingAttr]}
 				onChange={(value) =>
@@ -284,7 +284,7 @@ export default function TypographyControl({
 				step={0.1}
 			/>
 			<RangeControl
-				__nextHasNoMarginBottom
+				__nextHasNoMarginBottom={true}
 				label="Line Height"
 				value={attributes[textLineHeightAttr]}
 				onChange={(value) =>

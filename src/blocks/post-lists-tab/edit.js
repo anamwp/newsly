@@ -347,7 +347,7 @@ export default function edit(props) {
 											postId={post.featured_media}
 										/>
 									)}
-								<h2 class="mt-4 inline-block font-poppins text-2xl text-slate-900 hover:text-emerald-600	transition font-medium">
+								<h2 className="mt-4 inline-block font-poppins text-2xl text-slate-900 hover:text-emerald-600	transition font-medium">
 									{post.title.rendered}
 								</h2>
 								{attributes.showCategory && (

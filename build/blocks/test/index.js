@@ -103,7 +103,7 @@ function edit(_ref) {
   // 	apiFetch( {
   // 		path: '/wp/v2/comments',
   // 		method: 'POST',
-  // 		data: { 
+  // 		data: {
   // 			title: 'New Post Title 2',
   // 			author: 1,
   // 			status: 'publish',

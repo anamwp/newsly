@@ -84,7 +84,7 @@ const MovieCard = ({ movie, attributes }) => {
 						</span>
 					)}
 					{attributes.showVoteCount && (
-						<span class="vote-count">{movie.vote_count}</span>
+						<span className="vote-count">{movie.vote_count}</span>
 					)}
 				</div>
 				<div className="language-and-yeaer">
@@ -100,7 +100,7 @@ const MovieCard = ({ movie, attributes }) => {
 					)}
 				</div>
 			</div>
-			<div class="card__header">
+			<div className="card__header">
 				<h2>{movie.title}</h2>
 			</div>
 			{attributes.showDescription && (

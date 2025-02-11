@@ -48,10 +48,10 @@ const LoadingState = () => {
 		height: '100%',
 	};
 	return (
-		<div class="flex flex-row align-top h-full p-10 gap-5 overflow-hidden">
+		<div className="flex flex-row align-top h-full p-10 gap-5 overflow-hidden">
 			<div className="left w-1/2 h-full">
 				<span
-					class="bg-slate-300 flex items-center justify-center text-2xl"
+					className="bg-slate-300 flex items-center justify-center text-2xl"
 					style={style}
 				>
 					Image is loading.
@@ -66,27 +66,27 @@ const LoadingState = () => {
 
 const HandleMovieContentRender = (props) => {
 	return (
-		<div class="flex flex-row align-top h-full p-10 gap-5 overflow-hidden">
+		<div className="flex flex-row align-top h-full p-10 gap-5 overflow-hidden">
 			<div className="left w-1/2 h-full">
 				<img
-					class="w-full object-cover h-full"
+					className="w-full object-cover h-full"
 					src={`https://image.tmdb.org/t/p/w500${props.data.poster_path}`}
 					alt={props.data.title}
 				/>
 			</div>
 			<div className="right w-1/2 overflow-scroll">
-				<h1 class="text-2xl font-bold font-poppins font-medium">
+				<h1 className="text-2xl font-bold font-poppins font-medium">
 					{props.data.title}
 				</h1>
 				<div className="overview mb-3">{props.data.overview}</div>
 				<div>
-					<span class="font-bold font-poppins capitalize">
+					<span className="font-bold font-poppins capitalize">
 						genres -{' '}
 					</span>
 					{props.data.genres.map((genre) => genre.name).join(', ')}
 				</div>
 				<div>
-					<span class="font-bold font-poppins capitalize">
+					<span className="font-bold font-poppins capitalize">
 						Production Companies -{' '}
 					</span>
 					{props.data.production_companies
@@ -94,7 +94,7 @@ const HandleMovieContentRender = (props) => {
 						.join(', ')}
 				</div>
 				<div>
-					<span class="font-bold font-poppins capitalize">
+					<span className="font-bold font-poppins capitalize">
 						Spoken Language -{' '}
 					</span>
 					{props.data.spoken_languages
@@ -103,79 +103,79 @@ const HandleMovieContentRender = (props) => {
 				</div>
 				<ul>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							ID
 						</span>{' '}
 						- {props.data.id}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							Release Data
 						</span>{' '}
 						- {props.data.release_date}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							Status
 						</span>{' '}
 						- {props.data.status}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							tagline
 						</span>{' '}
 						- {props.data.tagline}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							Original language
 						</span>{' '}
 						- {props.data.original_language}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							IMDb ID
 						</span>{' '}
 						- {props.data.imdb_id}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							video
 						</span>{' '}
 						- {props.data.video}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							vote_average
 						</span>{' '}
 						- {props.data.vote_average}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							vote_count
 						</span>{' '}
 						- {props.data.vote_count}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							runtime
 						</span>{' '}
 						- {props.data.runtime}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							revenue
 						</span>{' '}
 						- {props.data.revenue}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							homepage
 						</span>{' '}
 						- {props.data.homepage}
 					</li>
 					<li>
-						<span class="font-bold font-poppins capitalize">
+						<span className="font-bold font-poppins capitalize">
 							budget
 						</span>{' '}
 						- {props.data.budget}

@@ -27,7 +27,7 @@ export default function getFeaturedImage(props) {
 									data.media_details.sizes.thumbnail
 										.source_url
 								}
-								class="rounded h-80 object-cover w-full"
+								className="rounded h-80 object-cover w-full"
 								alt=""
 							/>
 						);
