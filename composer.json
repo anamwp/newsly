@@ -31,5 +31,8 @@
 		"phpcs_i": "phpcs -i",
 		"phpcs": "phpcs includes/CLI/* --standard=./phpcs.xml *",
 		"phpcbf": "phpcbf includes/CLI/* --standard=./phpcbf.xml *"
+	},
+	"require": {
+		"vlucas/phpdotenv": "^5.6@dev"
 	}
 }
