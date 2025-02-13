@@ -3,7 +3,7 @@
         'name' => 'theanamhossain/anam-gutenberg-starter',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'f11517126611d043a87db2d1185ed6cce5466bbe',
+        'reference' => '1101fb538bfa5c689df7817ed944cf94961bf3e0',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'composer/ca-bundle' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'bc0593537a463e55cadf45fd938d23b75095b7e1',
+            'reference' => '08c50d5ec4c6ced7d0271d2862dec8c1033283e6',
             'type' => 'library',
             'install_path' => __DIR__ . '/./ca-bundle',
             'aliases' => array(
@@ -24,7 +24,7 @@
         'composer/class-map-generator' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '4b0a223cf5be7c9ee7e0ef1bc7db42b4a97c9915',
+            'reference' => 'ffe442c5974c44a9343e37a0abcb1cc37319f5b9',
             'type' => 'library',
             'install_path' => __DIR__ . '/./class-map-generator',
             'aliases' => array(
@@ -35,7 +35,7 @@
         'composer/composer' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'eefa0122043a54508630cd13b0addb477b8c6ac8',
+            'reference' => 'e58aad45b51c6b29b9f47800a182d7e86e654201',
             'type' => 'library',
             'install_path' => __DIR__ . '/./composer',
             'aliases' => array(
@@ -105,6 +105,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'graham-campbell/result-type' => array(
+            'pretty_version' => '1.1.x-dev',
+            'version' => '1.1.9999999.9999999-dev',
+            'reference' => '9d6c1d7ce69a3329936e603617e59ba205ab0a66',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../graham-campbell/result-type',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'justinrainbow/json-schema' => array(
             'pretty_version' => '5.x-dev',
             'version' => '5.9999999.9999999.9999999-dev',
@@ -128,13 +137,24 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '9b2671b7342d2c8ad8ec78c8bdac45958d9de065',
+            'reference' => '8ef592afe141d07ab178ca85dca0853d35fbd61a',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(
                 0 => '1.x-dev',
             ),
             'dev_requirement' => true,
+        ),
+        'phpoption/phpoption' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'e3fac8b24f56113f7cb96af14958c0dd16330f54',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpoption/phpoption',
+            'aliases' => array(
+                0 => '1.9.x-dev',
+            ),
+            'dev_requirement' => false,
         ),
         'psr/container' => array(
             'pretty_version' => 'dev-master',
@@ -205,7 +225,7 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '0d969c927165b61ae7c211a047652aa36a481328',
+            'reference' => 'd694aea3ba403e171f4f32cbdc68dd580f98a355',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(
@@ -216,7 +236,7 @@
         'symfony/console' => array(
             'pretty_version' => '7.3.x-dev',
             'version' => '7.3.9999999.9999999-dev',
-            'reference' => '722fa7cd85d81a3e61fcbdce053754c6541235d3',
+            'reference' => '12b71ff91b978d6db0215b49cc3eedb287585c2e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
@@ -245,7 +265,7 @@
         'symfony/finder' => array(
             'pretty_version' => '7.3.x-dev',
             'version' => '7.3.9999999.9999999-dev',
-            'reference' => '6de263e5868b9a137602dd1e33e4d48bfae99c49',
+            'reference' => 'ec2344cf77a48253bbca6939aa3d2477773ea63d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/finder',
             'aliases' => array(),
@@ -258,7 +278,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-ctype',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/polyfill-intl-grapheme' => array(
             'pretty_version' => '1.x-dev',
@@ -281,11 +301,11 @@
         'symfony/polyfill-mbstring' => array(
             'pretty_version' => '1.x-dev',
             'version' => '1.9999999.9999999.9999999-dev',
-            'reference' => '2369cb908b33d7b7518cce042615de430142497f',
+            'reference' => '6d857f4d76bd4b343eac26d6b539585d2bc56493',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/polyfill-php73' => array(
             'pretty_version' => '1.x-dev',
@@ -303,7 +323,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php80',
             'aliases' => array(),
-            'dev_requirement' => true,
+            'dev_requirement' => false,
         ),
         'symfony/polyfill-php81' => array(
             'pretty_version' => '1.x-dev',
@@ -317,7 +337,7 @@
         'symfony/process' => array(
             'pretty_version' => '7.3.x-dev',
             'version' => '7.3.9999999.9999999-dev',
-            'reference' => 'd34b22ba9390ec19d2dd966c40aa9e8462f27a7e',
+            'reference' => 'acece5e1423ba01df2f4cdf980dec483fd7b8ef2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/process',
             'aliases' => array(),
@@ -337,7 +357,7 @@
         'symfony/string' => array(
             'pretty_version' => '7.3.x-dev',
             'version' => '7.3.9999999.9999999-dev',
-            'reference' => '446e0d146f991dde3e73f45f2c97a9faad773c82',
+            'reference' => '373a11f2d03e71934a0023888edf3328a583e4ec',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/string',
             'aliases' => array(),
@@ -346,10 +366,21 @@
         'theanamhossain/anam-gutenberg-starter' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'f11517126611d043a87db2d1185ed6cce5466bbe',
+            'reference' => '1101fb538bfa5c689df7817ed944cf94961bf3e0',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'vlucas/phpdotenv' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'a59a13791077fe3d44f90e7133eb68e7d22eaff2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../vlucas/phpdotenv',
+            'aliases' => array(
+                0 => '5.6.x-dev',
+            ),
             'dev_requirement' => false,
         ),
         'wp-coding-standards/wpcs' => array(
