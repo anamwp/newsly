@@ -25,11 +25,22 @@ class Product_Tab {
 	 * Construct of Class
 	 */
 	public function __construct() {
-		add_filter( 'woocommerce_product_data_tabs', array( $this, 'gs_product_tab__meta_information' ), 10, 1 );
-		add_action( 'woocommerce_product_data_panels', array( $this, 'gs_product_tab_panel__meta_information' ) );
-		// add_action( 'save_post', array( $this, 'wk_save_custom_tab_data' ), 10, 3 );
-		add_action( 'woocommerce_product_options_shipping_product_data', array( $this, 'gs_add_extra_text_field_to_shipping_tab' ) );
-		add_action( 'woocommerce_product_options_general_product_data', array( $this, 'gs_add_extra_text_field_to_general_tab' ) );
+		/**
+		 * Add [meta information] custom tab to product add/edit page
+		 */
+		add_filter( 'woocommerce_product_data_tabs', array( $this, 'gs_product_tab__meta_information_callback' ), 10, 1 );
+		/**
+		 * Add fields for [meta information] custom tab
+		 */
+		add_action( 'woocommerce_product_data_panels', array( $this, 'gs_product_tab_panel__meta_information_callback' ) );
+		/**
+		 * Add [Shipping Information] extra text field to shipping tab
+		 */
+		add_action( 'woocommerce_product_options_shipping_product_data', array( $this, 'gs_add_extra_text_field_to_shipping_tab_callback' ) );
+		/**
+		 * Add [Return policy] extra text field to general tab
+		 */
+		add_action( 'woocommerce_product_options_general_product_data', array( $this, 'gs_add_extra_text_field_to_general_tab_callback' ) );
 	}
 	/**
 	 * Product Add/Edit custom tabs
@@ -38,7 +49,7 @@ class Product_Tab {
 	 *
 	 * @return array $default_tabs
 	 */
-	function gs_product_tab__meta_information( $default_tabs ) {
+	function gs_product_tab__meta_information_callback( $default_tabs ) {
 
 		global $post;
 
@@ -60,7 +71,7 @@ class Product_Tab {
 	 *
 	 * @return void
 	 */
-	function gs_product_tab_panel__meta_information() {
+	function gs_product_tab_panel__meta_information_callback() {
 		global $woocommerce, $post;
 
 		?>
@@ -79,21 +90,8 @@ class Product_Tab {
 
 		<?php
 	}
-	/**
-	 * Save custom data
-	 *
-	 * @return boolean
-	 */
-	public function wk_save_custom_tab_data( $post_id, $post, $update ) {
 
-		global $post;
-
-		if ( isset( $_POST['_wk_custom_data'] ) ) {
-			update_post_meta( $post->ID, '_wk_custom_data', esc_attr( $_POST['_wk_custom_data'] ) );
-		}
-	}
-
-	public function gs_add_extra_text_field_to_shipping_tab() {
+	public function gs_add_extra_text_field_to_shipping_tab_callback() {
 		global $woocommerce, $post;
 		$shipping_information = get_post_meta( $post->ID, 'shipping_tab_information', true );
 		woocommerce_wp_text_input(
@@ -111,7 +109,7 @@ class Product_Tab {
 		);
 	}
 
-	public function gs_add_extra_text_field_to_general_tab() {
+	public function gs_add_extra_text_field_to_general_tab_callback() {
 		global $woocommerce, $post;
 		$return_policy = get_post_meta( $post->ID, 'returnPolicy', true );
 		woocommerce_wp_text_input(

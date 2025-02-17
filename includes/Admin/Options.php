@@ -30,9 +30,9 @@ class Options {
 		}
 	}
 	public function gs_plugin_settings_page() {
-		add_options_page( 'Gutenberg Starter', 'Gutenberg Starter', 'manage_options', 'guternberg_starter', array( $this, 'gs_handle_plugin_setting_page' ), null );
+		add_options_page( 'Gutenberg Starter', 'Gutenberg Starter', 'manage_options', 'guternberg_starter', array( $this, 'gs_handle_plugin_setting_page_callback' ), null );
 	}
-	public function gs_handle_plugin_setting_page() {
+	public function gs_handle_plugin_setting_page_callback() {
 		?>
 		<h1>Guternberg Starter</h1>
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam quam dicta consequatur labore, libero veniam suscipit obcaecati eligendi architecto veritatis, illum tempore harum quos assumenda ab, ut in consectetur aspernatur dolor at vel! Magni, accusamus?</p>
