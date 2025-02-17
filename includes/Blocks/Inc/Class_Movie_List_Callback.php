@@ -171,9 +171,9 @@ class Class_Movie_List_Callback {
 							<div class="genre">
 								<ul>
 								<?php
-									$get_details = $this->handle_genre_filter( $movie->genre_ids );
+								$get_details = $this->handle_genre_filter( $movie->genre_ids );
 								foreach ( $get_details as $genre ) {
-									echo "<li>{$genre['name']}</li>";
+									echo '<li>' . esc_html( $genre['name'] ) . '</li>';
 								}
 								?>
 								</ul>
@@ -349,14 +349,27 @@ class Class_Movie_List_Callback {
 		endif;
 	}
 	/**
-	 * Undocumented function
+	 * Filters and returns the genres based on the provided genre IDs.
 	 *
-	 * @param [type] $arr
-	 * @return void
+	 * This function takes an array of genre IDs and returns an array of genres
+	 * that match the provided IDs. The genres are filtered from the $new_genres
+	 * property of the class.
+	 *
+	 * @param array $arr An array of genre IDs to filter.
+	 * @return array An array of genres that match the provided genre IDs.
 	 */
 	public function handle_genre_filter( $arr ) {
+		/**
+		 * Fill an array with values
+		 */
 		$new_arr_fill     = array_fill_keys( $arr, null );
+		/**
+		 * Compare the keys of two arrays, and return the matches:
+		 */
 		$intersection_arr = array_intersect_key( $this->new_genres, $new_arr_fill );
+		/**
+		 * Return the intersection array
+		 */
 		return $intersection_arr;
 	}
 }
