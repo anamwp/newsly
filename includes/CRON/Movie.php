@@ -30,6 +30,7 @@ class Movie {
 	}
 	/**
 	 * Construct of Class
+	 * Command to run - wp cron event run update_movie_block_event
 	 */
 	public function __construct() {
 		add_action( 'wp', array( $this, 'schedule_movie_update_cron' ) );

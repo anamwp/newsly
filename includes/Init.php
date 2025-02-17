@@ -33,6 +33,7 @@ class Init {
 		REST\Post::init();
 		/**
 		 * Cron
+		 * Command - wp cron event run update_movie_block_event
 		 */
 		CRON\Movie::init();
 		/**
