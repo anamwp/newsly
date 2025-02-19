@@ -1,0 +1,1 @@
+{"version":3,"file":"blocks/_test/style-index.css","mappings":";;;AACC;EACC;AAAF;AAEC;EACC;AAAF,C","sources":["webpack://anam-gutenberg-starter/./src/blocks/_test/style.scss"],"sourcesContent":[".gts__test {\n\t&__container {\n\t\tpadding: 50px 100px;\n\t}\n\t&__button {\n\t\tdisplay: inline-block;\n\t}\n}\n"],"names":[],"sourceRoot":""}
