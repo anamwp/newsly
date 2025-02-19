@@ -9,4 +9,9 @@ module.exports = {
 	moduleNameMapper: {
 		'\\.(css|scss)$': 'identity-obj-proxy', // Ignore CSS imports in tests
 	},
+	testPathIgnorePatterns: [
+		'<rootDir>/node_modules/',
+		'<rootDir>/dist/',
+		'<rootDir>/build/',
+	],
 };
