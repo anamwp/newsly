@@ -3,7 +3,6 @@ import { useSelect, withSelect, select } from '@wordpress/data';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
-
 import { __ } from '@wordpress/i18n';
 import MovieCard from '../components/MovieCard';
 import PopupModal from '../components/PopupModal';
@@ -34,7 +33,6 @@ export default function edit(props) {
 	/**
 	 * Fetch meta status from the API
 	 */
-	// console.log('metaInsertStatus', metaInsertStatus);
 	useEffect(() => {
 		if (!postId) return; // Ensure postId is available
 
@@ -55,7 +53,7 @@ export default function edit(props) {
 				if (!response.ok) {
 					throw new Error(`HTTP error! Status: ${response.status}`);
 				}
-				return response.json(); // Parse the response JSON
+				return response.json();
 			})
 			.then((data) => {
 				if (200 === data.status) {

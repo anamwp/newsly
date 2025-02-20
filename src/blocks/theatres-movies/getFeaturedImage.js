@@ -14,13 +14,11 @@ export default function getFeaturedImage(props) {
 		},
 		[postId]
 	);
-	// console.log('getMediaContent', getMediaContent);
 
 	return (
 		<div>
 			{getMediaContent
 				? getMediaContent.map((data) => {
-						// return <img src={data.source_url} alt="" />;
 						return (
 							<img
 								src={
@@ -30,7 +28,7 @@ export default function getFeaturedImage(props) {
 								alt=""
 							/>
 						);
-					})
+				  })
 				: 'Fetching Image'}
 		</div>
 	);

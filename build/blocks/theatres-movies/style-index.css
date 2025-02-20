@@ -1026,7 +1026,7 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 4; /* number of lines to show */
+  -webkit-line-clamp: 4;
   line-clamp: 4;
   -webkit-box-orient: vertical;
 }
@@ -1039,7 +1039,6 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
 .movie-list .card__footer .genre li {
   list-style-type: none;
   display: inline-block;
-  /* border: solid 1px; */
   border-radius: 4px;
   font-size: 10px;
   margin: 0px 5px 0px 0px;

@@ -1,3 +1,4 @@
+import React from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSelect, withSelect, select } from '@wordpress/data';
 import { InspectorControls } from '@wordpress/block-editor';
@@ -6,12 +7,6 @@ import {
 	PanelBody,
 	PanelRow,
 	SelectControl,
-	ToggleControl,
-	TabPanel,
-	ColorPicker,
-	DateTimePicker,
-	Button,
-	ButtonGroup,
 	CheckboxControl,
 	ClipboardButton,
 	GradientPicker,
@@ -19,69 +14,12 @@ import {
 	__experimentalBorderControl as BorderControl,
 	__experimentalBorderBoxControl as BorderBoxControl,
 } from '@wordpress/components';
-import React from 'react';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
-import FetchMovie from '../components/FetchMovie';
+
 import HandleMovieUpdate from '../components/HandleMovieUpdate';
 
-export default function sidebarControl({
-	props,
-	// categories,
-	// handleCategoryChange,
-	// handleSelectedPostData,
-	// handleCategoryToggleControl,
-	// handleExcerptToggleControl,
-	// handleFeaturedImageToggleControl,
-	handleMovieUpdateForView,
-}) {
+export default function sidebarControl({ props, handleMovieUpdateForView }) {
 	const { attributes, setAttributes } = props;
-	const [hasFixedBackground, setHasFixedBackground] = useState(false);
-	const [hasFixedBg, setHasFixedBg] = useState(false);
-	const [color, setColor] = useState();
-	const [date, setDate] = useState(new Date());
-	const [checkUpdateLoader, setCheckUpdateLoader] = useState(false);
-	const [updateAttrLoader, setUpdateAttrLoader] = useState(false);
-	const [updateAvailable, setUpdateAvailable] = useState(false);
-	const [newUpdatedMovie, setNewUpdatedMovie] = useState([]);
-	const [checkUpdateMessage, setCheckUpdateMessage] = useState('');
 
-	const onSelect = (tabName) => {
-		console.log('Selecting tab', tabName);
-	};
-
-	const MyCustomTabContent = () => {
-		return (
-			<ToggleControl
-				label="Fixed Background"
-				help={
-					hasFixedBg
-						? 'Has fixed background.'
-						: 'No fixed background.'
-				}
-				checked={hasFixedBg}
-				onChange={(newValue) => {
-					setHasFixedBg(newValue);
-				}}
-			/>
-		);
-	};
-
-	// Component: BorderControl
-	// Component: BorderBoxControl
-	const colors = [{ name: 'Blue 20', color: '#72aee6' }];
-
-	// Component: CheckboxControl
-	const MyCheckboxControl = () => {
-		const [isChecked, setChecked] = useState(true);
-		return (
-			<CheckboxControl
-				label="Is author"
-				help="Is the user a author or not?"
-				checked={isChecked}
-				onChange={setChecked}
-			/>
-		);
-	};
 	const CardGradientPicker = () => {
 		return (
 			<GradientPicker
