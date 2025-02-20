@@ -179,17 +179,19 @@ var fetchedMovieContent = document.getElementById('fetched-movie-content');
 /**
  * Hide the modal
  */
-modlCardElement[0].style.display = 'none';
-/**
- * Close the modal
- */
-modalCloseElement[0].addEventListener('click', function () {
+if (modlCardElement) {
   modlCardElement[0].style.display = 'none';
-  fetchedMovieContent.innerHTML = '';
-});
+  /**
+   * Close the modal
+   */
+  modalCloseElement[0].addEventListener('click', function () {
+    modlCardElement[0].style.display = 'none';
+    fetchedMovieContent.innerHTML = '';
+  });
+}
 /**
  * Fetch data from the API
- * @param {string} url url to fetch data from
+ * @param {string} url - url to fetch data from.
  * @returns Promise
  */
 var GetAPIResponseFromUrl = /*#__PURE__*/function () {
@@ -203,6 +205,7 @@ var GetAPIResponseFromUrl = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           url = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
+          // Todo: Get API keys from env file
           options = {
             method: 'GET',
             headers: {
@@ -214,19 +217,18 @@ var GetAPIResponseFromUrl = /*#__PURE__*/function () {
           return fetch(url, options);
         case 4:
           getMovieAPIResponse = _context.sent;
-          console.log('getMovieAPIResponse', getMovieAPIResponse);
-          _context.next = 8;
+          _context.next = 7;
           return getMovieAPIResponse.json();
-        case 8:
+        case 7:
           getMovieAPIResponseJSON = _context.sent;
           if (!(getMovieAPIResponseJSON.success === false)) {
-            _context.next = 11;
+            _context.next = 10;
             break;
           }
           throw new Error(getMovieAPIResponseJSON.status_message);
-        case 11:
+        case 10:
           return _context.abrupt("return", getMovieAPIResponseJSON);
-        case 12:
+        case 11:
         case "end":
           return _context.stop();
       }
@@ -398,7 +400,6 @@ var HandleMovieContentRender = function HandleMovieContentRender(props) {
           blockId: blockId
         },
         success: function success(response) {
-          // console.log('response', response);
           $('.movie-list').empty().append(response);
           $(window).scrollTop(0);
         }

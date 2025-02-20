@@ -11,20 +11,23 @@ var fetchedMovieContent = document.getElementById('fetched-movie-content');
 /**
  * Hide the modal
  */
-modlCardElement[0].style.display = 'none';
-/**
- * Close the modal
- */
-modalCloseElement[0].addEventListener('click', function () {
+if (modlCardElement) {
 	modlCardElement[0].style.display = 'none';
-	fetchedMovieContent.innerHTML = '';
-});
+	/**
+	 * Close the modal
+	 */
+	modalCloseElement[0].addEventListener('click', function () {
+		modlCardElement[0].style.display = 'none';
+		fetchedMovieContent.innerHTML = '';
+	});
+}
 /**
  * Fetch data from the API
- * @param {string} url url to fetch data from
+ * @param {string} url - url to fetch data from.
  * @returns Promise
  */
 const GetAPIResponseFromUrl = async (url = '') => {
+	// Todo: Get API keys from env file
 	const options = {
 		method: 'GET',
 		headers: {
@@ -34,7 +37,6 @@ const GetAPIResponseFromUrl = async (url = '') => {
 		},
 	};
 	const getMovieAPIResponse = await fetch(url, options);
-	console.log('getMovieAPIResponse', getMovieAPIResponse);
 	const getMovieAPIResponseJSON = await getMovieAPIResponse.json();
 	if (getMovieAPIResponseJSON.success === false) {
 		throw new Error(getMovieAPIResponseJSON.status_message);
@@ -222,7 +224,6 @@ const HandleMovieContentRender = (props) => {
 						blockId: blockId,
 					},
 					success: function (response) {
-						// console.log('response', response);
 						$('.movie-list').empty().append(response);
 						$(window).scrollTop(0);
 					},

@@ -1,7 +1,5 @@
 import React from 'react';
-import { useSelect, withSelect, select } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 
 export default function getFeaturedImage(props) {
 	const { postId } = props;
@@ -14,13 +12,11 @@ export default function getFeaturedImage(props) {
 		},
 		[postId]
 	);
-	// console.log('getMediaContent', getMediaContent);
 
 	return (
 		<div>
 			{getMediaContent
 				? getMediaContent.map((data) => {
-						// return <img src={data.source_url} alt="" />;
 						return (
 							<img
 								src={
@@ -30,7 +26,7 @@ export default function getFeaturedImage(props) {
 								alt=""
 							/>
 						);
-					})
+				  })
 				: 'Fetching Image'}
 		</div>
 	);

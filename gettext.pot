@@ -128,7 +128,7 @@ msgstr ""
 msgid "Transform"
 msgstr ""
 
-#: src/blocks/movie-lists/sidebarControl.js:95
+#: src/blocks/movie-lists/sidebarControl.js:59
 msgid "Borders"
 msgstr ""
 

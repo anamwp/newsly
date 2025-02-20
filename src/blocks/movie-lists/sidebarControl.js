@@ -1,42 +1,25 @@
+import React from 'react';
 import { __ } from '@wordpress/i18n';
-import { useSelect, withSelect, select } from '@wordpress/data';
+import { useState, useRef } from '@wordpress/element';
 import { InspectorControls } from '@wordpress/block-editor';
 import TypographyControl from '../components/TypographyControl';
 // import TabPanelForTextAndLink from '../components/TabPanelForTextAndLink';
 import {
 	Panel,
 	PanelBody,
-	PanelRow,
 	SelectControl,
 	ToggleControl,
-	TabPanel,
-	ColorPicker,
-	DateTimePicker,
 	Button,
-	ButtonGroup,
 	CheckboxControl,
 	ClipboardButton,
-	Popover,
-	MenuGroup,
-	MenuItem,
 	__experimentalBoxControl as BoxControl,
 	__experimentalBorderControl as BorderControl,
 	__experimentalBorderBoxControl as BorderBoxControl,
 	__experimentalSpacer as Spacer,
 } from '@wordpress/components';
-import React from 'react';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import GSPaddingControl from '../components/GSPaddingControl';
 
-export default function sidebarControl({
-	props,
-	// categories,
-	// handleCategoryChange,
-	// handleSelectedPostData,
-	// handleCategoryToggleControl,
-	// handleExcerptToggleControl,
-	// handleFeaturedImageToggleControl,
-}) {
+export default function sidebarControl({ props }) {
 	const { attributes, setAttributes } = props;
 	const [hasFixedBackground, setHasFixedBackground] = useState(false);
 	const [hasFixedBg, setHasFixedBg] = useState(false);
@@ -45,91 +28,6 @@ export default function sidebarControl({
 
 	const onSelect = (tabName) => {
 		console.log('Selecting tab', tabName);
-	};
-
-	const MyCustomTabContent = () => {
-		return (
-			<ToggleControl
-				label="Fixed Background"
-				help={
-					hasFixedBg
-						? 'Has fixed background.'
-						: 'No fixed background.'
-				}
-				checked={hasFixedBg}
-				onChange={(newValue) => {
-					setHasFixedBg(newValue);
-				}}
-			/>
-		);
-	};
-
-	// Component: BorderControl
-	// Component: BorderBoxControl
-	const colors = [{ name: 'Blue 20', color: '#72aee6' }];
-
-	const MyBorderBoxControl = () => {
-		const defaultBorder = {
-			color: '#72aee6',
-			style: 'dashed',
-			width: '1px',
-		};
-		const defaultTopBorder = {
-			color: '#72aee6',
-			style: 'solid',
-			width: '2px',
-		};
-		const [borders, setBorders] = useState({
-			top: defaultBorder,
-			right: defaultBorder,
-			bottom: defaultBorder,
-			left: defaultBorder,
-		});
-		const onChange = (newBorders) => setBorders(newBorders);
-
-		return (
-			<>
-				<p>Border Control</p>
-				<BorderBoxControl
-					colors={colors}
-					label={__('Borders')}
-					onChange={onChange}
-					value={borders}
-				/>
-			</>
-		);
-	};
-
-	// Component: CheckboxControl
-	const MyCheckboxControl = () => {
-		const [isChecked, setChecked] = useState(true);
-		return (
-			<CheckboxControl
-				label="Is author"
-				help="Is the user a author or not?"
-				checked={isChecked}
-				onChange={setChecked}
-			/>
-		);
-	};
-	// Component: ClipboardButton
-	const MyClipboardButton = () => {
-		const [hasCopied, setHasCopied] = useState(false);
-		return (
-			<ClipboardButton
-				variant="primary"
-				text="Text to be copied."
-				onCopy={() => setHasCopied(true)}
-				onFinishCopy={() => setHasCopied(false)}
-			>
-				{hasCopied ? 'Copied!' : 'Copy Text'}
-			</ClipboardButton>
-		);
-	};
-	const buttonRef = useRef();
-	const [isVisible, setIsVisible] = useState(false);
-	const toggleVisible = () => {
-		setIsVisible((state) => !state);
 	};
 
 	return (

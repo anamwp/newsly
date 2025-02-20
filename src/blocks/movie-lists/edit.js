@@ -1,28 +1,12 @@
 import React from 'react';
-import { useSelect, withSelect, select } from '@wordpress/data';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
-import ServerSideRender from '@wordpress/server-side-render';
-import GetFeaturedImage from './getFeaturedImage';
+import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
-
+import { useState, useEffect } from '@wordpress/element';
 import {
-	Disabled,
-	Animate,
-	Notice,
-	Card,
-	CardHeader,
-	CardBody,
-	CardFooter,
-	CardMedia,
 	__experimentalText as Text,
 	__experimentalHeading as Heading,
 } from '@wordpress/components';
-import { addQueryArgs } from '@wordpress/url';
-import axios from 'axios';
-
-import { __ } from '@wordpress/i18n';
 
 /**
  * Handle API call to
@@ -30,6 +14,7 @@ import { __ } from '@wordpress/i18n';
  * @returns JSON
  */
 const GetPopularMovies = async () => {
+	// Todo: Get API keys from env file
 	const movieAPIUrl = 'https://api.themoviedb.org/3/movie/popular';
 	const apiKey = '94413492db5e2e4ca5e93402ca623fca';
 	const apiResponse = await fetch(
@@ -47,6 +32,7 @@ const GetPopularMovies = async () => {
  * @returns JSON
  */
 const GetMovieGenres = async () => {
+	// Todo: Get API keys from env file
 	const options = {
 		method: 'GET',
 		headers: {
@@ -55,7 +41,6 @@ const GetMovieGenres = async () => {
 				'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA',
 		},
 	};
-	// console.log('length', attributes.genres.length);
 	const getGenreResponse = await fetch(
 		'https://api.themoviedb.org/3/genre/movie/list?language=en',
 		options
@@ -68,14 +53,12 @@ const GetMovieGenres = async () => {
 };
 /**
  * Handle movie genre component
- * @param {*} genreIDArr array
- * @param {*} attributes object
+ * @param {Array} genreIDArr - genre id array
+ * @param {Object} attributes - block attributes
  * @returns HTML
  */
 const HandleGenreRender = ({ genreIDArr, attributes }) => {
-	// console.log('IDs', genreIDArr);
 	let getGenre = attributes.genres;
-	// let isFound = getGenre.some((ai) => genreIDArr.includes(ai));
 	let newGenreArr = getGenre.filter((ai) => genreIDArr.includes(ai.id));
 	return (
 		<ul>
@@ -84,15 +67,12 @@ const HandleGenreRender = ({ genreIDArr, attributes }) => {
 			})}
 		</ul>
 	);
-	// return newGenreArr;
-	// console.log('getGenre', newGenreArr);
-	// console.log('is found', isFound);
 };
 /**
  * MovieCard component
- * @param {*} move object
- * @param {*} attributes object
- * @returns
+ * @param {Object} movie - movie object.
+ * @param {Object} attributes - block attributes.
+ * @returns HTML
  */
 const MovieCard = ({ movie, attributes }) => {
 	var headingPadding = attributes.titlePaddingAttr;
