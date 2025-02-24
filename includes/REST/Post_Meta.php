@@ -9,10 +9,11 @@
  */
 
 namespace Anam\GutenbergStarter\REST;
+
 /**
  * Class to Handle rest request regarding add and delete meta
  */
-class Post {
+class Post_Meta {
 	/**
 	 * Class instance.
 	 *
