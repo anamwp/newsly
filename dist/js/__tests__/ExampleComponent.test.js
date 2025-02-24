@@ -26,3 +26,49 @@ test('Sub function', function () {
   render(/*#__PURE__*/_jsx(Sub, {}));
   expect(Sub(2, 1)).toBe(1);
 });
+test('null', function () {
+  var n = null;
+  expect(n).toBeNull();
+  expect(n).toBeDefined();
+  expect(n).not.toBeUndefined();
+  expect(n).not.toBeTruthy();
+  expect(n).toBeFalsy();
+});
+test('zero', function () {
+  var z = 0;
+  expect(z).not.toBeNull();
+  expect(z).toBeDefined();
+  expect(z).not.toBeUndefined();
+  expect(z).not.toBeTruthy();
+  expect(z).toBeFalsy();
+});
+var shoppingList = ['diapers', 'kleenex', 'trash bags', 'paper towels', 'milk'];
+test('the shopping list has milk on it', function () {
+  expect(shoppingList).toContain('milk');
+  expect(new Set(shoppingList)).toContain('milk');
+});
+function compileAndroidCode() {
+  throw new Error('you are using the wrong JDK!');
+}
+test('compiling android goes as expected', function () {
+  expect(function () {
+    return compileAndroidCode();
+  }).toThrow();
+  expect(function () {
+    return compileAndroidCode();
+  }).toThrow(Error);
+
+  // You can also use a string that must be contained in the error message or a regexp
+  expect(function () {
+    return compileAndroidCode();
+  }).toThrow('you are using the wrong JDK');
+  expect(function () {
+    return compileAndroidCode();
+  }).toThrow(/JDK/);
+
+  // Or you can match an exact error message using a regexp like below
+  // expect(() => compileAndroidCode()).toThrow(/^you are using the wrong JDK$/); // Test fails
+  expect(function () {
+    return compileAndroidCode();
+  }).toThrow(/^you are using the wrong JDK!$/); // Test pass
+});
