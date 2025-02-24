@@ -43,7 +43,7 @@ class Init {
 		/**
 		 * REST API
 		 */
-		REST\Post::init();
+		REST\Post_Meta::init();
 		/**
 		 * Cron
 		 * Command - wp cron event run update_movie_block_event
