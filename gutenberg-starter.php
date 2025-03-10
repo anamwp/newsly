@@ -159,6 +159,19 @@ function gs_enqueue_editor_assets() {
 add_action('enqueue_block_editor_assets', 'gs_enqueue_editor_assets');
 
 /**
+ * enquque build/css/index.css file
+ */
+function gs_enqueue_block_assets() {
+	wp_enqueue_style(
+		'gs-block-style',
+		plugins_url( 'build/css/index.css', __FILE__ ),
+		array(),
+		'1.0'
+	);
+}
+add_action( 'enqueue_block_assets', 'gs_enqueue_block_assets' );
+
+/**
  * Initilize the main plugin
  *
  * @return \Guest_Post_Submission

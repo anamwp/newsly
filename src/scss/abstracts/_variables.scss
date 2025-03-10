@@ -1,0 +1,51 @@
+// Colors
+$color-primary: #4285f4;
+$color-primary-light: lighten($color-primary, 15%);
+$color-primary-dark: darken($color-primary, 15%);
+
+$color-secondary: #34a853;
+$color-secondary-light: lighten($color-secondary, 15%);
+$color-secondary-dark: darken($color-secondary, 15%);
+
+$color-text-primary: #212121;
+$color-text-secondary: #757575;
+$color-text-light: #ffffff;
+
+$color-bg-light: #f5f5f5;
+$color-bg-dark: #212121;
+$color-border: #e0e0e0;
+
+// Spacing
+$spacing-xs: 0.25rem;    // 4px
+$spacing-sm: 0.5rem;     // 8px
+$spacing-md: 1rem;       // 16px
+$spacing-lg: 1.5rem;     // 24px
+$spacing-xl: 2rem;       // 32px
+$spacing-xxl: 3rem;      // 48px
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Container widths
+$container-max-width: 1200px;
+$container-padding: $spacing-md;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-modal: 2000;
+$z-index-popover: 3000;
+$z-index-tooltip: 4000;
+

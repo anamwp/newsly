@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// 1. Abstracts (variables and mixins)
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// 2. Base (reset and typography)
+@import 'base/reset';
+@import 'base/typography';
+
+// 3. Existing styles
+body {
+	background: pink;
+}
+
+// 4. Layout components
+.container {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
