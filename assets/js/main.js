@@ -1,10 +1,8 @@
-// import { registerPlugin } from '@wordpress/plugins';
-// import { useSelect } from '@wordpress/data';
-// import { useEffect, useState } from '@wordpress/element';
-
 const { registerPlugin } = wp.plugins;
 const { useSelect } = wp.data;
 const { useEffect, useState } = wp.element;
+
+console.log('hello from main.js');
 
 const BlockMonitor = () => {
 	const postId = useSelect((select) =>

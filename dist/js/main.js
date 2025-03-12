@@ -1,13 +1,10 @@
 import _slicedToArray from "@babel/runtime/helpers/slicedToArray";
-// import { registerPlugin } from '@wordpress/plugins';
-// import { useSelect } from '@wordpress/data';
-// import { useEffect, useState } from '@wordpress/element';
-
 var registerPlugin = wp.plugins.registerPlugin;
 var useSelect = wp.data.useSelect;
 var _wp$element = wp.element,
   useEffect = _wp$element.useEffect,
   useState = _wp$element.useState;
+console.log('hello from main.js');
 var BlockMonitor = function BlockMonitor() {
   var postId = useSelect(function (select) {
     return select('core/editor').getCurrentPostId();
