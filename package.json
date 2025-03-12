@@ -8,12 +8,10 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"watch-assets": "babel assets/js --out-dir dist/js --watch",
 		"watch-blocks": "cross-env NODE_ENV=development wp-scripts start && tailwindwatch --experimental-modules",
-		"start": "concurrently --kill-others-on-fail \"npm run watch-blocks\" \"npm run watch-assets\" \"npm run sass-watch\"",
+		"start": "concurrently --kill-others-on-fail \"npm run watch-blocks\" \"npm run watch-assets\"",
 		"build": "wp-scripts build --experimental-modules",
 		"start-modules": "wp-scripts start --experimental-modules",
-		"jest": "jest",
-		"sass-build": "mkdir -p build/css && wp-scripts build --webpack-src-dir=src/scss --output-path=build/css",
-		"sass-watch": "mkdir -p build/css && wp-scripts start --webpack-src-dir=src/scss --output-path=build/css"
+		"jest": "jest"
 	},
 	"keywords": [],
 	"author": "",
