@@ -19,5 +19,8 @@
 		"@babel/preset-react",
 		"@wordpress/babel-preset-default"
 	],
-	"plugins": [["@wordpress/babel-plugin-makepot"]]
+	"plugins": [
+		"@babel/plugin-transform-runtime",
+		["@wordpress/babel-plugin-makepot"]
+	]
 }
