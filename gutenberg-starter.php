@@ -163,8 +163,14 @@ add_action('enqueue_block_editor_assets', 'gs_enqueue_editor_assets');
  */
 function gs_enqueue_block_assets() {
 	wp_enqueue_style(
-		'gs-block-style',
+		'gs-plugin-style',
 		plugins_url( 'dist/css/main.css', __FILE__ ),
+		array(),
+		'1.0'
+	);
+	wp_enqueue_style(
+		'gs-block-style',
+		plugins_url( 'build/css/index.css', __FILE__ ),
 		array(),
 		'1.0'
 	);

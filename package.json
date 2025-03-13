@@ -16,7 +16,10 @@
 		"start": "concurrently --kill-others-on-fail \"npm run watch-blocks\" \"npm run watch-assets\"",
 		"build": "wp-scripts build --experimental-modules",
 		"start-modules": "wp-scripts start --experimental-modules",
-		"jest": "jest"
+		"jest": "jest",
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js",
+		"packages-update": "wp scripts packages-update"
 	},
 	"keywords": [],
 	"author": "",
