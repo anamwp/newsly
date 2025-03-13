@@ -3,7 +3,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/_test/edit.js:34
 #: src/blocks/blurb/edit.js:31
 #: src/blocks/card/sidebarControl.js:37
 #: src/blocks/components/TypographyControl.js:81
@@ -11,7 +10,6 @@ msgstr ""
 msgid "Small"
 msgstr ""
 
-#: src/blocks/_test/edit.js:39
 #: src/blocks/blurb/edit.js:36
 #: src/blocks/card/sidebarControl.js:47
 #: src/blocks/components/TypographyControl.js:91
