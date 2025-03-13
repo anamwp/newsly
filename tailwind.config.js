@@ -1,5 +1,5 @@
 module.exports = {
-	content: ['./src/**/*.php', './src/**/*.js'],
+	content: ['./src/**/*.php', './src/**/*.js', './assets/scss/**/*.scss'],
 	theme: {
 		extend: {
 			colors: {}, // Extend Tailwind's default colors
