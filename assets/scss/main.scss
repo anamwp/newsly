@@ -1,9 +1,3 @@
 @import './vendors/tailwind.scss';
 @import './components/blocks/movie.scss';
-
-.block {
-	&__image {
-		width: 100%;
-		height: auto;
-	}
-}
+@import './components/blocks/pagination.scss';
