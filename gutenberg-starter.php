@@ -90,7 +90,7 @@ final class Anam_Gutenberg_Starter {
 		define( 'ANAM_GUTENBERG_STARTER_DIR_ASSETS', ANAM_GUTENBERG_STARTER_DIR_URL . 'build' );
 	}
 	/**
-	 * add installation time
+	 * Add installation time
 	 * and plugin version
 	 * while active the plugin
 	 *
@@ -111,19 +111,10 @@ final class Anam_Gutenberg_Starter {
 		new Anam\GutenbergStarter\Init();
 	}
 }
-// function create_block_starter_block_init() {
-// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
-// include_once($file);
-// }
-// register_block_type_from_metadata( __DIR__ . '/build/blocks/theatres-movies' );
-// register_block_type_from_metadata( __DIR__ . '/build/blocks/upcoming-movies' );
-// register_block_type_from_metadata( __DIR__ . '/build/blocks/top-rated-movie-lists' );
-// register_block_type_from_metadata( __DIR__ . '/build/blocks/movie-lists' );
-// }
-// add_action( 'init', 'create_block_starter_block_init' );
 
 /**
- * Undocumented function
+ * Manage fonts in the editor
+ * 
  * ref: https://developer.wordpress.org/block-editor/how-to-guides/enqueueing-assets-in-the-editor/
  *
  * @return void
@@ -159,18 +150,12 @@ function gs_enqueue_editor_assets() {
 add_action('enqueue_block_editor_assets', 'gs_enqueue_editor_assets');
 
 /**
- * enquque build/css/index.css file
+ * Enquque build/css/index.css file
  */
 function gs_enqueue_block_assets() {
 	wp_enqueue_style(
 		'gs-plugin-style',
 		plugins_url( 'dist/css/main.css', __FILE__ ),
-		array(),
-		'1.0'
-	);
-	wp_enqueue_style(
-		'gs-block-style',
-		plugins_url( 'build/css/index.css', __FILE__ ),
 		array(),
 		'1.0'
 	);
