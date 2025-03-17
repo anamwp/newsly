@@ -1,5 +1,5 @@
-@import './style/accessible-slick-theme';
-@import './style/slick';
+@use './style/accessible-slick-theme';
+@use './style/slick';
 .movie-list {
 	// display: grid;
 	// grid-template-columns: repeat(4, 1fr);
