@@ -1,0 +1,139 @@
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/upcoming-movies/style.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+.gs-upcoming-movie-block #popup-modal-for-movie-card {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gs-upcoming-movie-block #popup-modal-for-movie-card #close-modal {
+  position: absolute;
+  border: solid 2px white;
+  top: 50px;
+  right: 50px;
+  display: inline-block;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+.gs-upcoming-movie-block #popup-modal-for-movie-card #fetched-movie-content {
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+  background: white;
+  display: inline-block;
+  overflow: hidden;
+}
+.gs-upcoming-movie-block .movie-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image,
+.gs-upcoming-movie-block .movie-list .card__image {
+  position: relative;
+  line-height: 0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image::before,
+.gs-upcoming-movie-block .movie-list .card__image::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image img,
+.gs-upcoming-movie-block .movie-list .card__image img {
+  width: 100%;
+  display: inline-block;
+  border-radius: 4px;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image .rating-point,
+.gs-upcoming-movie-block .movie-list .card__image .rating-point {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  line-height: 1;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image .rating-point .vote-point,
+.gs-upcoming-movie-block .movie-list .card__image .rating-point .vote-point {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image .rating-point .vote-count,
+.gs-upcoming-movie-block .movie-list .card__image .rating-point .vote-count {
+  font-size: 10px;
+  color: white;
+  border-radius: 4px;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image .language-and-yeaer,
+.gs-upcoming-movie-block .movie-list .card__image .language-and-yeaer {
+  line-height: 1;
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  color: white;
+  font-size: 10px;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image .language-and-yeaer .language,
+.gs-upcoming-movie-block .movie-list .card__image .language-and-yeaer .language {
+  text-transform: uppercase;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__image .language-and-yeaer .year,
+.gs-upcoming-movie-block .movie-list .card__image .language-and-yeaer .year {
+  margin-left: 5px;
+}
+.gs-upcoming-movie-block .movie-list .movie-card h2,
+.gs-upcoming-movie-block .movie-list .card h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.gs-upcoming-movie-block .movie-list .movie-card .overview,
+.gs-upcoming-movie-block .movie-list .card .overview {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* number of lines to show */
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__footer .genre ul,
+.gs-upcoming-movie-block .movie-list .card__footer .genre ul {
+  padding: 0;
+  margin: 0;
+}
+.gs-upcoming-movie-block .movie-list .movie-card__footer .genre li,
+.gs-upcoming-movie-block .movie-list .card__footer .genre li {
+  list-style-type: none;
+  display: inline-block;
+  /* border: solid 1px; */
+  border-radius: 4px;
+  font-size: 10px;
+  margin: 0px 5px 0px 0px;
+  text-transform: uppercase;
+  background: #eee;
+  padding: 3px;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
