@@ -1,16 +1,19 @@
 // {
-// "presets": [
-//     "@wordpress/babel-preset-default",
-//     "@babel/preset-env",
-//     "@babel/preset-react"
-// ],
-// "plugins": [
-//     "@babel/plugin-proposal-class-properties",
-//     ["@babel/plugin-transform-runtime", {
-//     "helpers": true,
-//     "regenerator": false
-//     }]
-// ]
+// 	"presets": [
+// 		"@wordpress/babel-preset-default",
+// 		"@babel/preset-env",
+// 		"@babel/preset-react"
+// 	],
+// 	"plugins": [
+// 		"@babel/plugin-proposal-class-properties",
+// 		[
+// 			"@babel/plugin-transform-runtime",
+// 			{
+// 				"helpers": true,
+// 				"regenerator": false
+// 			}
+// 		]
+// 	]
 // }
 
 {
@@ -20,7 +23,7 @@
 		"@wordpress/babel-preset-default"
 	],
 	"plugins": [
-		"@babel/plugin-transform-runtime",
+		["@babel/plugin-transform-runtime", { "absoluteRuntime": false }],
 		["@wordpress/babel-plugin-makepot"]
 	]
 }
