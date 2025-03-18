@@ -593,18 +593,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-// const { attributes } = metadata;
-
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_1__.name, {
-  // apiVersion: 2,
-  // title: 'Blurb',
-  // icon: 'admin-post',
-  // category: 'anam-starter',
-  // attributes,
-  // example: {
-
-  // },
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
 });

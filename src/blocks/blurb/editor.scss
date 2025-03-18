@@ -1,18 +1,4 @@
 .gts__blurb {
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
-	// &__container {
-	// 	padding: 30px;
-	// 	h2 {
-	// 		margin-top: 0px;
-	// 		margin-bottom: 10px;
-	// 	}
-	// }
-	// &__button {
-	// 	display: inline-block;
-	// 	margin-top: 10px;
-	// }
 	.wp-block-button {
 		&.is-style-outline {
 			&:hover {
@@ -23,7 +9,6 @@
 			}
 		}
 		.wp-block-button__link {
-			// @apply text-white bg-slate-700 border-black hover:bg-white hover:text-black hover:border-slate-700;
 			border: solid 2px theme('colors.slate.700');
 			transition: all 0.3s ease;
 			color: theme('colors.white');

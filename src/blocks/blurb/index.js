@@ -5,17 +5,7 @@ import save from './save';
 import './editor.scss';
 import './style.scss';
 
-// const { attributes } = metadata;
-
 registerBlockType(metadata.name, {
-	// apiVersion: 2,
-	// title: 'Blurb',
-	// icon: 'admin-post',
-	// category: 'anam-starter',
-	// attributes,
-	// example: {
-
-	// },
 	edit,
 	save,
 });
