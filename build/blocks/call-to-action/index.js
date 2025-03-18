@@ -374,7 +374,7 @@ function edit(props) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarGroup, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToolbarItem, {
           as: _wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button,
-          children: "I am a toolbar button"
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Call to Action', 'gutenberg-starter')
         })
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {

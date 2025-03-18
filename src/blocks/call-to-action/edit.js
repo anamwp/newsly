@@ -143,7 +143,9 @@ export default function edit(props) {
 			/>
 			<BlockControls>
 				<ToolbarGroup>
-					<ToolbarItem as={Button}>I am a toolbar button</ToolbarItem>
+					<ToolbarItem as={Button}>
+						{__('Call to Action', 'gutenberg-starter')}
+					</ToolbarItem>
 				</ToolbarGroup>
 			</BlockControls>
 

@@ -3,6 +3,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: src/blocks/call-to-action/edit.js:147
+msgid "Call to Action"
+msgstr ""
+
+#: src/blocks/call-to-action/edit.js:229
 #: src/blocks/call-to-action/edit.js:227
 #: src/blocks/call-to-action/edit.js:223
 #: src/blocks/call-to-action/edit.js:218
@@ -18,7 +23,7 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: src/blocks/call-to-action/edit.js:231
+#: src/blocks/call-to-action/edit.js:233
 msgid "Action Link"
 msgstr ""
 
