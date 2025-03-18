@@ -21,10 +21,15 @@ import {
 	MediaPlaceholder,
 	InnerBlocks,
 } from '@wordpress/block-editor';
-import classnames from 'classnames';
 import SidebarControl from './sidebarControl';
 import EditorImageUploader from '../components/EditorImageUploader';
 import { useEffect } from '@wordpress/element';
+/**
+ * External dependencies
+ * Importing useInstanceId from @wordpress/compose
+ * This Provides a unique instance ID.
+ * Doc Link: https://developer.wordpress.org/block-editor/reference-guides/packages/packages-compose/#useinstanceid
+ */
 import { useInstanceId } from '@wordpress/compose';
 
 /**
@@ -35,8 +40,8 @@ const CARD_FOOTER_TEMPLATE = [
 	[
 		'core/button',
 		{
-			text: 'Read More',
-			placeholder: 'Book Your Demo',
+			text: __('Read More', 'gutenbergp-starter'),
+			placeholder: __('Add your button text', 'gutenbergp-starter'),
 			customClass: 'inline-block mt-6',
 		},
 	],
@@ -60,12 +65,9 @@ export default function edit(props) {
 		/**
 		 * Set block id
 		 */
-		// if (!attributes.blockId) {
-		// const instanceId = useInstanceId('editor-card');
 		setAttributes({
 			blockId: instanceId,
 		});
-		// }
 	}, [blockId, instanceId]);
 
 	/**
@@ -81,7 +83,12 @@ export default function edit(props) {
 				textAlign: attributes.blockAlignContent,
 			}}
 		>
-			{/* style */}
+			{/* 
+			Style
+			Link: https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/block-styles/
+			This inline style is added to maintain individual block style to avoid conflicts with other card blocks
+			 */}
+
 			<style>{`.gts__card__${attributes.blockId} .card__content__title h2 a {color: ${attributes.linkColor};} .gts__card__${attributes.blockId} .card__content__title h2 a:hover {color: ${attributes.linkHoverColor};} .gts__card__${attributes.blockId} .card__content__description a{color: ${attributes.contentLinkColor}} .gts__card__${attributes.blockId} .card__content__description a:hover{color: ${attributes.contentLinkHoverColor}}`}</style>
 
 			{/* Sidebar Control */}
@@ -110,6 +117,7 @@ export default function edit(props) {
 				<div className="card__content">
 					{/* title */}
 					<div className="card__content__title">
+						{/* Link: https://developer.wordpress.org/block-editor/reference-guides/richtext/ */}
 						<RichText
 							tagName="h2"
 							className="mt-8 mb-3 font-poppins text-2xl text-slate-700 font-medium"
@@ -118,10 +126,9 @@ export default function edit(props) {
 								fontSize: attributes.titleFontSize + 'px',
 								color: attributes.headingColor,
 							}}
-							// allowedFormats={['core/bold', 'core/italic']}
 							onChange={(title) => setAttributes({ title })}
 							multiline={false}
-							placeholder={__('Heading...')}
+							placeholder={__('Heading...', 'gutenbergp-starter')}
 						/>
 					</div>
 					{/* content */}
@@ -134,12 +141,12 @@ export default function edit(props) {
 								fontSize: attributes.contentFontSize + 'px',
 								color: attributes.contentColor,
 							}}
-							// allowedFormats={['core/bold', 'core/italic']}
 							onChange={(content) => setAttributes({ content })}
 						/>
 					</div>
 					{/* footer */}
 					<div className="card__footer mt-5 inline-block">
+						{/* Link: https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/nested-blocks-inner-blocks/ */}
 						<InnerBlocks
 							template={CARD_FOOTER_TEMPLATE}
 							templateLock="all"

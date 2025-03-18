@@ -3,83 +3,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/blurb/edit.js:31
-#: src/blocks/components/TypographyControl.js:81
-#: src/blocks/recent-product/edit.js:40
-msgid "Small"
-msgstr ""
-
-#: src/blocks/blurb/edit.js:36
-#: src/blocks/components/TypographyControl.js:91
-#: src/blocks/recent-product/edit.js:45
-msgid "Big"
-msgstr ""
-
-#: src/blocks/calculator/edit.js:41
-msgid "Calculator Settings"
-msgstr ""
-
-#: src/blocks/calculator/edit.js:43
-msgid "set the price for one tree"
-msgstr ""
-
-#: src/blocks/calculator/edit.js:44
-msgid "The value will be used for calculation"
-msgstr ""
-
-#: src/blocks/calculator/edit.js:60
-msgid "Check the impact of your donation"
-msgstr ""
-
-#: src/blocks/calculator/edit.js:74
-msgid "Your"
-msgstr ""
-
-#: src/blocks/calculator/edit.js:76
-msgid "donation will enable us to plant"
-msgstr ""
-
-#: src/blocks/calculator/edit.js:78
-msgid "trees"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:109
-msgid "Remove Imagee"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:274
-msgid "Read More"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:278
-msgid "Action Link"
-msgstr ""
-
-#: src/blocks/card/edit.js:124
+#: src/blocks/card/edit.js:131
 msgid "Heading..."
 msgstr ""
 
-#: src/blocks/components/TypographyControl.js:187
-msgid "Font Weight"
+#: src/blocks/card/edit.js:43
+msgid "Read More"
 msgstr ""
 
-#: src/blocks/components/TypographyControl.js:234
-msgid "Style"
-msgstr ""
-
-#: src/blocks/components/TypographyControl.js:240
-msgid "Decoration"
-msgstr ""
-
-#: src/blocks/components/TypographyControl.js:246
-msgid "Transform"
-msgstr ""
-
-#: src/blocks/components/TypographyControl.js:86
-msgid "Medium"
-msgstr ""
-
-#: src/blocks/post-lists-tab/edit.js:236
-#: src/blocks/single-post/edit.js:220
-msgid "No featured image found"
+#: src/blocks/card/edit.js:44
+msgid "Add your button textr"
 msgstr ""

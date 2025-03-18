@@ -31,32 +31,31 @@ class Block {
 		 */
 		$this->movie_list_callback_instance = Inc\Class_Movie_List_Callback::init();
 	}
+	/**
+	 * Register Block
+	 *
+	 * @return void
+	 */
 	public function register_block() {
-		// dump(ANAM_GUTENBERG_STARTER_PATH);
-		// dump(plugins_url());
-		// dump(__DIR__);
-		// function create_block_starter_block_init() {
-			// foreach (glob(__DIR__ . '/blocks/*/**.php') as $file) {
-			// include_once($file);
-			// }
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/test' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/single-post' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/card' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/call-to-action' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/blurb' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/recent-product' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/post-lists-tab' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/theatres-movies' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movie-slider' );
-			register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/top-rated-movie-lists' );
-			register_block_type_from_metadata(
-				ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/movie-lists',
-				array(
-					'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
-				)
-			);
-		// }
+		/**
+		 * Register block type from metadata
+		 */
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/single-post' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/card' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/call-to-action' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/blurb' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/recent-product' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/post-lists-tab' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/theatres-movies' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movie-slider' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/top-rated-movie-lists' );
+		register_block_type_from_metadata(
+			ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/movie-lists',
+			array(
+				'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
+			)
+		);
 	}
 	/**
 	 * Register Starter Blocks
@@ -242,15 +241,15 @@ class Block {
 	}
 	/**
 	 * Single Post Block Frontend Render Callback
-	 * This function not in use
+	 * [ This function not in use ]
 	 *
-	 * @param [type] $block_attributes
-	 * @param [type] $content
-	 * @return void
+	 * @param [obj]    $block_attributes - block attributes.
+	 * @param [string] $content - block content.
+	 * @return HTML
 	 */
 	public function single_post_render_frontend_callback( $block_attributes, $content ) {
 		/**
-		 * assign post id from
+		 * Assign post id from
 		 * block attributes array
 		 * if nothing found
 		 * assing empty

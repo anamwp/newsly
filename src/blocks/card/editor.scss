@@ -1,32 +1,7 @@
-// .gts__card {
-// 	.card {
-// 		border: solid 1px #eee;
-// 		border-radius: 4px;
-// 		overflow: hidden;
-// 		&__img {
-// 			img {
-// 				width: 100%;
-// 			}
-// 		}
-// 		&__content {
-// 			padding: 30px;
-// 			&__title {
-// 				h2 {
-// 					margin-top: 0px;
-// 				}
-// 			}
-// 		}
-// 	}
-// }
-
 .gts__card {
-	// @tailwind base;
-	// @tailwind components;
-	// @tailwind utilities;
 	.card {
 		&__footer {
 			.wp-block-button__link {
-				// @apply text-white bg-slate-700 border-black hover:bg-white hover:text-black hover:border-slate-700;
 				border: solid 2px theme('colors.slate.700');
 				transition: all 0.3s ease;
 			}
