@@ -161,7 +161,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
  * Template to insert core blocks
  */
 
-var CARD_FOOTER_TEMPLATE = [['core/button', {
+var GTS_CARD_FOOTER_TEMPLATE = [['core/button', {
   text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read More', 'gutenbergp-starter'),
   placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add your button text', 'gutenbergp-starter'),
   customClass: 'inline-block mt-6'
@@ -256,7 +256,7 @@ function edit(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
           className: "card__footer mt-5 inline-block",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.InnerBlocks, {
-            template: CARD_FOOTER_TEMPLATE,
+            template: GTS_CARD_FOOTER_TEMPLATE,
             templateLock: "all",
             allowedBlocks: ['core/button']
           })

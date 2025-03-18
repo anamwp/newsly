@@ -24,27 +24,20 @@ import {
 } from '@wordpress/block-editor';
 import classNames from 'classnames';
 
-const MY_TEMPLATE = [['core/button', { text: 'Book Your Demo', placeholder: 'Book Your Demo', customClass: 'inline-block mt-6', }]];
-
-const fontSizes = [
-	{
-		name: __('Small'),
-		slug: 'small',
-		size: 12,
-	},
-	{
-		name: __('Big'),
-		slug: 'big',
-		size: 26,
-	},
+const GTS_BLURB_FOOTER_TEMPLATE = [
+	[
+		'core/button',
+		{
+			text: __('Book Your Demo', 'gutenberg-starter'),
+			placeholder: __('Book Your Demo', 'gutenberg-starter'),
+			customClass: 'inline-block mt-6',
+		},
+	],
 ];
-const fallbackFontSize = 16;
 
 export default function edit({ attributes, setAttributes }) {
 	const [fontSize, setFontSize] = useState(12);
 	const [isChecked, setChecked] = useState(true);
-	console.log('attributes', attributes);
-	console.log('fontSize', fontSize);
 	/**
 	 * pass style through useBlockProps()
 	 */
@@ -107,7 +100,10 @@ export default function edit({ attributes, setAttributes }) {
 							initialOpen={true}
 						>
 							<PanelRow>
-								Set the blurb background color
+								{__(
+									'Set the blurb background color',
+									'gutenberg-starter'
+								)}
 							</PanelRow>
 							<ColorPalette
 								onChange={(newFontSize) => {
@@ -145,24 +141,27 @@ export default function edit({ attributes, setAttributes }) {
 					style={{
 						color: attributes.text_color,
 					}}
-					className='mt-0 mb-3 font-poppins text-2xl text-slate-700 font-medium'
+					className="mt-0 mb-3 font-poppins text-2xl text-slate-700 font-medium"
 					onChange={onChangeContent}
 					value={attributes.newcontent}
-					placeholder="this is rich text editor"
+					placeholder={__(
+						'this is rich text editor',
+						'gutenberg-starter'
+					)}
 				/>
 				<RichText
 					tagName="p"
 					style={{
 						color: attributes.content_color,
 					}}
-					className='text-slate-600'
+					className="text-slate-600"
 					onChange={(val) => setAttributes({ newmessage: val })}
 					value={attributes.newmessage}
-					placeholder="hello text control"
+					placeholder={__('hello text control', 'gutenberg-starter')}
 				/>
 				<div className="gts__blurb__button pt-6">
 					<InnerBlocks
-						template={MY_TEMPLATE}
+						template={GTS_BLURB_FOOTER_TEMPLATE}
 						templateLock="all"
 						allowedBlocks={['core/button']}
 					/>

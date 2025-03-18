@@ -417,21 +417,11 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 
 
 
-var MY_TEMPLATE = [['core/button', {
-  text: 'Book Your Demo',
-  placeholder: 'Book Your Demo',
+var GTS_BLURB_FOOTER_TEMPLATE = [['core/button', {
+  text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Book Your Demo', 'gutenberg-starter'),
+  placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Book Your Demo', 'gutenberg-starter'),
   customClass: 'inline-block mt-6'
 }]];
-var fontSizes = [{
-  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Small'),
-  slug: 'small',
-  size: 12
-}, {
-  name: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Big'),
-  slug: 'big',
-  size: 26
-}];
-var fallbackFontSize = 16;
 function edit(_ref) {
   var attributes = _ref.attributes,
     setAttributes = _ref.setAttributes;
@@ -443,8 +433,6 @@ function edit(_ref) {
     _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
     isChecked = _useState4[0],
     setChecked = _useState4[1];
-  console.log('attributes', attributes);
-  console.log('fontSize', fontSize);
   /**
    * pass style through useBlockProps()
    */
@@ -502,7 +490,7 @@ function edit(_ref) {
             icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
             initialOpen: true,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-              children: "Set the blurb background color"
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Set the blurb background color', 'gutenberg-starter')
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
               onChange: function onChange(newFontSize) {
                 setAttributes({
@@ -543,7 +531,7 @@ function edit(_ref) {
         className: "mt-0 mb-3 font-poppins text-2xl text-slate-700 font-medium",
         onChange: onChangeContent,
         value: attributes.newcontent,
-        placeholder: "this is rich text editor"
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('this is rich text editor', 'gutenberg-starter')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.RichText, {
         tagName: "p",
         style: {
@@ -556,11 +544,11 @@ function edit(_ref) {
           });
         },
         value: attributes.newmessage,
-        placeholder: "hello text control"
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('hello text control', 'gutenberg-starter')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "gts__blurb__button pt-6",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.InnerBlocks, {
-          template: MY_TEMPLATE,
+          template: GTS_BLURB_FOOTER_TEMPLATE,
           templateLock: "all",
           allowedBlocks: ['core/button']
         })

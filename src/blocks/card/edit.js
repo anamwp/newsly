@@ -36,7 +36,7 @@ import { useInstanceId } from '@wordpress/compose';
  * Internal dependencies
  * Template to insert core blocks
  */
-const CARD_FOOTER_TEMPLATE = [
+const GTS_CARD_FOOTER_TEMPLATE = [
 	[
 		'core/button',
 		{
@@ -148,7 +148,7 @@ export default function edit(props) {
 					<div className="card__footer mt-5 inline-block">
 						{/* Link: https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/nested-blocks-inner-blocks/ */}
 						<InnerBlocks
-							template={CARD_FOOTER_TEMPLATE}
+							template={GTS_CARD_FOOTER_TEMPLATE}
 							templateLock="all"
 							allowedBlocks={['core/button']}
 						/>

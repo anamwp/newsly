@@ -3,22 +3,27 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: src/blocks/blurb/edit.js:103
+msgid "Set the blurb background color"
+msgstr ""
+
+#: src/blocks/blurb/edit.js:147
+msgid "this is rich text editor"
+msgstr ""
+
+#: src/blocks/blurb/edit.js:160
+msgid "hello text control"
+msgstr ""
+
+#: src/blocks/blurb/edit.js:32
+msgid "Book Your Demo"
+msgstr ""
+
 #: src/blocks/call-to-action/edit.js:147
 msgid "Call to Action"
 msgstr ""
 
 #: src/blocks/call-to-action/edit.js:229
-#: src/blocks/call-to-action/edit.js:227
-#: src/blocks/call-to-action/edit.js:223
-#: src/blocks/call-to-action/edit.js:218
-#: src/blocks/call-to-action/edit.js:217
-#: src/blocks/call-to-action/edit.js:215
-#: src/blocks/call-to-action/edit.js:261
-#: src/blocks/call-to-action/edit.js:263
-#: src/blocks/call-to-action/edit.js:265
-#: src/blocks/call-to-action/edit.js:267
-#: src/blocks/call-to-action/edit.js:269
-#: src/blocks/call-to-action/edit.js:271
 #: src/blocks/card/edit.js:43
 msgid "Read More"
 msgstr ""
@@ -76,5 +81,5 @@ msgid "Heading..."
 msgstr ""
 
 #: src/blocks/card/edit.js:44
-msgid "Add your button textr"
+msgid "Add your button text"
 msgstr ""
