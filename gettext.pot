@@ -3,12 +3,71 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/card/edit.js:131
-msgid "Heading..."
-msgstr ""
-
+#: src/blocks/call-to-action/edit.js:227
+#: src/blocks/call-to-action/edit.js:223
+#: src/blocks/call-to-action/edit.js:218
+#: src/blocks/call-to-action/edit.js:217
+#: src/blocks/call-to-action/edit.js:215
+#: src/blocks/call-to-action/edit.js:261
+#: src/blocks/call-to-action/edit.js:263
+#: src/blocks/call-to-action/edit.js:265
+#: src/blocks/call-to-action/edit.js:267
+#: src/blocks/call-to-action/edit.js:269
+#: src/blocks/call-to-action/edit.js:271
 #: src/blocks/card/edit.js:43
 msgid "Read More"
+msgstr ""
+
+#: src/blocks/call-to-action/edit.js:231
+msgid "Action Link"
+msgstr ""
+
+#: src/blocks/call-to-action/edit.js:58
+msgid "The Image"
+msgstr ""
+
+#: src/blocks/call-to-action/edit.js:96
+msgid "Remove Imagee"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:105
+msgid "Add Image"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:142
+msgid "Remove Image"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:168
+msgid "Replace Image"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:182
+msgid "Focal Point"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:202
+msgid "Alignment"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:67
+msgid "Call to action Image"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:72
+msgid "Image"
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:75
+msgid " "
+msgstr ""
+
+#: src/blocks/call-to-action/sidebarControl.js:76
+msgid "Display Image for Call to action"
+msgstr ""
+
+#: src/blocks/card/edit.js:131
+msgid "Heading..."
 msgstr ""
 
 #: src/blocks/card/edit.js:44

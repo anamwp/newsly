@@ -270,8 +270,6 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 
 
 function edit(props) {
-  // debugger;
-  console.log('edit props ', props);
   var attributes = props.attributes,
     setAttributes = props.setAttributes,
     className = props.className,
@@ -280,8 +278,6 @@ function edit(props) {
     className: 'gts__call-to-action'
   });
   var onSelectImage = function onSelectImage(imageObj) {
-    // debugger;
-    // console.log('imageObj', imageObj);
     setAttributes({
       media: imageObj,
       mediaId: imageObj.id,
@@ -303,11 +299,9 @@ function edit(props) {
         multiple: false,
         icon: "format-image",
         labels: {
-          title: 'The Image'
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('The Image', 'gutenberg-starter')
         },
         onSelect: function onSelect(imageEntity) {
-          // debugger;
-          // console.log(imageEntity);
           if ((0,_wordpress_blob__WEBPACK_IMPORTED_MODULE_5__.isBlobURL)(imageEntity === null || imageEntity === void 0 ? void 0 : imageEntity.url)) {
             return;
           }
@@ -318,16 +312,12 @@ function edit(props) {
             mediaId: imageEntity === null || imageEntity === void 0 ? void 0 : imageEntity.id,
             mediaUrl: imageEntity === null || imageEntity === void 0 ? void 0 : imageEntity.url
           });
-          // console.log('updated attributes ', props.attributes);
-          // debugger;
         }
       })
     });
   };
   var renderImage = function renderImage() {
-    // console.log('render image', attributes);
     var focalPoint = attributes.focalPoint;
-    // console.log('focalPoint', focalPoint);
     var classes = classnames__WEBPACK_IMPORTED_MODULE_7___default()('call-to-action-image-wrapper', {
       'is-selected': isSelected
     });
@@ -369,6 +359,7 @@ function edit(props) {
       })
     });
   };
+  console.log(props.attributes);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_4__["default"], {
       data: props,
@@ -389,7 +380,7 @@ function edit(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
         className: "call-to-action flex flex-row ".concat(props.attributes.imageLayoutPosition === 'right' ? 'flex-row-reverse' : '', " font-roboto items-center shadow-md rounded-md overflow-hidden"),
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+        children: [props.attributes.showImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
           className: "call-to-action__left basis-1/2",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
             className: "call-to-action__media-wrapper",
@@ -399,7 +390,7 @@ function edit(props) {
             children: props.attributes.showImage ? props.attributes.media ? renderImage() : renderPlaceholderForImage() : false
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-          className: "call-to-action__right basis-1/2 p-10",
+          className: "call-to-action__right  ".concat(props.attributes.showImage ? 'basis-1/2' : '', "  p-10"),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
             className: "call-to-action__title",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.RichText, {
@@ -436,16 +427,9 @@ function edit(props) {
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.InnerBlocks, {
               template: [['core/button', {
-                text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read More', 'anam-gutenberg-starter'),
-                placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Action Link', 'anam-gutenberg-starter'),
+                text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Read More', 'gutenberg-starter'),
+                placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Action Link', 'gutenberg-starter'),
                 className: 'inline-block'
-                // backgroundColor: 'black',
-                // url: 'google.com',
-                // textAlign: 'center',
-                // textColor: 'red-500',
-                // styles: {
-                // 	fontSize: '2.5rem',
-                // },
               }]],
               allowedBlocks: ['core/button'],
               templateInsertUpdatesSelection: true,
@@ -494,14 +478,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// const { attributes } = metadata;
-
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_1__.name, {
-  // apiVersion: 2,
-  // title: 'Call To Action',
-  // icon: 'admin-post',
-  // category: 'anam-starter',
-  // attributes,
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
@@ -540,7 +517,7 @@ function save(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "call-to-action font-roboto flex flex-row ".concat(attributes.imageLayoutPosition === 'right' ? 'flex-row-reverse' : '', " items-center shadow-md rounded-md overflow-hidden"),
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      children: [attributes.showImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "call-to-action__left basis-1/2",
         children: attributes.showImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "call-to-action__media-wrapper",
@@ -556,7 +533,7 @@ function save(_ref) {
           })
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "call-to-action__right basis-1/2 p-10",
+        className: "call-to-action__right ".concat(attributes.showImage ? 'basis-1/2' : '', " p-10"),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "call-to-action__title",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.RichText.Content, {

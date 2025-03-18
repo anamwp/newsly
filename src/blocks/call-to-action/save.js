@@ -15,33 +15,42 @@ export default function save({ attributes }) {
 						: ''
 				} items-center shadow-md rounded-md overflow-hidden`}
 			>
-				<div className="call-to-action__left basis-1/2">
-					{attributes.showImage && (
-						<div
-							className="call-to-action__media-wrapper"
-							style={{ textAlign: attributes.alignment }}
-						>
-							{attributes.media && (
-								<img
-									src={attributes.mediaUrl}
-									alt=""
-									style={{
-										objectPosition: attributes.focalPoint
-											? `${
-													attributes.focalPoint.x *
-													100
-											  }% ${
-													attributes.focalPoint.y *
-													100
-											  }%`
-											: undefined,
-									}}
-								/>
-							)}
-						</div>
-					)}
-				</div>
-				<div className="call-to-action__right basis-1/2 p-10">
+				{attributes.showImage && (
+					<div className="call-to-action__left basis-1/2">
+						{attributes.showImage && (
+							<div
+								className="call-to-action__media-wrapper"
+								style={{ textAlign: attributes.alignment }}
+							>
+								{attributes.media && (
+									<img
+										src={attributes.mediaUrl}
+										alt=""
+										style={{
+											objectPosition:
+												attributes.focalPoint
+													? `${
+															attributes
+																.focalPoint.x *
+															100
+													  }% ${
+															attributes
+																.focalPoint.y *
+															100
+													  }%`
+													: undefined,
+										}}
+									/>
+								)}
+							</div>
+						)}
+					</div>
+				)}
+				<div
+					className={`call-to-action__right ${
+						attributes.showImage ? 'basis-1/2' : ''
+					} p-10`}
+				>
 					<div className="call-to-action__title">
 						<RichText.Content
 							style={{ textAlign: attributes.alignment }}

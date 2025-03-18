@@ -54,12 +54,6 @@ export default function SidebarControl({
 	};
 	return (
 		<div>
-			{/* <BlockControls>
-                <AlignmentToolbar 
-                    value={attributes.alignment}
-                    onChange={onChangeAlignment}
-                    />
-            </BlockControls> */}
 			<InspectorControls>
 				<Panel>
 					<PanelBody initialOpen={true} title="Image Layout">

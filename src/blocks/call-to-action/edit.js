@@ -23,15 +23,10 @@ import {
 	MediaPlaceholder,
 	InnerBlocks,
 	BlockControls,
-	// URLInput,
-	// URLInputButton,
-	// URLPopover,
 } from '@wordpress/block-editor';
 import classnames from 'classnames';
 
 export default function edit(props) {
-	// debugger;
-	console.log('edit props ', props);
 	const { attributes, setAttributes, className, isSelected } = props;
 
 	const blockProps = useBlockProps({
@@ -39,8 +34,6 @@ export default function edit(props) {
 	});
 
 	const onSelectImage = (imageObj) => {
-		// debugger;
-		// console.log('imageObj', imageObj);
 		setAttributes({
 			media: imageObj,
 			mediaId: imageObj.id,
@@ -62,11 +55,9 @@ export default function edit(props) {
 					multiple={false}
 					icon="format-image"
 					labels={{
-						title: 'The Image',
+						title: __('The Image', 'gutenberg-starter'),
 					}}
 					onSelect={(imageEntity) => {
-						// debugger;
-						// console.log(imageEntity);
 						if (isBlobURL(imageEntity?.url)) {
 							return;
 						}
@@ -77,17 +68,13 @@ export default function edit(props) {
 							mediaId: imageEntity?.id,
 							mediaUrl: imageEntity?.url,
 						});
-						// console.log('updated attributes ', props.attributes);
-						// debugger;
 					}}
 				/>
 			</div>
 		);
 	};
 	const renderImage = () => {
-		// console.log('render image', attributes);
 		const { focalPoint } = attributes;
-		// console.log('focalPoint', focalPoint);
 		const classes = classnames('call-to-action-image-wrapper', {
 			'is-selected': isSelected,
 		});
@@ -139,6 +126,7 @@ export default function edit(props) {
 			</>
 		);
 	};
+	console.log(props.attributes);
 
 	return (
 		<div {...blockProps}>
@@ -156,53 +144,10 @@ export default function edit(props) {
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarItem as={Button}>I am a toolbar button</ToolbarItem>
-					{/* <URLInputButton
-						url="#"
-						// url={url}
-						// onChange={(url, post) =>
-						// 	setAttributes({
-						// 		url,
-						// 		title: (post && post.title) || __('Click here'),
-						// 	})
-						// }
-					/>
-
-					<URLInput
-						className={className}
-						value="#"
-						// value={url}
-						// onChange={(url, post) =>
-						// 	setAttributes({
-						// 		url,
-						// 		text: (post && post.title) || 'Click here',
-						// 	})
-						// }
-					/> */}
 				</ToolbarGroup>
 			</BlockControls>
 
 			<div>
-				{/* <MediaUploadCheck>
-					{!props.attributes.media && (
-						<MediaUpload
-							onSelect={onSelectImage}
-							value={props.attributes.mediaUrl}
-							render={({ open }) => (
-								<Button onClick={open}>
-									{props.attributes.mediaUrl ? (
-										<img
-											src={props.attributes.mediaUrl}
-											alt=""
-										/>
-									) : (
-										<BlockIcon icon={icon} />
-									)}
-								</Button>
-							)}
-						/>
-					)}
-				</MediaUploadCheck> */}
-
 				<div
 					className={`call-to-action flex flex-row ${
 						props.attributes.imageLayoutPosition === 'right'
@@ -210,22 +155,30 @@ export default function edit(props) {
 							: ''
 					} font-roboto items-center shadow-md rounded-md overflow-hidden`}
 				>
-					<div className="call-to-action__left basis-1/2">
-						<div
-							className="call-to-action__media-wrapper"
-							style={{ textAlign: props.attributes.alignment }}
-						>
-							{/* {props.attributes.media && (
-							<img src={props.attributes.mediaUrl} alt="" />
-						)} */}
-							{props.attributes.showImage
-								? props.attributes.media
-									? renderImage()
-									: renderPlaceholderForImage()
-								: false}
+					{/* Left side */}
+					{/* if showImage true, then show this block, otherwise not */}
+					{props.attributes.showImage && (
+						<div className="call-to-action__left basis-1/2">
+							<div
+								className="call-to-action__media-wrapper"
+								style={{
+									textAlign: props.attributes.alignment,
+								}}
+							>
+								{props.attributes.showImage
+									? props.attributes.media
+										? renderImage()
+										: renderPlaceholderForImage()
+									: false}
+							</div>
 						</div>
-					</div>
-					<div className="call-to-action__right basis-1/2 p-10">
+					)}
+					{/* Right side */}
+					<div
+						className={`call-to-action__right  ${
+							props.attributes.showImage ? 'basis-1/2' : ''
+						}  p-10`}
+					>
 						<div className="call-to-action__title">
 							<RichText
 								style={{
@@ -273,20 +226,13 @@ export default function edit(props) {
 										{
 											text: __(
 												'Read More',
-												'anam-gutenberg-starter'
+												'gutenberg-starter'
 											),
 											placeholder: __(
 												'Action Link',
-												'anam-gutenberg-starter'
+												'gutenberg-starter'
 											),
 											className: 'inline-block',
-											// backgroundColor: 'black',
-											// url: 'google.com',
-											// textAlign: 'center',
-											// textColor: 'red-500',
-											// styles: {
-											// 	fontSize: '2.5rem',
-											// },
 										},
 									],
 								]}
