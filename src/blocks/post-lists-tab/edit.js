@@ -32,6 +32,7 @@ export default function edit(props) {
 					catArr.push({
 						label: cat.name,
 						value: cat.id,
+						slug: cat.slug,
 					});
 				});
 				setAttributes({
@@ -55,7 +56,6 @@ export default function edit(props) {
 			})
 			.catch((err) => console.log('err', err));
 	}, []);
-	// console.log('props after fetch', props);
 	/**
 	 * set posts while change the category
 	 * @param {*} selectedCatId
@@ -290,6 +290,8 @@ export default function edit(props) {
 		});
 	};
 
+	console.log('attributes', attributes);
+
 	return (
 		<div {...blockProps}>
 			{/* <SidebarControl
@@ -312,7 +314,7 @@ export default function edit(props) {
 					href=""
 					className="active tablinks px-4 py-2 font-semibold text-sm bg-emerald-800 transition-all text-white rounded-full shadow-sm"
 				>
-					All
+					{__('All', 'gutenberg-starter')}
 				</a>
 				{attributes.categories.length > 0 &&
 					attributes.categories.map((cat, index) => {
@@ -329,16 +331,14 @@ export default function edit(props) {
 					})}
 			</nav>
 			<div className="post-lists grid grid-cols-3 gap-4">
-				{isLoading ? <p>Loading...</p> : null}
+				{isLoading ? (
+					<p>{__('Loading...', 'gutenberg-starter')}</p>
+				) : null}
 				{attributes.fetchedPosts.length > 0 &&
 					attributes.fetchedPosts.map((post, index) => {
 						return (
 							<div
 								key={index}
-								// style={{
-								// 	border: 'solid 1px',
-								// 	marginBottom: '30px',
-								// }}
 								className="card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8"
 							>
 								{attributes.showFeaturedImage &&
@@ -347,7 +347,7 @@ export default function edit(props) {
 											postId={post.featured_media}
 										/>
 									)}
-								<h2 className="mt-4 inline-block font-poppins text-2xl text-slate-900 hover:text-emerald-600	transition font-medium">
+								<h2 className="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-emerald-600	transition font-medium">
 									{post.title.rendered}
 								</h2>
 								{attributes.showCategory && (

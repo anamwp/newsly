@@ -245,7 +245,7 @@ function _unsupportedIterableToArray(r, a) {
   \**********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/post-lists-tab","version":"0.1.0","title":"Post Lists Tab","category":"anam-starter","icon":"media-interactive","description":"","example":{},"supports":{"interactivity":true},"attributes":{"label":{"type":"string","default":"hello from label"},"postId":{"type":"number","default":null},"categories":{"type":"array","default":[]},"selectedCategroyId":{"type":"string","default":""},"selectedPostId":{"type":"string","default":""},"selectedCategoryPosts":{"type":"array","default":[]},"fetchedPosts":{"type":"array","default":[]},"fetchedPostCategoryData":{"type":"array","default":[]},"showExcerpt":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showFeaturedImage":{"type":"boolean","default":true}},"textdomain":"anam-gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScriptModule":["file:./view.js"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/post-lists-tab","version":"0.1.0","title":"Post Lists Tab","category":"anam-starter","icon":"media-interactive","description":"","example":{},"supports":{"interactivity":false},"attributes":{"label":{"type":"string","default":"hello from label"},"postId":{"type":"number","default":null},"categories":{"type":"array","default":[]},"selectedCategroyId":{"type":"string","default":""},"selectedPostId":{"type":"string","default":""},"selectedCategoryPosts":{"type":"array","default":[]},"fetchedPosts":{"type":"array","default":[]},"fetchedPostCategoryData":{"type":"array","default":[]},"showExcerpt":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showFeaturedImage":{"type":"boolean","default":true}},"textdomain":"anam-gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","render":"file:./render.php","viewScript":["file:./view.js"]}');
 
 /***/ }),
 
@@ -384,7 +384,8 @@ function edit(props) {
       cat.map(function (cat) {
         catArr.push({
           label: cat.name,
-          value: cat.id
+          value: cat.id,
+          slug: cat.slug
         });
       });
       setAttributes({
@@ -408,7 +409,6 @@ function edit(props) {
       return console.log('err', err);
     });
   }, []);
-  // console.log('props after fetch', props);
   /**
    * set posts while change the category
    * @param {*} selectedCatId
@@ -601,13 +601,14 @@ function edit(props) {
       showFeaturedImage: !attributes.showFeaturedImage
     });
   };
+  console.log('attributes', attributes);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("nav", {
       className: "tab mb-10 flex gap-2 p-4 pl-0",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("a", {
         href: "",
         className: "active tablinks px-4 py-2 font-semibold text-sm bg-emerald-800 transition-all text-white rounded-full shadow-sm",
-        children: "All"
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('All', 'gutenberg-starter')
       }), attributes.categories.length > 0 && attributes.categories.map(function (cat, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("a", {
           style: {
@@ -621,18 +622,14 @@ function edit(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
       className: "post-lists grid grid-cols-3 gap-4",
       children: [isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("p", {
-        children: "Loading..."
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('Loading...', 'gutenberg-starter')
       }) : null, attributes.fetchedPosts.length > 0 && attributes.fetchedPosts.map(function (post, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
-          // style={{
-          // 	border: 'solid 1px',
-          // 	marginBottom: '30px',
-          // }}
           className: "card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8",
           children: [attributes.showFeaturedImage && post.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_getFeaturedImage__WEBPACK_IMPORTED_MODULE_6__["default"], {
             postId: post.featured_media
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("h2", {
-            className: "mt-4 inline-block font-poppins text-2xl text-slate-900 hover:text-emerald-600\ttransition font-medium",
+            className: "mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-emerald-600\ttransition font-medium",
             children: post.title.rendered
           }), attributes.showCategory && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
             catArr: post.categories

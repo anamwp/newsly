@@ -3,83 +3,14 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/blurb/edit.js:103
-msgid "Set the blurb background color"
+#: src/blocks/post-lists-tab/edit.js:236
+msgid "No featured image found"
 msgstr ""
 
-#: src/blocks/blurb/edit.js:147
-msgid "this is rich text editor"
+#: src/blocks/post-lists-tab/edit.js:317
+msgid "All"
 msgstr ""
 
-#: src/blocks/blurb/edit.js:160
-msgid "hello text control"
-msgstr ""
-
-#: src/blocks/blurb/edit.js:32
-msgid "Book Your Demo"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:147
-msgid "Call to Action"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:229
-#: src/blocks/card/edit.js:43
-msgid "Read More"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:233
-msgid "Action Link"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:58
-msgid "The Image"
-msgstr ""
-
-#: src/blocks/call-to-action/edit.js:96
-msgid "Remove Imagee"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:105
-msgid "Add Image"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:142
-msgid "Remove Image"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:168
-msgid "Replace Image"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:182
-msgid "Focal Point"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:202
-msgid "Alignment"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:67
-msgid "Call to action Image"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:72
-msgid "Image"
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:75
-msgid " "
-msgstr ""
-
-#: src/blocks/call-to-action/sidebarControl.js:76
-msgid "Display Image for Call to action"
-msgstr ""
-
-#: src/blocks/card/edit.js:131
-msgid "Heading..."
-msgstr ""
-
-#: src/blocks/card/edit.js:44
-msgid "Add your button text"
+#: src/blocks/post-lists-tab/edit.js:335
+msgid "Loading..."
 msgstr ""

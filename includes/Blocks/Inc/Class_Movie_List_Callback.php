@@ -33,74 +33,8 @@ class Class_Movie_List_Callback {
 	 * Construct of Class
 	 */
 	public function __construct() {
-		add_action( 'init', array( $this, 'init_resources' ) );
-		// phpcs:ignore add_action('wp_head', array( $this, 'handle_script_for_movie_list_block' ));
 		add_action( 'wp_ajax_nopriv_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
 		add_action( 'wp_ajax_popular_movie_pagination', array( $this, 'handle_movie_list_block_ajax_pagination' ) );
-	}
-	/**
-	 * Init Block Resources
-	 *
-	 * @return void
-	 */
-	public function init_resources() {
-		wp_enqueue_script( 'jquery' );
-		// wp_enqueue_script('jquery', false, array(), false, false);
-		wp_localize_script(
-			'jquery',
-			'anamajaxpagination',
-			array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			)
-		);
-	}
-	/**
-	 * Javascript for Movie List Block
-	 *
-	 * @return void
-	 */
-	public function handle_script_for_movie_list_block() {
-		?>
-		<script>
-			(function($){
-				$(document).ready(function(){
-					function getPageNumberFromUrl(url) {
-						// Extract query parameters from the URL
-						// var queryParams = getPageNumberFromUrl(anchor.href)
-						var queryParams = url.split('&');
-						// Iterate through query parameters to find 'page' parameter
-						for (var i = 0; i < queryParams.length; i++) {
-							var param = queryParams[i].split('=');
-							if (param[0] === 'page') {
-								return param[1];
-							}
-						}
-						// Return null if 'page' parameter is not found
-						return null;
-					}
-					$(document).on('click', '.movie-list-ajax-number-pagination a', function(e){
-						e.preventDefault();
-						debugger;
-						var page = $(this).attr('href');
-						var pageNumber = getPageNumberFromUrl(page);
-						$.ajax({
-							url: anamajaxpagination.ajaxurl,
-							type: 'post',
-							data: {
-								action: 'popular_movie_pagination',
-								pageNumber: pageNumber,
-							},
-							success: function(response){
-								console.log('response', response);
-								$('.movie-list').empty().append(response);
-								$(window).scrollTop(0);
-							}
-						});
-					});
-				});
-			})(jQuery);
-		</script>
-		<?php
 	}
 	/**
 	 * Movie list block ajax callback from pagination
@@ -112,15 +46,11 @@ class Class_Movie_List_Callback {
 		$total_pages             = '';
 		$get_post_data           = $_POST['blockId'] ? get_post( $_POST['blockId'] ) : '';
 		$get_post_content        = parse_blocks( $get_post_data->post_content );
-		// dump($get_post_content);
 		$block_attrs = is_array( $get_post_content ) ? $get_post_content[0]['attrs'] : array();
 
 		foreach ( $block_attrs['genres'] as $key => $value ) {
 			$this->new_genres[ $value['id'] ] = $value;
 		}
-		// dump($block_attributes);
-		// dump(get_the_ID());
-		// dump($block_attrs);
 
 		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=' . $_POST['pageNumber'] );
 

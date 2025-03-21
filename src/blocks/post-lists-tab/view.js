@@ -1,19 +1,33 @@
-console.log('hello asdfads');
-import { store, getContext } from '@wordpress/interactivity';
-console.log('store', store);
-console.log('getContext', getContext);
-store('anam-gutenberg-starter-block/postlisttab', {
-	actions: {
-		toggle: () => {
-			const context = getContext();
-			context.isOpen = !context.isOpen;
+const handleCategoryChange = (event) => {
+	// console.log('handleCategoryChange', jQuery);
+	var $ = jQuery;
+	event.preventDefault();
+	var catSlug = event.currentTarget.getAttribute('data-cat-slug');
+
+	categoryButton.forEach((btn) =>
+		btn.classList.remove('active', 'bg-emerald-800')
+	);
+	event.currentTarget.classList.add('active', 'bg-emerald-800');
+
+	$.ajax({
+		url: anamajaxpagination.ajaxurl,
+		type: 'post',
+		data: {
+			action: 'handle_category_post_content',
+			catSlug: catSlug,
+			gsAjaxNonce: anamajaxpagination.gs_ajax_nonce,
+			// blockId: blockId,
 		},
-	},
-	callbacks: {
-		logIsOpen: () => {
-			const { isOpen } = getContext();
-			// Log the value of `isOpen` each time it changes.
-			console.log(`Is open: ${isOpen}`);
+		success: function (response) {
+			// clean post-list-tab-post-content id inner html
+			$('#post-list-tab-post-content').empty().append(response);
+			// console.log('response', response);
+			// $('.movie-list').empty().append(response);
+			// $(window).scrollTop(0);
 		},
-	},
+	});
+};
+var categoryButton = document.querySelectorAll('.post-lists-tab .tablinks');
+categoryButton.forEach((element) => {
+	element.addEventListener('click', handleCategoryChange);
 });

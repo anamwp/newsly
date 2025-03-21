@@ -31,6 +31,7 @@ class Init {
 		 * Gutenberg block
 		 */
 		Blocks\Block::init();
+		Blocks\Inc\Class_Post_List_Tab_Callback::init();
 		/**
 		 * Plugin Option Panel under settings menu.
 		 */

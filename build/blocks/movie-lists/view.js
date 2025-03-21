@@ -375,16 +375,33 @@ var HandleMovieContentRender = function HandleMovieContentRender(props) {
     function getPageNumberFromUrl(url) {
       // Extract query parameters from the URL
       // var queryParams = getPageNumberFromUrl(anchor.href)
-      var queryParams = url.split('&');
-      // Iterate through query parameters to find 'page' parameter
-      for (var i = 0; i < queryParams.length; i++) {
-        var param = queryParams[i].split('=');
-        if (param[0] === 'page') {
-          return param[1];
-        }
+      // var queryParams = url.split('&');
+      // // Iterate through query parameters to find 'page' parameter
+      // for (var i = 0; i < queryParams.length; i++) {
+      // 	var param = queryParams[i].split('=');
+      // 	if (param[0] === 'page') {
+      // 		return param[1];
+      // 	}
+      // }
+
+      // Get the full URL
+      // let url = window.location.href;
+
+      // Use a regular expression to extract the 'page' parameter
+      var match = url.match(/[?&]page=(\d+)/);
+
+      // Check if 'page' exists and log it
+      if (match) {
+        var pageValue = match[1]; // Extracted page number
+        console.log('Page Value:', pageValue);
+        return pageValue;
+      } else {
+        console.log('Page parameter not found');
+        return null;
       }
+
       // Return null if 'page' parameter is not found
-      return null;
+      // return null;
     }
     $(document).on('click', '.movie-list-ajax-number-pagination a', function (e) {
       e.preventDefault();
