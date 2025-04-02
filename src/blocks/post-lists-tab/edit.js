@@ -312,7 +312,7 @@ export default function edit(props) {
 			<nav className="tab mb-10 flex gap-2 p-4 pl-0">
 				<a
 					href=""
-					className="active tablinks px-4 py-2 font-semibold text-sm bg-emerald-800 transition-all text-white rounded-full shadow-sm"
+					className="active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm"
 				>
 					{__('All', 'gutenberg-starter')}
 				</a>
@@ -323,7 +323,7 @@ export default function edit(props) {
 								style={{ margin: '0px 10px' }}
 								href="#"
 								key={index}
-								className="tablinks px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-800 transition-all text-white rounded-full shadow-sm"
+								className="tablinks no-underline px-4 py-2 font-semibold text-sm transition-all rounded-md capitalize bg-slate-50 hover:bg-slate-800 hover:text-white  text-slate-800 border border-slate-100 hover:border-slate-800 shadow-sm"
 							>
 								{cat.label}
 							</a>
@@ -347,7 +347,7 @@ export default function edit(props) {
 											postId={post.featured_media}
 										/>
 									)}
-								<h2 className="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-emerald-600	transition font-medium">
+								<h2 className="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium">
 									{post.title.rendered}
 								</h2>
 								{attributes.showCategory && (

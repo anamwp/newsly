@@ -607,7 +607,7 @@ function edit(props) {
       className: "tab mb-10 flex gap-2 p-4 pl-0",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("a", {
         href: "",
-        className: "active tablinks px-4 py-2 font-semibold text-sm bg-emerald-800 transition-all text-white rounded-full shadow-sm",
+        className: "active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_11__.__)('All', 'gutenberg-starter')
       }), attributes.categories.length > 0 && attributes.categories.map(function (cat, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("a", {
@@ -615,7 +615,7 @@ function edit(props) {
             margin: '0px 10px'
           },
           href: "#",
-          className: "tablinks px-4 py-2 font-semibold text-sm bg-emerald-500 hover:bg-emerald-800 transition-all text-white rounded-full shadow-sm",
+          className: "tablinks no-underline px-4 py-2 font-semibold text-sm transition-all rounded-md capitalize bg-slate-50 hover:bg-slate-800 hover:text-white  text-slate-800 border border-slate-100 hover:border-slate-800 shadow-sm",
           children: cat.label
         }, index);
       })]
@@ -629,7 +629,7 @@ function edit(props) {
           children: [attributes.showFeaturedImage && post.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_getFeaturedImage__WEBPACK_IMPORTED_MODULE_6__["default"], {
             postId: post.featured_media
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("h2", {
-            className: "mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-emerald-600\ttransition font-medium",
+            className: "mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600\ttransition font-medium",
             children: post.title.rendered
           }), attributes.showCategory && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
             catArr: post.categories

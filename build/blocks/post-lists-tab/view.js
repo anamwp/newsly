@@ -8,9 +8,9 @@ var handleCategoryChange = function handleCategoryChange(event) {
   event.preventDefault();
   var catSlug = event.currentTarget.getAttribute('data-cat-slug');
   categoryButton.forEach(function (btn) {
-    return btn.classList.remove('active', 'bg-emerald-800');
+    return btn.classList.remove('active', 'bg-slate-800', 'text-white', 'border-slate-800');
   });
-  event.currentTarget.classList.add('active', 'bg-emerald-800');
+  event.currentTarget.classList.add('active', 'bg-slate-800', 'text-white', 'border-slate-800');
   $.ajax({
     url: anamajaxpagination.ajaxurl,
     type: 'post',

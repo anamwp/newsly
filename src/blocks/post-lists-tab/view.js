@@ -5,9 +5,19 @@ const handleCategoryChange = (event) => {
 	var catSlug = event.currentTarget.getAttribute('data-cat-slug');
 
 	categoryButton.forEach((btn) =>
-		btn.classList.remove('active', 'bg-emerald-800')
+		btn.classList.remove(
+			'active',
+			'bg-slate-800',
+			'text-white',
+			'border-slate-800'
+		)
 	);
-	event.currentTarget.classList.add('active', 'bg-emerald-800');
+	event.currentTarget.classList.add(
+		'active',
+		'bg-slate-800',
+		'text-white',
+		'border-slate-800'
+	);
 
 	$.ajax({
 		url: anamajaxpagination.ajaxurl,
