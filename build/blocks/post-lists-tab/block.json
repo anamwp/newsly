@@ -24,23 +24,7 @@
       "type": "array",
       "default": []
     },
-    "selectedCategroyId": {
-      "type": "string",
-      "default": ""
-    },
-    "selectedPostId": {
-      "type": "string",
-      "default": ""
-    },
-    "selectedCategoryPosts": {
-      "type": "array",
-      "default": []
-    },
     "fetchedPosts": {
-      "type": "array",
-      "default": []
-    },
-    "fetchedPostCategoryData": {
       "type": "array",
       "default": []
     },

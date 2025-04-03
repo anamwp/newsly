@@ -3,7 +3,7 @@ import { useSelect, withSelect, select } from '@wordpress/data';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
 import GetFeaturedImage from './getFeaturedImage';
-// import SidebarControl from './sidebarControl';
+import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -13,13 +13,12 @@ import { __ } from '@wordpress/i18n';
 
 export default function edit(props) {
 	const blockProps = useBlockProps();
-	// console.log('props before fetch', props);
 
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const { getEntityRecords, getMedia } = select('core');
 	const { getEditorSettings, getCurrentPost } = select('core/editor');
-	// let __catDataa = getEntityRecords('taxonomy', 'category');
+	const [perPage, setPerPage] = useState(9); // default value is 9 and also need to be set in ajax call
 	/**
 	 * fetch all categoris
 	 * at first loading
@@ -46,7 +45,7 @@ export default function edit(props) {
 	useEffect(() => {
 		setIsLoading(true);
 		apiFetch({
-			path: `/wp/v2/posts/`,
+			path: `/wp/v2/posts?per_page=${perPage}`,
 		})
 			.then((res) => {
 				setAttributes({
@@ -56,72 +55,7 @@ export default function edit(props) {
 			})
 			.catch((err) => console.log('err', err));
 	}, []);
-	/**
-	 * set posts while change the category
-	 * @param {*} selectedCatId
-	 */
-	const handlePostsByCategory = (
-		selectedCatId = attributes.selectedCategroyId
-	) => {
-		/**
-		 * if nothing passed
-		 * then assing catId from
-		 * attributes
-		 */
-		let catId = selectedCatId
-			? selectedCatId
-			: attributes.selectedCategroyId;
-		/**
-		 * fetch the data
-		 * from restapi endpoint
-		 * for specific category
-		 */
-		apiFetch({
-			path: `/wp/v2/posts?categories=${catId}`,
-		})
-			.then((res) => {
-				let catPostsArr = [];
-				/**
-				 * set response first data
-				 * to fetchPosts attribute
-				 */
-				setAttributes({
-					fetchedPosts: [res[0]],
-				});
-				res.map((res) => {
-					catPostsArr.push({
-						label: res.title.rendered,
-						value: res.id,
-					});
-				});
-				setAttributes({
-					selectedCategoryPosts: catPostsArr,
-				});
-			})
-			.catch((err) => console.log(err));
-	};
-	/**
-	 * handle category change
-	 * @param {*} selectedCat
-	 */
-	const handleCategoryChange = (selectedCat) => {
-		/**
-		 * if no value passed
-		 * then reset all data
-		 */
-		if (!selectedCat) {
-			setAttributes({
-				selectedCategroyId: '',
-				selectedCategoryPosts: [],
-				fetchedPosts: [],
-			});
-			return;
-		}
-		setAttributes({
-			selectedCategroyId: selectedCat,
-		});
-		handlePostsByCategory(selectedCat);
-	};
+
 	/**
 	 * fetch category
 	 * specific posts
@@ -159,45 +93,6 @@ export default function edit(props) {
 		},
 		[attributes.selectedCategroyId]
 	);
-	/**
-	 * fetch posts by id
-	 * and then assign
-	 * fetchedPosts attribute
-	 * @param {*} newPostId
-	 * @returns
-	 */
-	const handleSelectedPostData = (newPostId) => {
-		let selectedPostId = newPostId ? newPostId : attributes.selectedPostId;
-		/**
-		 * set the new post ID
-		 * to selectedPostId attribute
-		 */
-		if (newPostId) {
-			setAttributes({
-				selectedPostId: newPostId,
-			});
-		}
-		/**
-		 * if there is no
-		 * selectedPostId
-		 * then return
-		 */
-		if (!selectedPostId) {
-			return;
-		}
-		/**
-		 * fetch data from rest point
-		 */
-		apiFetch({
-			path: `/wp/v2/posts/?include=${selectedPostId}`,
-		})
-			.then((res) => {
-				setAttributes({
-					fetchedPosts: res,
-				});
-			})
-			.catch((err) => console.log('err', err));
-	};
 
 	/**
 	 * Fallback message
@@ -290,24 +185,16 @@ export default function edit(props) {
 		});
 	};
 
-	console.log('attributes', attributes);
-
 	return (
 		<div {...blockProps}>
-			{/* <SidebarControl
+			<SidebarControl
 				props={props}
-				categories={attributes.categories}
-				handleCategoryChange={handleCategoryChange}
-				handleSelectedPostData={handleSelectedPostData}
 				handleCategoryToggleControl={handleCategoryToggleControl}
 				handleExcerptToggleControl={handleExcerptToggleControl}
 				handleFeaturedImageToggleControl={
 					handleFeaturedImageToggleControl
 				}
-			/> */}
-			{/* <ServerSideRender
-                block="anam-gutenberg-starter-block/single-post"
-            /> */}
+			/>
 
 			<nav className="tab mb-10 flex gap-2 p-4 pl-0">
 				<a
@@ -356,55 +243,18 @@ export default function edit(props) {
 										// parentProps={parentProps}
 									/>
 								)}
-								<div
-									dangerouslySetInnerHTML={{
-										__html: post.excerpt.rendered,
-									}}
-									className="text-slate-600 mt-2"
-								/>
+								{attributes.showExcerpt && (
+									<div
+										dangerouslySetInnerHTML={{
+											__html: post.excerpt.rendered,
+										}}
+										className="text-slate-600 mt-2"
+									/>
+								)}
 							</div>
 						);
 					})}
 			</div>
-
-			{/* {attributes.fetchedPosts.length == 0 && (
-				<FallbackMessage message="Please select a post to display" />
-			)} */}
-
-			{/* {!attributes.selectedPostId &&
-				attributes.categories.length > 0 &&
-				attributes.fetchedPosts.length > 0 && (
-					<PostCard
-						data={attributes.fetchedPosts[0]}
-						parent={props}
-					/>
-				)}
-			{attributes.selectedPostId &&
-				attributes.fetchedPosts.length > 0 && (
-					<PostCard
-						data={attributes.fetchedPosts[0]}
-						parent={props}
-					/>
-				)} */}
-			{/* {
-                !attributes.selectedCategroyId && <p>Select a category first.</p>
-            }
-            { ! getPosts && 'Loading' }
-            { getPosts && getPosts.length === 0 && 'No Posts' }
-            { getPosts && getPosts.length > 0 && 
-                getPosts.map(singlePost => {
-                    return(
-                        <p>
-                            <GetFeaturedImage
-                                postId={singlePost.featured_media}
-                            />
-                            <a href={ singlePost.link }>
-                                { singlePost.title.rendered }
-                            </a>
-                        </p>
-                    )
-                })
-            } */}
 		</div>
 	);
 }

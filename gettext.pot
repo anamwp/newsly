@@ -3,14 +3,30 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/post-lists-tab/edit.js:236
+#: src/blocks/post-lists-tab/edit.js:131
 msgid "No featured image found"
 msgstr ""
 
-#: src/blocks/post-lists-tab/edit.js:317
+#: src/blocks/post-lists-tab/edit.js:204
 msgid "All"
 msgstr ""
 
-#: src/blocks/post-lists-tab/edit.js:335
+#: src/blocks/post-lists-tab/edit.js:222
 msgid "Loading..."
+msgstr ""
+
+#: src/blocks/post-lists-tab/sidebarControl.js:20
+msgid "Post Card Controls"
+msgstr ""
+
+#: src/blocks/post-lists-tab/sidebarControl.js:25
+msgid "Show Featured Image"
+msgstr ""
+
+#: src/blocks/post-lists-tab/sidebarControl.js:36
+msgid "Show Category"
+msgstr ""
+
+#: src/blocks/post-lists-tab/sidebarControl.js:44
+msgid "Show Excerpt"
 msgstr ""

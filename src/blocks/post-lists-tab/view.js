@@ -1,8 +1,8 @@
 const handleCategoryChange = (event) => {
-	// console.log('handleCategoryChange', jQuery);
 	var $ = jQuery;
 	event.preventDefault();
 	var catSlug = event.currentTarget.getAttribute('data-cat-slug');
+	var posdID = event.target.parentElement.getAttribute('data-postid');
 
 	categoryButton.forEach((btn) =>
 		btn.classList.remove(
@@ -26,14 +26,10 @@ const handleCategoryChange = (event) => {
 			action: 'handle_category_post_content',
 			catSlug: catSlug,
 			gsAjaxNonce: anamajaxpagination.gs_ajax_nonce,
-			// blockId: blockId,
+			posdID: posdID,
 		},
 		success: function (response) {
-			// clean post-list-tab-post-content id inner html
 			$('#post-list-tab-post-content').empty().append(response);
-			// console.log('response', response);
-			// $('.movie-list').empty().append(response);
-			// $(window).scrollTop(0);
 		},
 	});
 };

@@ -53,10 +53,10 @@ final class Anam_Gutenberg_Starter {
 	 * @return void
 	 */
 	public function load_text_domain() {
-		load_plugin_textdomain( 'anam-gutenberg-starter' );
+		load_plugin_textdomain( 'gutenberg-starter' );
 	}
 	/**
-	 * define plugin
+	 * Define plugin
 	 * default constants
 	 *
 	 * @return void
@@ -71,6 +71,7 @@ final class Anam_Gutenberg_Starter {
 		 * C:\xampp\htdocs\devplugin\wp-content\plugins\gutenberg-starter\gutenberg-starter.php
 		 */
 		define( 'ANAM_GUTENBERG_STARTER_FILE', __FILE__ );
+		define( 'GUTENBERG_STARTER_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 		/**
 		 * return the plugin director
 		 * C:\xampp\htdocs\devplugin\wp-content\plugins\gutenberg-starter

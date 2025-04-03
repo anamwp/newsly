@@ -3,10 +3,10 @@
   !*** ./src/blocks/post-lists-tab/view.js ***!
   \*******************************************/
 var handleCategoryChange = function handleCategoryChange(event) {
-  // console.log('handleCategoryChange', jQuery);
   var $ = jQuery;
   event.preventDefault();
   var catSlug = event.currentTarget.getAttribute('data-cat-slug');
+  var posdID = event.target.parentElement.getAttribute('data-postid');
   categoryButton.forEach(function (btn) {
     return btn.classList.remove('active', 'bg-slate-800', 'text-white', 'border-slate-800');
   });
@@ -17,15 +17,11 @@ var handleCategoryChange = function handleCategoryChange(event) {
     data: {
       action: 'handle_category_post_content',
       catSlug: catSlug,
-      gsAjaxNonce: anamajaxpagination.gs_ajax_nonce
-      // blockId: blockId,
+      gsAjaxNonce: anamajaxpagination.gs_ajax_nonce,
+      posdID: posdID
     },
     success: function success(response) {
-      // clean post-list-tab-post-content id inner html
       $('#post-list-tab-post-content').empty().append(response);
-      // console.log('response', response);
-      // $('.movie-list').empty().append(response);
-      // $(window).scrollTop(0);
     }
   });
 };
