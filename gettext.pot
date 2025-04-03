@@ -20,13 +20,28 @@ msgid "Post Card Controls"
 msgstr ""
 
 #: src/blocks/post-lists-tab/sidebarControl.js:25
+#: src/blocks/single-post/sidebarControl.js:49
 msgid "Show Featured Image"
 msgstr ""
 
 #: src/blocks/post-lists-tab/sidebarControl.js:36
+#: src/blocks/single-post/sidebarControl.js:60
 msgid "Show Category"
 msgstr ""
 
 #: src/blocks/post-lists-tab/sidebarControl.js:44
+#: src/blocks/single-post/sidebarControl.js:69
 msgid "Show Excerpt"
+msgstr ""
+
+#: src/blocks/single-post/sidebarControl.js:23
+msgid "Single Post Controls"
+msgstr ""
+
+#: src/blocks/single-post/sidebarControl.js:28
+msgid "Choose Category"
+msgstr ""
+
+#: src/blocks/single-post/sidebarControl.js:39
+msgid "Choose post to display"
 msgstr ""

@@ -51,6 +51,6 @@
 			"default": ""
 		}
 	},
-	"textdomain": "anam-gutenberg-starter",
+	"textdomain": "gutenberg-starter",
 	"editorScript": "file:./index.js"
 }
