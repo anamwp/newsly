@@ -12,7 +12,7 @@ registerBlockType(metadata.name, {
 	// title: __('Single Post', 'anam-gutenberg-starter'),
 	// icon: 'admin-post',
 	// category: 'anam-starter',
-	attributes,
+	// attributes,
 	edit,
 	save,
 });

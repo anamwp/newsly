@@ -22,8 +22,8 @@
 			"default": ""
 		},
 		"selectedPostId": {
-			"type": "string",
-			"default": ""
+			"type": "number",
+			"default": null
 		},
 		"selectedCategoryPosts": {
 			"type": "array",
@@ -47,7 +47,15 @@
 		},
 		"showFeaturedImage": {
 			"type": "boolean",
-			"default": true
+			"default": false
+		},
+		"selectedPostCategory": {
+			"type": "array",
+			"default": []
+		},
+		"selectedPostFeaturedImage": {
+			"type": "object",
+			"default": {}
 		}
 	},
 	"textdomain": "gutenberg-starter",

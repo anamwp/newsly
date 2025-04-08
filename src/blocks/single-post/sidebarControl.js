@@ -44,16 +44,18 @@ export default function sidebarControl({
 							onChange={handleSelectedPostData}
 						/>
 					</p>
-					<p className="display-single-post-featured-image">
-						<ToggleControl
-							label={__(
-								'Show Featured Image',
-								'gutenberg-starter'
-							)}
-							checked={attributes.showFeaturedImage}
-							onChange={handleFeaturedImageToggleControl}
-						/>
-					</p>
+					{attributes.selectedCategroyId && (
+						<p className="display-single-post-featured-image">
+							<ToggleControl
+								label={__(
+									'Show Featured Image',
+									'gutenberg-starter'
+								)}
+								checked={attributes.showFeaturedImage}
+								onChange={handleFeaturedImageToggleControl}
+							/>
+						</p>
+					)}
 					{attributes.selectedCategroyId && (
 						<p className="display-single-post-category-switch">
 							<ToggleControl

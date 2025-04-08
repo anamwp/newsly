@@ -4,6 +4,7 @@ msgstr ""
 "X-Generator: babel-plugin-makepot\n"
 
 #: src/blocks/post-lists-tab/edit.js:131
+#: src/blocks/single-post/edit.js:217
 msgid "No featured image found"
 msgstr ""
 
@@ -20,17 +21,17 @@ msgid "Post Card Controls"
 msgstr ""
 
 #: src/blocks/post-lists-tab/sidebarControl.js:25
-#: src/blocks/single-post/sidebarControl.js:49
+#: src/blocks/single-post/sidebarControl.js:50
 msgid "Show Featured Image"
 msgstr ""
 
 #: src/blocks/post-lists-tab/sidebarControl.js:36
-#: src/blocks/single-post/sidebarControl.js:60
+#: src/blocks/single-post/sidebarControl.js:62
 msgid "Show Category"
 msgstr ""
 
 #: src/blocks/post-lists-tab/sidebarControl.js:44
-#: src/blocks/single-post/sidebarControl.js:69
+#: src/blocks/single-post/sidebarControl.js:71
 msgid "Show Excerpt"
 msgstr ""
 

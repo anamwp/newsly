@@ -1,14 +1,13 @@
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useSelect, withSelect, select } from '@wordpress/data';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
-import ServerSideRender from '@wordpress/server-side-render';
 import SidebarControl from './sidebarControl';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import GetFeaturedImage from './getFeaturedImage';
 import RenderPostCategoryData from './components';
 import { Disabled } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
 
 export default function edit(props) {
 	const blockProps = useBlockProps();
@@ -69,16 +68,25 @@ export default function edit(props) {
 				/**
 				 * set response first data
 				 * to fetchPosts attribute
+				 * and set [selectedPostId] from the first ID of the fetched post
 				 */
 				setAttributes({
 					fetchedPosts: [res[0]],
+					selectedPostId: res.length > 0 ? res[0].id : null,
 				});
+				/**
+				 * Update the dropdown list
+				 * based on category selection
+				 */
 				res.map((res) => {
 					catPostsArr.push({
 						label: res.title.rendered,
 						value: res.id,
 					});
 				});
+				/**
+				 * Update Attrbutes [selectedCategoryPosts]
+				 */
 				setAttributes({
 					selectedCategoryPosts: catPostsArr,
 				});
@@ -86,6 +94,7 @@ export default function edit(props) {
 			.catch((err) => console.log(err));
 	};
 	/**
+	 * Fire this function on change of the category selection from the sidebar control panel
 	 * handle category change
 	 * @param {*} selectedCat
 	 */
@@ -102,52 +111,23 @@ export default function edit(props) {
 			});
 			return;
 		}
+		/**
+		 * Update [selectedCategroyId] attribute for the selected category.
+		 */
 		setAttributes({
 			selectedCategroyId: selectedCat,
 		});
+		/**
+		 * Update dropdown list posts based on category selections
+		 * Update attribute [selectedCategoryPosts] value for the new posts
+		 */
 		handlePostsByCategory(selectedCat);
 	};
 	/**
-	 * fetch category
-	 * specific posts
-	 * no use of this function
-	 * ------------------------
-	 */
-	const getPosts = useSelect(
-		(select) => {
-			/**
-			 * if no selected category id
-			 * return
-			 */
-			if (!attributes.selectedCategroyId) {
-				return;
-			}
-			/**
-			 * If selected category id available
-			 * then fetch specific category post
-			 */
-			let getSelectedPosts = select('core').getEntityRecords(
-				'postType',
-				'post',
-				{
-					categories: [attributes.selectedCategroyId],
-				}
-			);
-			/**
-			 * if no data found
-			 * return
-			 */
-			if (null == getSelectedPosts) {
-				return;
-			}
-			return getSelectedPosts;
-		},
-		[attributes.selectedCategroyId]
-	);
-	/**
-	 * fetch posts by id
-	 * and then assign
-	 * fetchedPosts attribute
+	 * Fire this function on chnage of posts selection from the sidebar control panel
+	 * Its main function is to Fetch posts by id
+	 * and then assign data to [fetchedPosts] attribute
+	 *
 	 * @param {*} newPostId
 	 * @returns
 	 */
@@ -191,6 +171,18 @@ export default function edit(props) {
 	const FallbackMessage = (props) => {
 		return <p>{props.message}</p>;
 	};
+	const UpdateCatAttrCallback = (data) => {
+		var catData = data;
+		setAttributes({
+			selectedPostCategory: catData,
+		});
+	};
+	const SelectedPostFeaturedImage = (data) => {
+		var featuredImageData = data;
+		setAttributes({
+			selectedPostFeaturedImage: featuredImageData,
+		});
+	};
 	/**
 	 * component to display post card
 	 * @param {*} props
@@ -208,7 +200,12 @@ export default function edit(props) {
                 */}
 				{attributes.showFeaturedImage &&
 					postData.featured_media !== 0 && (
-						<GetFeaturedImage postId={postData.featured_media} />
+						<GetFeaturedImage
+							postId={postData.featured_media}
+							selectedPostFeaturedImage={
+								SelectedPostFeaturedImage
+							}
+						/>
 					)}
 				{/* 
                 If user want to show featured image
@@ -216,7 +213,7 @@ export default function edit(props) {
                 */}
 				{attributes.showFeaturedImage &&
 					postData.featured_media == 0 && (
-						<div>
+						<div className="mb-2">
 							{__(
 								'No featured image found',
 								'anam-gutenberg-starter'
@@ -226,32 +223,43 @@ export default function edit(props) {
 				{/* 
                 Toggle category display
                 */}
-				{attributes.showCategory && (
-					<RenderPostCategoryData
-						catArr={postData.categories}
-						parentProps={parentProps}
-					/>
-				)}
+				<div className="mb-3">
+					{attributes.showCategory && (
+						<RenderPostCategoryData
+							catArr={postData.categories}
+							parentProps={parentProps}
+							updateCatAttrCallback={UpdateCatAttrCallback}
+						/>
+					)}
+				</div>
 				{/* 
                 disabled click inside editor
                 */}
 				<Disabled>
-					<h3>
-						<a href={postData.link}>{postData.title.rendered}</a>
-					</h3>
+					<a
+						href={postData.link}
+						className="inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2"
+					>
+						<h3>{postData.title.rendered}</h3>
+					</a>
 				</Disabled>
 				{/* 
                 excerpt of the post
                 */}
-				{attributes.showExcerpt && (
-					<RichText tagName="p" value={postData.excerpt.rendered} />
-				)}
+				{/* <div>{postData.excerpt.rendered}</div> */}
+				<div
+					className="font-poppins text-slate-900 mt-2"
+					dangerouslySetInnerHTML={{
+						__html: postData.excerpt.rendered,
+					}}
+				/>
 			</div>
 		);
 	};
 	/**
-	 * handle category display control
-	 * in post card
+	 * Show Category based on the selection for sidebar panel
+	 * for the post card
+	 * and update [showCategory] value
 	 */
 	const handleCategoryToggleControl = () => {
 		setAttributes({
@@ -259,15 +267,20 @@ export default function edit(props) {
 		});
 	};
 	/**
-	 * handle excerpt display control
-	 * in post card
+	 * Show excerpt based on the selection for sidebar panel
+	 * for the post card
+	 * and update [showExcerpt] value
 	 */
 	const handleExcerptToggleControl = () => {
 		setAttributes({
 			showExcerpt: !attributes.showExcerpt,
 		});
 	};
-
+	/**
+	 * Show featured image based on the selection for sidebar panel
+	 * for the post card
+	 * and update [showFeaturedImage] value
+	 */
 	const handleFeaturedImageToggleControl = () => {
 		setAttributes({
 			showFeaturedImage: !attributes.showFeaturedImage,
@@ -293,14 +306,17 @@ export default function edit(props) {
 			{attributes.fetchedPosts.length == 0 && (
 				<FallbackMessage message="Please select a post to display" />
 			)}
-			{!attributes.selectedPostId &&
+
+			{/* {!attributes.selectedPostId &&
 				attributes.categories.length > 0 &&
 				attributes.fetchedPosts.length > 0 && (
 					<PostCard
 						data={attributes.fetchedPosts[0]}
 						parent={props}
 					/>
-				)}
+				)} */}
+
+			{/* show to first post from the choosen category listed post */}
 			{attributes.selectedPostId &&
 				attributes.fetchedPosts.length > 0 && (
 					<PostCard
@@ -308,25 +324,6 @@ export default function edit(props) {
 						parent={props}
 					/>
 				)}
-			{/* {
-                !attributes.selectedCategroyId && <p>Select a category first.</p>
-            }
-            { ! getPosts && 'Loading' }
-            { getPosts && getPosts.length === 0 && 'No Posts' }
-            { getPosts && getPosts.length > 0 && 
-                getPosts.map(singlePost => {
-                    return(
-                        <p>
-                            <GetFeaturedImage
-                                postId={singlePost.featured_media}
-                            />
-                            <a href={ singlePost.link }>
-                                { singlePost.title.rendered }
-                            </a>
-                        </p>
-                    )
-                })
-            } */}
 		</div>
 	);
 }
