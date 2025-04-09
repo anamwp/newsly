@@ -22,32 +22,36 @@ export default function save(props) {
 				)} */}
 			{postData.length > 0 && (
 				<div className="single-post-card">
-					<div className="mb-3">
-						{selectedPostFeaturedImage ? (
-							<img
-								className="inline-block w-full"
-								src={selectedPostFeaturedImage.source_url}
-								alt=""
-							/>
-						) : (
-							'Fetching Image'
-						)}
-					</div>
+					{props.attributes.showFeaturedImage && (
+						<div className="mb-3">
+							{selectedPostFeaturedImage ? (
+								<img
+									className="inline-block w-full"
+									src={selectedPostFeaturedImage.source_url}
+									alt=""
+								/>
+							) : (
+								'Fetching Image'
+							)}
+						</div>
+					)}
 					{/* <GetFeaturedImage postId={postData[0].featured_media} /> */}
-					<div className="mb-3">
-						{selectedPostCategory &&
-							selectedPostCategory.map((singleCat) => {
-								return (
-									<a
-										href={singleCat.link}
-										style={{ marginRight: '10px' }}
-										className="inline-block no-underline text-xs text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-300 capitalize p-1 mr-1 rounded-md transition-all"
-									>
-										{singleCat.name}
-									</a>
-								);
-							})}
-					</div>
+					{props.attributes.showCategory && (
+						<div className="mb-3">
+							{selectedPostCategory &&
+								selectedPostCategory.map((singleCat) => {
+									return (
+										<a
+											href={singleCat.link}
+											style={{ marginRight: '10px' }}
+											className="inline-block no-underline text-xs text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-300 capitalize p-1 mr-1 rounded-md transition-all"
+										>
+											{singleCat.name}
+										</a>
+									);
+								})}
+						</div>
+					)}
 					<a
 						href={postData[0].link}
 						className="inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium"
@@ -60,12 +64,14 @@ export default function save(props) {
 						value={postData[0].excerpt.rendered}
 					/> */}
 					{/* <div>{postData[0].excerpt.rendered}</div> */}
-					<div
-						className="font-poppins text-slate-900 mt-2"
-						dangerouslySetInnerHTML={{
-							__html: postData[0].excerpt.rendered,
-						}}
-					/>
+					{props.attributes.showExcerpt && (
+						<div
+							className="font-poppins text-slate-900 mt-2"
+							dangerouslySetInnerHTML={{
+								__html: postData[0].excerpt.rendered,
+							}}
+						/>
+					)}
 				</div>
 			)}
 		</div>

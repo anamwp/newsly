@@ -198,7 +198,7 @@ export default function edit(props) {
                 if user want to show featured image 
                 and post have featured image
                 */}
-				{attributes.showFeaturedImage &&
+				{parentProps.attributes.showFeaturedImage &&
 					postData.featured_media !== 0 && (
 						<GetFeaturedImage
 							postId={postData.featured_media}
@@ -211,7 +211,7 @@ export default function edit(props) {
                 If user want to show featured image
                 but post have no featured image
                 */}
-				{attributes.showFeaturedImage &&
+				{parentProps.attributes.showFeaturedImage &&
 					postData.featured_media == 0 && (
 						<div className="mb-2">
 							{__(
@@ -224,7 +224,7 @@ export default function edit(props) {
                 Toggle category display
                 */}
 				<div className="mb-3">
-					{attributes.showCategory && (
+					{parentProps.attributes.showCategory && (
 						<RenderPostCategoryData
 							catArr={postData.categories}
 							parentProps={parentProps}
@@ -247,12 +247,14 @@ export default function edit(props) {
                 excerpt of the post
                 */}
 				{/* <div>{postData.excerpt.rendered}</div> */}
-				<div
-					className="font-poppins text-slate-900 mt-2"
-					dangerouslySetInnerHTML={{
-						__html: postData.excerpt.rendered,
-					}}
-				/>
+				{parentProps.attributes.showExcerpt && (
+					<div
+						className="font-poppins text-slate-900 mt-2"
+						dangerouslySetInnerHTML={{
+							__html: postData.excerpt.rendered,
+						}}
+					/>
+				)}
 			</div>
 		);
 	};
