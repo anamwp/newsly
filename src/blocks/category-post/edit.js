@@ -375,7 +375,7 @@ export default function edit(props) {
 				)}
 			</div>
 			<div
-				className={`post-wrapper grid grid-cols-${attributes.postColumn}`}
+				className={`post-wrapper grid gs-cols-${attributes.postColumn}`}
 			>
 				{attributes.selectedPostId &&
 					attributes.fetchedPosts.length > 0 &&

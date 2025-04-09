@@ -667,7 +667,7 @@ function edit(props) {
         children: attributes.selectedCategroyName
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
-      className: "post-wrapper grid grid-cols-".concat(attributes.postColumn),
+      className: "post-wrapper grid gs-cols-".concat(attributes.postColumn),
       children: attributes.selectedPostId && attributes.fetchedPosts.length > 0 && attributes.fetchedPosts[0].slice(0, attributes.postsToShow).map(function (post) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(PostCard, {
           data: post,
@@ -882,7 +882,7 @@ function save(props) {
         children: props.attributes.selectedCategroyName
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-      className: "post-wrapper grid grid-cols-".concat(props.attributes.postColumn),
+      className: "post-wrapper grid gs-cols-".concat(props.attributes.postColumn),
       children: props.attributes.fetchedPosts.length > 0 && props.attributes.fetchedPosts[0].slice(0, props.attributes.postsToShow).map(function (post) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(PostCard, {
           data: post,

@@ -116,7 +116,7 @@ export default function save(props) {
 				)}
 			</div>
 			<div
-				className={`post-wrapper grid grid-cols-${props.attributes.postColumn}`}
+				className={`post-wrapper grid gs-cols-${props.attributes.postColumn}`}
 			>
 				{props.attributes.fetchedPosts.length > 0 &&
 					props.attributes.fetchedPosts[0]
