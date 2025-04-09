@@ -1,0 +1,1 @@
+{"version":3,"file":"blocks/category-post/style-index.css","mappings":";;;AAEE;IAAA;AAAA,C","sources":["webpack://gutenberg-starter/./src/blocks/category-post/style.scss"],"sourcesContent":[".gts_block__category_post {\n\t.post-wrapper {\n\t\t@apply gap-3;\n\t}\n}\n"],"names":[],"sourceRoot":""}

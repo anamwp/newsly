@@ -3,46 +3,31 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/post-lists-tab/edit.js:131
-#: src/blocks/single-post/edit.js:217
+#: src/blocks/category-post/edit.js:258
+#: src/blocks/category-post/save.js:58
 msgid "No featured image found"
 msgstr ""
 
-#: src/blocks/post-lists-tab/edit.js:204
-msgid "All"
-msgstr ""
-
-#: src/blocks/post-lists-tab/edit.js:222
-msgid "Loading..."
-msgstr ""
-
-#: src/blocks/post-lists-tab/sidebarControl.js:20
-msgid "Post Card Controls"
-msgstr ""
-
-#: src/blocks/post-lists-tab/sidebarControl.js:25
-#: src/blocks/single-post/sidebarControl.js:50
-msgid "Show Featured Image"
-msgstr ""
-
-#: src/blocks/post-lists-tab/sidebarControl.js:36
-#: src/blocks/single-post/sidebarControl.js:62
-msgid "Show Category"
-msgstr ""
-
-#: src/blocks/post-lists-tab/sidebarControl.js:44
-#: src/blocks/single-post/sidebarControl.js:71
-msgid "Show Excerpt"
-msgstr ""
-
-#: src/blocks/single-post/sidebarControl.js:23
+#: src/blocks/category-post/sidebarControl.js:29
 msgid "Single Post Controls"
 msgstr ""
 
-#: src/blocks/single-post/sidebarControl.js:28
+#: src/blocks/category-post/sidebarControl.js:34
 msgid "Choose Category"
 msgstr ""
 
-#: src/blocks/single-post/sidebarControl.js:39
-msgid "Choose post to display"
+#: src/blocks/category-post/sidebarControl.js:46
+msgid "Posts Found to display"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:67
+msgid "Show Featured Image"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:79
+msgid "Show Category"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:88
+msgid "Show Excerpt"
 msgstr ""

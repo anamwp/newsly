@@ -41,6 +41,7 @@ class Block {
 		 * Register block type from metadata
 		 */
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/single-post' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/category-post' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/card' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/call-to-action' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/blurb' );
