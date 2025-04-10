@@ -1,9 +1,31 @@
 import React from 'react';
-import { useSelect, withSelect, select } from '@wordpress/data';
-import apiFetch from '@wordpress/api-fetch';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
+import { useEffect } from '@wordpress/element';
 
-export default function getFeaturedImage(props) {
+/**
+ * ❗️ Before use this component make sure below data is available ❗️
+ * 👉 - Block is having [selectedPostFeaturedImage] attr.
+ * 👉 - function [SelectedPostFeaturedImage] is defined in parent component.
+ * 
+ * Sample function that can be passed as a prop to GetFeaturedImage
+ * to handle the selected post featured image.
+ * This function can be defined in the parent component.
+	const SelectedPostFeaturedImage = (data) => {
+		var featuredImageData = data;
+		setAttributes({
+			selectedPostFeaturedImage: featuredImageData,
+		});
+	};
+ * 👉 this is how you can use this component
+	<GetFeaturedImage
+		postFeaturedMediaId={postData.featured_media}
+		selectedPostFeaturedImage={
+			SelectedPostFeaturedImage
+		}
+	/>
+ */
+
+export default function GetFeaturedImage(props) {
 	const { postFeaturedMediaId, selectedPostFeaturedImage } = props;
 
 	const getMediaContent = useSelect(
@@ -14,6 +36,9 @@ export default function getFeaturedImage(props) {
 		},
 		[postFeaturedMediaId]
 	);
+	/**
+	 * Store fetch image content to block attribute
+	 */
 	useEffect(() => {
 		if (getMediaContent && getMediaContent.length > 0) {
 			selectedPostFeaturedImage(getMediaContent[0]); // Pass featured image to parent

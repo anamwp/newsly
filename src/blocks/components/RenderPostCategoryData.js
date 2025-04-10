@@ -1,7 +1,33 @@
 import React from 'react';
 import apiFetch from '@wordpress/api-fetch';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
+import { useState, useEffect } from '@wordpress/element';
 
+/**
+ * ❗️ Before use this component make sure below data is available ❗️
+ * 👉 - your block attributes has [selectedPostCategory] attr
+ * 👉 - parent component has function [UpdateCatAttrCallback] like below
+ * 
+	const UpdateCatAttrCallback = (data) => {
+		var catData = data;
+		setAttributes({
+			selectedPostCategory: catData,
+		});
+	};
+ 	👉 pass props like below from the parent component
+	<RenderPostCategoryData
+		catArr={postData.categories}
+		parentProps={parentProps}
+		updateCatAttrCallback={UpdateCatAttrCallback}
+	/>;
+ */
+
+/**
+ * Fetch multiple category from the REST API and display them.
+ * @param {array} catArr - array of category ids - [1,2,3]
+ * @param {object} parentProps - parent attributes
+ * @param {function} updateCatAttrCallback - function to update the attributes
+ * @returns
+ */
 export default function RenderPostCategoryData(props) {
 	let postArr = props.catArr.toString();
 	const [catData, setCatData] = useState([]);
@@ -9,12 +35,15 @@ export default function RenderPostCategoryData(props) {
 
 	useEffect(() => {
 		if (!postArr) return;
-
 		apiFetch({
 			path: `/wp/v2/categories?include=${postArr}`,
 		})
 			.then((res) => {
 				setCatData(res);
+				/**
+				 * if selectedPostCategory is not same as
+				 * the response then update the attributes
+				 */
 				if (
 					JSON.stringify(res) !==
 					JSON.stringify(

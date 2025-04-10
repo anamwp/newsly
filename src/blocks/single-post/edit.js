@@ -5,18 +5,13 @@ import { RichText, useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
-import GetFeaturedImage from './getFeaturedImage';
-import RenderPostCategoryData from './components';
-import { Disabled } from '@wordpress/components';
 import GSPostCard from '../components/GSPostCard';
 
 export default function edit(props) {
-	const blockProps = useBlockProps();
-
+	const blockProps = useBlockProps({
+		className: 'gts_block__single_post',
+	});
 	const { attributes, setAttributes } = props;
-	const { getEntityRecords, getMedia } = select('core');
-	const { getEditorSettings, getCurrentPost } = select('core/editor');
-	// let __catDataa = getEntityRecords('taxonomy', 'category');
 	/**
 	 * fetch all categoris
 	 * at first loading
@@ -155,7 +150,7 @@ export default function edit(props) {
 		 * fetch data from rest point
 		 */
 		apiFetch({
-			path: `/wp/v2/posts/?include=${selectedPostId}`,
+			path: `/wp/v2/posts/?include=${selectedPostId}&_embed`,
 		})
 			.then((res) => {
 				setAttributes({
@@ -171,93 +166,6 @@ export default function edit(props) {
 	 */
 	const FallbackMessage = (props) => {
 		return <p>{props.message}</p>;
-	};
-	const UpdateCatAttrCallback = (data) => {
-		var catData = data;
-		setAttributes({
-			selectedPostCategory: catData,
-		});
-	};
-	const SelectedPostFeaturedImage = (data) => {
-		var featuredImageData = data;
-		setAttributes({
-			selectedPostFeaturedImage: featuredImageData,
-		});
-	};
-	/**
-	 * component to display post card
-	 * @param {*} props
-	 * @returns
-	 * post card content
-	 */
-	const PostCard = (props) => {
-		let postData = props.data;
-		let parentProps = props.parent;
-		return (
-			<div className="single-post-card">
-				{/* 
-                if user want to show featured image 
-                and post have featured image
-                */}
-				{parentProps.attributes.showFeaturedImage &&
-					postData.featured_media !== 0 && (
-						<GetFeaturedImage
-							postFeaturedMediaId={postData.featured_media}
-							selectedPostFeaturedImage={
-								SelectedPostFeaturedImage
-							}
-						/>
-					)}
-				{/* 
-                If user want to show featured image
-                but post have no featured image
-                */}
-				{parentProps.attributes.showFeaturedImage &&
-					postData.featured_media == 0 && (
-						<div className="mb-2">
-							{__(
-								'No featured image found',
-								'anam-gutenberg-starter'
-							)}
-						</div>
-					)}
-				{/* 
-                Toggle category display
-                */}
-				<div className="mb-3">
-					{parentProps.attributes.showCategory && (
-						<RenderPostCategoryData
-							catArr={postData.categories}
-							parentProps={parentProps}
-							updateCatAttrCallback={UpdateCatAttrCallback}
-						/>
-					)}
-				</div>
-				{/* 
-                disabled click inside editor
-                */}
-				<Disabled>
-					<a
-						href={postData.link}
-						className="inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2"
-					>
-						<h3>{postData.title.rendered}</h3>
-					</a>
-				</Disabled>
-				{/* 
-                excerpt of the post
-                */}
-				{/* <div>{postData.excerpt.rendered}</div> */}
-				{parentProps.attributes.showExcerpt && (
-					<div
-						className="font-poppins text-slate-900 mt-2"
-						dangerouslySetInnerHTML={{
-							__html: postData.excerpt.rendered,
-						}}
-					/>
-				)}
-			</div>
-		);
 	};
 	/**
 	 * Show Category based on the selection for sidebar panel
@@ -303,6 +211,7 @@ export default function edit(props) {
 					handleFeaturedImageToggleControl
 				}
 			/>
+			{/* Show fallback message before category choosen */}
 			{attributes.fetchedPosts.length == 0 && (
 				<FallbackMessage message="Please select a post to display" />
 			)}
