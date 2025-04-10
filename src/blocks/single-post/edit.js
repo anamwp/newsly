@@ -1,7 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useSelect, withSelect, select } from '@wordpress/data';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
@@ -13,7 +12,7 @@ export default function edit(props) {
 	});
 	const { attributes, setAttributes } = props;
 	/**
-	 * fetch all categoris
+	 * Fetch first 10 categoris from REST API
 	 * at first loading
 	 */
 	useEffect(() => {
@@ -37,7 +36,7 @@ export default function edit(props) {
 			});
 	}, []);
 	/**
-	 * set posts while change the category
+	 * Set posts while change the category
 	 * @param {*} selectedCatId
 	 */
 	const handlePostsByCategory = (

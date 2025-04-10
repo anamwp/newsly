@@ -48,14 +48,6 @@
     "showCategory": {
       "type": "boolean",
       "default": true
-    },
-    "selectedPostCategory": {
-      "type": "array",
-      "default": []
-    },
-    "selectedPostFeaturedImage": {
-      "type": "object",
-      "default": {}
     }
   },
   "textdomain": "gutenberg-starter",

@@ -23,6 +23,11 @@ import { useEffect } from '@wordpress/element';
 			SelectedPostFeaturedImage
 		}
 	/>
+	👉 In the block JSON file attr needs to add like below
+	"selectedPostFeaturedImage": {
+		"type": "object",
+		"default": {}
+	}
  */
 
 export default function GetFeaturedImage(props) {

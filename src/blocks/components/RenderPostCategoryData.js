@@ -19,6 +19,11 @@ import { useState, useEffect } from '@wordpress/element';
 		parentProps={parentProps}
 		updateCatAttrCallback={UpdateCatAttrCallback}
 	/>;
+	👉 In the block JSON file attr needs to add like below
+	"selectedPostCategory": {
+		"type": "array",
+		"default": []
+	},
  */
 
 /**
