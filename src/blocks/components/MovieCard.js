@@ -1,5 +1,10 @@
 import React from 'react';
-
+/**
+ * Render Genre as List
+ * @param {array} genreIDArr - Genre ID Array
+ * @param {object} attributes - Block Attributes
+ * @returns HTML
+ */
 const HandleGenreRender = ({ genreIDArr, attributes }) => {
 	let getGenre = attributes.genres;
 	let newGenreArr = getGenre.filter((ai) => genreIDArr.includes(ai.id));
@@ -11,12 +16,22 @@ const HandleGenreRender = ({ genreIDArr, attributes }) => {
 		</ul>
 	);
 };
-
+/**
+ * Round Number
+ * @param {number} number
+ * @param {number} decimal_digit
+ * @returns number
+ */
 const HandleRoundNumber = (number, decimal_digit) => {
 	let powerOften = Math.pow(10, decimal_digit);
 	let result = Math.round(number * powerOften) / powerOften;
 	return result;
 };
+/**
+ * Make the date more readable.
+ * @param {string} date - Date String
+ * @returns
+ */
 const HandleDate = (date) => {
 	let dateParseString = Date.parse(date);
 	let newDate = new Date(dateParseString);
@@ -25,7 +40,6 @@ const HandleDate = (date) => {
 };
 
 const MovieCard = ({ movie, attributes }) => {
-	// console.log('top rated movie save attributes', attributes);
 	return (
 		<div className="card" data-movieId={movie.id}>
 			<div className="card__image">

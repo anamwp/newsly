@@ -683,9 +683,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /**
  * How to use 
- * [textColorAttribute] = text color attributes name from block json file
- * [linkColorAttribute] = text color attributes name from block json file
- * [linkHoverColorAttribute] = text color attributes name from block json file
+ * ❗️ Make sure that block support this attributes ❗️
+ * 👉 [textColorAttribute] = text color attributes name from block json file
+ * 👉 [linkColorAttribute] = text color attributes name from block json file
+ * 👉 [linkHoverColorAttribute] = text color attributes name from block json file
  * this values are passed from parent component
  * and needs to reuse through style ={{color: attributes[textColorAttribute]}} tag
  * ==========

@@ -6,3 +6,7 @@ msgstr ""
 #: src/blocks/components/GSPostCard.js:51
 msgid "No featured image found"
 msgstr ""
+
+#: src/blocks/components/PopupModal.js:7
+msgid "close"
+msgstr ""
