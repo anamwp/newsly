@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useSelect, withSelect, select } from '@wordpress/data';
+import React from 'react';
 import { InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -7,8 +7,6 @@ import {
 	ToggleControl,
 	RangeControl,
 } from '@wordpress/components';
-import React from 'react';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
 export default function sidebarControl({
 	props,

@@ -1,27 +1,24 @@
 import { __ } from '@wordpress/i18n';
 import React from 'react';
-import { useSelect, withSelect, select } from '@wordpress/data';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
-import GetFeaturedImage from './getFeaturedImage';
-import RenderPostCategoryData from './components';
-import { Disabled } from '@wordpress/components';
+import GSPostCard from '../components/GSPostCard';
 
 export default function edit(props) {
-	const blockProps = useBlockProps({
-		className: 'gts__category-post',
-	});
-	console.log('edit props', props.attributes);
-
-	const { attributes, setAttributes } = props;
-	const { getEntityRecords, getMedia } = select('core');
-	const { getEditorSettings, getCurrentPost } = select('core/editor');
-	// let __catDataa = getEntityRecords('taxonomy', 'category');
 	/**
-	 * fetch all categoris
-	 * at first loading
+	 * Extract attributes and setAttributes from props.
+	 */
+	const { attributes, setAttributes } = props;
+	/**
+	 * Add classname to block props.
+	 */
+	const blockProps = useBlockProps({
+		className: 'gts__category_post',
+	});
+	/**
+	 * Fetch all categoris at first loading.
 	 */
 	useEffect(() => {
 		attributes.categories.length === 0 &&
@@ -46,7 +43,7 @@ export default function edit(props) {
 			});
 	}, []);
 	/**
-	 * Manage number of posts to show
+	 * Manage number of posts to show.
 	 * @param {number} postNumber
 	 */
 	const handleNumberofPoststoShow = (postNumber) => {
@@ -55,7 +52,7 @@ export default function edit(props) {
 		});
 	};
 	/**
-	 * Manage number of posts to show
+	 * Manage number of column to show.
 	 * @param {number} postNumber
 	 */
 	const handleNumberofPostsColumn = (column) => {
@@ -64,8 +61,9 @@ export default function edit(props) {
 		});
 	};
 	/**
-	 * set posts while change the category
-	 * @param {*} selectedCatId
+	 * Set posts while change the category
+	 * Update dropdown list posts based on category selections
+	 * @param {*} selectedCatId - Category ID
 	 */
 	const handlePostsByCategory = (
 		selectedCatId = attributes.selectedCategroyId
@@ -94,7 +92,6 @@ export default function edit(props) {
 				 * and set [selectedPostId] from the first ID of the fetched post
 				 */
 				setAttributes({
-					// fetchedPosts: [res[0]],
 					fetchedPosts: [res],
 					selectedPostId: res.length > 0 ? res[0].id : null,
 				});
@@ -136,13 +133,11 @@ export default function edit(props) {
 			return;
 		}
 		/**
-		 * Get category name
-		 *
+		 * Get the selected category option
 		 */
 		const selectedCatOption = attributes.categories.find(
 			(option) => option.value === parseInt(selectedCat)
 		);
-		// console.log('selectedCatOption', selectedCatOption);
 		/**
 		 * Update [selectedCategroyId] attribute for the selected category.
 		 */
@@ -157,153 +152,22 @@ export default function edit(props) {
 		handlePostsByCategory(selectedCat);
 	};
 	/**
-	 * Fire this function on chnage of posts selection from the sidebar control panel
-	 * Its main function is to Fetch posts by id
-	 * and then assign data to [fetchedPosts] attribute
-	 *
-	 * @param {*} newPostId
-	 * @returns
-	 */
-	const handleSelectedPostData = (newPostId) => {
-		let selectedPostId = newPostId ? newPostId : attributes.selectedPostId;
-		/**
-		 * set the new post ID
-		 * to selectedPostId attribute
-		 */
-		if (newPostId) {
-			setAttributes({
-				selectedPostId: newPostId,
-			});
-		}
-		/**
-		 * if there is no
-		 * selectedPostId
-		 * then return
-		 */
-		if (!selectedPostId) {
-			return;
-		}
-		/**
-		 * fetch data from rest point
-		 */
-		apiFetch({
-			path: `/wp/v2/posts/?include=${selectedPostId}`,
-		})
-			.then((res) => {
-				setAttributes({
-					fetchedPosts: res,
-				});
-			})
-			.catch((err) => console.log('err', err));
-	};
-	/**
 	 * Fallback message
-	 * @param {*} props
-	 * @returns
+	 * @param {string} props
+	 * @returns HTML
 	 */
 	const FallbackMessage = (props) => {
 		return <p>{props.message}</p>;
 	};
-	const UpdateCatAttrCallback = (data) => {
-		var catData = data;
-		setAttributes({
-			selectedPostCategory: catData,
-		});
-	};
-	const SelectedPostFeaturedImage = (data) => {
-		var featuredImageData = data;
-		setAttributes({
-			selectedPostFeaturedImage: featuredImageData,
-		});
-	};
 	/**
-	 * component to display post card
-	 * @param {*} props
-	 * @returns
-	 * post card content
+	 * Show featured image based on the selection for sidebar panel
+	 * for the post card
+	 * and update [showFeaturedImage] value
 	 */
-	const PostCard = (props) => {
-		let postData = props.data;
-		console.log('postData', postData);
-		let parentProps = props.parent;
-		const featuredImage =
-			postData._embedded['wp:featuredmedia']?.[0]?.source_url;
-
-		const categories = postData._embedded['wp:term']?.[0] || [];
-		console.log(featuredImage, categories);
-
-		return (
-			<div className="category-post-card bg-slate-200 p-4 rounded">
-				{/* 
-                if user want to show featured image 
-                and post have featured image
-                */}
-				{parentProps.attributes.showFeaturedImage &&
-					postData.featured_media !== 0 && (
-						<div className="mb-2">
-							<img
-								className="inline-block w-full rounded"
-								src={featuredImage}
-								alt=""
-							/>
-						</div>
-					)}
-				{/* 
-                If user want to show featured image
-                but post have no featured image
-                */}
-				{parentProps.attributes.showFeaturedImage &&
-					postData.featured_media == 0 && (
-						<div className="mb-2">
-							{__(
-								'No featured image found',
-								'anam-gutenberg-starter'
-							)}
-						</div>
-					)}
-				{/* 
-                Toggle category display
-                */}
-				<div className="mb-3">
-					{parentProps.attributes.showCategory &&
-						categories &&
-						categories.map((singleCat) => {
-							return (
-								<a
-									href={singleCat.link}
-									style={{ marginRight: '10px' }}
-									className="inline-block no-underline text-xs text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-300 capitalize p-1 mr-1 rounded-md transition-all"
-								>
-									{singleCat.name}
-								</a>
-							);
-						})}
-				</div>
-				{/* 
-                disabled click inside editor
-                */}
-				<Disabled>
-					<a
-						href={postData.link}
-						className="inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2"
-					>
-						<h3>{postData.title.rendered}</h3>
-					</a>
-				</Disabled>
-				{/* 
-                excerpt of the post
-                */}
-				{/* <div>{postData.excerpt.rendered}</div> */}
-				{parentProps.attributes.showExcerpt && (
-					<div
-						className="font-poppins text-slate-900 mt-2"
-						dangerouslySetInnerHTML={{
-							__html: postData.excerpt.rendered,
-						}}
-					/>
-				)}
-			</div>
-		);
+	const handleFeaturedImageToggleControl = () => {
+		setAttributes({
+			showFeaturedImage: !attributes.showFeaturedImage,
+		});
 	};
 	/**
 	 * Show Category based on the selection for sidebar panel
@@ -325,16 +189,6 @@ export default function edit(props) {
 			showExcerpt: !attributes.showExcerpt,
 		});
 	};
-	/**
-	 * Show featured image based on the selection for sidebar panel
-	 * for the post card
-	 * and update [showFeaturedImage] value
-	 */
-	const handleFeaturedImageToggleControl = () => {
-		setAttributes({
-			showFeaturedImage: !attributes.showFeaturedImage,
-		});
-	};
 
 	return (
 		<div {...blockProps}>
@@ -350,23 +204,11 @@ export default function edit(props) {
 					handleFeaturedImageToggleControl
 				}
 			/>
-			{/* <ServerSideRender
-                block="anam-gutenberg-starter-block/category-post"
-            /> */}
+			{/* Fallback message */}
 			{attributes.fetchedPosts.length == 0 && (
-				<FallbackMessage message="Please select a post to display" />
+				<FallbackMessage message="Please select a category to display posts" />
 			)}
-
-			{/* {!attributes.selectedPostId &&
-				attributes.categories.length > 0 &&
-				attributes.fetchedPosts.length > 0 && (
-					<PostCard
-						data={attributes.fetchedPosts[0]}
-						parent={props}
-					/>
-				)} */}
-
-			{/* show to first post from the choosen category listed post */}
+			{/* Show the category name. */}
 			<div className="cat-label">
 				{attributes.selectedCategroyName && (
 					<p className="text-xl font-semibold capitalize mb-5">
@@ -374,6 +216,7 @@ export default function edit(props) {
 					</p>
 				)}
 			</div>
+			{/* Show posts from the selected category. */}
 			<div
 				className={`post-wrapper grid gs-cols-${attributes.postColumn}`}
 			>
@@ -381,7 +224,9 @@ export default function edit(props) {
 					attributes.fetchedPosts.length > 0 &&
 					attributes.fetchedPosts[0]
 						.slice(0, attributes.postsToShow)
-						.map((post) => <PostCard data={post} parent={props} />)}
+						.map((post) => (
+							<GSPostCard data={post} parent={props} />
+						))}
 			</div>
 		</div>
 	);
