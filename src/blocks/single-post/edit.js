@@ -8,6 +8,7 @@ import apiFetch from '@wordpress/api-fetch';
 import GetFeaturedImage from './getFeaturedImage';
 import RenderPostCategoryData from './components';
 import { Disabled } from '@wordpress/components';
+import GSPostCard from '../components/GSPostCard';
 
 export default function edit(props) {
 	const blockProps = useBlockProps();
@@ -61,7 +62,7 @@ export default function edit(props) {
 		 * for specific category
 		 */
 		apiFetch({
-			path: `/wp/v2/posts?categories=${catId}`,
+			path: `/wp/v2/posts?categories=${catId}&_embed`,
 		})
 			.then((res) => {
 				let catPostsArr = [];
@@ -201,7 +202,7 @@ export default function edit(props) {
 				{parentProps.attributes.showFeaturedImage &&
 					postData.featured_media !== 0 && (
 						<GetFeaturedImage
-							postId={postData.featured_media}
+							postFeaturedMediaId={postData.featured_media}
 							selectedPostFeaturedImage={
 								SelectedPostFeaturedImage
 							}
@@ -302,26 +303,13 @@ export default function edit(props) {
 					handleFeaturedImageToggleControl
 				}
 			/>
-			{/* <ServerSideRender
-                block="anam-gutenberg-starter-block/single-post"
-            /> */}
 			{attributes.fetchedPosts.length == 0 && (
 				<FallbackMessage message="Please select a post to display" />
 			)}
-
-			{/* {!attributes.selectedPostId &&
-				attributes.categories.length > 0 &&
-				attributes.fetchedPosts.length > 0 && (
-					<PostCard
-						data={attributes.fetchedPosts[0]}
-						parent={props}
-					/>
-				)} */}
-
 			{/* show to first post from the choosen category listed post */}
 			{attributes.selectedPostId &&
 				attributes.fetchedPosts.length > 0 && (
-					<PostCard
+					<GSPostCard
 						data={attributes.fetchedPosts[0]}
 						parent={props}
 					/>

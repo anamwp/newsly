@@ -239,13 +239,96 @@ function _unsupportedIterableToArray(r, a) {
 
 /***/ }),
 
+/***/ "./src/blocks/components/GSPostCard.js":
+/*!*********************************************!*\
+  !*** ./src/blocks/components/GSPostCard.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+/**
+ * ❗️ Before use this component make sure below data is available ❗️
+ * 👉 - postData._embedded['wp:featuredmedia']?.[0]?.source_url
+ * 👉 - postData._embedded['wp:term']?.[0]
+ * ❗️ Also make sure block having below atttributes ❗️
+ * 👉 - attributes.showFeaturedImage
+ * 👉 - attributes.showCategory
+ * 👉 - attributes.showExcerpt
+ */
+/**
+ * Component to display post card
+ * accept props.data - to access post data
+ * and props.parent - to access parent attributes where all the block data is stored
+ * Way to pass props is - <PostCard data={post} parent={props} />
+ * @param {object} props - data and parent
+ * @param {object} props.data - post data
+ * @param {object} props.parent - parent attributes
+ * @returns HTML
+ */
+
+var GSPostCard = function GSPostCard(props) {
+  var _postData$_embedded$w, _postData$_embedded$w2;
+  var postData = props.data;
+  var parentProps = props.parent;
+  var featuredImage = (_postData$_embedded$w = postData._embedded['wp:featuredmedia']) === null || _postData$_embedded$w === void 0 || (_postData$_embedded$w = _postData$_embedded$w[0]) === null || _postData$_embedded$w === void 0 ? void 0 : _postData$_embedded$w.source_url;
+  var categories = ((_postData$_embedded$w2 = postData._embedded['wp:term']) === null || _postData$_embedded$w2 === void 0 ? void 0 : _postData$_embedded$w2[0]) || [];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    className: "gs__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
+    children: [parentProps.attributes.showFeaturedImage && postData.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "mb-4",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+        className: "inline-block w-full rounded",
+        src: featuredImage,
+        alt: ""
+      })
+    }), parentProps.attributes.showFeaturedImage && postData.featured_media == 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "mb-4",
+      children: __('No featured image found', 'anam-gutenberg-starter')
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "mb-3",
+      children: parentProps.attributes.showCategory && categories && categories.map(function (singleCat) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          href: singleCat.link,
+          style: {
+            marginRight: '10px'
+          },
+          className: "inline-block no-underline text-xs text-slate-600 bg-slate-100 hover:bg-slate-400 hover:text-white capitalize p-1 mr-1 rounded-md transition-all",
+          children: singleCat.name
+        });
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+      href: postData.link,
+      className: "inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+        children: postData.title.rendered
+      })
+    }), parentProps.attributes.showExcerpt && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "font-poppins text-slate-900 mt-2",
+      dangerouslySetInnerHTML: {
+        __html: postData.excerpt.rendered
+      }
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GSPostCard);
+
+/***/ }),
+
 /***/ "./src/blocks/single-post/block.json":
 /*!*******************************************!*\
   !*** ./src/blocks/single-post/block.json ***!
   \*******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/single-post","version":"0.1.0","title":"Single Post","category":"anam-starter","icon":"media-interactive","description":"","example":{},"attributes":{"postId":{"type":"number","default":null},"categories":{"type":"array","default":[]},"selectedCategroyId":{"type":"string","default":""},"selectedPostId":{"type":"number","default":null},"selectedCategoryPosts":{"type":"array","default":[]},"fetchedPosts":{"type":"array","default":[]},"fetchedPostCategoryData":{"type":"array","default":[]},"showExcerpt":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showFeaturedImage":{"type":"boolean","default":false},"selectedPostCategory":{"type":"array","default":[]},"selectedPostFeaturedImage":{"type":"object","default":{}}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/single-post","version":"0.1.0","title":"Single Post","category":"anam-starter","icon":"media-interactive","description":"","example":{},"attributes":{"postId":{"type":"number","default":null},"categories":{"type":"array","default":[]},"selectedCategroyId":{"type":"string","default":""},"selectedPostId":{"type":"number","default":null},"selectedCategoryPosts":{"type":"array","default":[]},"fetchedPosts":{"type":"array","default":[]},"fetchedPostCategoryData":{"type":"array","default":[]},"showFeaturedImage":{"type":"boolean","default":true},"showExcerpt":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"selectedPostCategory":{"type":"array","default":[]},"selectedPostFeaturedImage":{"type":"object","default":{}}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ }),
 
@@ -341,11 +424,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components */ "./src/blocks/single-post/components.js");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _components_GSPostCard__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/GSPostCard */ "./src/blocks/components/GSPostCard.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+
 
 
 
@@ -409,7 +494,7 @@ function edit(props) {
      * for specific category
      */
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_7___default()({
-      path: "/wp/v2/posts?categories=".concat(catId)
+      path: "/wp/v2/posts?categories=".concat(catId, "&_embed")
     }).then(function (res) {
       var catPostsArr = [];
       /**
@@ -517,7 +602,7 @@ function edit(props) {
    * @returns
    */
   var FallbackMessage = function FallbackMessage(props) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("p", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("p", {
       children: props.message
     });
   };
@@ -542,30 +627,30 @@ function edit(props) {
   var PostCard = function PostCard(props) {
     var postData = props.data;
     var parentProps = props.parent;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
       className: "single-post-card",
-      children: [parentProps.attributes.showFeaturedImage && postData.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_getFeaturedImage__WEBPACK_IMPORTED_MODULE_8__["default"], {
-        postId: postData.featured_media,
+      children: [parentProps.attributes.showFeaturedImage && postData.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_getFeaturedImage__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        postFeaturedMediaId: postData.featured_media,
         selectedPostFeaturedImage: SelectedPostFeaturedImage
-      }), parentProps.attributes.showFeaturedImage && postData.featured_media == 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+      }), parentProps.attributes.showFeaturedImage && postData.featured_media == 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
         className: "mb-2",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('No featured image found', 'anam-gutenberg-starter')
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
         className: "mb-3",
-        children: parentProps.attributes.showCategory && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        children: parentProps.attributes.showCategory && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components__WEBPACK_IMPORTED_MODULE_9__["default"], {
           catArr: postData.categories,
           parentProps: parentProps,
           updateCatAttrCallback: UpdateCatAttrCallback
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__.Disabled, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("a", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_10__.Disabled, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("a", {
           href: postData.link,
           className: "inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("h3", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("h3", {
             children: postData.title.rendered
           })
         })
-      }), parentProps.attributes.showExcerpt && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)("div", {
+      }), parentProps.attributes.showExcerpt && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
         className: "font-poppins text-slate-900 mt-2",
         dangerouslySetInnerHTML: {
           __html: postData.excerpt.rendered
@@ -603,8 +688,8 @@ function edit(props) {
       showFeaturedImage: !attributes.showFeaturedImage
     });
   };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
       props: props,
       categories: attributes.categories,
       handleCategoryChange: handleCategoryChange,
@@ -612,9 +697,9 @@ function edit(props) {
       handleCategoryToggleControl: handleCategoryToggleControl,
       handleExcerptToggleControl: handleExcerptToggleControl,
       handleFeaturedImageToggleControl: handleFeaturedImageToggleControl
-    }), attributes.fetchedPosts.length == 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(FallbackMessage, {
+    }), attributes.fetchedPosts.length == 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(FallbackMessage, {
       message: "Please select a post to display"
-    }), attributes.selectedPostId && attributes.fetchedPosts.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx)(PostCard, {
+    }), attributes.selectedPostId && attributes.fetchedPosts.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_GSPostCard__WEBPACK_IMPORTED_MODULE_11__["default"], {
       data: attributes.fetchedPosts[0],
       parent: props
     })]
@@ -661,13 +746,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getFeaturedImage(props) {
-  var postId = props.postId,
+  var postFeaturedMediaId = props.postFeaturedMediaId,
     selectedPostFeaturedImage = props.selectedPostFeaturedImage;
   var getMediaContent = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
     return select('core').getEntityRecords('postType', 'attachment', {
-      include: [postId]
+      include: [postFeaturedMediaId]
     });
-  }, [postId]);
+  }, [postFeaturedMediaId]);
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     if (getMediaContent && getMediaContent.length > 0) {
       selectedPostFeaturedImage(getMediaContent[0]); // Pass featured image to parent
@@ -744,8 +829,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components */ "./src/blocks/single-post/components.js");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_GSPostCard__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/GSPostCard */ "./src/blocks/components/GSPostCard.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -761,41 +848,11 @@ function save(props) {
   var postData = props.attributes.fetchedPosts;
   var selectedPostCategory = props.attributes.selectedPostCategory;
   var selectedPostFeaturedImage = props.attributes.selectedPostFeaturedImage;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
     className: "gts_block__single_post",
-    children: postData.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-      className: "single-post-card",
-      children: [props.attributes.showFeaturedImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "mb-3",
-        children: selectedPostFeaturedImage ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-          className: "inline-block w-full",
-          src: selectedPostFeaturedImage.source_url,
-          alt: ""
-        }) : 'Fetching Image'
-      }), props.attributes.showCategory && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "mb-3",
-        children: selectedPostCategory && selectedPostCategory.map(function (singleCat) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
-            href: singleCat.link,
-            style: {
-              marginRight: '10px'
-            },
-            className: "inline-block no-underline text-xs text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-300 capitalize p-1 mr-1 rounded-md transition-all",
-            children: singleCat.name
-          });
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
-        href: postData[0].link,
-        className: "inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h3", {
-          children: postData[0].title.rendered
-        })
-      }), props.attributes.showExcerpt && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "font-poppins text-slate-900 mt-2",
-        dangerouslySetInnerHTML: {
-          __html: postData[0].excerpt.rendered
-        }
-      })]
+    children: postData.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_GSPostCard__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      data: postData[0],
+      parent: props
     })
   });
 }

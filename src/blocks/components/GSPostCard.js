@@ -26,7 +26,7 @@ const GSPostCard = (props) => {
 	const categories = postData._embedded['wp:term']?.[0] || [];
 
 	return (
-		<div className="category-post-card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all">
+		<div className="gs__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all">
 			{/* 
 			if user want to show featured image 
 			and post have featured image

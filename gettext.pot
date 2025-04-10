@@ -4,6 +4,7 @@ msgstr ""
 "X-Generator: babel-plugin-makepot\n"
 
 #: src/blocks/components/GSPostCard.js:51
+#: src/blocks/single-post/edit.js:218
 msgid "No featured image found"
 msgstr ""
 

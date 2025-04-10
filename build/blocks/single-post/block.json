@@ -37,6 +37,10 @@
       "type": "array",
       "default": []
     },
+    "showFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    },
     "showExcerpt": {
       "type": "boolean",
       "default": true
@@ -44,10 +48,6 @@
     "showCategory": {
       "type": "boolean",
       "default": true
-    },
-    "showFeaturedImage": {
-      "type": "boolean",
-      "default": false
     },
     "selectedPostCategory": {
       "type": "array",
