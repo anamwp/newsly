@@ -1,15 +1,8 @@
-import React from 'react';
-import { useSelect, withSelect, select } from '@wordpress/data';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
-import SidebarControl from './sidebarControl';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
-
 import { __ } from '@wordpress/i18n';
-import styled from 'styled-components';
-
-// const Wrapper = styled.div`
-// 	background: red;
-// `;
+import React from 'react';
+import { useBlockProps } from '@wordpress/block-editor';
+import SidebarControl from './sidebarControl';
+import { useState, useEffect } from '@wordpress/element';
 
 /**
  * Function to fetch API response from URL
@@ -124,10 +117,11 @@ const MovieCard = ({ movie, attributes }) => {
 
 export default function edit(props) {
 	const blockProps = useBlockProps();
+	// console.log('blockProps', blockProps);
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
 	const [movies, setMovies] = useState([]);
-
+	const [slideColumn, setSlideColumn] = useState(attributes.movieColumn);
 	useEffect(() => {
 		/**
 		 * Fetch genres from the API
@@ -157,7 +151,6 @@ export default function edit(props) {
 				'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1'
 			)
 				.then((res) => {
-					console.log('res', res);
 					/**
 					 * Set state with the fetched movies
 					 */
@@ -168,36 +161,42 @@ export default function edit(props) {
 					setAttributes({ fetchedMovies: res.results });
 				})
 				.catch((err) => console.log('err', err));
-
-		console.log('hello useeffect');
-		console.log('hello useeffect', movies);
-		(function ($) {
-			$(document).ready(function ($) {
-				console.log(document.querySelector('.upcoming-movie-list'));
-				$('.upcoming-movie-list').slick({
-					arrows: true,
-					dots: true,
-					autoplay: true,
-					slidesToShow: 3,
-					slidesToScroll: 3,
-					autoplaySpeed: 3000,
-					responsive: [
-						{
-							breakpoint: 1300,
-							settings: {
-								arrows: false,
-							},
-						},
-					],
-				});
-			});
-		})(jQuery);
 	}, []);
+
+	useEffect(() => {
+		console.log('Current document location:', window.location.href);
+		console.log(
+			document.querySelector(
+				'.wp-block-anam-gutenberg-starter-block-upcoming-movie-slider'
+			)
+		);
+
+		//		setSlideColumn(attributes.movieColumn);
+		const iframe = document.querySelector('iframe.editor-canvas');
+		if (iframe) {
+			console.log('🎯 Found iframe:', iframe);
+		} else {
+			console.log('🚫 No iframe found');
+		}
+		//const iframe = document.querySelector('iframe.editor-canvas');
+		const blockElement = document.querySelector(
+			'.wp-block-anam-gutenberg-starter-block-upcoming-movie-slider'
+		);
+		console.log('🔍 Block element in main DOM:', blockElement);
+		console.log('sliderWrapper', iframe);
+	}, [attributes.movieColumn]);
+
+	var sliderWrapper = document.querySelector('.upcoming-movie-listr');
+	console.log('sliderWrapper', sliderWrapper);
+	//const iframe = document.querySelector('iframe.editor-canvas');
 
 	return (
 		<div {...blockProps}>
 			<SidebarControl props={props} />
-			<div className="upcoming-movie-list">
+			<div
+				data-slide-column={attributes.movieColumn}
+				className="upcoming-movie-list"
+			>
 				{movies &&
 					movies.map((movie) => (
 						<MovieCard

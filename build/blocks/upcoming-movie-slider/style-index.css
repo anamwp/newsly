@@ -260,6 +260,13 @@
 .slick-slider .slick-list {
   transform: translate3d(0, 0, 0);
 }
+/* the slides */
+.slick-slide {
+  margin: 0 15px;
+}
+.slick-list {
+  margin: 0 -15px;
+}
 .slick-track {
   position: relative;
   left: 0;
@@ -407,6 +414,25 @@
   text-transform: uppercase;
   background: #eee;
   padding: 3px;
+}
+.upcoming-movie-list .slick-dots{
+  bottom: auto;
+  margin-top: 2.5rem;
+}
+.upcoming-movie-list .slick-autoplay-toggle-button{
+  display: none;
+}
+.upcoming-movie-list .slick-arrow{
+  position: absolute;
+  right: 0px;
+  left: auto;
+  top: -30px;
+}
+.upcoming-movie-list .slick-prev{
+  right: 2.5rem;
+}
+.upcoming-movie-list .slick-track{
+  gap: 1.25rem;
 }
 
 /*# sourceMappingURL=style-index.css.map*/

@@ -5,7 +5,7 @@ import edit from './edit';
 import save from './save';
 import './editor.scss';
 import './style.scss';
-import './accessible-slick-theme.min.css';
+import './accessible-slick-theme.min.css'; // Read more from 👉 https://accessible360.github.io/accessible-slick/
 import './slick.min.css';
 
 registerBlockType(metadata.name, {

@@ -260,6 +260,13 @@
 .slick-slider .slick-list {
   transform: translate3d(0, 0, 0);
 }
+/* the slides */
+.slick-slide {
+  margin: 0 15px;
+}
+.slick-list {
+  margin: 0 -15px;
+}
 .slick-track {
   position: relative;
   right: 0;
@@ -310,24 +317,24 @@
 .slick-arrow.slick-hidden {
   display: none;
 }
-.movie-list .movie-card img,
-.movie-list .components-card img,
-.movie-list .card img {
+.upcoming-movie-list .movie-card img,
+.upcoming-movie-list .components-card img,
+.upcoming-movie-list .card img {
   width: 100%;
   display: inline-block;
 }
-.movie-list .movie-card h2,
-.movie-list .components-card h2,
-.movie-list .card h2 {
+.upcoming-movie-list .movie-card h2,
+.upcoming-movie-list .components-card h2,
+.upcoming-movie-list .card h2 {
   font-size: 24px;
   font-weight: bold;
 }
-.movie-list .movie-card .overview,
-.movie-list .movie-card .components-text,
-.movie-list .components-card .overview,
-.movie-list .components-card .components-text,
-.movie-list .card .overview,
-.movie-list .card .components-text {
+.upcoming-movie-list .movie-card .overview,
+.upcoming-movie-list .movie-card .components-text,
+.upcoming-movie-list .components-card .overview,
+.upcoming-movie-list .components-card .components-text,
+.upcoming-movie-list .card .overview,
+.upcoming-movie-list .card .components-text {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -335,11 +342,20 @@
   line-clamp: 4;
   -webkit-box-orient: vertical;
 }
-.movie-list .movie-card__footer,
-.movie-list .components-card__footer,
-.movie-list .card__footer {
+.upcoming-movie-list .movie-card__footer,
+.upcoming-movie-list .components-card__footer,
+.upcoming-movie-list .card__footer {
   flex-direction: column;
   align-items: flex-start;
+}
+.upcoming-movie-list .slick-dots{
+  margin-top: 1.25rem;
+}
+.upcoming-movie-list .slick-autoplay-toggle-button{
+  display: none;
+}
+.upcoming-movie-list .slick-track{
+  gap: 1.25rem;
 }
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[2].use[2]!./src/blocks/upcoming-movie-slider/accessible-slick-theme.min.css ***!

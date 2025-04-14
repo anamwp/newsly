@@ -38,6 +38,15 @@
 	-o-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
 }
+/* the slides */
+.slick-slide {
+	margin: 0 15px;
+}
+
+// /* the parent */
+.slick-list {
+	margin: 0 -15px;
+}
 
 .slick-track {
 	position: relative;

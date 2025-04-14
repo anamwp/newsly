@@ -6,7 +6,7 @@
 	"title": "Theatres Movies",
 	"category": "widgets",
 	"icon": "media-interactive",
-	"description": "An interactive block with the Interactivity API",
+	"description": "Show to the latest theatres movies.",
 	"example": {},
 	"supports": {
 		"html": false

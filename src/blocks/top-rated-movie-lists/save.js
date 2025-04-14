@@ -1,11 +1,6 @@
-import React from 'react';
-// import { useBlockProps } from '@wordpress/block-editor';
-// import { useSelect, withSelect, select } from '@wordpress/data';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
-// import SidebarControl from './sidebarControl';
-// import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
-
 import { __ } from '@wordpress/i18n';
+import React from 'react';
+import { useBlockProps } from '@wordpress/block-editor';
 import MovieCard from '../components/MovieCard';
 import PopupModal from '../components/PopupModal';
 

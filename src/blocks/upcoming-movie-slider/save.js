@@ -1,12 +1,6 @@
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useBlockProps } from '@wordpress/block-editor';
-
-import { __ } from '@wordpress/i18n';
-import styled from 'styled-components';
-
-// const Wrapper = styled.div`
-// 	background: red;
-// `;
 
 const HandleGenreRender = ({ genreIDArr, attributes }) => {
 	let getGenre = attributes.genres;
@@ -84,6 +78,7 @@ const MovieCard = ({ movie, attributes }) => {
 };
 
 export default function save({ attributes }) {
+	const { movieColumn } = attributes;
 	const blockProps = useBlockProps.save();
 	const fetchedMovies = attributes.fetchedMovies;
 	let sliceFirstTenMovies = [];
@@ -93,7 +88,10 @@ export default function save({ attributes }) {
 
 	return (
 		<div {...blockProps}>
-			<div className="upcoming-movie-list">
+			<div
+				data-slide-column={movieColumn}
+				className="upcoming-movie-list"
+			>
 				{sliceFirstTenMovies &&
 					sliceFirstTenMovies.map((movie) => (
 						<MovieCard

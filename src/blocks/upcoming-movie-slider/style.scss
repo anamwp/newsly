@@ -1,9 +1,6 @@
 @use './style/accessible-slick-theme';
 @use './style/slick';
 .upcoming-movie-list {
-	// display: grid;
-	// grid-template-columns: repeat(4, 1fr);
-	// gap: 20px;
 	.movie-card,
 	.card {
 		&__image {
@@ -107,5 +104,21 @@
 				}
 			}
 		}
+	}
+	.slick-dots {
+		@apply mt-10 bottom-auto;
+	}
+	.slick-autoplay-toggle-button {
+		@apply hidden;
+	}
+	.slick-arrow {
+		@apply absolute right-0 left-auto;
+		top: -30px;
+	}
+	.slick-prev {
+		@apply right-10;
+	}
+	.slick-track {
+		@apply gap-5;
 	}
 }

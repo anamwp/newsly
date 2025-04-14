@@ -1,7 +1,6 @@
+import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useBlockProps } from '@wordpress/block-editor';
-
-import { __ } from '@wordpress/i18n';
 import MovieCard from '../components/MovieCard';
 import PopupModal from '../components/PopupModal';
 
