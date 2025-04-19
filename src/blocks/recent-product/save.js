@@ -14,30 +14,46 @@ import {
 
 export default function save(props) {
 	// console.log('hello world');
-	console.log('props', props);
+	const { attributes } = props;
+	console.log('attributes', attributes);
 	/**
 	 * get block props and
 	 * assign it to a variable
 	 */
 	const blockProps = useBlockProps.save({
-		className: 'gts_block__recent_product',
+		className: 'gs_block__recent_product',
 	});
+	/**
+	 * Extract products from attributes
+	 */
+	const recentProducts =
+		attributes.product_obj.length > 0 ? attributes.product_obj : [];
 	/**
 	 * return save data
 	 *  */
 	return (
 		<div {...blockProps}>
-			<div className="container gts_block__recent_product__container">
-				<h2>Recent Products</h2>
-				<div className="row">
-					{props.attributes.product_obj &&
-						props.attributes.product_obj.map(function (p, index) {
+			<div className="container gs_block__recent_product__container">
+				<h2 className="text-2xl">
+					{__('Recent Products', 'gutenberg-starter')}
+				</h2>
+				<div className="grid grid-cols-3 gap-5">
+					{recentProducts &&
+						recentProducts.map(function (p, index) {
+							let productTitle = p.name;
 							let onSale = p.on_sale;
+							let featuredImage = p.images[0].src;
+
 							return (
-								<div key={index} className="col-md-3">
-									<h2>
-										<a href={p.permalink}>{p.name}</a>
-									</h2>
+								<div
+									key={index}
+									className="gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
+								>
+									<img
+										src={featuredImage}
+										alt={productTitle}
+									/>
+									<a href={p.permalink}>{productTitle}</a>
 									<p
 										className="product_price"
 										dangerouslySetInnerHTML={{

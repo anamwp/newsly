@@ -35,35 +35,21 @@ const api = new WooCommerceRestApi({
 	version: 'wc/v3',
 });
 
-const fontSizes = [
-	{
-		name: __('Small'),
-		slug: 'small',
-		size: 12,
-	},
-	{
-		name: __('Big'),
-		slug: 'big',
-		size: 26,
-	},
-];
-const fallbackFontSize = 16;
-
 export default function edit({ attributes, setAttributes }) {
-	const [fontSize, setFontSize] = useState(12);
-	const [isChecked, setChecked] = useState(true);
-	const [product, setProduct] = useState();
-	let productResponseData = '';
-	// console.log('process.env.WOO_CONSUMER_KEY', api);
 	useEffect(() => {
-		apiFetch({ path: '/wp/v2/posts' }).then((posts) => {
-			console.log(posts);
-		});
+		console.log('product objs', attributes.product_obj);
+		/**
+		 * If product object is having products
+		 * then return and not run api call.
+		 */
+		if (attributes.product_obj.length > 0) {
+			return;
+		}
+		debugger;
 		api.get('products', {
 			per_page: 3, // 20 products per page
 		})
 			.then((response) => {
-				setProduct(response.data);
 				setAttributes({
 					product_obj: response.data,
 				});
@@ -88,70 +74,45 @@ export default function edit({ attributes, setAttributes }) {
 			});
 	}, []);
 
-	// console.log('.product_obj', .product_obj);
-	// console.log('fontSize', fontSize);
+	console.log('product obj', attributes && attributes.product_obj);
 	/**
 	 * pass style through useBlockProps()
 	 */
 	const blockProps = useBlockProps({
-		className: 'gts_block__recent_product',
+		className: 'gs_block__recent_product',
 	});
 	/**
-	 *
-	 * @param {*} newContent
+	 * Extract products from attributes
 	 */
-	const onChangeContent = (newContent) => {
-		setAttributes({
-			newcontent: newContent,
-		});
-	};
-	/**
-	 *
-	 * @param {*} newColor
-	 */
-	const onChangeTextColor = (newColor) => {
-		setAttributes({
-			text_color: newColor,
-		});
-	};
-	const handleTextColor = (newColor) => {
-		setAttributes({
-			content_color: newColor,
-		});
-	};
-	/**
-	 *
-	 * @param {*} newAlignment
-	 */
-	const onChangeAlignment = (newAlignment) => {
-		setAttributes({
-			alignment: 'undefined' === newAlignment ? none : newAlignment,
-		});
-	};
-	console.log('productResponseData', product);
-	console.log('product obj', attributes && attributes.product_obj);
+	const recentProducts =
+		attributes.product_obj.length > 0 ? attributes.product_obj : [];
 	/**
 	 * return edit content
 	 */
 	return (
 		<div {...blockProps}>
-			{/* block level control in the editor */}
-			{<BlockControls></BlockControls>}
-			{/* for sidebar control */}
-			<InspectorControls key={'settings'}></InspectorControls>
-
 			{/* View */}
-			<div className="container gts_block__recent_product__container">
-				<h2>Recent Products</h2>
-				<div className="row">
-					{product &&
-						product.map(function (p, index) {
+			<div className="container gs_block__recent_product__container">
+				<h2 className="text-2xl">
+					{__('Recent Products', 'gutenberg-starter')}
+				</h2>
+				<div className="grid grid-cols-3 gap-5">
+					{recentProducts &&
+						recentProducts.map(function (p, index) {
+							let productTitle = p.name;
 							let onSale = p.on_sale;
+							let featuredImage = p.images[0].src;
+
 							return (
-								<div key={index} className="col-md-3">
-									<h2>
-										<a href={p.permalink}>{p.name}</a>
-									</h2>
+								<div
+									key={index}
+									className="gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
+								>
+									<img
+										src={featuredImage}
+										alt={productTitle}
+									/>
+									<a href={p.permalink}>{productTitle}</a>
 									<p
 										className="product_price"
 										dangerouslySetInnerHTML={{

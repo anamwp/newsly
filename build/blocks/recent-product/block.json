@@ -47,8 +47,8 @@
       "default": "#eee"
     },
     "product_obj": {
-      "type": "object",
-      "default": ""
+      "type": "array",
+      "default": []
     }
   },
   "textdomain": "gutenberg-starter",
