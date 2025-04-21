@@ -43,6 +43,10 @@ export default function save(props) {
 							let productTitle = p.name;
 							let onSale = p.on_sale;
 							let featuredImage = p.images[0].src;
+							let productId = p.id;
+							let addToCartUrl = `?add-to-cart=${productId}`;
+							const productType = p.type; // 'simple', 'variable', 'grouped', etc.
+							const isSimple = productType === 'simple';
 
 							return (
 								<div
@@ -60,6 +64,28 @@ export default function save(props) {
 											__html: p.price_html,
 										}}
 									></p>
+									{isSimple ? (
+										<button
+											className="add_to_cart_button ajax_add_to_cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all mt-2 flex items-center justify-center gap-2"
+											data-product_id={p.id}
+											data-product_sku={p.sku}
+											data-quantity="1"
+											aria-label={`Add “${p.name}” to your cart`}
+											rel="nofollow"
+										>
+											<span className="add-to-cart-text">
+												Add to Cart
+											</span>
+											<span className="spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
+										</button>
+									) : (
+										<a
+											href={p.permalink}
+											className="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-all mt-2"
+										>
+											View Options
+										</a>
+									)}
 								</div>
 							);
 						})}

@@ -3,7 +3,27 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/recent-product/edit.js:101
+#: src/blocks/recent-product/edit.js:122
 #: src/blocks/recent-product/save.js:38
 msgid "Recent Products"
+msgstr ""
+
+#: src/blocks/recent-product/sidebarControl.js:25
+msgid "Product"
+msgstr ""
+
+#: src/blocks/recent-product/sidebarControl.js:35
+msgid "Refresh Products"
+msgstr ""
+
+#: src/blocks/recent-product/sidebarControl.js:48
+msgid "Number of Products"
+msgstr ""
+
+#: src/blocks/recent-product/sidebarControl.js:61
+msgid "Reset"
+msgstr ""
+
+#: src/blocks/recent-product/sidebarControl.js:62
+msgid "Reset to default value"
 msgstr ""
