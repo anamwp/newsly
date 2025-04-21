@@ -26,18 +26,16 @@ import {
 	useInnerBlocksProps,
 } from '@wordpress/block-editor';
 
-const MY_TEMPLATE = [['core/button', { placeholder: 'Book Your Demo' }]];
-
 const api = new WooCommerceRestApi({
-	url: 'https://anamstarter.local/',
-	consumerKey: 'ck_c891525480173c17a6be34e0ff34797271bee966',
-	consumerSecret: 'cs_2960e30b1041ff1ddebae9746b95101c7e564f8a',
+	url: envVars.GS_SITE_URL,
+	consumerKey: envVars.WC_CONSUMER_KEY,
+	consumerSecret: envVars.WC_CONSUMER_SECRET,
 	version: 'wc/v3',
 });
 
 export default function edit({ attributes, setAttributes }) {
+	const productPerPage = attributes.no_of_product_to_show;
 	useEffect(() => {
-		console.log('product objs', attributes.product_obj);
 		/**
 		 * If product object is having products
 		 * then return and not run api call.
@@ -45,11 +43,19 @@ export default function edit({ attributes, setAttributes }) {
 		if (attributes.product_obj.length > 0) {
 			return;
 		}
-		debugger;
+		/**
+		 * Call WooCommerce Rest API
+		 * to get products
+		 * By default it will get 20 products per page
+		 */
 		api.get('products', {
-			per_page: 3, // 20 products per page
+			per_page: productPerPage,
 		})
 			.then((response) => {
+				/**
+				 * Update product attributes
+				 * with the latest content
+				 */
 				setAttributes({
 					product_obj: response.data,
 				});
@@ -73,13 +79,11 @@ export default function edit({ attributes, setAttributes }) {
 				// Always executed.
 			});
 	}, []);
-
-	console.log('product obj', attributes && attributes.product_obj);
 	/**
-	 * pass style through useBlockProps()
+	 * Pass style through useBlockProps()
 	 */
 	const blockProps = useBlockProps({
-		className: 'gs_block__recent_product',
+		className: attributes.className,
 	});
 	/**
 	 * Extract products from attributes

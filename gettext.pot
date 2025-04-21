@@ -3,8 +3,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/recent-product/edit.js:97
-#: src/blocks/recent-product/edit.js:96
+#: src/blocks/recent-product/edit.js:101
 #: src/blocks/recent-product/save.js:38
 msgid "Recent Products"
 msgstr ""

@@ -11330,7 +11330,7 @@ function config (name) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/recent-product","version":"0.1.0","title":"Recent Product","category":"anam-starter","icon":"media-interactive","description":"","example":{"attributes":{"content":"Hello World","alignment":"right"}},"attributes":{"newcontent":{"type":"string","source":"html","selector":"h2","default":"Lorem ipsum dolor sit amet"},"newmessage":{"type":"string","source":"html","selector":"p","default":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."},"alignment":{"type":"string","default":"none"},"font_size":{"type":"number","default":"none"},"text_color":{"type":"string","default":"#000"},"content_color":{"type":"string","default":"#000"},"blurb_bg_color":{"type":"string","default":"#eee"},"product_obj":{"type":"array","default":[]}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/recent-product","version":"0.1.0","title":"Recent Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__recent_product"},"product_obj":{"type":"array","default":[]},"no_of_product_to_show":{"type":"number","default":3}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
 
 /***/ }),
 
@@ -11372,20 +11372,17 @@ var WooCommerceRestApi = (__webpack_require__(/*! @woocommerce/woocommerce-rest-
 
 
 
-var MY_TEMPLATE = [['core/button', {
-  placeholder: 'Book Your Demo'
-}]];
 var api = new WooCommerceRestApi({
-  url: 'https://anamstarter.local/',
-  consumerKey: 'ck_c891525480173c17a6be34e0ff34797271bee966',
-  consumerSecret: 'cs_2960e30b1041ff1ddebae9746b95101c7e564f8a',
+  url: envVars.GS_SITE_URL,
+  consumerKey: envVars.WC_CONSUMER_KEY,
+  consumerSecret: envVars.WC_CONSUMER_SECRET,
   version: 'wc/v3'
 });
 function edit(_ref) {
   var attributes = _ref.attributes,
     setAttributes = _ref.setAttributes;
+  var productPerPage = attributes.no_of_product_to_show;
   (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
-    console.log('product objs', attributes.product_obj);
     /**
      * If product object is having products
      * then return and not run api call.
@@ -11393,10 +11390,18 @@ function edit(_ref) {
     if (attributes.product_obj.length > 0) {
       return;
     }
-    debugger;
+    /**
+     * Call WooCommerce Rest API
+     * to get products
+     * By default it will get 20 products per page
+     */
     api.get('products', {
-      per_page: 3 // 20 products per page
+      per_page: productPerPage
     }).then(function (response) {
+      /**
+       * Update product attributes
+       * with the latest content
+       */
       setAttributes({
         product_obj: response.data
       });
@@ -11415,12 +11420,11 @@ function edit(_ref) {
       // Always executed.
     });
   }, []);
-  console.log('product obj', attributes && attributes.product_obj);
   /**
-   * pass style through useBlockProps()
+   * Pass style through useBlockProps()
    */
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useBlockProps)({
-    className: 'gs_block__recent_product'
+    className: attributes.className
   });
   /**
    * Extract products from attributes
@@ -11503,7 +11507,7 @@ function save(props) {
    * assign it to a variable
    */
   var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps.save({
-    className: 'gs_block__recent_product'
+    className: attributes.className
   });
   /**
    * Extract products from attributes

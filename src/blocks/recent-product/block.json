@@ -7,48 +7,18 @@
 	"category": "anam-starter",
 	"icon": "media-interactive",
 	"description": "",
-	"example": {
-		"attributes": {
-			"content": "Hello World",
-			"alignment": "right"
-		}
-	},
 	"attributes": {
-		"newcontent": {
+		"className": {
 			"type": "string",
-			"source": "html",
-			"selector": "h2",
-			"default": "Lorem ipsum dolor sit amet"
-		},
-		"newmessage": {
-			"type": "string",
-			"source": "html",
-			"selector": "p",
-			"default": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."
-		},
-		"alignment": {
-			"type": "string",
-			"default": "none"
-		},
-		"font_size": {
-			"type": "number",
-			"default": "none"
-		},
-		"text_color": {
-			"type": "string",
-			"default": "#000"
-		},
-		"content_color": {
-			"type": "string",
-			"default": "#000"
-		},
-		"blurb_bg_color": {
-			"type": "string",
-			"default": "#eee"
+			"default": "gs_block__recent_product"
 		},
 		"product_obj": {
 			"type": "array",
 			"default": []
+		},
+		"no_of_product_to_show": {
+			"type": "number",
+			"default": 3
 		}
 	},
 	"textdomain": "gutenberg-starter",

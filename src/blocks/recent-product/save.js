@@ -21,7 +21,7 @@ export default function save(props) {
 	 * assign it to a variable
 	 */
 	const blockProps = useBlockProps.save({
-		className: 'gs_block__recent_product',
+		className: attributes.className,
 	});
 	/**
 	 * Extract products from attributes
