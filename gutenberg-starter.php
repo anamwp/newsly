@@ -114,6 +114,16 @@ final class Anam_Gutenberg_Starter {
 }
 
 /**
+ * Load the .env file if it exists
+ * and set the environment variables
+ */
+if ( file_exists( __DIR__ . '/.env' ) && class_exists( 'Dotenv\Dotenv' ) ) {
+	$gs_dotenv = \Dotenv\Dotenv::createImmutable( __DIR__ );
+	$gs_dotenv->load();
+}
+
+
+/**
  * Manage fonts in the editor
  * 
  * ref: https://developer.wordpress.org/block-editor/how-to-guides/enqueueing-assets-in-the-editor/
@@ -126,27 +136,10 @@ function handle_google_fonts() {
 add_action( 'enqueue_block_editor_assets', 'handle_google_fonts' );
 add_action( 'wp_enqueue_scripts', 'handle_google_fonts' );
 
-function gs_enqueue_editor_assets() {
-	wp_enqueue_script(
-		'gs-block-monitor',
-		plugins_url( 'dist/js/main.js', __FILE__ ),
-		[ 'wp-plugins', 'wp-edit-post', 'wp-data', 'wp-element' ],
-		'1.0',
-		true
-	);
-
-    // Ensure the script is treated as an ES module
-	add_filter( 'script_loader_tag', function ( $tag, $handle ) {
-		if ( 'gs-block-monitor' === $handle ) {
-			return str_replace( 'src=', 'type="module" src=', $tag );
-		}
-		return $tag;
-	}, 10, 2 );
-}
-// add_action('enqueue_block_editor_assets', 'gs_enqueue_editor_assets');
-
 /**
  * Enqueue script for ajax pagination
+ *
+ * @return void
  */
 function gs_enqueue_ajax_pagination_script() {
 	wp_enqueue_script( 'jquery' );
@@ -158,8 +151,14 @@ function gs_enqueue_ajax_pagination_script() {
 			'gs_ajax_nonce'   => wp_create_nonce( 'gs_ajax_nonce' )
 		)
 	);
+	wp_localize_script('jquery', 'envVars', array(
+        'GS_SITE_URL' => getenv('GS_SITE_URL'),
+        'WC_CONSUMER_KEY' => getenv('WC_CONSUMER_KEY'),
+        'WC_CONSUMER_SECRET' => getenv('WC_CONSUMER_SECRET'),
+    ));
 }
 add_action( 'wp_enqueue_scripts', 'gs_enqueue_ajax_pagination_script' );
+add_action( 'enqueue_block_editor_assets', 'gs_enqueue_ajax_pagination_script' );
 
 /**
  * Enquque build/css/index.css file
