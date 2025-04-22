@@ -129,7 +129,7 @@ export default function edit({ attributes, setAttributes }) {
 			/>
 			{/* View */}
 			<div className="container gs_block__recent_product__container">
-				<h2 className="text-2xl">
+				<h2 className="text-2xl mb-7">
 					{__('Recent Products', 'gutenberg-starter')}
 				</h2>
 				<div className="grid grid-cols-3 gap-5">

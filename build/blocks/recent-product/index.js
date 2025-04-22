@@ -11478,7 +11478,7 @@ function config (name) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/recent-product","version":"0.1.0","title":"Recent Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__recent_product"},"product_obj":{"type":"array","default":[]},"no_of_product_to_show":{"type":"number","default":2}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/recent-product","version":"0.1.0","title":"Recent Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__recent_product"},"product_obj":{"type":"array","default":[]},"no_of_product_to_show":{"type":"number","default":3}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
 
 /***/ }),
 
@@ -11640,7 +11640,7 @@ function edit(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "container gs_block__recent_product__container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
-        className: "text-2xl",
+        className: "text-2xl mb-7",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Recent Products', 'gutenberg-starter')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "grid grid-cols-3 gap-5",
@@ -11746,7 +11746,7 @@ function save(props) {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "container gs_block__recent_product__container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
-        className: "text-2xl",
+        className: "text-2xl mb-7",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Recent Products', 'gutenberg-starter')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "grid grid-cols-3 gap-5",

@@ -18,7 +18,7 @@
     },
     "no_of_product_to_show": {
       "type": "number",
-      "default": 2
+      "default": 3
     }
   },
   "textdomain": "gutenberg-starter",
