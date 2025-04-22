@@ -11499,17 +11499,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
-/* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _sidebarControl__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sidebarControl */ "./src/blocks/recent-product/sidebarControl.js");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _sidebarControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sidebarControl */ "./src/blocks/recent-product/sidebarControl.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
 
 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -11520,9 +11516,11 @@ var WooCommerceRestApi = (__webpack_require__(/*! @woocommerce/woocommerce-rest-
 
 
 
-
-
-
+/**
+ * Import env variables
+ * from .env file
+ * for Woocommerce authentication
+ */
 
 var api = new WooCommerceRestApi({
   url: envVars.GS_SITE_URL,
@@ -11533,11 +11531,40 @@ var api = new WooCommerceRestApi({
 function edit(_ref) {
   var attributes = _ref.attributes,
     setAttributes = _ref.setAttributes;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_6__.useState)(false),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(false),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
   var productPerPage = attributes.no_of_product_to_show;
+  /**
+   * Fetch products from WooCommerce API
+   * and set it to product_obj
+   * on component mount
+   * using useEffect hook
+   * This will run only once
+   * when the component is mounted
+   * and not on every render
+   * because of empty dependency array
+   * [].
+   * If product_obj is already having
+   * products then it will not run
+   * the api call again.
+   * This is to prevent unnecessary
+   * api calls and to improve performance.
+   * If you want to run the api call
+   * on every render then you can
+   * remove the empty dependency array
+   * [] and it will run on every render.
+   * But this is not recommended
+   * because it will make unnecessary
+   * api calls and will slow down
+   * the performance of the block.
+   * So, it is better to use
+   * empty dependency array [].
+   * This will run only once
+   * when the component is mounted
+   * and not on every render.
+   */
   (0,react__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
     /**
      * If product object is having products
@@ -11579,7 +11606,7 @@ function edit(_ref) {
   /**
    * Pass style through useBlockProps()
    */
-  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_8__.useBlockProps)({
+  var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useBlockProps)({
     className: attributes.className
   });
   /**
@@ -11604,18 +11631,18 @@ function edit(_ref) {
   /**
    * return edit content
    */
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
       attributes: attributes,
       setAttributes: setAttributes,
       handleUpdateRecentProduct: handleUpdateRecentProduct,
       loading: isLoading
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "container gs_block__recent_product__container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h2", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
         className: "text-2xl",
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Recent Products', 'gutenberg-starter')
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
         className: "grid grid-cols-3 gap-5",
         children: recentProducts && recentProducts.map(function (p, index) {
           var productTitle = p.name;
@@ -11625,35 +11652,35 @@ function edit(_ref) {
           var addToCartUrl = "?add-to-cart=".concat(productId);
           var productType = p.type; // 'simple', 'variable', 'grouped', etc.
           var isSimple = productType === 'simple';
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
               src: featuredImage,
               alt: productTitle,
               className: "mb-3 inline-block w-full rounded"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
               className: "text-xl font-medium font-roboto",
               href: encodeURI(p.permalink),
               children: productTitle
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
               className: "product_price",
               dangerouslySetInnerHTML: {
                 __html: p.price_html
               }
-            }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("button", {
+            }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
               className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
               "data-product_id": p.id,
               "data-product_sku": p.sku,
               "data-quantity": "1",
               "aria-label": "Add \u201C".concat(p.name, "\u201D to your cart"),
               rel: "nofollow",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
                 className: "add-to-cart-text",
                 children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add to cart', 'gutenberg-starter')
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
                 className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
               })]
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
               href: encodeURI(p.permalink),
               className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
               children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('View Product', 'gutenberg-starter')
@@ -11739,7 +11766,7 @@ function save(props) {
               className: "mb-3 inline-block w-full rounded"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               className: "text-xl font-medium font-roboto",
-              href: p.permalink,
+              href: encodeURI(p.permalink),
               children: productTitle
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
               className: "product_price",
@@ -11760,7 +11787,7 @@ function save(props) {
                 className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
               })]
             }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-              href: p.permalink,
+              href: encodeURI(p.permalink),
               className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
               children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Product', 'gutenberg-starter')
             })]
@@ -11874,17 +11901,6 @@ function sidebarControl(_ref) {
 /***/ (() => {
 
 /* (ignored) */
-
-/***/ }),
-
-/***/ "@wordpress/api-fetch":
-/*!**********************************!*\
-  !*** external ["wp","apiFetch"] ***!
-  \**********************************/
-/***/ ((module) => {
-
-"use strict";
-module.exports = window["wp"]["apiFetch"];
 
 /***/ }),
 

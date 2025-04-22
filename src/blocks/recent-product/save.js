@@ -60,7 +60,7 @@ export default function save(props) {
 									/>
 									<a
 										className="text-xl font-medium font-roboto"
-										href={p.permalink}
+										href={encodeURI(p.permalink)}
 									>
 										{productTitle}
 									</a>
@@ -89,7 +89,7 @@ export default function save(props) {
 										</button>
 									) : (
 										<a
-											href={p.permalink}
+											href={encodeURI(p.permalink)}
 											className="inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2"
 										>
 											{__(

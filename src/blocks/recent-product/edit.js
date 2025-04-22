@@ -1,32 +1,14 @@
 import { __ } from '@wordpress/i18n';
 import React, { useEffect } from 'react';
 const WooCommerceRestApi = require('@woocommerce/woocommerce-rest-api').default;
-
-import {
-	TextControl,
-	ColorPicker,
-	Panel,
-	PanelBody,
-	PanelRow,
-	FontSizePicker,
-	CheckboxControl,
-} from '@wordpress/components';
-import apiFetch from '@wordpress/api-fetch';
 import { useState } from '@wordpress/element';
-import { more } from '@wordpress/icons';
 import SidebarControl from './sidebarControl';
-
-import {
-	useBlockProps,
-	RichText,
-	AlignmentToolbar,
-	BlockControls,
-	ColorPalette,
-	InnerBlocks,
-	InspectorControls,
-	useInnerBlocksProps,
-} from '@wordpress/block-editor';
-
+import { useBlockProps } from '@wordpress/block-editor';
+/**
+ * Import env variables
+ * from .env file
+ * for Woocommerce authentication
+ */
 const api = new WooCommerceRestApi({
 	url: envVars.GS_SITE_URL,
 	consumerKey: envVars.WC_CONSUMER_KEY,
@@ -37,6 +19,35 @@ const api = new WooCommerceRestApi({
 export default function edit({ attributes, setAttributes }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const productPerPage = attributes.no_of_product_to_show;
+	/**
+	 * Fetch products from WooCommerce API
+	 * and set it to product_obj
+	 * on component mount
+	 * using useEffect hook
+	 * This will run only once
+	 * when the component is mounted
+	 * and not on every render
+	 * because of empty dependency array
+	 * [].
+	 * If product_obj is already having
+	 * products then it will not run
+	 * the api call again.
+	 * This is to prevent unnecessary
+	 * api calls and to improve performance.
+	 * If you want to run the api call
+	 * on every render then you can
+	 * remove the empty dependency array
+	 * [] and it will run on every render.
+	 * But this is not recommended
+	 * because it will make unnecessary
+	 * api calls and will slow down
+	 * the performance of the block.
+	 * So, it is better to use
+	 * empty dependency array [].
+	 * This will run only once
+	 * when the component is mounted
+	 * and not on every render.
+	 */
 	useEffect(() => {
 		/**
 		 * If product object is having products

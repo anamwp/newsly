@@ -3,17 +3,20 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/recent-product/edit.js:122
+#: src/blocks/recent-product/edit.js:133
+#: src/blocks/recent-product/edit.js:109
 #: src/blocks/recent-product/save.js:38
 msgid "Recent Products"
 msgstr ""
 
-#: src/blocks/recent-product/edit.js:166
+#: src/blocks/recent-product/edit.js:177
+#: src/blocks/recent-product/edit.js:153
 #: src/blocks/recent-product/save.js:83
 msgid "Add to cart"
 msgstr ""
 
-#: src/blocks/recent-product/edit.js:178
+#: src/blocks/recent-product/edit.js:189
+#: src/blocks/recent-product/edit.js:165
 #: src/blocks/recent-product/save.js:95
 msgid "View Product"
 msgstr ""
