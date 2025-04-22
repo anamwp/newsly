@@ -47,6 +47,8 @@ class Block {
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/blurb' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/recent-product' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/sale-product' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/featured-product' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/popular-product' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/post-lists-tab' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/theatres-movies' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );

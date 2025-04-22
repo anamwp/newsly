@@ -3,50 +3,108 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/recent-product/edit.js:133
-#: src/blocks/recent-product/save.js:38
-msgid "Recent Products"
+#: src/blocks/featured-product copy/edit.js:139
+#: src/blocks/featured-product copy/save.js:26
+#: src/blocks/featured-product/edit.js:139
+#: src/blocks/featured-product/save.js:26
+msgid "Featured Products"
 msgstr ""
 
+#: src/blocks/featured-product copy/edit.js:180
+#: src/blocks/featured-product copy/save.js:68
+#: src/blocks/featured-product/edit.js:180
+#: src/blocks/featured-product/save.js:68
+#: src/blocks/popular-product/edit.js:180
+#: src/blocks/popular-product/save.js:68
 #: src/blocks/recent-product/edit.js:177
 #: src/blocks/recent-product/save.js:83
+#: src/blocks/sale-product copy/edit.js:180
+#: src/blocks/sale-product copy/save.js:68
 #: src/blocks/sale-product/edit.js:180
 #: src/blocks/sale-product/save.js:68
 msgid "Add to cart"
 msgstr ""
 
+#: src/blocks/featured-product copy/edit.js:192
+#: src/blocks/featured-product copy/save.js:80
+#: src/blocks/featured-product/edit.js:192
+#: src/blocks/featured-product/save.js:80
+#: src/blocks/popular-product/edit.js:192
+#: src/blocks/popular-product/save.js:80
 #: src/blocks/recent-product/edit.js:189
 #: src/blocks/recent-product/save.js:95
+#: src/blocks/sale-product copy/edit.js:192
+#: src/blocks/sale-product copy/save.js:80
 #: src/blocks/sale-product/edit.js:192
 #: src/blocks/sale-product/save.js:80
 msgid "View Product"
 msgstr ""
 
-#: src/blocks/sale-product/edit.js:139
-#: src/blocks/sale-product/save.js:26
-msgid "Sale Products"
-msgstr ""
-
+#: src/blocks/featured-product copy/sidebarControl.js:17
+#: src/blocks/featured-product/sidebarControl.js:17
+#: src/blocks/popular-product/sidebarControl.js:17
+#: src/blocks/sale-product copy/sidebarControl.js:17
 #: src/blocks/sale-product/sidebarControl.js:17
 msgid "Product"
 msgstr ""
 
+#: src/blocks/featured-product copy/sidebarControl.js:35
+#: src/blocks/featured-product/sidebarControl.js:35
+#: src/blocks/popular-product/sidebarControl.js:35
+#: src/blocks/sale-product copy/sidebarControl.js:35
 #: src/blocks/sale-product/sidebarControl.js:35
 msgid "Loading..."
 msgstr ""
 
+#: src/blocks/featured-product copy/sidebarControl.js:36
+#: src/blocks/featured-product/sidebarControl.js:36
+#: src/blocks/popular-product/sidebarControl.js:36
+#: src/blocks/sale-product copy/sidebarControl.js:36
 #: src/blocks/sale-product/sidebarControl.js:36
 msgid "Refresh Products"
 msgstr ""
 
+#: src/blocks/featured-product copy/sidebarControl.js:42
+#: src/blocks/featured-product/sidebarControl.js:42
+#: src/blocks/popular-product/sidebarControl.js:42
+#: src/blocks/sale-product copy/sidebarControl.js:42
 #: src/blocks/sale-product/sidebarControl.js:42
 msgid "Number of Products"
 msgstr ""
 
+#: src/blocks/featured-product copy/sidebarControl.js:55
+#: src/blocks/featured-product/sidebarControl.js:55
+#: src/blocks/popular-product/sidebarControl.js:55
+#: src/blocks/sale-product copy/sidebarControl.js:55
 #: src/blocks/sale-product/sidebarControl.js:55
 msgid "Reset"
 msgstr ""
 
+#: src/blocks/featured-product copy/sidebarControl.js:56
+#: src/blocks/featured-product/sidebarControl.js:56
+#: src/blocks/popular-product/sidebarControl.js:56
+#: src/blocks/sale-product copy/sidebarControl.js:56
 #: src/blocks/sale-product/sidebarControl.js:56
 msgid "Reset to default value"
+msgstr ""
+
+#: src/blocks/popular-product/edit.js:139
+#: src/blocks/popular-product/save.js:26
+msgid "Popular Products"
+msgstr ""
+
+#: src/blocks/recent-product/edit.js:133
+#: src/blocks/recent-product/save.js:38
+msgid "Recent Products"
+msgstr ""
+
+#: src/blocks/featured-product copy/edit.js:139
+#: src/blocks/featured-product copy/save.js:26
+#: src/blocks/featured-product/edit.js:139
+#: src/blocks/featured-product/save.js:26
+#: src/blocks/sale-product copy/edit.js:139
+#: src/blocks/sale-product copy/save.js:26
+#: src/blocks/sale-product/edit.js:139
+#: src/blocks/sale-product/save.js:26
+msgid "Sale Products"
 msgstr ""
