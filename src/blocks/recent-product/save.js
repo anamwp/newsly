@@ -56,8 +56,14 @@ export default function save(props) {
 									<img
 										src={featuredImage}
 										alt={productTitle}
+										className="mb-3 inline-block w-full rounded"
 									/>
-									<a href={p.permalink}>{productTitle}</a>
+									<a
+										className="text-xl font-medium font-roboto"
+										href={p.permalink}
+									>
+										{productTitle}
+									</a>
 									<p
 										className="product_price"
 										dangerouslySetInnerHTML={{
@@ -66,7 +72,7 @@ export default function save(props) {
 									></p>
 									{isSimple ? (
 										<button
-											className="add_to_cart_button ajax_add_to_cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all mt-2 flex items-center justify-center gap-2"
+											className="add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2"
 											data-product_id={p.id}
 											data-product_sku={p.sku}
 											data-quantity="1"
@@ -74,16 +80,22 @@ export default function save(props) {
 											rel="nofollow"
 										>
 											<span className="add-to-cart-text">
-												Add to Cart
+												{__(
+													'Add to cart',
+													'gutenberg-starter'
+												)}
 											</span>
 											<span className="spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"></span>
 										</button>
 									) : (
 										<a
 											href={p.permalink}
-											className="inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-all mt-2"
+											className="inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2"
 										>
-											View Options
+											{__(
+												'View Product',
+												'gutenberg-starter'
+											)}
 										</a>
 									)}
 								</div>

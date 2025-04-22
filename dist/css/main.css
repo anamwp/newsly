@@ -746,6 +746,10 @@ video {
 	--tw-bg-opacity: 1;
 	background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));
 }
+.bg-teal-600{
+	--tw-bg-opacity: 1;
+	background-color: rgb(13 148 136 / var(--tw-bg-opacity, 1));
+}
 .object-cover{
 	-o-object-fit: cover;
 	   object-fit: cover;
@@ -1122,6 +1126,10 @@ video {
 .hover\:bg-gray-700:hover{
 	--tw-bg-opacity: 1;
 	background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-teal-700:hover{
+	--tw-bg-opacity: 1;
+	background-color: rgb(15 118 110 / var(--tw-bg-opacity, 1));
 }
 .hover\:text-slate-600:hover{
 	--tw-text-opacity: 1;

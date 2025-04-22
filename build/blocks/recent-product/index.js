@@ -11629,9 +11629,11 @@ function edit(_ref) {
             className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
               src: featuredImage,
-              alt: productTitle
+              alt: productTitle,
+              className: "mb-3 inline-block w-full rounded"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
-              href: p.permalink,
+              className: "text-xl font-medium font-roboto",
+              href: encodeURI(p.permalink),
               children: productTitle
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
               className: "product_price",
@@ -11639,7 +11641,7 @@ function edit(_ref) {
                 __html: p.price_html
               }
             }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("button", {
-              className: "add_to_cart_button ajax_add_to_cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all mt-2 flex items-center justify-center gap-2",
+              className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
               "data-product_id": p.id,
               "data-product_sku": p.sku,
               "data-quantity": "1",
@@ -11647,14 +11649,14 @@ function edit(_ref) {
               rel: "nofollow",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
                 className: "add-to-cart-text",
-                children: "Add to Cart"
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add to cart', 'gutenberg-starter')
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
                 className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
               })]
             }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("a", {
-              href: p.permalink,
-              className: "inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-all mt-2",
-              children: "View Options"
+              href: encodeURI(p.permalink),
+              className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('View Product', 'gutenberg-starter')
             })]
           }, index);
         })
@@ -11733,8 +11735,10 @@ function save(props) {
             className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
               src: featuredImage,
-              alt: productTitle
+              alt: productTitle,
+              className: "mb-3 inline-block w-full rounded"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+              className: "text-xl font-medium font-roboto",
               href: p.permalink,
               children: productTitle
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
@@ -11743,7 +11747,7 @@ function save(props) {
                 __html: p.price_html
               }
             }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-              className: "add_to_cart_button ajax_add_to_cart bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-all mt-2 flex items-center justify-center gap-2",
+              className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
               "data-product_id": p.id,
               "data-product_sku": p.sku,
               "data-quantity": "1",
@@ -11751,14 +11755,14 @@ function save(props) {
               rel: "nofollow",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "add-to-cart-text",
-                children: "Add to Cart"
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add to cart', 'gutenberg-starter')
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
                 className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
               })]
             }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
               href: p.permalink,
-              className: "inline-block bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition-all mt-2",
-              children: "View Options"
+              className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Product', 'gutenberg-starter')
             })]
           }, index);
         })

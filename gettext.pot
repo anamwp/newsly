@@ -8,6 +8,16 @@ msgstr ""
 msgid "Recent Products"
 msgstr ""
 
+#: src/blocks/recent-product/edit.js:166
+#: src/blocks/recent-product/save.js:83
+msgid "Add to cart"
+msgstr ""
+
+#: src/blocks/recent-product/edit.js:178
+#: src/blocks/recent-product/save.js:95
+msgid "View Product"
+msgstr ""
+
 #: src/blocks/recent-product/sidebarControl.js:25
 msgid "Product"
 msgstr ""
