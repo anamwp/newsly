@@ -3,40 +3,41 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/recent-product/edit.js:133
-#: src/blocks/recent-product/edit.js:109
-#: src/blocks/recent-product/save.js:38
-msgid "Recent Products"
+#: src/blocks/sale-product/edit.js:139
+#: src/blocks/sale-product/save.js:26
+msgid "Sale Products"
 msgstr ""
 
-#: src/blocks/recent-product/edit.js:177
-#: src/blocks/recent-product/edit.js:153
-#: src/blocks/recent-product/save.js:83
+#: src/blocks/sale-product/edit.js:180
+#: src/blocks/sale-product/save.js:68
 msgid "Add to cart"
 msgstr ""
 
-#: src/blocks/recent-product/edit.js:189
-#: src/blocks/recent-product/edit.js:165
-#: src/blocks/recent-product/save.js:95
+#: src/blocks/sale-product/edit.js:192
+#: src/blocks/sale-product/save.js:80
 msgid "View Product"
 msgstr ""
 
-#: src/blocks/recent-product/sidebarControl.js:25
+#: src/blocks/sale-product/sidebarControl.js:17
 msgid "Product"
 msgstr ""
 
-#: src/blocks/recent-product/sidebarControl.js:35
+#: src/blocks/sale-product/sidebarControl.js:35
+msgid "Loading..."
+msgstr ""
+
+#: src/blocks/sale-product/sidebarControl.js:36
 msgid "Refresh Products"
 msgstr ""
 
-#: src/blocks/recent-product/sidebarControl.js:48
+#: src/blocks/sale-product/sidebarControl.js:42
 msgid "Number of Products"
 msgstr ""
 
-#: src/blocks/recent-product/sidebarControl.js:61
+#: src/blocks/sale-product/sidebarControl.js:55
 msgid "Reset"
 msgstr ""
 
-#: src/blocks/recent-product/sidebarControl.js:62
+#: src/blocks/sale-product/sidebarControl.js:56
 msgid "Reset to default value"
 msgstr ""
