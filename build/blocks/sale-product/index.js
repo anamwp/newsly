@@ -11836,7 +11836,7 @@ function sidebarControl(_ref) {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Product', 'gutenberg-starter'),
         initialOpen: true,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-          className: "display-single-post-featured-image",
+          className: "display-single-post-featured-image mb-5 flex items-center flex-row justify-between",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
             type: "button",
             className: "button is-primary",
@@ -11844,11 +11844,9 @@ function sidebarControl(_ref) {
             disabled: loading,
             "aria-disabled": loading,
             "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Refresh Products', 'gutenberg-starter'),
-            icon: loading ? 'update' : 'update',
-            iconPosition: "left",
             children: loading ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading...', 'gutenberg-starter') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Refresh Products', 'gutenberg-starter')
           }), loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-            className: "spinner is-active"
+            className: "spinner is-active m-0"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Number of Products', 'gutenberg-starter'),
@@ -11867,7 +11865,9 @@ function sidebarControl(_ref) {
           allowReset: true,
           resetFallbackValue: default_product_to_show_value,
           resetLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Reset', 'gutenberg-starter'),
-          resetTooltip: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Reset to default value', 'gutenberg-starter')
+          resetTooltip: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Reset to default value', 'gutenberg-starter'),
+          disabled: loading,
+          "aria-disabled": loading
         })]
       })
     })

@@ -17,7 +17,7 @@ export default function sidebarControl({
 					title={__('Product', 'gutenberg-starter')}
 					initialOpen={true}
 				>
-					<p className="display-single-post-featured-image">
+					<p className="display-single-post-featured-image mb-5 flex items-center flex-row justify-between">
 						<Button
 							type="button"
 							className="button is-primary"
@@ -28,14 +28,14 @@ export default function sidebarControl({
 								'Refresh Products',
 								'gutenberg-starter'
 							)}
-							icon={loading ? 'update' : 'update'}
-							iconPosition="left"
 						>
 							{loading
 								? __('Loading...', 'gutenberg-starter')
 								: __('Refresh Products', 'gutenberg-starter')}
 						</Button>
-						{loading && <span className="spinner is-active"></span>}
+						{loading && (
+							<span className="spinner is-active m-0"></span>
+						)}
 					</p>
 
 					<RangeControl
@@ -57,6 +57,8 @@ export default function sidebarControl({
 							'Reset to default value',
 							'gutenberg-starter'
 						)}
+						disabled={loading}
+						aria-disabled={loading}
 					/>
 				</PanelBody>
 			</InspectorControls>

@@ -4,10 +4,12 @@ msgstr ""
 "X-Generator: babel-plugin-makepot\n"
 
 #: src/blocks/category-product/edit.js:176
+#: src/blocks/recent-product/edit.js:177
 msgid "Add to cart"
 msgstr ""
 
 #: src/blocks/category-product/edit.js:188
+#: src/blocks/recent-product/edit.js:189
 msgid "View Product"
 msgstr ""
 
@@ -28,10 +30,19 @@ msgid "Select a category to load products"
 msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:101
+#: src/blocks/featured-product/sidebarControl.js:33
+#: src/blocks/featured-product/sidebarControl.js:35
+#: src/blocks/popular-product/sidebarControl.js:33
+#: src/blocks/sale-product/sidebarControl.js:33
 msgid "Loading..."
 msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:102
+#: src/blocks/featured-product/sidebarControl.js:34
+#: src/blocks/featured-product/sidebarControl.js:36
+#: src/blocks/popular-product/sidebarControl.js:34
+#: src/blocks/recent-product/sidebarControl.js:40
+#: src/blocks/sale-product/sidebarControl.js:34
 msgid "Refresh Products"
 msgstr ""
 
@@ -40,6 +51,10 @@ msgid "Error in sidebar panel"
 msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:117
+#: src/blocks/featured-product/sidebarControl.js:17
+#: src/blocks/popular-product/sidebarControl.js:17
+#: src/blocks/recent-product/sidebarControl.js:25
+#: src/blocks/sale-product/sidebarControl.js:17
 msgid "Product"
 msgstr ""
 
@@ -52,17 +67,36 @@ msgid "Loading categories from the API..."
 msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:155
+#: src/blocks/featured-product/sidebarControl.js:42
+#: src/blocks/featured-product/sidebarControl.js:40
+#: src/blocks/popular-product/sidebarControl.js:42
+#: src/blocks/recent-product/sidebarControl.js:48
+#: src/blocks/sale-product/sidebarControl.js:42
 msgid "Number of Products"
 msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:175
+#: src/blocks/featured-product/sidebarControl.js:55
+#: src/blocks/featured-product/sidebarControl.js:53
+#: src/blocks/popular-product/sidebarControl.js:55
+#: src/blocks/recent-product/sidebarControl.js:61
+#: src/blocks/sale-product/sidebarControl.js:55
 msgid "Reset"
 msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:176
+#: src/blocks/featured-product/sidebarControl.js:56
+#: src/blocks/featured-product/sidebarControl.js:54
+#: src/blocks/popular-product/sidebarControl.js:56
+#: src/blocks/recent-product/sidebarControl.js:62
+#: src/blocks/sale-product/sidebarControl.js:56
 msgid "Reset to default value"
 msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:70
 msgid "Select Category"
+msgstr ""
+
+#: src/blocks/recent-product/edit.js:133
+msgid "Recent Products"
 msgstr ""
