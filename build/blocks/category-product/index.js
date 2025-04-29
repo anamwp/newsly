@@ -11692,7 +11692,7 @@ function config (name) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/category-product","version":"0.1.0","title":"Category Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__category_product"},"product_obj":{"type":"array","default":[]},"product_category":{"type":"array","default":[]},"selected_category":{"type":"string","default":"null"},"no_of_product_to_show":{"type":"number","default":3}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/category-product","version":"0.1.0","title":"Category Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__category_product"},"product_obj":{"type":"array","default":[]},"product_category":{"type":"array","default":[]},"selected_category":{"type":"string","default":""},"no_of_product_to_show":{"type":"number","default":3}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
 
 /***/ }),
 
@@ -12208,7 +12208,6 @@ function sidebarControl(_ref) {
       })]
     });
   };
-  console.log('attributes.product_category.length', attributes.product_category.length);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_error_boundary__WEBPACK_IMPORTED_MODULE_7__.ErrorBoundary, {
     fallback: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
       children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Error in sidebar panel', 'gutenberg-starter')
@@ -12218,7 +12217,7 @@ function sidebarControl(_ref) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
           title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Product', 'gutenberg-starter'),
           initialOpen: true,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_2__.Suspense, {
+          children: [attributes.selected_category && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_2__.Suspense, {
             fallback: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
               className: "flex justify-between flex-row align-middle text-center text-current p-2 bg-slate-300 mt-3 mb-3 rounded",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {

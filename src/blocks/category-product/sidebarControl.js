@@ -105,11 +105,6 @@ export default function sidebarControl({
 			</p>
 		);
 	};
-
-	console.log(
-		'attributes.product_category.length',
-		attributes.product_category.length
-	);
 	return (
 		<ErrorBoundary
 			fallback={
@@ -122,21 +117,23 @@ export default function sidebarControl({
 						title={__('Product', 'gutenberg-starter')}
 						initialOpen={true}
 					>
-						<Suspense
-							fallback={
-								<p className="flex justify-between flex-row align-middle text-center text-current p-2 bg-slate-300 mt-3 mb-3 rounded">
-									<span>
-										{__(
-											'Let load the category first',
-											'gutenberg-stater'
-										)}
-									</span>
-									<span className="spinner is-active m-0"></span>
-								</p>
-							}
-						>
-							<RefreshProductsComponent />
-						</Suspense>
+						{attributes.selected_category && (
+							<Suspense
+								fallback={
+									<p className="flex justify-between flex-row align-middle text-center text-current p-2 bg-slate-300 mt-3 mb-3 rounded">
+										<span>
+											{__(
+												'Let load the category first',
+												'gutenberg-stater'
+											)}
+										</span>
+										<span className="spinner is-active m-0"></span>
+									</p>
+								}
+							>
+								<RefreshProductsComponent />
+							</Suspense>
+						)}
 
 						<Suspense
 							fallback={

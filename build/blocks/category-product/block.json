@@ -22,7 +22,7 @@
     },
     "selected_category": {
       "type": "string",
-      "default": "null"
+      "default": ""
     },
     "no_of_product_to_show": {
       "type": "number",

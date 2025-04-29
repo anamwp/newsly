@@ -39,31 +39,31 @@ msgstr ""
 msgid "Refresh Products"
 msgstr ""
 
-#: src/blocks/category-product/sidebarControl.js:116
+#: src/blocks/category-product/sidebarControl.js:111
 msgid "Error in sidebar panel"
 msgstr ""
 
-#: src/blocks/category-product/sidebarControl.js:122
+#: src/blocks/category-product/sidebarControl.js:117
 msgid "Product"
 msgstr ""
 
-#: src/blocks/category-product/sidebarControl.js:129
+#: src/blocks/category-product/sidebarControl.js:125
 msgid "Let load the category first"
 msgstr ""
 
-#: src/blocks/category-product/sidebarControl.js:145
+#: src/blocks/category-product/sidebarControl.js:142
 msgid "Loading categories from the API..."
 msgstr ""
 
-#: src/blocks/category-product/sidebarControl.js:158
+#: src/blocks/category-product/sidebarControl.js:155
 msgid "Number of Products"
 msgstr ""
 
-#: src/blocks/category-product/sidebarControl.js:178
+#: src/blocks/category-product/sidebarControl.js:175
 msgid "Reset"
 msgstr ""
 
-#: src/blocks/category-product/sidebarControl.js:179
+#: src/blocks/category-product/sidebarControl.js:176
 msgid "Reset to default value"
 msgstr ""
 
