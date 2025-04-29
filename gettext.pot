@@ -3,108 +3,70 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/featured-product copy/edit.js:139
-#: src/blocks/featured-product copy/save.js:26
-#: src/blocks/featured-product/edit.js:139
-#: src/blocks/featured-product/save.js:26
-msgid "Featured Products"
-msgstr ""
-
-#: src/blocks/featured-product copy/edit.js:180
-#: src/blocks/featured-product copy/save.js:68
-#: src/blocks/featured-product/edit.js:180
-#: src/blocks/featured-product/save.js:68
-#: src/blocks/popular-product/edit.js:180
-#: src/blocks/popular-product/save.js:68
-#: src/blocks/recent-product/edit.js:177
-#: src/blocks/recent-product/save.js:83
-#: src/blocks/sale-product copy/edit.js:180
-#: src/blocks/sale-product copy/save.js:68
-#: src/blocks/sale-product/edit.js:180
-#: src/blocks/sale-product/save.js:68
+#: src/blocks/category-product/edit.js:176
 msgid "Add to cart"
 msgstr ""
 
-#: src/blocks/featured-product copy/edit.js:192
-#: src/blocks/featured-product copy/save.js:80
-#: src/blocks/featured-product/edit.js:192
-#: src/blocks/featured-product/save.js:80
-#: src/blocks/popular-product/edit.js:192
-#: src/blocks/popular-product/save.js:80
-#: src/blocks/recent-product/edit.js:189
-#: src/blocks/recent-product/save.js:95
-#: src/blocks/sale-product copy/edit.js:192
-#: src/blocks/sale-product copy/save.js:80
-#: src/blocks/sale-product/edit.js:192
-#: src/blocks/sale-product/save.js:80
+#: src/blocks/category-product/edit.js:188
 msgid "View Product"
 msgstr ""
 
-#: src/blocks/featured-product copy/sidebarControl.js:17
-#: src/blocks/featured-product/sidebarControl.js:17
-#: src/blocks/popular-product/sidebarControl.js:17
-#: src/blocks/sale-product copy/sidebarControl.js:17
-#: src/blocks/sale-product/sidebarControl.js:17
-msgid "Product"
+#: src/blocks/category-product/edit.js:211
+msgid "Loading products..."
 msgstr ""
 
-#: src/blocks/featured-product copy/sidebarControl.js:35
-#: src/blocks/featured-product/sidebarControl.js:35
-#: src/blocks/popular-product/sidebarControl.js:35
-#: src/blocks/sale-product copy/sidebarControl.js:35
-#: src/blocks/sale-product/sidebarControl.js:35
+#: src/blocks/category-product/edit.js:239
+msgid "Category Products"
+msgstr ""
+
+#: src/blocks/category-product/edit.js:245
+msgid "Please select a category to display products"
+msgstr ""
+
+#: src/blocks/category-product/edit.js:255
+msgid "Error to fetch product"
+msgstr ""
+
+#: src/blocks/category-product/edit.js:270
+msgid "Select a category to load products"
+msgstr ""
+
+#: src/blocks/category-product/sidebarControl.js:101
 msgid "Loading..."
 msgstr ""
 
-#: src/blocks/featured-product copy/sidebarControl.js:36
-#: src/blocks/featured-product/sidebarControl.js:36
-#: src/blocks/popular-product/sidebarControl.js:36
-#: src/blocks/sale-product copy/sidebarControl.js:36
-#: src/blocks/sale-product/sidebarControl.js:36
+#: src/blocks/category-product/sidebarControl.js:102
 msgid "Refresh Products"
 msgstr ""
 
-#: src/blocks/featured-product copy/sidebarControl.js:42
-#: src/blocks/featured-product/sidebarControl.js:42
-#: src/blocks/popular-product/sidebarControl.js:42
-#: src/blocks/sale-product copy/sidebarControl.js:42
-#: src/blocks/sale-product/sidebarControl.js:42
+#: src/blocks/category-product/sidebarControl.js:116
+msgid "Error in sidebar panel"
+msgstr ""
+
+#: src/blocks/category-product/sidebarControl.js:122
+msgid "Product"
+msgstr ""
+
+#: src/blocks/category-product/sidebarControl.js:129
+msgid "Let load the category first"
+msgstr ""
+
+#: src/blocks/category-product/sidebarControl.js:145
+msgid "Loading categories from the API..."
+msgstr ""
+
+#: src/blocks/category-product/sidebarControl.js:158
 msgid "Number of Products"
 msgstr ""
 
-#: src/blocks/featured-product copy/sidebarControl.js:55
-#: src/blocks/featured-product/sidebarControl.js:55
-#: src/blocks/popular-product/sidebarControl.js:55
-#: src/blocks/sale-product copy/sidebarControl.js:55
-#: src/blocks/sale-product/sidebarControl.js:55
+#: src/blocks/category-product/sidebarControl.js:178
 msgid "Reset"
 msgstr ""
 
-#: src/blocks/featured-product copy/sidebarControl.js:56
-#: src/blocks/featured-product/sidebarControl.js:56
-#: src/blocks/popular-product/sidebarControl.js:56
-#: src/blocks/sale-product copy/sidebarControl.js:56
-#: src/blocks/sale-product/sidebarControl.js:56
+#: src/blocks/category-product/sidebarControl.js:179
 msgid "Reset to default value"
 msgstr ""
 
-#: src/blocks/popular-product/edit.js:139
-#: src/blocks/popular-product/save.js:26
-msgid "Popular Products"
-msgstr ""
-
-#: src/blocks/recent-product/edit.js:133
-#: src/blocks/recent-product/save.js:38
-msgid "Recent Products"
-msgstr ""
-
-#: src/blocks/featured-product copy/edit.js:139
-#: src/blocks/featured-product copy/save.js:26
-#: src/blocks/featured-product/edit.js:139
-#: src/blocks/featured-product/save.js:26
-#: src/blocks/sale-product copy/edit.js:139
-#: src/blocks/sale-product copy/save.js:26
-#: src/blocks/sale-product/edit.js:139
-#: src/blocks/sale-product/save.js:26
-msgid "Sale Products"
+#: src/blocks/category-product/sidebarControl.js:70
+msgid "Select Category"
 msgstr ""

@@ -39,6 +39,46 @@ function _arrayWithHoles(r) {
 
 /***/ }),
 
+/***/ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ _asyncToGenerator)
+/* harmony export */ });
+function asyncGeneratorStep(n, t, e, r, o, a, c) {
+  try {
+    var i = n[a](c),
+      u = i.value;
+  } catch (n) {
+    return void e(n);
+  }
+  i.done ? t(u) : Promise.resolve(u).then(r, o);
+}
+function _asyncToGenerator(n) {
+  return function () {
+    var t = this,
+      e = arguments;
+    return new Promise(function (r, o) {
+      var a = n.apply(t, e);
+      function _next(n) {
+        asyncGeneratorStep(a, r, o, _next, _throw, "next", n);
+      }
+      function _throw(n) {
+        asyncGeneratorStep(a, r, o, _next, _throw, "throw", n);
+      }
+      _next(void 0);
+    });
+  };
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
@@ -6226,6 +6266,180 @@ exports.parse = querystring;
 
 /***/ }),
 
+/***/ "./node_modules/react-error-boundary/dist/react-error-boundary.development.esm.js":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/react-error-boundary/dist/react-error-boundary.development.esm.js ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ErrorBoundary: () => (/* binding */ ErrorBoundary),
+/* harmony export */   ErrorBoundaryContext: () => (/* binding */ ErrorBoundaryContext),
+/* harmony export */   useErrorBoundary: () => (/* binding */ useErrorBoundary),
+/* harmony export */   withErrorBoundary: () => (/* binding */ withErrorBoundary)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+'use client';
+
+
+const ErrorBoundaryContext = (0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)(null);
+
+const initialState = {
+  didCatch: false,
+  error: null
+};
+class ErrorBoundary extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+  constructor(props) {
+    super(props);
+    this.resetErrorBoundary = this.resetErrorBoundary.bind(this);
+    this.state = initialState;
+  }
+  static getDerivedStateFromError(error) {
+    return {
+      didCatch: true,
+      error
+    };
+  }
+  resetErrorBoundary() {
+    const {
+      error
+    } = this.state;
+    if (error !== null) {
+      var _this$props$onReset, _this$props;
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+      (_this$props$onReset = (_this$props = this.props).onReset) === null || _this$props$onReset === void 0 ? void 0 : _this$props$onReset.call(_this$props, {
+        args,
+        reason: "imperative-api"
+      });
+      this.setState(initialState);
+    }
+  }
+  componentDidCatch(error, info) {
+    var _this$props$onError, _this$props2;
+    (_this$props$onError = (_this$props2 = this.props).onError) === null || _this$props$onError === void 0 ? void 0 : _this$props$onError.call(_this$props2, error, info);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      didCatch
+    } = this.state;
+    const {
+      resetKeys
+    } = this.props;
+
+    // There's an edge case where if the thing that triggered the error happens to *also* be in the resetKeys array,
+    // we'd end up resetting the error boundary immediately.
+    // This would likely trigger a second error to be thrown.
+    // So we make sure that we don't check the resetKeys on the first call of cDU after the error is set.
+
+    if (didCatch && prevState.error !== null && hasArrayChanged(prevProps.resetKeys, resetKeys)) {
+      var _this$props$onReset2, _this$props3;
+      (_this$props$onReset2 = (_this$props3 = this.props).onReset) === null || _this$props$onReset2 === void 0 ? void 0 : _this$props$onReset2.call(_this$props3, {
+        next: resetKeys,
+        prev: prevProps.resetKeys,
+        reason: "keys"
+      });
+      this.setState(initialState);
+    }
+  }
+  render() {
+    const {
+      children,
+      fallbackRender,
+      FallbackComponent,
+      fallback
+    } = this.props;
+    const {
+      didCatch,
+      error
+    } = this.state;
+    let childToRender = children;
+    if (didCatch) {
+      const props = {
+        error,
+        resetErrorBoundary: this.resetErrorBoundary
+      };
+      if (typeof fallbackRender === "function") {
+        childToRender = fallbackRender(props);
+      } else if (FallbackComponent) {
+        childToRender = (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(FallbackComponent, props);
+      } else if (fallback !== undefined) {
+        childToRender = fallback;
+      } else {
+        {
+          console.error("react-error-boundary requires either a fallback, fallbackRender, or FallbackComponent prop");
+        }
+        throw error;
+      }
+    }
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ErrorBoundaryContext.Provider, {
+      value: {
+        didCatch,
+        error,
+        resetErrorBoundary: this.resetErrorBoundary
+      }
+    }, childToRender);
+  }
+}
+function hasArrayChanged() {
+  let a = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  let b = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  return a.length !== b.length || a.some((item, index) => !Object.is(item, b[index]));
+}
+
+function assertErrorBoundaryContext(value) {
+  if (value == null || typeof value.didCatch !== "boolean" || typeof value.resetErrorBoundary !== "function") {
+    throw new Error("ErrorBoundaryContext not found");
+  }
+}
+
+function useErrorBoundary() {
+  const context = (0,react__WEBPACK_IMPORTED_MODULE_0__.useContext)(ErrorBoundaryContext);
+  assertErrorBoundaryContext(context);
+  const [state, setState] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    error: null,
+    hasError: false
+  });
+  const memoized = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(() => ({
+    resetBoundary: () => {
+      context.resetErrorBoundary();
+      setState({
+        error: null,
+        hasError: false
+      });
+    },
+    showBoundary: error => setState({
+      error,
+      hasError: true
+    })
+  }), [context.resetErrorBoundary]);
+  if (state.hasError) {
+    throw state.error;
+  }
+  return memoized;
+}
+
+function withErrorBoundary(component, errorBoundaryProps) {
+  const Wrapped = (0,react__WEBPACK_IMPORTED_MODULE_0__.forwardRef)((props, ref) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(ErrorBoundary, errorBoundaryProps, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(component, {
+    ...props,
+    ref
+  })));
+
+  // Format for display in DevTools
+  const name = component.displayName || component.name || "Unknown";
+  Wrapped.displayName = "withErrorBoundary(".concat(name, ")");
+  return Wrapped;
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/readable-stream/errors-browser.js":
 /*!********************************************************!*\
   !*** ./node_modules/readable-stream/errors-browser.js ***!
@@ -11471,21 +11685,21 @@ function config (name) {
 
 /***/ }),
 
-/***/ "./src/blocks/sell-product/block.json":
-/*!********************************************!*\
-  !*** ./src/blocks/sell-product/block.json ***!
-  \********************************************/
+/***/ "./src/blocks/category-product/block.json":
+/*!************************************************!*\
+  !*** ./src/blocks/category-product/block.json ***!
+  \************************************************/
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/sell-product","version":"0.1.0","title":"Sell Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__sell_product"},"product_obj":{"type":"array","default":[]},"no_of_product_to_show":{"type":"number","default":2}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/category-product","version":"0.1.0","title":"Category Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__category_product"},"product_obj":{"type":"array","default":[]},"product_category":{"type":"array","default":[]},"selected_category":{"type":"string","default":"null"},"no_of_product_to_show":{"type":"number","default":3}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
 
 /***/ }),
 
-/***/ "./src/blocks/sell-product/edit.js":
-/*!*****************************************!*\
-  !*** ./src/blocks/sell-product/edit.js ***!
-  \*****************************************/
+/***/ "./src/blocks/category-product/edit.js":
+/*!*********************************************!*\
+  !*** ./src/blocks/category-product/edit.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11501,11 +11715,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _sidebarControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sidebarControl */ "./src/blocks/sell-product/sidebarControl.js");
+/* harmony import */ var _sidebarControl__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./sidebarControl */ "./src/blocks/category-product/sidebarControl.js");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var react_error_boundary__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-error-boundary */ "./node_modules/react-error-boundary/dist/react-error-boundary.development.esm.js");
+/* harmony import */ var _components_WooCommerceAPI__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/WooCommerceAPI */ "./src/blocks/components/WooCommerceAPI.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__);
 
 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -11513,6 +11729,9 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 
 
 var WooCommerceRestApi = (__webpack_require__(/*! @woocommerce/woocommerce-rest-api */ "./node_modules/@woocommerce/woocommerce-rest-api/index.js")["default"]);
+
+
+
 
 
 
@@ -11536,6 +11755,10 @@ function edit(_ref) {
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
   var productPerPage = attributes.no_of_product_to_show;
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(Promise.resolve([])),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
+    catProducts = _useState4[0],
+    setCatProducts = _useState4[1];
   /**
    * Fetch products from WooCommerce API
    * and set it to product_obj
@@ -11573,6 +11796,9 @@ function edit(_ref) {
     if (attributes.product_obj.length > 0) {
       return;
     }
+    if (!attributes.selected_category) {
+      return;
+    }
     /**
      * Call WooCommerce Rest API
      * to get products
@@ -11580,7 +11806,9 @@ function edit(_ref) {
      */
     api.get('products', {
       per_page: productPerPage,
-      on_sale: true
+      hide_empty: true,
+      // Exclude categories with no products
+      category: attributes.selected_category
     }).then(function (response) {
       /**
        * Update product attributes
@@ -11611,6 +11839,7 @@ function edit(_ref) {
       // Always executed.
     });
   }, []);
+
   /**
    * Pass style through useBlockProps()
    */
@@ -11621,11 +11850,12 @@ function edit(_ref) {
    * Refresh product if any product updated
    * or any new product is added.
    */
-  var handleUpdateRecentProduct = function handleUpdateRecentProduct() {
+  var handleUpdateCategoryProduct = function handleUpdateCategoryProduct() {
     setIsLoading(true);
     api.get('products', {
       per_page: productPerPage,
-      on_sale: true
+      hide_empty: true,
+      category: attributes.selected_category
     }).then(function (response) {
       setAttributes({
         product_obj: response.data
@@ -11633,65 +11863,109 @@ function edit(_ref) {
       setIsLoading(false);
     });
   };
+  function ProductCard(_ref2) {
+    var attributes = _ref2.attributes;
+    if (isLoading == true) {
+      throw catProducts;
+    }
+    var product_obj = attributes.product_obj;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
+      children: product_obj && product_obj.map(function (product) {
+        var productTitle = product.name;
+        var featuredImage = product.images[0].src;
+        var productType = product.type; // 'simple', 'variable', 'grouped', etc.
+        var isSimple = productType === 'simple';
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+          className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
+            src: featuredImage,
+            alt: productTitle,
+            className: "mb-3 inline-block w-full rounded"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("a", {
+            className: "text-xl font-medium font-roboto",
+            href: encodeURI(product.permalink),
+            children: productTitle
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+            className: "product_price",
+            dangerouslySetInnerHTML: {
+              __html: product.price_html
+            }
+          }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
+            className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
+            "data-product_id": product.id,
+            "data-product_sku": product.sku,
+            "data-quantity": "1",
+            "aria-label": "Add \u201C".concat(product.name, "\u201D to your cart"),
+            rel: "nofollow",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+              className: "add-to-cart-text",
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add to cart', 'gutenberg-starter')
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+              className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+            })]
+          }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("a", {
+            href: encodeURI(product.permalink),
+            className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('View Product', 'gutenberg-starter')
+          })]
+        }, product.id);
+      })
+    });
+  }
+  function ProductCardFallback() {
+    var product_to_show = attributes.no_of_product_to_show;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      className: "grid grid-cols-3 gap-5",
+      children: Array.from({
+        length: product_to_show
+      }, function (_, index) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+          className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+            className: "text-center text-xl",
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Loading products...', 'gutenberg-starter')
+          })
+        }, index);
+      })
+    });
+  }
+
   /**
    * Extract products from attributes
    */
-  var saleProducts = attributes.product_obj.length > 0 ? attributes.product_obj : [];
+  var categoryProducts = attributes.product_obj.length > 0 ? attributes.product_obj : [];
   /**
    * return edit content
    */
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_5__["default"], {
       attributes: attributes,
       setAttributes: setAttributes,
-      handleUpdateRecentProduct: handleUpdateRecentProduct,
-      loading: isLoading
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: "container gs_block__recent_product__container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
-        className: "text-2xl",
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Recent Products', 'gutenberg-starter')
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "grid grid-cols-3 gap-5",
-        children: saleProducts && saleProducts.map(function (p, index) {
-          var productTitle = p.name;
-          var featuredImage = p.images[0].src;
-          var productType = p.type; // 'simple', 'variable', 'grouped', etc.
-          var isSimple = productType === 'simple';
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-            className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-              src: featuredImage,
-              alt: productTitle,
-              className: "mb-3 inline-block w-full rounded"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-              className: "text-xl font-medium font-roboto",
-              href: encodeURI(p.permalink),
-              children: productTitle
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
-              className: "product_price",
-              dangerouslySetInnerHTML: {
-                __html: p.price_html
-              }
-            }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
-              className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
-              "data-product_id": p.id,
-              "data-product_sku": p.sku,
-              "data-quantity": "1",
-              "aria-label": "Add \u201C".concat(p.name, "\u201D to your cart"),
-              rel: "nofollow",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-                className: "add-to-cart-text",
-                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Add to cart', 'gutenberg-starter')
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-                className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
-              })]
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-              href: encodeURI(p.permalink),
-              className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('View Product', 'gutenberg-starter')
-            })]
-          }, index);
+      handleUpdateCategoryProduct: handleUpdateCategoryProduct,
+      loading: isLoading,
+      setIsLoading: setIsLoading
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+      className: "container gs_block__category_product__container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
+        className: "text-2xl mb-7",
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Category Products', 'gutenberg-starter')
+      }), categoryProducts.length === 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+        className: "text-center text-xl",
+        children: isLoading == false && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please select a category to display products', 'gutenberg-starter')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_error_boundary__WEBPACK_IMPORTED_MODULE_9__.ErrorBoundary, {
+        fallback: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Error to fetch product', 'gutenberg-starter')
+        }),
+        children: catProducts ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react__WEBPACK_IMPORTED_MODULE_3__.Suspense, {
+          fallback: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(ProductCardFallback, {}),
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+            className: "grid grid-cols-3 gap-5",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(ProductCard, {
+              attributes: attributes
+            }, attributes.selected_category)
+          })
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Select a category to load products', 'gutenberg-starter')
         })
       })]
     })]
@@ -11700,10 +11974,10 @@ function edit(_ref) {
 
 /***/ }),
 
-/***/ "./src/blocks/sell-product/save.js":
-/*!*****************************************!*\
-  !*** ./src/blocks/sell-product/save.js ***!
-  \*****************************************/
+/***/ "./src/blocks/category-product/save.js":
+/*!*********************************************!*\
+  !*** ./src/blocks/category-product/save.js ***!
+  \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11727,6 +12001,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 
 
 
+
 function save(props) {
   var attributes = props.attributes;
   /**
@@ -11739,69 +12014,76 @@ function save(props) {
   /**
    * Extract products from attributes
    */
-  var saleProducts = attributes.product_obj.length > 0 ? attributes.product_obj : [];
+  var categoryProducts = attributes.product_obj.length > 0 ? attributes.product_obj : [];
   /**
    * return save data
    *  */
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-      className: "container gs_block__recent_product__container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-        className: "text-2xl",
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Recent Products', 'gutenberg-starter')
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-        className: "grid grid-cols-3 gap-5",
-        children: saleProducts && saleProducts.map(function (p, index) {
-          var productTitle = p.name;
-          var featuredImage = p.images[0].src;
-          var productType = p.type; // 'simple', 'variable', 'grouped', etc.
-          var isSimple = productType === 'simple';
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-              src: featuredImage,
-              alt: productTitle,
-              className: "mb-3 inline-block w-full rounded"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-              className: "text-xl font-medium font-roboto",
-              href: encodeURI(p.permalink),
-              children: productTitle
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-              className: "product_price",
-              dangerouslySetInnerHTML: {
-                __html: p.price_html
-              }
-            }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
-              className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
-              "data-product_id": p.id,
-              "data-product_sku": p.sku,
-              "data-quantity": "1",
-              "aria-label": "Add \u201C".concat(p.name, "\u201D to your cart"),
-              rel: "nofollow",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-                className: "add-to-cart-text",
-                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add to cart', 'gutenberg-starter')
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-                className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+  return (
+    /*#__PURE__*/
+    // <ErrorBoundary fallback={<p>{__('Error', 'gutenberg-starter')}</p>}>
+    // <Suspense fallback={<p>{__('Loading...', 'gutenberg-starter')}</p>}>
+    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "container gs_block__featured_product__container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+          className: "text-2xl mb-7",
+          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Category Products', 'gutenberg-starter')
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "grid grid-cols-3 gap-5",
+          children: categoryProducts && categoryProducts.map(function (p, index) {
+            var productTitle = p.name;
+            var featuredImage = p.images[0].src;
+            var productType = p.type; // 'simple', 'variable', 'grouped', etc.
+            var isSimple = productType === 'simple';
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+                src: featuredImage,
+                alt: productTitle,
+                className: "mb-3 inline-block w-full rounded"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                className: "text-xl font-medium font-roboto",
+                href: encodeURI(p.permalink),
+                children: productTitle
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                className: "product_price",
+                dangerouslySetInnerHTML: {
+                  __html: p.price_html
+                }
+              }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+                className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
+                "data-product_id": p.id,
+                "data-product_sku": p.sku,
+                "data-quantity": "1",
+                "aria-label": "Add \u201C".concat(p.name, "\u201D to your cart"),
+                rel: "nofollow",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  className: "add-to-cart-text",
+                  children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add to cart', 'gutenberg-starter')
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                  className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                })]
+              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+                href: encodeURI(p.permalink),
+                className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Product', 'gutenberg-starter')
               })]
-            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-              href: encodeURI(p.permalink),
-              className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Product', 'gutenberg-starter')
-            })]
-          }, index);
-        })
-      })]
-    })
-  }));
+            }, index);
+          })
+        })]
+      })
+    }))
+    // </Suspense>
+    // </ErrorBoundary>
+  );
 }
 
 /***/ }),
 
-/***/ "./src/blocks/sell-product/sidebarControl.js":
-/*!***************************************************!*\
-  !*** ./src/blocks/sell-product/sidebarControl.js ***!
-  \***************************************************/
+/***/ "./src/blocks/category-product/sidebarControl.js":
+/*!*******************************************************!*\
+  !*** ./src/blocks/category-product/sidebarControl.js ***!
+  \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -11809,16 +12091,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ sidebarControl)
 /* harmony export */ });
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_WooCommerceAPI__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/WooCommerceAPI */ "./src/blocks/components/WooCommerceAPI.js");
+/* harmony import */ var react_error_boundary__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-error-boundary */ "./node_modules/react-error-boundary/dist/react-error-boundary.development.esm.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
 
 
 
@@ -11827,51 +12115,235 @@ __webpack_require__.r(__webpack_exports__);
 function sidebarControl(_ref) {
   var attributes = _ref.attributes,
     setAttributes = _ref.setAttributes,
-    handleUpdateRecentProduct = _ref.handleUpdateRecentProduct,
-    loading = _ref.loading;
+    handleUpdateCategoryProduct = _ref.handleUpdateCategoryProduct,
+    loading = _ref.loading,
+    setIsLoading = _ref.setIsLoading;
   var default_product_to_show_value = 3;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Product', 'gutenberg-starter'),
-        initialOpen: true,
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
-          className: "display-single-post-featured-image",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
-            type: "button",
-            className: "button is-primary",
-            onClick: handleUpdateRecentProduct,
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_2___default().useState(Promise.resolve([])),
+    _React$useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
+    fetchPromise = _React$useState2[0],
+    setFetchPromise = _React$useState2[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    var wooPromise = (0,_components_WooCommerceAPI__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      restURL: 'products/categories',
+      params: {
+        per_page: 100,
+        hide_empty: true // Exclude categories with no products
+      }
+    });
+    // setFetchPromise(wooPromise);
+    wooPromise.then(function (response) {
+      setAttributes({
+        product_category: response
+      });
+    })["catch"](function (error) {
+      return console.error('API Error:', error);
+    });
+  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    if (!attributes.selected_category) {
+      return;
+    }
+    var wooProductPromise = (0,_components_WooCommerceAPI__WEBPACK_IMPORTED_MODULE_5__["default"])({
+      restURL: 'products',
+      params: {
+        per_page: attributes.no_of_product_to_show,
+        hide_empty: true,
+        category: attributes.selected_category
+      }
+    });
+    wooProductPromise.then(function (response) {
+      setAttributes({
+        product_obj: response
+      });
+      setIsLoading(false);
+    })["catch"](function (error) {
+      return console.error('API Error:', error);
+    });
+  }, [attributes.selected_category]);
+  var WooCategories = function WooCategories() {
+    /**
+     * Throw promise for the susspense fallback
+     * to show loading state
+     * @see https://react.dev/reference/react/Suspense#suspense-fallback
+     */
+    if (attributes.product_category.length == 0) {
+      throw fetchPromise;
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.SelectControl, {
+      label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Select Category', 'gutenberg-starter'),
+      value: attributes.selected_category,
+      options: attributes.product_category.map(function (category) {
+        return {
+          label: category.name,
+          value: category.id
+        };
+      }),
+      onChange: function onChange(value) {
+        setIsLoading(true);
+        setAttributes({
+          selected_category: value
+        });
+      },
+      disabled: loading,
+      "aria-disabled": loading
+    });
+  };
+  var RefreshProductsComponent = function RefreshProductsComponent() {
+    if (attributes.product_category.length == 0) {
+      throw fetchPromise;
+    }
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
+      className: "display-single-post-featured-image mb-3 flex align-middle flex-row justify-between",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.Button, {
+        type: "button",
+        className: "button is-primary",
+        onClick: handleUpdateCategoryProduct,
+        disabled: loading,
+        "aria-disabled": loading,
+        "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Refresh Products', 'gutenberg-starter'),
+        children: loading ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Loading...', 'gutenberg-starter') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Refresh Products', 'gutenberg-starter')
+      }), loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+        className: "spinner is-active m-0"
+      })]
+    });
+  };
+  console.log('attributes.product_category.length', attributes.product_category.length);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_error_boundary__WEBPACK_IMPORTED_MODULE_7__.ErrorBoundary, {
+    fallback: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+      children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Error in sidebar panel', 'gutenberg-starter')
+    }),
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelBody, {
+          title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Product', 'gutenberg-starter'),
+          initialOpen: true,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_2__.Suspense, {
+            fallback: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
+              className: "flex justify-between flex-row align-middle text-center text-current p-2 bg-slate-300 mt-3 mb-3 rounded",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Let load the category first', 'gutenberg-stater')
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                className: "spinner is-active m-0"
+              })]
+            }),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(RefreshProductsComponent, {})
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react__WEBPACK_IMPORTED_MODULE_2__.Suspense, {
+            fallback: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
+              className: "flex justify-between flex-row align-middle text-center text-current p-2 bg-slate-300 mt-3 mb-3 rounded",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Loading categories from the API...', 'gutenberg-starter')
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                className: "spinner is-active m-0"
+              })]
+            }),
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(WooCategories, {})
+          }), attributes.product_category.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.RangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Number of Products', 'gutenberg-starter'),
+            value: attributes.no_of_product_to_show,
+            onChange: function onChange(value) {
+              return setAttributes({
+                no_of_product_to_show: value
+              });
+            },
+            __next40pxDefaultSize: true,
+            __nextHasNoMarginBottom: true,
+            min: 1,
+            max: 9,
+            step: 1,
+            initialPosition: default_product_to_show_value,
+            allowReset: true,
+            resetFallbackValue: default_product_to_show_value,
+            resetLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Reset', 'gutenberg-starter'),
+            resetTooltip: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Reset to default value', 'gutenberg-starter'),
             disabled: loading,
-            "aria-disabled": loading,
-            "aria-label": (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Refresh Products', 'gutenberg-starter'),
-            icon: loading ? 'update' : 'update',
-            iconPosition: "left",
-            children: loading ? (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading...', 'gutenberg-starter') : (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Refresh Products', 'gutenberg-starter')
-          }), loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-            className: "spinner is-active"
+            "aria-disabled": loading
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Number of Products', 'gutenberg-starter'),
-          value: attributes.no_of_product_to_show,
-          onChange: function onChange(value) {
-            return setAttributes({
-              no_of_product_to_show: value
-            });
-          },
-          __next40pxDefaultSize: true,
-          __nextHasNoMarginBottom: true,
-          min: 1,
-          max: 9,
-          step: 1,
-          initialPosition: default_product_to_show_value,
-          allowReset: true,
-          resetFallbackValue: default_product_to_show_value,
-          resetLabel: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Reset', 'gutenberg-starter'),
-          resetTooltip: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Reset to default value', 'gutenberg-starter')
-        })]
+        })
       })
     })
   });
+}
+
+/***/ }),
+
+/***/ "./src/blocks/components/WooCommerceAPI.js":
+/*!*************************************************!*\
+  !*** ./src/blocks/components/WooCommerceAPI.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ WooCommerceAPI)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var WooCommerceRestApi = (__webpack_require__(/*! @woocommerce/woocommerce-rest-api */ "./node_modules/@woocommerce/woocommerce-rest-api/index.js")["default"]);
+function WooCommerceAPI(_x) {
+  return _WooCommerceAPI.apply(this, arguments);
+}
+function _WooCommerceAPI() {
+  _WooCommerceAPI = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(_ref) {
+    var restURL, params, api, wooAPIResponse, _error$response;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          restURL = _ref.restURL, params = _ref.params;
+          /**
+           * Import env variables
+           * from .env file
+           * for Woocommerce authentication
+           */
+          api = new WooCommerceRestApi({
+            url: envVars.GS_SITE_URL,
+            consumerKey: envVars.WC_CONSUMER_KEY,
+            consumerSecret: envVars.WC_CONSUMER_SECRET,
+            version: 'wc/v3',
+            headers: {
+              'Custom-User-Agent': 'WooCommerceAPIClient' // Replace User-Agent with a custom header
+            }
+          });
+          _context.prev = 2;
+          _context.next = 5;
+          return api.get(restURL.toString(), params);
+        case 5:
+          wooAPIResponse = _context.sent;
+          _context.next = 8;
+          return new Promise(function (resolve) {
+            return setTimeout(resolve, 8 * 1000);
+          });
+        case 8:
+          _context.next = 10;
+          return wooAPIResponse.data;
+        case 10:
+          return _context.abrupt("return", _context.sent);
+        case 13:
+          _context.prev = 13;
+          _context.t0 = _context["catch"](2);
+          return _context.abrupt("return", Promise.reject(
+          /**
+           * Explanation of error.response?.data?.message:
+          	👉 error: This is the error object thrown by the api.get() call. It contains details about what went wrong.
+          	👉 error.response: This property (if available) contains the HTTP response returned by the server when the request fails. It includes details like the status code, headers, and response body.
+          	👉 error.response?.data: This accesses the data property of the response, which typically contains the body of the error response sent by the server. The ?. (optional chaining) ensures that the code doesn't throw an error if response or data is undefined.
+          	👉 error.response?.data?.message: This accesses the message property within the data object. The message usually contains a human-readable description of the error, such as "Invalid API key" or "Resource not found."
+           */
+          new Error(((_error$response = _context.t0.response) === null || _error$response === void 0 || (_error$response = _error$response.data) === null || _error$response === void 0 ? void 0 : _error$response.message) || _context.t0.message)));
+        case 16:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[2, 13]]);
+  }));
+  return _WooCommerceAPI.apply(this, arguments);
 }
 
 /***/ }),
@@ -11893,6 +12365,17 @@ function sidebarControl(_ref) {
 /***/ (() => {
 
 /* (ignored) */
+
+/***/ }),
+
+/***/ "@babel/runtime/regenerator":
+/*!*************************************!*\
+  !*** external "regeneratorRuntime" ***!
+  \*************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = window["regeneratorRuntime"];
 
 /***/ }),
 
@@ -12057,15 +12540,15 @@ var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be in strict mode.
 (() => {
 "use strict";
-/*!******************************************!*\
-  !*** ./src/blocks/sell-product/index.js ***!
-  \******************************************/
+/*!**********************************************!*\
+  !*** ./src/blocks/category-product/index.js ***!
+  \**********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/sell-product/block.json");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/sell-product/edit.js");
-/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/blocks/sell-product/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.json */ "./src/blocks/category-product/block.json");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/category-product/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/blocks/category-product/save.js");
 
 
 

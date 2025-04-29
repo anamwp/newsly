@@ -1,20 +1,28 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "anam-gutenberg-starter-block/sale-product",
+  "name": "anam-gutenberg-starter-block/category-product",
   "version": "0.1.0",
-  "title": "Sale Product",
+  "title": "Category Product",
   "category": "anam-starter",
   "icon": "media-interactive",
   "description": "",
   "attributes": {
     "className": {
       "type": "string",
-      "default": "gs_block__sale_product"
+      "default": "gs_block__category_product"
     },
     "product_obj": {
       "type": "array",
       "default": []
+    },
+    "product_category": {
+      "type": "array",
+      "default": []
+    },
+    "selected_category": {
+      "type": "string",
+      "default": "null"
     },
     "no_of_product_to_show": {
       "type": "number",
