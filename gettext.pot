@@ -11,23 +11,19 @@ msgstr ""
 msgid "View Product"
 msgstr ""
 
-#: src/blocks/category-product/edit.js:211
-msgid "Loading products..."
-msgstr ""
-
-#: src/blocks/category-product/edit.js:239
+#: src/blocks/category-product/edit.js:240
 msgid "Category Products"
 msgstr ""
 
-#: src/blocks/category-product/edit.js:245
+#: src/blocks/category-product/edit.js:246
 msgid "Please select a category to display products"
 msgstr ""
 
-#: src/blocks/category-product/edit.js:255
+#: src/blocks/category-product/edit.js:256
 msgid "Error to fetch product"
 msgstr ""
 
-#: src/blocks/category-product/edit.js:270
+#: src/blocks/category-product/edit.js:271
 msgid "Select a category to load products"
 msgstr ""
 

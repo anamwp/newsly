@@ -11919,12 +11919,17 @@ function edit(_ref) {
       children: Array.from({
         length: product_to_show
       }, function (_, index) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-          className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
-            className: "text-center text-xl",
-            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Loading products...', 'gutenberg-starter')
-          })
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+          className: "gs__product_card bg-slate-200 p-4 rounded transition-all",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+            className: "mb-3 inline-block w-full rounded bg-slate-300 h-60"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+            className: "text-xl font-medium font-roboto bg-slate-300 h-6 mb-3"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+            className: "product_price bg-slate-300 h-6 mb-3"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+            className: "add_to_cart_button ajax_add_to_cart bg-slate-300 h-10 mb-3 inline-block w-40 rounded"
+          })]
         }, index);
       })
     });

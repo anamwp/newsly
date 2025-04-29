@@ -205,11 +205,12 @@ export default function edit({ attributes, setAttributes }) {
 				{Array.from({ length: product_to_show }, (_, index) => (
 					<div
 						key={index}
-						className="gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
+						className="gs__product_card bg-slate-200 p-4 rounded transition-all"
 					>
-						<p className="text-center text-xl">
-							{__('Loading products...', 'gutenberg-starter')}
-						</p>
+						<div className="mb-3 inline-block w-full rounded bg-slate-300 h-60"></div>
+						<div className="text-xl font-medium font-roboto bg-slate-300 h-6 mb-3"></div>
+						<div className="product_price bg-slate-300 h-6 mb-3"></div>
+						<div className="add_to_cart_button ajax_add_to_cart bg-slate-300 h-10 mb-3 inline-block w-40 rounded"></div>
 					</div>
 				))}
 			</div>
