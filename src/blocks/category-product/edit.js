@@ -222,6 +222,7 @@ export default function edit({ attributes, setAttributes }) {
 	 */
 	const categoryProducts =
 		attributes.product_obj.length > 0 ? attributes.product_obj : [];
+	console.log('attributes', attributes);
 	/**
 	 * return edit content
 	 */
@@ -237,7 +238,12 @@ export default function edit({ attributes, setAttributes }) {
 
 			<div className="container gs_block__category_product__container">
 				<h2 className="text-2xl mb-7">
-					{__('Category Products', 'gutenberg-starter')}
+					{/* show category label */}
+					{attributes.selected_category &&
+						__(
+							'Category: ' + attributes.selected_category_label,
+							'gutenberg-starter'
+						)}
 				</h2>
 
 				{categoryProducts.length === 0 && (

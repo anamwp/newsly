@@ -24,6 +24,10 @@
       "type": "string",
       "default": ""
     },
+    "selected_category_label": {
+      "type": "string",
+      "default": ""
+    },
     "no_of_product_to_show": {
       "type": "number",
       "default": 3

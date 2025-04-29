@@ -11692,7 +11692,7 @@ function config (name) {
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/category-product","version":"0.1.0","title":"Category Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__category_product"},"product_obj":{"type":"array","default":[]},"product_category":{"type":"array","default":[]},"selected_category":{"type":"string","default":""},"no_of_product_to_show":{"type":"number","default":3}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/category-product","version":"0.1.0","title":"Category Product","category":"anam-starter","icon":"media-interactive","description":"","attributes":{"className":{"type":"string","default":"gs_block__category_product"},"product_obj":{"type":"array","default":[]},"product_category":{"type":"array","default":[]},"selected_category":{"type":"string","default":""},"selected_category_label":{"type":"string","default":""},"no_of_product_to_show":{"type":"number","default":3}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js"}');
 
 /***/ }),
 
@@ -11939,6 +11939,7 @@ function edit(_ref) {
    * Extract products from attributes
    */
   var categoryProducts = attributes.product_obj.length > 0 ? attributes.product_obj : [];
+  console.log('attributes', attributes);
   /**
    * return edit content
    */
@@ -11953,7 +11954,7 @@ function edit(_ref) {
       className: "container gs_block__category_product__container",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
         className: "text-2xl mb-7",
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Category Products', 'gutenberg-starter')
+        children: attributes.selected_category && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Category: ' + attributes.selected_category_label, 'gutenberg-starter')
       }), categoryProducts.length === 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
         className: "text-center text-xl",
         children: isLoading == false && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Please select a category to display products', 'gutenberg-starter')
@@ -12023,64 +12024,57 @@ function save(props) {
   /**
    * return save data
    *  */
-  return (
-    /*#__PURE__*/
-    // <ErrorBoundary fallback={<p>{__('Error', 'gutenberg-starter')}</p>}>
-    // <Suspense fallback={<p>{__('Loading...', 'gutenberg-starter')}</p>}>
-    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "container gs_block__featured_product__container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
-          className: "text-2xl mb-7",
-          children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Category Products', 'gutenberg-starter')
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          className: "grid grid-cols-3 gap-5",
-          children: categoryProducts && categoryProducts.map(function (p, index) {
-            var productTitle = p.name;
-            var featuredImage = p.images[0].src;
-            var productType = p.type; // 'simple', 'variable', 'grouped', etc.
-            var isSimple = productType === 'simple';
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                src: featuredImage,
-                alt: productTitle,
-                className: "mb-3 inline-block w-full rounded"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-                className: "text-xl font-medium font-roboto",
-                href: encodeURI(p.permalink),
-                children: productTitle
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                className: "product_price",
-                dangerouslySetInnerHTML: {
-                  __html: p.price_html
-                }
-              }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
-                className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
-                "data-product_id": p.id,
-                "data-product_sku": p.sku,
-                "data-quantity": "1",
-                "aria-label": "Add \u201C".concat(p.name, "\u201D to your cart"),
-                rel: "nofollow",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-                  className: "add-to-cart-text",
-                  children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add to cart', 'gutenberg-starter')
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-                  className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
-                })]
-              }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
-                href: encodeURI(p.permalink),
-                className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
-                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Product', 'gutenberg-starter')
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "container gs_block__featured_product__container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+        className: "text-2xl mb-7",
+        children: attributes.selected_category && (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Category: ' + attributes.selected_category_label, 'gutenberg-starter')
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "grid grid-cols-3 gap-5",
+        children: categoryProducts && categoryProducts.map(function (p, index) {
+          var productTitle = p.name;
+          var featuredImage = p.images[0].src;
+          var productType = p.type; // 'simple', 'variable', 'grouped', etc.
+          var isSimple = productType === 'simple';
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "gs__product_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+              src: featuredImage,
+              alt: productTitle,
+              className: "mb-3 inline-block w-full rounded"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+              className: "text-xl font-medium font-roboto",
+              href: encodeURI(p.permalink),
+              children: productTitle
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+              className: "product_price",
+              dangerouslySetInnerHTML: {
+                __html: p.price_html
+              }
+            }), isSimple ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+              className: "add_to_cart_button ajax_add_to_cart bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2 flex items-center justify-center gap-2",
+              "data-product_id": p.id,
+              "data-product_sku": p.sku,
+              "data-quantity": "1",
+              "aria-label": "Add \u201C".concat(p.name, "\u201D to your cart"),
+              rel: "nofollow",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "add-to-cart-text",
+                children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('Add to cart', 'gutenberg-starter')
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
+                className: "spinner hidden animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full"
               })]
-            }, index);
-          })
-        })]
-      })
-    }))
-    // </Suspense>
-    // </ErrorBoundary>
-  );
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
+              href: encodeURI(p.permalink),
+              className: "inline-block bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 transition-all mt-2",
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('View Product', 'gutenberg-starter')
+            })]
+          }, index);
+        })
+      })]
+    })
+  }));
 }
 
 /***/ }),
@@ -12186,8 +12180,12 @@ function sidebarControl(_ref) {
       }),
       onChange: function onChange(value) {
         setIsLoading(true);
+        var selectedCategory = attributes.product_category.find(function (category) {
+          return category.id === parseInt(value);
+        });
         setAttributes({
-          selected_category: value
+          selected_category: value,
+          selected_category_label: (selectedCategory === null || selectedCategory === void 0 ? void 0 : selectedCategory.name) || ''
         });
       },
       disabled: loading,

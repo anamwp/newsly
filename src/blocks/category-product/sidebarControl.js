@@ -75,7 +75,13 @@ export default function sidebarControl({
 				}))}
 				onChange={(value) => {
 					setIsLoading(true);
-					setAttributes({ selected_category: value });
+					const selectedCategory = attributes.product_category.find(
+						(category) => category.id === parseInt(value)
+					);
+					setAttributes({
+						selected_category: value,
+						selected_category_label: selectedCategory?.name || '',
+					});
 				}}
 				disabled={loading}
 				aria-disabled={loading}

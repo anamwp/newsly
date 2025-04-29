@@ -21,12 +21,14 @@ export default function save(props) {
 	 * return save data
 	 *  */
 	return (
-		// <ErrorBoundary fallback={<p>{__('Error', 'gutenberg-starter')}</p>}>
-		// <Suspense fallback={<p>{__('Loading...', 'gutenberg-starter')}</p>}>
 		<div {...blockProps}>
 			<div className="container gs_block__featured_product__container">
 				<h2 className="text-2xl mb-7">
-					{__('Category Products', 'gutenberg-starter')}
+					{attributes.selected_category &&
+						__(
+							'Category: ' + attributes.selected_category_label,
+							'gutenberg-starter'
+						)}
 				</h2>
 				<div className="grid grid-cols-3 gap-5">
 					{categoryProducts &&
@@ -92,7 +94,5 @@ export default function save(props) {
 				</div>
 			</div>
 		</div>
-		// </Suspense>
-		// </ErrorBoundary>
 	);
 }
