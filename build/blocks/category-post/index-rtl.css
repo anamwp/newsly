@@ -5,17 +5,30 @@
   /* styles.css */
 }
 .gts__category_post .post-wrapper {
-  gap: 0.75rem
+  gap: 0.75rem;
 }
 .gts__category_post .gs-cols-1 {
-  grid-template-columns: repeat(1, minmax(0, 1fr))
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 .gts__category_post .gs-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr))
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .gts__category_post .gs-cols-3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr))
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .gts__category_post .gs-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr))
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.gts__category_post.grid-4 .post-wrapper {
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+}
+.gts__category_post.grid-4 .post-wrapper .gs__post_card:nth-child(1) {
+  grid-column-start: 1;
+  grid-column-end: 7;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+.gts__category_post.grid-4 .post-wrapper .gs__post_card:nth-child(n+2) {
+  grid-column: span 3;
 }

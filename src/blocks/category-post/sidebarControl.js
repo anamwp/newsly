@@ -16,6 +16,7 @@ export default function sidebarControl({
 	handleNumberofPostsColumn,
 	handleCategoryToggleControl,
 	handleExcerptToggleControl,
+	handleFeaturedExcerptToggleControl,
 	handleFeaturedImageToggleControl,
 }) {
 	const { attributes, setAttributes } = props;
@@ -80,15 +81,35 @@ export default function sidebarControl({
 							/>
 						</p>
 					)}
-					{attributes.selectedCategroyId && (
-						<p className="display-category-post-excerpt-switch">
-							<ToggleControl
-								label={__('Show Excerpt', 'gutenberg-starter')}
-								checked={attributes.showExcerpt}
-								onChange={handleExcerptToggleControl}
-							/>
-						</p>
-					)}
+					{attributes.selectedCategroyId &&
+						attributes.layout === 'card' && (
+							<p className="display-category-post-excerpt-switch">
+								<ToggleControl
+									label={__(
+										'Show Excerpt',
+										'gutenberg-starter'
+									)}
+									checked={attributes.showExcerpt}
+									onChange={handleExcerptToggleControl}
+								/>
+							</p>
+						)}
+					{/* )} */}
+					{attributes.selectedCategroyId &&
+						attributes.layout === 'grid' && (
+							<p className="display-category-post-excerpt-switch">
+								<ToggleControl
+									label={__(
+										'Show Featured Post Excerpt',
+										'gutenberg-starter'
+									)}
+									checked={attributes.showFeaturedExcerpt}
+									onChange={
+										handleFeaturedExcerptToggleControl
+									}
+								/>
+							</p>
+						)}
 					{attributes.selectedCategroyId && (
 						<RangeControl
 							label="Post Column"
@@ -99,6 +120,32 @@ export default function sidebarControl({
 							min={1}
 							max={4}
 						/>
+					)}
+					{(attributes.postColumn === 3 ||
+						attributes.postColumn === 4) && (
+						<p>
+							<SelectControl
+								label={__('Select Layout', 'gutenberg-starter')}
+								value={attributes.layout}
+								options={[
+									{
+										label: 'Select Layout',
+										value: '',
+									},
+									{
+										label: 'Card',
+										value: 'card',
+									},
+									{
+										label: 'Grid',
+										value: 'grid',
+									},
+								]}
+								onChange={(value) =>
+									setAttributes({ layout: value })
+								}
+							/>
+						</p>
 					)}
 				</PanelBody>
 			</InspectorControls>

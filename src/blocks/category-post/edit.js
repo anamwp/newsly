@@ -14,8 +14,10 @@ export default function edit(props) {
 	/**
 	 * Add classname to block props.
 	 */
+	const gridClass =
+		attributes.layout === 'grid' ? `grid-${attributes.postColumn}` : '';
 	const blockProps = useBlockProps({
-		className: 'gts__category_post',
+		className: `gts__category_post gs-cols-${attributes.postColumn} ${gridClass}`,
 	});
 	/**
 	 * Fetch all categoris at first loading.
@@ -189,6 +191,11 @@ export default function edit(props) {
 			showExcerpt: !attributes.showExcerpt,
 		});
 	};
+	const handleFeaturedExcerptToggleControl = () => {
+		setAttributes({
+			showFeaturedExcerpt: !attributes.showFeaturedExcerpt,
+		});
+	};
 
 	return (
 		<div {...blockProps}>
@@ -200,6 +207,9 @@ export default function edit(props) {
 				handleNumberofPostsColumn={handleNumberofPostsColumn}
 				handleCategoryToggleControl={handleCategoryToggleControl}
 				handleExcerptToggleControl={handleExcerptToggleControl}
+				handleFeaturedExcerptToggleControl={
+					handleFeaturedExcerptToggleControl
+				}
 				handleFeaturedImageToggleControl={
 					handleFeaturedImageToggleControl
 				}
@@ -224,8 +234,13 @@ export default function edit(props) {
 					attributes.fetchedPosts.length > 0 &&
 					attributes.fetchedPosts[0]
 						.slice(0, attributes.postsToShow)
-						.map((post) => (
-							<GSPostCard data={post} parent={props} />
+						.map((post, index) => (
+							<GSPostCard
+								key={index}
+								data={post}
+								parent={props}
+								numberKey={index}
+							/>
 						))}
 			</div>
 		</div>

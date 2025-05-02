@@ -134,11 +134,14 @@ __webpack_require__.r(__webpack_exports__);
 
 var GSPostCard = function GSPostCard(props) {
   var _postData$_embedded$w, _postData$_embedded$w2;
+  var numberKey = props.numberKey || 0;
   var postData = props.data;
   var parentProps = props.parent;
   var featuredImage = (_postData$_embedded$w = postData._embedded['wp:featuredmedia']) === null || _postData$_embedded$w === void 0 || (_postData$_embedded$w = _postData$_embedded$w[0]) === null || _postData$_embedded$w === void 0 ? void 0 : _postData$_embedded$w.source_url;
   var categories = ((_postData$_embedded$w2 = postData._embedded['wp:term']) === null || _postData$_embedded$w2 === void 0 ? void 0 : _postData$_embedded$w2[0]) || [];
+  console.log('key', props);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    "data-post-serial": numberKey,
     className: "gs__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all",
     children: [parentProps.attributes.showFeaturedImage && postData.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "mb-4",
@@ -168,7 +171,12 @@ var GSPostCard = function GSPostCard(props) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
         children: postData.title.rendered
       })
-    }), parentProps.attributes.showExcerpt && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    }), parentProps.attributes.showExcerpt && parentProps.attributes.layout === 'card' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "font-poppins text-slate-900 mt-2",
+      dangerouslySetInnerHTML: {
+        __html: postData.excerpt.rendered
+      }
+    }), numberKey === 0 && parentProps.attributes.layout === 'grid' && parentProps.attributes.showFeaturedExcerpt === true && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "font-poppins text-slate-900 mt-2",
       dangerouslySetInnerHTML: {
         __html: postData.excerpt.rendered

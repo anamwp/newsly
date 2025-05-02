@@ -19,14 +19,19 @@ import { Disabled } from '@wordpress/components';
  * @returns HTML
  */
 const GSPostCard = (props) => {
+	let numberKey = props.numberKey || 0;
 	let postData = props.data;
 	let parentProps = props.parent;
 	const featuredImage =
 		postData._embedded['wp:featuredmedia']?.[0]?.source_url;
 	const categories = postData._embedded['wp:term']?.[0] || [];
+	console.log('key', props);
 
 	return (
-		<div className="gs__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all">
+		<div
+			data-post-serial={numberKey}
+			className="gs__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
+		>
 			{/* 
 			if user want to show featured image 
 			and post have featured image
@@ -86,14 +91,25 @@ const GSPostCard = (props) => {
 			excerpt of the post
 			*/}
 			{/* <div>{postData.excerpt.rendered}</div> */}
-			{parentProps.attributes.showExcerpt && (
-				<div
-					className="font-poppins text-slate-900 mt-2"
-					dangerouslySetInnerHTML={{
-						__html: postData.excerpt.rendered,
-					}}
-				/>
-			)}
+			{parentProps.attributes.showExcerpt &&
+				parentProps.attributes.layout === 'card' && (
+					<div
+						className="font-poppins text-slate-900 mt-2"
+						dangerouslySetInnerHTML={{
+							__html: postData.excerpt.rendered,
+						}}
+					/>
+				)}
+			{numberKey === 0 &&
+				parentProps.attributes.layout === 'grid' &&
+				parentProps.attributes.showFeaturedExcerpt === true && (
+					<div
+						className="font-poppins text-slate-900 mt-2"
+						dangerouslySetInnerHTML={{
+							__html: postData.excerpt.rendered,
+						}}
+					/>
+				)}
 		</div>
 	);
 };

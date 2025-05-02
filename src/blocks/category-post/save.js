@@ -4,8 +4,12 @@ import { useBlockProps } from '@wordpress/block-editor';
 import GSPostCard from '../components/GSPostCard';
 
 export default function save(props) {
+	const gridClass =
+		props.attributes.layout === 'grid'
+			? `grid-${props.attributes.postColumn}`
+			: '';
 	const blockProps = useBlockProps.save({
-		className: 'gts__category_post',
+		className: `gts__category_post gs-cols-${props.attributes.postColumn} ${gridClass}`,
 	});
 	const postData = props.attributes.fetchedPosts;
 
@@ -24,8 +28,13 @@ export default function save(props) {
 				{postData.length > 0 &&
 					postData[0]
 						.slice(0, props.attributes.postsToShow)
-						.map((post) => (
-							<GSPostCard data={post} parent={props} />
+						.map((post, index) => (
+							<GSPostCard
+								key={index}
+								data={post}
+								parent={props}
+								numberKey={index}
+							/>
 						))}
 			</div>
 		</div>

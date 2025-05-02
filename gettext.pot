@@ -3,6 +3,38 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: src/blocks/category-post/sidebarControl.js:102
+msgid "Show Featured Post Excerpt"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:128
+msgid "Select Layout"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:28
+msgid "Single Post Controls"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:33
+msgid "Choose Category"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:45
+msgid "Posts Found to display"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:66
+msgid "Show Featured Image"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:78
+msgid "Show Category"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:88
+msgid "Show Excerpt"
+msgstr ""
+
 #: src/blocks/category-product/edit.js:176
 #: src/blocks/category-product/save.js:73
 #: src/blocks/category-product/save.js:75
@@ -106,6 +138,10 @@ msgstr ""
 
 #: src/blocks/category-product/sidebarControl.js:70
 msgid "Select Category"
+msgstr ""
+
+#: src/blocks/components/GSPostCard.js:56
+msgid "No featured image found"
 msgstr ""
 
 #: src/blocks/recent-product/edit.js:133
