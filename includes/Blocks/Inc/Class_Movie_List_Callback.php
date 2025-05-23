@@ -46,7 +46,7 @@ class Class_Movie_List_Callback {
 		$total_pages             = '';
 		$get_post_data           = $_POST['blockId'] ? get_post( $_POST['blockId'] ) : '';
 		$get_post_content        = parse_blocks( $get_post_data->post_content );
-		$block_attrs = is_array( $get_post_content ) ? $get_post_content[0]['attrs'] : array();
+		$block_attrs             = is_array( $get_post_content ) ? $get_post_content[0]['attrs'] : array();
 
 		foreach ( $block_attrs['genres'] as $key => $value ) {
 			$this->new_genres[ $value['id'] ] = $value;
@@ -147,6 +147,7 @@ class Class_Movie_List_Callback {
 	/**
 	 * Manage Movie List Block Content from API for the first time
 	 * Responsible for the primary view of the block
+	 *
 	 * @param [type] $block_attributes
 	 * @param [type] $content
 	 * @return void
@@ -157,7 +158,7 @@ class Class_Movie_List_Callback {
 
 		// Get API key from settings
 		$api_key = get_option( 'gutenberg_starter_movie_api_key', '' );
-		
+
 		// If no API key is set, use the fallback API URL
 		if ( empty( $api_key ) ) {
 			$api_url = 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1';
@@ -302,7 +303,7 @@ class Class_Movie_List_Callback {
 		/**
 		 * Fill an array with values
 		 */
-		$new_arr_fill     = array_fill_keys( $arr, null );
+		$new_arr_fill = array_fill_keys( $arr, null );
 		/**
 		 * Compare the keys of two arrays, and return the matches:
 		 */

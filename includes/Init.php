@@ -9,6 +9,7 @@
  */
 
 namespace Anam\GutenbergStarter;
+
 /**
  * Inilize all necessary files.
  */

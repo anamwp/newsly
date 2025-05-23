@@ -51,7 +51,7 @@ class Class_Post_List_Tab_Callback {
 	/**
 	 * Get block attributes from post
 	 *
-	 * @param [int] $post_id - Post ID.
+	 * @param [int]    $post_id - Post ID.
 	 * @param [string] $block_name - Block name.
 	 * @return Array| WP_Error
 	 */
@@ -66,7 +66,7 @@ class Class_Post_List_Tab_Callback {
 		// Find the desired block.
 		foreach ( $blocks as $block ) {
 			if ( $block['blockName'] === $block_name ) {
-				return isset( $block['attrs'] ) ? $block['attrs'] : [];
+				return isset( $block['attrs'] ) ? $block['attrs'] : array();
 			}
 		}
 		return new \WP_Error( 'block_not_found', 'Block not found in post' );
@@ -89,18 +89,18 @@ class Class_Post_List_Tab_Callback {
 		 * Check and sanitize inputs.
 		 */
 		$cat_slug = isset( $_POST['catSlug'] ) ? sanitize_text_field( wp_unslash( $_POST['catSlug'] ) ) : '';
-		$post_id = isset( $_POST['posdID'] ) ? sanitize_text_field( wp_unslash( $_POST['posdID'] ) ) : '';
+		$post_id  = isset( $_POST['posdID'] ) ? sanitize_text_field( wp_unslash( $_POST['posdID'] ) ) : '';
 		// Make post int.
-		$post_id = intval( $post_id );
-		$block_attr = $this->get_block_attributes_from_post( $post_id, self::$block_name );
-		$show_excerpt = isset( $block_attr['showExcerpt'] ) ? $block_attr['showExcerpt'] : true;
-		$show_category = isset( $block_attr['showCategory'] ) ? $block_attr['showCategory'] : true;
+		$post_id             = intval( $post_id );
+		$block_attr          = $this->get_block_attributes_from_post( $post_id, self::$block_name );
+		$show_excerpt        = isset( $block_attr['showExcerpt'] ) ? $block_attr['showExcerpt'] : true;
+		$show_category       = isset( $block_attr['showCategory'] ) ? $block_attr['showCategory'] : true;
 		$show_featured_image = isset( $block_attr['showFeaturedImage'] ) ? $block_attr['showFeaturedImage'] : true;
 
 		/**
 		 * Query to get posts by category.
 		 */
-		$args = array(
+		$args  = array(
 			'post_type'      => 'post',
 			'post_status'    => 'publish',
 			'category_name'  => $cat_slug,
@@ -109,10 +109,11 @@ class Class_Post_List_Tab_Callback {
 		$posts = new \WP_Query( $args );
 		?>
 		<?php if ( $posts->have_posts() ) : ?>
-			<?php while( $posts->have_posts() ) :
+			<?php
+			while ( $posts->have_posts() ) :
 				$posts->the_post();
 				$post_id = get_the_ID();
-				$post = array(
+				$post    = array(
 					'id'      => $post_id,
 					'title'   => get_the_title( $post_id ),
 					'excerpt' => get_the_excerpt( $post_id ),
@@ -139,12 +140,13 @@ class Class_Post_List_Tab_Callback {
 						<?php
 						$categories = get_the_category( $post_id );
 						if ( count( $categories ) > 0 ) :
-							foreach( $categories as $cat ) :
+							foreach ( $categories as $cat ) :
 								?>
 								<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" class="inline-block text-xs text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-300 capitalize p-1 mr-1 rounded-md transition-all">
 									<?php echo esc_html( $cat->name ); ?>
 								</a>
-							<?php endforeach;
+								<?php
+							endforeach;
 						endif;
 						?>
 					</div>
