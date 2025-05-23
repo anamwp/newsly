@@ -155,7 +155,17 @@ class Class_Movie_List_Callback {
 		$this->block_attributes = $block_attributes;
 		$this->content          = $content;
 
-		$get_movie_data = wp_remote_get( 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1' );
+		// Get API key from settings
+		$api_key = get_option( 'gutenberg_starter_movie_api_key', '' );
+		
+		// If no API key is set, use the fallback API URL
+		if ( empty( $api_key ) ) {
+			$api_url = 'https://api.themoviedb.org/3/movie/popular?api_key=94413492db5e2e4ca5e93402ca623fca&language=en-US&page=1';
+		} else {
+			$api_url = 'https://api.themoviedb.org/3/movie/popular?api_key=' . $api_key . '&language=en-US&page=1';
+		}
+
+		$get_movie_data = wp_remote_get( $api_url );
 		$movie_api_data = '';
 		$total_pages    = '';
 		if ( is_array( $get_movie_data ) && ! is_wp_error( $get_movie_data ) ) {
