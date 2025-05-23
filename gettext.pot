@@ -3,147 +3,22 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/category-post/sidebarControl.js:102
-msgid "Show Featured Post Excerpt"
+#: src/blocks/movie-lists/edit.js:109
+msgid "No movies found."
 msgstr ""
 
-#: src/blocks/category-post/sidebarControl.js:128
-msgid "Select Layout"
+#: src/blocks/movie-lists/edit.js:38
+msgid "Failed to load movie genres."
 msgstr ""
 
-#: src/blocks/category-post/sidebarControl.js:28
-msgid "Single Post Controls"
+#: src/blocks/movie-lists/edit.js:53
+msgid "Failed to load movies."
 msgstr ""
 
-#: src/blocks/category-post/sidebarControl.js:33
-msgid "Choose Category"
+#: src/blocks/movie-lists/edit.js:72
+msgid "Failed to refresh movies."
 msgstr ""
 
-#: src/blocks/category-post/sidebarControl.js:45
-msgid "Posts Found to display"
-msgstr ""
-
-#: src/blocks/category-post/sidebarControl.js:66
-msgid "Show Featured Image"
-msgstr ""
-
-#: src/blocks/category-post/sidebarControl.js:78
-msgid "Show Category"
-msgstr ""
-
-#: src/blocks/category-post/sidebarControl.js:88
-msgid "Show Excerpt"
-msgstr ""
-
-#: src/blocks/category-product/edit.js:176
-#: src/blocks/category-product/save.js:73
-#: src/blocks/category-product/save.js:75
-#: src/blocks/recent-product/edit.js:177
-msgid "Add to cart"
-msgstr ""
-
-#: src/blocks/category-product/edit.js:188
-#: src/blocks/category-product/save.js:85
-#: src/blocks/category-product/save.js:87
-#: src/blocks/recent-product/edit.js:189
-msgid "View Product"
-msgstr ""
-
-#: src/blocks/category-product/edit.js:243
-#: src/blocks/category-product/save.js:28
-msgid "Category: "
-msgstr ""
-
-#: src/blocks/category-product/edit.js:252
-msgid "Please select a category to display products"
-msgstr ""
-
-#: src/blocks/category-product/edit.js:262
-msgid "Error to fetch product"
-msgstr ""
-
-#: src/blocks/category-product/edit.js:277
-msgid "Select a category to load products"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:107
-#: src/blocks/category-product/sidebarControl.js:101
-#: src/blocks/featured-product/sidebarControl.js:33
-#: src/blocks/featured-product/sidebarControl.js:35
-#: src/blocks/popular-product/sidebarControl.js:33
-#: src/blocks/sale-product/sidebarControl.js:33
-msgid "Loading..."
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:108
-#: src/blocks/category-product/sidebarControl.js:102
-#: src/blocks/featured-product/sidebarControl.js:34
-#: src/blocks/featured-product/sidebarControl.js:36
-#: src/blocks/popular-product/sidebarControl.js:34
-#: src/blocks/recent-product/sidebarControl.js:40
-#: src/blocks/sale-product/sidebarControl.js:34
-msgid "Refresh Products"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:117
-msgid "Error in sidebar panel"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:123
-#: src/blocks/category-product/sidebarControl.js:117
-#: src/blocks/featured-product/sidebarControl.js:17
-#: src/blocks/popular-product/sidebarControl.js:17
-#: src/blocks/recent-product/sidebarControl.js:25
-#: src/blocks/sale-product/sidebarControl.js:17
-msgid "Product"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:131
-msgid "Let load the category first"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:148
-msgid "Loading categories from the API..."
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:161
-#: src/blocks/category-product/sidebarControl.js:155
-#: src/blocks/featured-product/sidebarControl.js:42
-#: src/blocks/featured-product/sidebarControl.js:40
-#: src/blocks/popular-product/sidebarControl.js:42
-#: src/blocks/recent-product/sidebarControl.js:48
-#: src/blocks/sale-product/sidebarControl.js:42
-msgid "Number of Products"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:181
-#: src/blocks/category-product/sidebarControl.js:175
-#: src/blocks/featured-product/sidebarControl.js:55
-#: src/blocks/featured-product/sidebarControl.js:53
-#: src/blocks/popular-product/sidebarControl.js:55
-#: src/blocks/recent-product/sidebarControl.js:61
-#: src/blocks/sale-product/sidebarControl.js:55
-msgid "Reset"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:182
-#: src/blocks/category-product/sidebarControl.js:176
-#: src/blocks/featured-product/sidebarControl.js:56
-#: src/blocks/featured-product/sidebarControl.js:54
-#: src/blocks/popular-product/sidebarControl.js:56
-#: src/blocks/recent-product/sidebarControl.js:62
-#: src/blocks/sale-product/sidebarControl.js:56
-msgid "Reset to default value"
-msgstr ""
-
-#: src/blocks/category-product/sidebarControl.js:70
-msgid "Select Category"
-msgstr ""
-
-#: src/blocks/components/GSPostCard.js:56
-msgid "No featured image found"
-msgstr ""
-
-#: src/blocks/recent-product/edit.js:133
-msgid "Recent Products"
+#: src/blocks/movie-lists/edit.js:91
+msgid "Loading movies..."
 msgstr ""

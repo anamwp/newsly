@@ -839,6 +839,138 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 
 /***/ }),
 
+/***/ "./src/blocks/movie-lists/components/MovieCard.js":
+/*!********************************************************!*\
+  !*** ./src/blocks/movie-lists/components/MovieCard.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils/api */ "./src/blocks/movie-lists/utils/api.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+/**
+ * Handle movie genre component
+ * @param {Object} props - Component props
+ * @param {Array} props.genreIDArr - genre id array
+ * @param {Object} props.attributes - block attributes
+ * @returns {JSX.Element} Rendered HTML
+ */
+
+var HandleGenreRender = function HandleGenreRender(_ref) {
+  var genreIDArr = _ref.genreIDArr,
+    attributes = _ref.attributes;
+  var getGenre = attributes.genres;
+  var newGenreArr = getGenre.filter(function (genre) {
+    return genreIDArr.includes(genre.id);
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("ul", {
+    className: "movie-card__genres",
+    children: newGenreArr.map(function (genre) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("li", {
+        className: "movie-card__genre-item",
+        children: genre.name
+      }, genre.id);
+    })
+  });
+};
+
+/**
+ * MovieCard component
+ * @param {Object} props - Component props
+ * @param {Object} props.movie - movie object
+ * @param {Object} props.attributes - block attributes
+ * @returns {JSX.Element} Rendered HTML
+ */
+var MovieCard = function MovieCard(_ref2) {
+  var movie = _ref2.movie,
+    attributes = _ref2.attributes;
+  var _getApiConfig = (0,_utils_api__WEBPACK_IMPORTED_MODULE_2__.getApiConfig)(),
+    imageBaseUrl = _getApiConfig.imageBaseUrl;
+  var headingPadding = attributes.titlePaddingAttr;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "movie-card",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "movie-card__image",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+        src: "".concat(imageBaseUrl).concat(movie.poster_path),
+        alt: movie.title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "meta",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "language-date",
+          children: [attributes.showLanguage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "language",
+            children: movie.original_language
+          }), attributes.showReleaseDate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "date",
+            children: movie.release_date
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "vote",
+          children: [attributes.showVoteAverage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "vote-average",
+            children: movie.vote_average
+          }), attributes.showVoteCount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+            className: "vote-count",
+            children: movie.vote_count
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "movie-card__content",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalHeading, {
+        style: {
+          fontSize: "".concat(attributes.titleFontSize, "px"),
+          fontWeight: attributes.titleFontWeight,
+          letterSpacing: "".concat(attributes.titleLetterSpacing, "px"),
+          lineHeight: "".concat(attributes.titleLineHeight),
+          fontStyle: attributes.titleStyle,
+          textTransform: attributes.titleTransform,
+          textDecoration: attributes.titleDecoration,
+          padding: "".concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.top, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.right, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.bottom, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.left)
+        },
+        level: 2,
+        children: movie.title
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "movie-card__overview overview",
+        style: {
+          padding: "".concat(attributes.contentPaddingAttr.top, " ").concat(attributes.contentPaddingAttr.right, " ").concat(attributes.contentPaddingAttr.bottom, " ").concat(attributes.contentPaddingAttr.left)
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.__experimentalText, {
+          children: movie.overview
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "movie-card__content__footer",
+        style: {
+          padding: "".concat(attributes.contentPaddingAttr.top, " ").concat(attributes.contentPaddingAttr.right, " ").concat(attributes.contentPaddingAttr.bottom, " ").concat(attributes.contentPaddingAttr.left)
+        },
+        children: attributes.showGenre && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "genre",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(HandleGenreRender, {
+            genreIDArr: movie.genre_ids,
+            attributes: attributes
+          })
+        })
+      })]
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MovieCard);
+
+/***/ }),
+
 /***/ "./src/blocks/movie-lists/edit.js":
 /*!****************************************!*\
   !*** ./src/blocks/movie-lists/edit.js ***!
@@ -847,11 +979,11 @@ module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/tru
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ edit)
+/* harmony export */   "default": () => (/* binding */ Edit)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "react");
@@ -860,13 +992,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _sidebarControl__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./sidebarControl */ "./src/blocks/movie-lists/sidebarControl.js");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _sidebarControl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./sidebarControl */ "./src/blocks/movie-lists/sidebarControl.js");
+/* harmony import */ var _components_MovieCard__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/MovieCard */ "./src/blocks/movie-lists/components/MovieCard.js");
+/* harmony import */ var _utils_api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils/api */ "./src/blocks/movie-lists/utils/api.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__);
 
 
 
@@ -880,250 +1014,169 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 
 
 
+
+
 /**
- * Handle API call to
- * Get popular movies from the API
- * @returns JSON
+ * Main edit component for the movie-lists block
+ * @param {Object} props - Component props
+ * @returns {JSX.Element} Block editor UI
  */
 
-var GetPopularMovies = /*#__PURE__*/function () {
-  var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee() {
-    var movieAPIUrl, apiKey, apiResponse, apiResponseJSON;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
-        case 0:
-          // Todo: Get API keys from env file
-          movieAPIUrl = 'https://api.themoviedb.org/3/movie/popular';
-          apiKey = '94413492db5e2e4ca5e93402ca623fca';
-          _context.next = 4;
-          return fetch(movieAPIUrl + "?api_key=".concat(apiKey, "&language=en-US&page=1"));
-        case 4:
-          apiResponse = _context.sent;
-          _context.next = 7;
-          return apiResponse.json();
-        case 7:
-          apiResponseJSON = _context.sent;
-          if (!(apiResponseJSON.success === false)) {
-            _context.next = 10;
-            break;
-          }
-          throw new Error(apiResponseJSON.status_message);
-        case 10:
-          return _context.abrupt("return", apiResponseJSON);
-        case 11:
-        case "end":
-          return _context.stop();
-      }
-    }, _callee);
-  }));
-  return function GetPopularMovies() {
-    return _ref.apply(this, arguments);
-  };
-}();
-/**
- * Handle API call to
- * Get movie genres from the API
- * @returns JSON
- */
-var GetMovieGenres = /*#__PURE__*/function () {
-  var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee2() {
-    var options, getGenreResponse, getGenreResponseJSON;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee2$(_context2) {
-      while (1) switch (_context2.prev = _context2.next) {
-        case 0:
-          // Todo: Get API keys from env file
-          options = {
-            method: 'GET',
-            headers: {
-              accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA'
-            }
-          };
-          _context2.next = 3;
-          return fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options);
-        case 3:
-          getGenreResponse = _context2.sent;
-          _context2.next = 6;
-          return getGenreResponse.json();
-        case 6:
-          getGenreResponseJSON = _context2.sent;
-          if (!(getGenreResponseJSON.success === false)) {
-            _context2.next = 9;
-            break;
-          }
-          throw new Error(getGenreResponseJSON.status_message);
-        case 9:
-          return _context2.abrupt("return", getGenreResponseJSON);
-        case 10:
-        case "end":
-          return _context2.stop();
-      }
-    }, _callee2);
-  }));
-  return function GetMovieGenres() {
-    return _ref2.apply(this, arguments);
-  };
-}();
-/**
- * Handle movie genre component
- * @param {Array} genreIDArr - genre id array
- * @param {Object} attributes - block attributes
- * @returns HTML
- */
-var HandleGenreRender = function HandleGenreRender(_ref3) {
-  var genreIDArr = _ref3.genreIDArr,
-    attributes = _ref3.attributes;
-  var getGenre = attributes.genres;
-  var newGenreArr = getGenre.filter(function (ai) {
-    return genreIDArr.includes(ai.id);
-  });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("ul", {
-    children: newGenreArr.map(function (genre) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("li", {
-        children: genre.name
-      }, genre.id);
-    })
-  });
-};
-/**
- * MovieCard component
- * @param {Object} movie - movie object.
- * @param {Object} attributes - block attributes.
- * @returns HTML
- */
-var MovieCard = function MovieCard(_ref4) {
-  var movie = _ref4.movie,
-    attributes = _ref4.attributes;
-  var headingPadding = attributes.titlePaddingAttr;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-    className: "movie-card",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-      className: "movie-card__image",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("img", {
-        src: "https://image.tmdb.org/t/p/w500".concat(movie.poster_path),
-        alt: movie.title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-        className: "meta",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-          "class": "language-date",
-          children: [attributes.showLanguage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-            className: "language",
-            children: movie.original_language
-          }), attributes.showReleaseDate && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-            className: "date",
-            children: movie.release_date
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-          "class": "vote",
-          children: [attributes.showVoteAverage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-            className: "vote-average",
-            children: movie.vote_average
-          }), attributes.showVoteCount && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-            className: "vote-count",
-            children: movie.vote_count
-          })]
-        })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-      className: "movie-card__content",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.__experimentalHeading, {
-        style: {
-          fontSize: "".concat(attributes.titleFontSize, "px"),
-          fontWeight: attributes.titleFontWeight,
-          letterSpacing: "".concat(attributes.titleLetterSpacing, "px"),
-          lineHeight: "".concat(attributes.titleLineHeight),
-          fontStyle: attributes.titleStyle,
-          textTransform: attributes.titleTransform,
-          textDecoration: attributes.titleDecoration,
-          padding: "".concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.top, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.right, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.bottom, " ").concat(headingPadding === null || headingPadding === void 0 ? void 0 : headingPadding.left)
-        },
-        level: 2,
-        children: movie.title
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-        className: "movie-card__overview overview",
-        style: {
-          padding: "".concat(attributes.contentPaddingAttr.top, " ").concat(attributes.contentPaddingAttr.right, " ").concat(attributes.contentPaddingAttr.bottom, " ").concat(attributes.contentPaddingAttr.left)
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_9__.__experimentalText, {
-          children: movie.overview
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-        className: "movie-card__content__footer",
-        style: {
-          padding: "".concat(attributes.contentPaddingAttr.top, " ").concat(attributes.contentPaddingAttr.right, " ").concat(attributes.contentPaddingAttr.bottom, " ").concat(attributes.contentPaddingAttr.left)
-        },
-        children: attributes.showGenre && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-          className: "genre",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(HandleGenreRender, {
-            genreIDArr: movie.genre_ids,
-            attributes: attributes
-          })
-        })
-      })]
-    })]
-  });
-};
-function edit(props) {
+function Edit(props) {
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.useBlockProps)();
   var attributes = props.attributes,
     setAttributes = props.setAttributes;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(false),
-    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
+  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(false),
+    _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState, 2),
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)([]),
-    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
-    movies = _useState4[0],
-    setMovies = _useState4[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)(null),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState3, 2),
+    error = _useState4[0],
+    setError = _useState4[1];
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useState)([]),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__["default"])(_useState5, 2),
+    movies = _useState6[0],
+    setMovies = _useState6[1];
+
   /**
    * Fetch movie and genre from the API
    */
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useEffect)(function () {
-    /**
-     * Fetch genres from the API
-     * and set the attributes with the fetched genres
-     */
-    attributes.genres.length < 1 && GetMovieGenres().then(function (res) {
-      setAttributes({
-        genres: res.genres
-      });
-    })["catch"](function (err) {
-      return console.log('genre err', err);
-    });
-    /**
-     * Fetch movies from the API
-     * and set the state
-     * with the fetched movies
-     */
-    attributes.fetchedMovies.length > 0 && setMovies(attributes.fetchedMovies);
-    attributes.fetchedMovies.length < 1 && GetPopularMovies().then(function (res) {
-      /**
-       * Set state with the fetched movies
-       */
-      setMovies(res.results);
-      /**
-       * Set attributes with the fetched movies
-       */
-      setAttributes({
-        fetchedMovies: res.results
-      });
-    })["catch"](function (err) {
-      return console.log('err', err);
-    });
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_7__.useEffect)(function () {
+    var fetchData = /*#__PURE__*/function () {
+      var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee() {
+        var genresData, moviesData;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              setIsLoading(true);
+
+              // Fetch genres if they haven't been fetched yet
+              if (!(attributes.genres.length < 1)) {
+                _context.next = 14;
+                break;
+              }
+              _context.prev = 3;
+              _context.next = 6;
+              return (0,_utils_api__WEBPACK_IMPORTED_MODULE_11__.getMovieGenres)();
+            case 6:
+              genresData = _context.sent;
+              setAttributes({
+                genres: genresData.genres
+              });
+              _context.next = 14;
+              break;
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](3);
+              console.error('Error fetching genres:', _context.t0);
+              setError((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Failed to load movie genres.'));
+            case 14:
+              if (!(attributes.fetchedMovies.length > 0)) {
+                _context.next = 18;
+                break;
+              }
+              setMovies(attributes.fetchedMovies);
+              _context.next = 23;
+              break;
+            case 18:
+              _context.next = 20;
+              return (0,_utils_api__WEBPACK_IMPORTED_MODULE_11__.getPopularMovies)();
+            case 20:
+              moviesData = _context.sent;
+              setMovies(moviesData.results);
+              setAttributes({
+                fetchedMovies: moviesData.results
+              });
+            case 23:
+              _context.next = 29;
+              break;
+            case 25:
+              _context.prev = 25;
+              _context.t1 = _context["catch"](0);
+              console.error('Error fetching movies:', _context.t1);
+              setError((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Failed to load movies.'));
+            case 29:
+              _context.prev = 29;
+              setIsLoading(false);
+              return _context.finish(29);
+            case 32:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 25, 29, 32], [3, 10]]);
+      }));
+      return function fetchData() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+    fetchData();
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      props: props
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+
+  // Function to refresh movies
+  var refreshMovies = /*#__PURE__*/function () {
+    var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().mark(function _callee2() {
+      var moviesData;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_3___default().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.prev = 0;
+            setIsLoading(true);
+            setError(null);
+            _context2.next = 5;
+            return (0,_utils_api__WEBPACK_IMPORTED_MODULE_11__.getPopularMovies)();
+          case 5:
+            moviesData = _context2.sent;
+            setMovies(moviesData.results);
+            setAttributes({
+              fetchedMovies: moviesData.results
+            });
+            _context2.next = 14;
+            break;
+          case 10:
+            _context2.prev = 10;
+            _context2.t0 = _context2["catch"](0);
+            console.error('Error refreshing movies:', _context2.t0);
+            setError((0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Failed to refresh movies.'));
+          case 14:
+            _context2.prev = 14;
+            setIsLoading(false);
+            return _context2.finish(14);
+          case 17:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2, null, [[0, 10, 14, 17]]);
+    }));
+    return function refreshMovies() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_sidebarControl__WEBPACK_IMPORTED_MODULE_9__["default"], {
+      props: props,
+      refreshMovies: refreshMovies
+    }), error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
+      className: "movie-list-error",
+      children: error
+    }), isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("div", {
+      className: "movie-list-loading",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_8__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("p", {
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('Loading movies...')
+      })]
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("div", {
       className: "movie-list",
       style: {
-        gridTemplateColumns: "repeat(\n\t\t\t\t\t\t".concat(attributes.movieColumn, ", 1fr\n\t\t\t\t\t)")
+        gridTemplateColumns: "repeat(".concat(attributes.movieColumn, ", 1fr)")
       },
-      children: movies && movies.map(function (movie) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(MovieCard, {
+      children: movies && movies.length > 0 ? movies.map(function (movie) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(_components_MovieCard__WEBPACK_IMPORTED_MODULE_10__["default"], {
           movie: movie,
           attributes: attributes
         }, movie.id);
+      }) : !error && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("p", {
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_5__.__)('No movies found.')
       })
     })]
   }));
@@ -1403,6 +1456,153 @@ function sidebarControl(_ref) {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
+
+/***/ }),
+
+/***/ "./src/blocks/movie-lists/utils/api.js":
+/*!*********************************************!*\
+  !*** ./src/blocks/movie-lists/utils/api.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getApiConfig: () => (/* binding */ getApiConfig),
+/* harmony export */   getMovieGenres: () => (/* binding */ getMovieGenres),
+/* harmony export */   getPopularMovies: () => (/* binding */ getPopularMovies)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+
+
+/**
+ * API utility functions for movie lists block
+ */
+
+/**
+ * Get API configuration from WordPress localized data
+ * @returns {Object} API configuration
+ */
+var getApiConfig = function getApiConfig() {
+  // This assumes you've localized the data from PHP
+  // Replace with your actual localization handle
+  return window.movieListsBlockConfig || {
+    apiKey: '',
+    apiUrl: 'https://api.themoviedb.org/3',
+    imageBaseUrl: 'https://image.tmdb.org/t/p/w500'
+  };
+};
+
+/**
+ * Get popular movies from the API
+ * @param {string} page - Page number
+ * @returns {Promise<Object>} Movie data
+ */
+var getPopularMovies = /*#__PURE__*/function () {
+  var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+    var page,
+      _getApiConfig,
+      apiKey,
+      apiUrl,
+      movieAPIUrl,
+      apiResponse,
+      apiResponseJSON,
+      _args = arguments;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          page = _args.length > 0 && _args[0] !== undefined ? _args[0] : 1;
+          _context.prev = 1;
+          _getApiConfig = getApiConfig(), apiKey = _getApiConfig.apiKey, apiUrl = _getApiConfig.apiUrl;
+          if (apiKey) {
+            _context.next = 5;
+            break;
+          }
+          throw new Error('API key is not configured');
+        case 5:
+          movieAPIUrl = "".concat(apiUrl, "/movie/popular");
+          _context.next = 8;
+          return fetch("".concat(movieAPIUrl, "?api_key=").concat(apiKey, "&language=en-US&page=").concat(page));
+        case 8:
+          apiResponse = _context.sent;
+          _context.next = 11;
+          return apiResponse.json();
+        case 11:
+          apiResponseJSON = _context.sent;
+          if (!(apiResponseJSON.success === false)) {
+            _context.next = 14;
+            break;
+          }
+          throw new Error(apiResponseJSON.status_message);
+        case 14:
+          return _context.abrupt("return", apiResponseJSON);
+        case 17:
+          _context.prev = 17;
+          _context.t0 = _context["catch"](1);
+          console.error('Error fetching popular movies:', _context.t0);
+          throw _context.t0;
+        case 21:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[1, 17]]);
+  }));
+  return function getPopularMovies() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/**
+ * Get movie genres from the API
+ * @returns {Promise<Object>} Genre data
+ */
+var getMovieGenres = /*#__PURE__*/function () {
+  var _ref2 = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2() {
+    var _getApiConfig2, apiKey, apiUrl, genreUrl, apiResponse, apiResponseJSON;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _getApiConfig2 = getApiConfig(), apiKey = _getApiConfig2.apiKey, apiUrl = _getApiConfig2.apiUrl;
+          if (apiKey) {
+            _context2.next = 4;
+            break;
+          }
+          throw new Error('API key is not configured');
+        case 4:
+          // Use consistent authentication method
+          genreUrl = "".concat(apiUrl, "/genre/movie/list");
+          _context2.next = 7;
+          return fetch("".concat(genreUrl, "?api_key=").concat(apiKey, "&language=en-US"));
+        case 7:
+          apiResponse = _context2.sent;
+          _context2.next = 10;
+          return apiResponse.json();
+        case 10:
+          apiResponseJSON = _context2.sent;
+          if (!(apiResponseJSON.success === false)) {
+            _context2.next = 13;
+            break;
+          }
+          throw new Error(apiResponseJSON.status_message);
+        case 13:
+          return _context2.abrupt("return", apiResponseJSON);
+        case 16:
+          _context2.prev = 16;
+          _context2.t0 = _context2["catch"](0);
+          console.error('Error fetching movie genres:', _context2.t0);
+          throw _context2.t0;
+        case 20:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[0, 16]]);
+  }));
+  return function getMovieGenres() {
+    return _ref2.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
