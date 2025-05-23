@@ -20,6 +20,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 
+/**
+ * Include API configuration for Movie Lists Block
+ */
+require_once __DIR__ . '/src/blocks/movie-lists/api-config.php';
+
 
 final class Anam_Gutenberg_Starter {
 
