@@ -19,16 +19,6 @@ class Init {
 	 */
 	public function __construct() {
 		/**
-		 * Init post types
-		 */
-		PostType\Demo::init();
-		PostType\Breweries::init();
-		/**
-		 * Init shortcodes.
-		 */
-		Shortcode\Demo::init();
-		Shortcode\Breweries::init();
-		/**
 		 * Gutenberg block
 		 */
 		Blocks\Block::init();
