@@ -3,7 +3,7 @@
 exports[`TestComponents renders correctly 1`] = `
 <div>
   <div
-    style="color: red; background-color: yellow; font-weight: bold;"
+    style="color: red; background-color: yellow; font-weight: bold; font-size: 20px;"
   >
     TestComponents is updated again updated and again
   </div>

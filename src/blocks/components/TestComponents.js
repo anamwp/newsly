@@ -15,6 +15,22 @@ export function TestComponents() {
 	);
 }
 
+export function TestButtonClick() {
+	return (
+		<button
+			style={{
+				color: 'white',
+				backgroundColor: 'blue',
+				fontWeight: 'bold',
+				fontSize: '16px',
+			}}
+			onClick={() => console.log('Button clicked!')}
+		>
+			TestButtonClick
+		</button>
+	);
+}
+
 export function Sub(a, b) {
 	return a - b;
 }
