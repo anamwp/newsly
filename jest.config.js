@@ -9,6 +9,8 @@ module.exports = {
 	moduleNameMapper: {
 		'\\.(css|scss)$': 'identity-obj-proxy', // Ignore CSS imports in tests
 	},
+	// Add support for Emotion snapshots
+	snapshotSerializers: ['@emotion/jest/serializer'],
 	testPathIgnorePatterns: [
 		'<rootDir>/node_modules/',
 		'<rootDir>/dist/',

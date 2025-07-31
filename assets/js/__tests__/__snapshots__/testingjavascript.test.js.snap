@@ -2,8 +2,10 @@
 
 exports[`TestComponents renders correctly 1`] = `
 <div>
-  <div>
-    TestComponents
+  <div
+    style="color: red; background-color: yellow; font-weight: bold;"
+  >
+    TestComponents is updated again updated and again
   </div>
 </div>
 `;
