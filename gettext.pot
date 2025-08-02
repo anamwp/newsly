@@ -3,22 +3,37 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/movie-lists/edit.js:109
-msgid "No movies found."
+#: src/blocks/post-lists-tab copy/edit.js:131
+#: src/blocks/smart-category-posts/edit.js:131
+msgid "No featured image found"
 msgstr ""
 
-#: src/blocks/movie-lists/edit.js:38
-msgid "Failed to load movie genres."
+#: src/blocks/post-lists-tab copy/edit.js:204
+#: src/blocks/smart-category-posts/edit.js:204
+msgid "All"
 msgstr ""
 
-#: src/blocks/movie-lists/edit.js:53
-msgid "Failed to load movies."
+#: src/blocks/post-lists-tab copy/edit.js:222
+#: src/blocks/smart-category-posts/edit.js:222
+msgid "Loading..."
 msgstr ""
 
-#: src/blocks/movie-lists/edit.js:72
-msgid "Failed to refresh movies."
+#: src/blocks/post-lists-tab copy/sidebarControl.js:20
+#: src/blocks/smart-category-posts/sidebarControl.js:20
+msgid "Post Card Controls"
 msgstr ""
 
-#: src/blocks/movie-lists/edit.js:91
-msgid "Loading movies..."
+#: src/blocks/post-lists-tab copy/sidebarControl.js:25
+#: src/blocks/smart-category-posts/sidebarControl.js:25
+msgid "Show Featured Image"
+msgstr ""
+
+#: src/blocks/post-lists-tab copy/sidebarControl.js:36
+#: src/blocks/smart-category-posts/sidebarControl.js:36
+msgid "Show Category"
+msgstr ""
+
+#: src/blocks/post-lists-tab copy/sidebarControl.js:44
+#: src/blocks/smart-category-posts/sidebarControl.js:44
+msgid "Show Excerpt"
 msgstr ""
