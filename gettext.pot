@@ -3,6 +3,15 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/smart-category-posts/save.js:22
+#: src/blocks/smart-category-posts/edit.js:134
+msgid "No featured image found"
+msgstr ""
+
+#: src/blocks/smart-category-posts/edit.js:207
+#: src/blocks/smart-category-posts/save.js:20
 msgid "All"
+msgstr ""
+
+#: src/blocks/smart-category-posts/edit.js:225
+msgid "Loading..."
 msgstr ""

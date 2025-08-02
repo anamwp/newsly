@@ -364,16 +364,20 @@ function edit(props) {
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
+  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(attributes.fetchPosts || []),
+    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
+    fetchPosts = _useState4[0],
+    setFetchPosts = _useState4[1];
   var _select = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.select)('core'),
     getEntityRecords = _select.getEntityRecords,
     getMedia = _select.getMedia;
   var _select2 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.select)('core/editor'),
     getEditorSettings = _select2.getEditorSettings,
     getCurrentPost = _select2.getCurrentPost;
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(9),
-    _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
-    perPage = _useState4[0],
-    setPerPage = _useState4[1]; // default value is 9 and also need to be set in ajax call
+  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(9),
+    _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState5, 2),
+    perPage = _useState6[0],
+    setPerPage = _useState6[1]; // default value is 9 and also need to be set in ajax call
   /**
    * fetch all categoris
    * at first loading
@@ -399,6 +403,7 @@ function edit(props) {
    * Load posts
    */
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useEffect)(function () {
+    debugger;
     setIsLoading(true);
     _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_9___default()({
       path: "/wp/v2/posts?per_page=".concat(perPage)
@@ -410,7 +415,8 @@ function edit(props) {
     })["catch"](function (err) {
       return console.log('err', err);
     });
-  }, []);
+  }, [fetchPosts]);
+  console.log('attributes.fetchedPosts', attributes.fetchedPosts);
 
   /**
    * fetch category
@@ -531,9 +537,7 @@ function edit(props) {
       }) : null, attributes.fetchedPosts.length > 0 && attributes.fetchedPosts.map(function (post, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
           className: "card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8",
-          children: [attributes.showFeaturedImage && post.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_getFeaturedImage__WEBPACK_IMPORTED_MODULE_6__["default"], {
-            postId: post.featured_media
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("h2", {
             className: "mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600\ttransition font-medium",
             children: post.title.rendered
           }), attributes.showCategory && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_components__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -592,6 +596,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function getFeaturedImage(props) {
   var postId = props.postId;
+  console.log('postId', postId);
   var getMediaContent = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
     return select('core').getEntityRecords('postType', 'attachment', {
       include: [postId]
@@ -701,9 +706,7 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 function save(props) {
   console.log('props', props);
   var attributes = props.attributes;
-  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps.save({
-    className: 'wp-block-anam-gutenberg-starter-block-smart-category-posts'
-  });
+  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_5__.useBlockProps.save();
   console.log('attributes', attributes);
   console.log('attributes fetchedPosts', attributes.fetchedPosts);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", _objectSpread(_objectSpread({}, blockProps), {}, {
@@ -728,9 +731,7 @@ function save(props) {
       children: attributes.fetchedPosts.length > 0 && attributes.fetchedPosts.map(function (post, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8",
-          children: [attributes.showFeaturedImage && post.featured_media !== 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_getFeaturedImage__WEBPACK_IMPORTED_MODULE_4__["default"], {
-            postId: post.featured_media
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
             className: "mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600\ttransition font-medium",
             children: post.title.rendered
           }), attributes.showCategory && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components__WEBPACK_IMPORTED_MODULE_3__["default"], {

@@ -5,6 +5,7 @@ import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 
 export default function getFeaturedImage(props) {
 	const { postId } = props;
+	console.log('postId', postId);
 
 	const getMediaContent = useSelect(
 		(select) => {

@@ -16,6 +16,7 @@ export default function edit(props) {
 
 	const { attributes, setAttributes } = props;
 	const [isLoading, setIsLoading] = useState(false);
+	const [fetchPosts, setFetchPosts] = useState(attributes.fetchPosts || []);
 	const { getEntityRecords, getMedia } = select('core');
 	const { getEditorSettings, getCurrentPost } = select('core/editor');
 	const [perPage, setPerPage] = useState(9); // default value is 9 and also need to be set in ajax call
@@ -43,6 +44,7 @@ export default function edit(props) {
 	 * Load posts
 	 */
 	useEffect(() => {
+		debugger;
 		setIsLoading(true);
 		apiFetch({
 			path: `/wp/v2/posts?per_page=${perPage}`,
@@ -54,7 +56,8 @@ export default function edit(props) {
 				setIsLoading(false);
 			})
 			.catch((err) => console.log('err', err));
-	}, []);
+	}, [fetchPosts]);
+	console.log('attributes.fetchedPosts', attributes.fetchedPosts);
 
 	/**
 	 * fetch category
@@ -228,12 +231,12 @@ export default function edit(props) {
 								key={index}
 								className="card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8"
 							>
-								{attributes.showFeaturedImage &&
+								{/* {attributes.showFeaturedImage &&
 									post.featured_media !== 0 && (
 										<GetFeaturedImage
 											postId={post.featured_media}
 										/>
-									)}
+									)} */}
 								<h2 className="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium">
 									{post.title.rendered}
 								</h2>
