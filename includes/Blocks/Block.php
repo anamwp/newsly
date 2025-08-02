@@ -55,6 +55,7 @@ class Block {
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movies' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/upcoming-movie-slider' );
 		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/top-rated-movie-lists' );
+		register_block_type_from_metadata( ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/smart-category-posts' );
 		register_block_type_from_metadata(
 			ANAM_GUTENBERG_STARTER_PATH . '/build/blocks/movie-lists',
 			array(
