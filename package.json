@@ -12,7 +12,7 @@
 		"watch-assets": "npm run watch-scss & npm run watch-js",
 		"tailwindwatch": "tailwindcss -i ./src/*.js -o ./build/style.css --watch --postcss --minify",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"watch-blocks": "cross-env NODE_ENV=development wp-scripts start && tailwindwatch --experimental-modules",
+		"watch-blocks": "cross-env NODE_ENV=development SCRIPT_DEBUG=true wp-scripts start && tailwindwatch --experimental-modules",
 		"start": "concurrently --kill-others-on-fail \"npm run watch-blocks\" \"npm run watch-assets\"",
 		"block-dev": "concurrently --kill-others-on-fail \"npm run watch-blocks\"",
 		"build": "wp-scripts build --experimental-modules",

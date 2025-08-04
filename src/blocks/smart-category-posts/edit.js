@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelect, withSelect, select } from '@wordpress/data';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
 import GetFeaturedImage from './getFeaturedImage';
 import SidebarControl from './sidebarControl';
-import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
+import { RawHTML, useRef } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
 import RenderPostCategoryData from './components';
@@ -44,26 +44,29 @@ export default function edit(props) {
 	 * Load posts
 	 */
 	useEffect(() => {
-		debugger;
+		// debugger;
 		setIsLoading(true);
-		apiFetch({
-			path: `/wp/v2/posts?per_page=${perPage}`,
-		})
-			.then((res) => {
-				setAttributes({
-					fetchedPosts: res,
-				});
-				setIsLoading(false);
+		//  if fetchPosts is empty, fetch all posts
+		if (fetchPosts.length === 0) {
+			debugger;
+			apiFetch({
+				path: `/wp/v2/posts?per_page=${perPage}`,
 			})
-			.catch((err) => console.log('err', err));
+				.then((res) => {
+					setAttributes({
+						fetchedPosts: res,
+					});
+					setIsLoading(false);
+				})
+				.catch((err) => console.log('errsss', err));
+		}
 	}, [fetchPosts]);
+
 	console.log('attributes.fetchedPosts', attributes.fetchedPosts);
 
 	/**
-	 * fetch category
-	 * specific posts
-	 * no use of this function
-	 * ------------------------
+	 * fetch category specific posts
+	 * no use of this function currently
 	 */
 	const getPosts = useSelect(
 		(select) => {

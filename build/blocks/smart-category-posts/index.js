@@ -275,32 +275,34 @@ __webpack_require__.r(__webpack_exports__);
 
 function RenderPostCategoryData(props) {
   var postArr = props.catArr.toString();
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useState)(),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_useState, 2),
     catData = _useState2[0],
     setCatData = _useState2[1];
   // const {attributes, setAttributes} = props.parentProps;
 
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.useEffect)(function () {
-    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
-      path: "/wp/v2/categories?include=".concat(postArr)
-    }).then(function (res) {
-      setCatData(res);
-    })["catch"](function (err) {
-      return console.log(err);
-    });
-  }, []);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (postArr) {
+      _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
+        path: "/wp/v2/categories?include=".concat(postArr)
+      }).then(function (res) {
+        setCatData(res);
+      })["catch"](function (err) {
+        return console.log(err);
+      });
+    }
+  }, [postArr]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [!catData && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
       children: "Fetching Data"
-    }), catData && catData.map(function (singleCat) {
+    }), catData && Array.isArray(catData) && catData.map(function (singleCat, index) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
         href: singleCat.link,
         style: {
           marginRight: '10px'
         },
         children: singleCat.name
-      });
+      }, singleCat.id || index);
     })]
   });
 }
@@ -360,11 +362,11 @@ function edit(props) {
   var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__.useBlockProps)();
   var attributes = props.attributes,
     setAttributes = props.setAttributes;
-  var _useState = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(false),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
     _useState2 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState, 2),
     isLoading = _useState2[0],
     setIsLoading = _useState2[1];
-  var _useState3 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(attributes.fetchPosts || []),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(attributes.fetchPosts || []),
     _useState4 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState3, 2),
     fetchPosts = _useState4[0],
     setFetchPosts = _useState4[1];
@@ -374,7 +376,7 @@ function edit(props) {
   var _select2 = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.select)('core/editor'),
     getEditorSettings = _select2.getEditorSettings,
     getCurrentPost = _select2.getCurrentPost;
-  var _useState5 = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useState)(9),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(9),
     _useState6 = (0,_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_useState5, 2),
     perPage = _useState6[0],
     setPerPage = _useState6[1]; // default value is 9 and also need to be set in ajax call
@@ -382,7 +384,7 @@ function edit(props) {
    * fetch all categoris
    * at first loading
    */
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     attributes.categories.length === 0 && _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_9___default()({
       path: '/wp/v2/categories'
     }).then(function (cat) {
@@ -402,27 +404,29 @@ function edit(props) {
   /**
    * Load posts
    */
-  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_8__.useEffect)(function () {
-    debugger;
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
+    // debugger;
     setIsLoading(true);
-    _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_9___default()({
-      path: "/wp/v2/posts?per_page=".concat(perPage)
-    }).then(function (res) {
-      setAttributes({
-        fetchedPosts: res
+    //  if fetchPosts is empty, fetch all posts
+    if (fetchPosts.length === 0) {
+      debugger;
+      _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_9___default()({
+        path: "/wp/v2/posts?per_page=".concat(perPage)
+      }).then(function (res) {
+        setAttributes({
+          fetchedPosts: res
+        });
+        setIsLoading(false);
+      })["catch"](function (err) {
+        return console.log('errsss', err);
       });
-      setIsLoading(false);
-    })["catch"](function (err) {
-      return console.log('err', err);
-    });
+    }
   }, [fetchPosts]);
   console.log('attributes.fetchedPosts', attributes.fetchedPosts);
 
   /**
-   * fetch category
-   * specific posts
-   * no use of this function
-   * ------------------------
+   * fetch category specific posts
+   * no use of this function currently
    */
   var getPosts = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(function (select) {
     /**
