@@ -390,10 +390,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
@@ -418,8 +418,8 @@ function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t =
 
 
 var GTS_BLURB_FOOTER_TEMPLATE = [['core/button', {
-  text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Book Your Demo', 'gutenberg-starter'),
-  placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Book Your Demo', 'gutenberg-starter'),
+  text: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Book Your Demo', 'gutenberg-starter'),
+  placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Book Your Demo', 'gutenberg-starter'),
   customClass: 'inline-block mt-6'
 }]];
 function edit(_ref) {
@@ -490,7 +490,7 @@ function edit(_ref) {
             icon: _wordpress_icons__WEBPACK_IMPORTED_MODULE_9__["default"],
             initialOpen: true,
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
-              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('Set the blurb background color', 'gutenberg-starter')
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Set the blurb background color', 'gutenberg-starter')
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
               onChange: function onChange(newFontSize) {
                 setAttributes({
@@ -530,21 +530,23 @@ function edit(_ref) {
         },
         className: "mt-0 mb-3 font-poppins text-2xl text-slate-700 font-medium",
         onChange: onChangeContent,
+        id: "gts-blurb-heading",
         value: attributes.newcontent,
-        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('this is rich text editor', 'gutenberg-starter')
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('this is rich text editor', 'gutenberg-starter')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.RichText, {
         tagName: "p",
         style: {
           color: attributes.content_color
         },
         className: "text-slate-600",
+        id: "gts-blurb-text",
         onChange: function onChange(val) {
           return setAttributes({
             newmessage: val
           });
         },
         value: attributes.newmessage,
-        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__.__)('hello text control', 'gutenberg-starter')
+        placeholder: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('hello text control', 'gutenberg-starter')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         className: "gts__blurb__button pt-6",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.InnerBlocks, {

@@ -3,14 +3,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/smart-category-posts/edit.js:137
-msgid "No featured image found"
+#: src/blocks/blurb/edit.js:103
+msgid "Set the blurb background color"
 msgstr ""
 
-#: src/blocks/smart-category-posts/edit.js:210
-msgid "All"
+#: src/blocks/blurb/edit.js:148
+msgid "this is rich text editor"
 msgstr ""
 
-#: src/blocks/smart-category-posts/edit.js:228
-msgid "Loading..."
+#: src/blocks/blurb/edit.js:162
+msgid "hello text control"
+msgstr ""
+
+#: src/blocks/blurb/edit.js:32
+msgid "Book Your Demo"
 msgstr ""

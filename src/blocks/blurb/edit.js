@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
 import React from 'react';
+import { __ } from '@wordpress/i18n';
 import {
 	TextControl,
 	ColorPicker,
@@ -143,6 +143,7 @@ export default function edit({ attributes, setAttributes }) {
 					}}
 					className="mt-0 mb-3 font-poppins text-2xl text-slate-700 font-medium"
 					onChange={onChangeContent}
+					id="gts-blurb-heading"
 					value={attributes.newcontent}
 					placeholder={__(
 						'this is rich text editor',
@@ -155,6 +156,7 @@ export default function edit({ attributes, setAttributes }) {
 						color: attributes.content_color,
 					}}
 					className="text-slate-600"
+					id="gts-blurb-text"
 					onChange={(val) => setAttributes({ newmessage: val })}
 					value={attributes.newmessage}
 					placeholder={__('hello text control', 'gutenberg-starter')}
