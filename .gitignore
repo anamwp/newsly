@@ -6,3 +6,5 @@ node_modules
 .env
 report.txt
 .phpunit.result.cache
+test-results/
+playwright-report/
