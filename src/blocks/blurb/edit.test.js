@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 // Manual mocks are automatically picked up from __mocks__ directory
 import Edit from './edit';
@@ -134,21 +134,24 @@ describe('Blurb Block Edit Component', () => {
 		// Since RichText is mocked, we can't test the actual content display
 		// but we can verify the component renders
 		expect(screen.getAllByTestId('rich-text')).toHaveLength(2);
-		expect(screen.getByText('Test Content')).toBeInTheDocument();
-		expect(screen.getByText('Test Message')).toBeInTheDocument();
+		expect(screen.getByDisplayValue('Test Content')).toBeInTheDocument();
+		expect(screen.getByDisplayValue('Test Message')).toBeInTheDocument();
 	});
+
 	//getAllByPlaceholderText
 	it('test with heading', () => {
 		render(<Edit {...defaultProps} {...defaultAttributes} />);
 		expect(
-			screen.getByText('this is rich text editor')
+			screen.getByPlaceholderText('this is rich text editor')
 		).toBeInTheDocument();
 	});
+
 	it('test with paragraph', () => {
 		render(<Edit {...defaultProps} {...defaultAttributes} />);
-		expect(screen.getByText('hello text control')).toBeInTheDocument();
+		expect(
+			screen.getByPlaceholderText('hello text control')
+		).toBeInTheDocument();
 	});
-
 	it('should apply custom styles based on color attributes', () => {
 		const propsWithColors = {
 			...defaultProps,
@@ -164,7 +167,7 @@ describe('Blurb Block Edit Component', () => {
 
 		// Check that the component renders with color attributes
 		const container = screen
-			.getByText('this is rich text editor')
+			.getByPlaceholderText('this is rich text editor')
 			.closest('.gts__blurb__container');
 		expect(container).toHaveStyle('background: #0000ff');
 	});
@@ -181,7 +184,7 @@ describe('Blurb Block Edit Component', () => {
 		render(<Edit {...alignmentProps} />);
 
 		const container = screen
-			.getByText('this is rich text editor')
+			.getByPlaceholderText('this is rich text editor')
 			.closest('.gts__blurb__container');
 		expect(container).toHaveStyle('text-align: center');
 	});
@@ -208,7 +211,7 @@ describe('Blurb Block Edit Component', () => {
 
 		// Verify the button container exists
 		const buttonContainer = screen
-			.getByText('this is rich text editor')
+			.getByPlaceholderText('this is rich text editor')
 			.closest('.gts__blurb__container')
 			.querySelector('.gts__blurb__button');
 		expect(buttonContainer).toBeInTheDocument();
@@ -224,7 +227,7 @@ describe('Blurb Block Edit Component', () => {
 
 		// Check blurb container classes
 		const blurbContainer = screen
-			.getByText('this is rich text editor')
+			.getByPlaceholderText('this is rich text editor')
 			.closest('.gts__blurb__container');
 		expect(blurbContainer).toHaveClass(
 			'p-10',
@@ -303,12 +306,14 @@ describe('Blurb Block Edit Component', () => {
 		render(<Edit {...blockDefaultProps} />);
 		// console.log(screen.debug());
 		expect(
-			screen.getByText(blockattr.attributes.newcontent.default)
+			screen.getByDisplayValue(blockattr.attributes.newcontent.default)
 		).toBeInTheDocument();
 		expect(
-			screen.getByText(blockattr.attributes.newmessage.default)
+			screen.getByDisplayValue(blockattr.attributes.newmessage.default)
 		).toBeInTheDocument();
 	});
+
+	// fire event test
 
 	it('should maintain component structure consistency', () => {
 		const { rerender } = render(<Edit {...defaultProps} />);
@@ -346,5 +351,151 @@ describe('Blurb Block Edit Component', () => {
 		// Check that controls are properly grouped
 		expect(screen.getByTestId('inspector-controls')).toBeInTheDocument();
 		expect(screen.getByTestId('block-controls')).toBeInTheDocument();
+	});
+
+	describe('onChange Event Handlers', () => {
+		let mockSetAttributes;
+
+		beforeEach(() => {
+			mockSetAttributes = jest.fn();
+		});
+
+		it('updates heading text on change', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const headingInput = screen.getByPlaceholderText(
+				'this is rich text editor'
+			);
+			fireEvent.change(headingInput, {
+				target: { value: 'New Heading Text' },
+			});
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				newcontent: 'New Heading Text',
+			});
+		});
+
+		it('updates paragraph text on change', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const paragraphInput =
+				screen.getByPlaceholderText('hello text control');
+			fireEvent.change(paragraphInput, {
+				target: { value: 'New Paragraph Text' },
+			});
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				newmessage: 'New Paragraph Text',
+			});
+		});
+
+		it('updates text color on color selection', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const colorButtons = screen.getAllByTestId('color-red');
+			// Click the second red button (heading color)
+			fireEvent.click(colorButtons[1]);
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				text_color: '#ff0000',
+			});
+		});
+
+		it('updates content color on color selection', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const colorButtons = screen.getAllByTestId('color-green');
+			// Click the third green button (content color)
+			fireEvent.click(colorButtons[2]);
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				content_color: '#00ff00',
+			});
+		});
+
+		it('updates background color on color selection', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const colorButtons = screen.getAllByTestId('color-blue');
+			// Click the first blue button (background color)
+			fireEvent.click(colorButtons[0]);
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				blurb_bg_color: '#0000ff',
+			});
+		});
+
+		it('updates alignment on toolbar button click', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const centerButton = screen.getByTestId('align-center');
+			fireEvent.click(centerButton);
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				alignment: 'center',
+			});
+		});
+
+		it('updates alignment to left', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const leftButton = screen.getByTestId('align-left');
+			fireEvent.click(leftButton);
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				alignment: 'left',
+			});
+		});
+
+		it('updates alignment to right', () => {
+			render(
+				<Edit
+					attributes={defaultAttributes}
+					setAttributes={mockSetAttributes}
+				/>
+			);
+
+			const rightButton = screen.getByTestId('align-right');
+			fireEvent.click(rightButton);
+
+			expect(mockSetAttributes).toHaveBeenCalledWith({
+				alignment: 'right',
+			});
+		});
 	});
 });
