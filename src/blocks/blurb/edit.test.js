@@ -5,7 +5,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Edit from './edit';
 import blockattr from './block.json';
 
-describe('testing block json', () => {
+describe('Testing block json', () => {
 	it('should have valid block.json structure', () => {
 		expect(blockattr).toBeDefined();
 		expect(typeof blockattr).toBe('object');
@@ -89,7 +89,7 @@ describe('testing block json', () => {
 	});
 });
 
-describe('Blurb Block Edit Component', () => {
+describe('Block Edit Component', () => {
 	const defaultAttributes = {
 		newcontent: '',
 		newmessage: '',
@@ -352,150 +352,158 @@ describe('Blurb Block Edit Component', () => {
 		expect(screen.getByTestId('inspector-controls')).toBeInTheDocument();
 		expect(screen.getByTestId('block-controls')).toBeInTheDocument();
 	});
+});
 
-	describe('onChange Event Handlers', () => {
-		let mockSetAttributes;
+describe('onChange Event Handlers', () => {
+	let mockSetAttributes;
+	const defaultAttributes = {
+		newcontent: '',
+		newmessage: '',
+		text_color: '',
+		content_color: '',
+		blurb_bg_color: '',
+		alignment: 'left',
+	};
 
-		beforeEach(() => {
-			mockSetAttributes = jest.fn();
+	beforeEach(() => {
+		mockSetAttributes = jest.fn();
+	});
+
+	it('updates heading text on change', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
+
+		const headingInput = screen.getByPlaceholderText(
+			'this is rich text editor'
+		);
+		fireEvent.change(headingInput, {
+			target: { value: 'New Heading Text' },
 		});
 
-		it('updates heading text on change', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			newcontent: 'New Heading Text',
+		});
+	});
 
-			const headingInput = screen.getByPlaceholderText(
-				'this is rich text editor'
-			);
-			fireEvent.change(headingInput, {
-				target: { value: 'New Heading Text' },
-			});
+	it('updates paragraph text on change', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
 
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				newcontent: 'New Heading Text',
-			});
+		const paragraphInput =
+			screen.getByPlaceholderText('hello text control');
+		fireEvent.change(paragraphInput, {
+			target: { value: 'New Paragraph Text' },
 		});
 
-		it('updates paragraph text on change', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
-
-			const paragraphInput =
-				screen.getByPlaceholderText('hello text control');
-			fireEvent.change(paragraphInput, {
-				target: { value: 'New Paragraph Text' },
-			});
-
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				newmessage: 'New Paragraph Text',
-			});
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			newmessage: 'New Paragraph Text',
 		});
+	});
 
-		it('updates text color on color selection', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
+	it('updates text color on color selection', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
 
-			const colorButtons = screen.getAllByTestId('color-red');
-			// Click the second red button (heading color)
-			fireEvent.click(colorButtons[1]);
+		const colorButtons = screen.getAllByTestId('color-red');
+		// Click the second red button (heading color)
+		fireEvent.click(colorButtons[1]);
 
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				text_color: '#ff0000',
-			});
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			text_color: '#ff0000',
 		});
+	});
 
-		it('updates content color on color selection', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
+	it('updates content color on color selection', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
 
-			const colorButtons = screen.getAllByTestId('color-green');
-			// Click the third green button (content color)
-			fireEvent.click(colorButtons[2]);
+		const colorButtons = screen.getAllByTestId('color-green');
+		// Click the third green button (content color)
+		fireEvent.click(colorButtons[2]);
 
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				content_color: '#00ff00',
-			});
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			content_color: '#00ff00',
 		});
+	});
 
-		it('updates background color on color selection', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
+	it('updates background color on color selection', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
 
-			const colorButtons = screen.getAllByTestId('color-blue');
-			// Click the first blue button (background color)
-			fireEvent.click(colorButtons[0]);
+		const colorButtons = screen.getAllByTestId('color-blue');
+		// Click the first blue button (background color)
+		fireEvent.click(colorButtons[0]);
 
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				blurb_bg_color: '#0000ff',
-			});
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			blurb_bg_color: '#0000ff',
 		});
+	});
 
-		it('updates alignment on toolbar button click', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
+	it('updates alignment on toolbar button click', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
 
-			const centerButton = screen.getByTestId('align-center');
-			fireEvent.click(centerButton);
+		const centerButton = screen.getByTestId('align-center');
+		fireEvent.click(centerButton);
 
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				alignment: 'center',
-			});
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			alignment: 'center',
 		});
+	});
 
-		it('updates alignment to left', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
+	it('updates alignment to left', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
 
-			const leftButton = screen.getByTestId('align-left');
-			fireEvent.click(leftButton);
+		const leftButton = screen.getByTestId('align-left');
+		fireEvent.click(leftButton);
 
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				alignment: 'left',
-			});
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			alignment: 'left',
 		});
+	});
 
-		it('updates alignment to right', () => {
-			render(
-				<Edit
-					attributes={defaultAttributes}
-					setAttributes={mockSetAttributes}
-				/>
-			);
+	it('updates alignment to right', () => {
+		render(
+			<Edit
+				attributes={defaultAttributes}
+				setAttributes={mockSetAttributes}
+			/>
+		);
 
-			const rightButton = screen.getByTestId('align-right');
-			fireEvent.click(rightButton);
+		const rightButton = screen.getByTestId('align-right');
+		fireEvent.click(rightButton);
 
-			expect(mockSetAttributes).toHaveBeenCalledWith({
-				alignment: 'right',
-			});
+		expect(mockSetAttributes).toHaveBeenCalledWith({
+			alignment: 'right',
 		});
 	});
 });
