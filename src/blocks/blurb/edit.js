@@ -106,9 +106,9 @@ export default function edit({ attributes, setAttributes }) {
 								)}
 							</PanelRow>
 							<ColorPalette
-								onChange={(newFontSize) => {
+								onChange={(newColor) => {
 									setAttributes({
-										blurb_bg_color: newFontSize,
+										blurb_bg_color: newColor,
 									});
 								}}
 							/>
