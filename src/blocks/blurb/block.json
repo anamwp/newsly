@@ -8,10 +8,7 @@
 	"icon": "media-interactive",
 	"description": "",
 	"example": {
-		"attributes": {
-			"content": "Hello World",
-			"alignment": "right"
-		}
+		"attributes": {}
 	},
 	"attributes": {
 		"newcontent": {
