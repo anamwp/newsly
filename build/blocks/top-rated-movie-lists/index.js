@@ -300,7 +300,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 var APIResponsePromise = /*#__PURE__*/function () {
   var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
-    var _window$gutenbergStar, _window$envVars;
+    var _window$envVars;
     var url,
       apiToken,
       options,
@@ -311,22 +311,14 @@ var APIResponsePromise = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           url = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
-          // Get API token from multiple possible sources
-          apiToken = ''; // Method 1: WordPress localized data (from admin settings)
-          if ((_window$gutenbergStar = window.gutenbergStarterData) !== null && _window$gutenbergStar !== void 0 && _window$gutenbergStar.movieApiToken) {
-            apiToken = window.gutenbergStarterData.movieApiToken;
-          }
-
-          // Method 2: Environment variables (fallback)
-          if (!apiToken && (_window$envVars = window.envVars) !== null && _window$envVars !== void 0 && _window$envVars.MOVIE_API_KEY) {
-            apiToken = window.envVars.MOVIE_API_KEY;
-          }
+          // Get API token from environment variables (localized in gutenberg-starter.php)
+          apiToken = ((_window$envVars = window.envVars) === null || _window$envVars === void 0 ? void 0 : _window$envVars.MOVIE_API_KEY) || '';
           if (apiToken) {
-            _context.next = 6;
+            _context.next = 4;
             break;
           }
-          throw new Error('Movie API token is not configured. Please set it in the plugin settings or environment variables.');
-        case 6:
+          throw new Error('Movie API token is not configured. Please set MOVIE_API_KEY in your .env file or WordPress admin (Settings > Gutenberg Starter).');
+        case 4:
           options = {
             method: 'GET',
             headers: {
@@ -334,22 +326,22 @@ var APIResponsePromise = /*#__PURE__*/function () {
               Authorization: "Bearer ".concat(apiToken)
             }
           };
-          _context.next = 9;
+          _context.next = 7;
           return fetch(url, options);
-        case 9:
+        case 7:
           getMovieAPIResponse = _context.sent;
-          _context.next = 12;
+          _context.next = 10;
           return getMovieAPIResponse.json();
-        case 12:
+        case 10:
           getMovieAPIResponseJSON = _context.sent;
           if (!(getMovieAPIResponseJSON.success === false)) {
-            _context.next = 15;
+            _context.next = 13;
             break;
           }
           throw new Error(getMovieAPIResponseJSON.status_message);
-        case 15:
+        case 13:
           return _context.abrupt("return", getMovieAPIResponseJSON);
-        case 16:
+        case 14:
         case "end":
           return _context.stop();
       }
