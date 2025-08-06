@@ -11,7 +11,7 @@ class Test_Class_Movie_List_Callback extends TestCase {
 
 		// Set up the genres
 		$movie_list_callback->new_genres = [
-			1 => ['id' => 1, 'name' => 'Actiosn'],
+			1 => ['id' => 1, 'name' => 'Action'],
 			2 => ['id' => 2, 'name' => 'Comedy'],
 			3 => ['id' => 3, 'name' => 'Drama'],
 		];
