@@ -156,11 +156,16 @@ function gs_enqueue_ajax_pagination_script() {
 			'gs_ajax_nonce'   => wp_create_nonce( 'gs_ajax_nonce' )
 		)
 	);
-	wp_localize_script('jquery', 'envVars', array(
-        'GS_SITE_URL' => getenv('GS_SITE_URL'),
-        'WC_CONSUMER_KEY' => getenv('WC_CONSUMER_KEY'),
-        'WC_CONSUMER_SECRET' => getenv('WC_CONSUMER_SECRET'),
-    ));
+	wp_localize_script(
+		'jquery',
+		'envVars',
+		array(
+			'GS_SITE_URL'        => getenv( 'GS_SITE_URL' ),
+			'WC_CONSUMER_KEY'    => getenv( 'WC_CONSUMER_KEY' ),
+			'WC_CONSUMER_SECRET' => getenv( 'WC_CONSUMER_SECRET' ),
+			'MOVIE_BEARER_TOKEN' => getenv( 'MOVIE_BEARER_TOKEN' ),
+		)
+	);
 }
 add_action( 'wp_enqueue_scripts', 'gs_enqueue_ajax_pagination_script' );
 add_action( 'enqueue_block_editor_assets', 'gs_enqueue_ajax_pagination_script' );

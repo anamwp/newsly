@@ -6,6 +6,42 @@
 -   Shortcode Class
 -   Demo Post Type Class
 
+## Environment Configuration
+
+### API Key Setup
+
+The plugin uses The Movie Database (TMDb) API for the movie lists block. You can configure the API key in two ways:
+
+#### Method 1: WordPress Admin (Recommended)
+
+1. Go to **Settings > Gutenberg Starter** in your WordPress admin
+2. Enter your TMDb API key in the "The Movie Database API Key" field
+3. Click "Save Changes"
+
+#### Method 2: Environment Variables
+
+1. Copy `.env.example` to `.env` in the plugin root directory
+2. Add your API key to the `.env` file:
+    ```
+    MOVIE_BEARER_TOKEN=your_actual_bearer_token_here
+    ```
+3. Make sure your WordPress installation loads environment variables
+
+### Getting a TMDb API Key
+
+1. Create an account at [The Movie Database](https://www.themoviedb.org/)
+2. Go to [API Settings](https://www.themoviedb.org/settings/api)
+3. Request an API key
+4. Use the API Read Access Token (v4 auth) for bearer token authentication
+
+### Priority Order
+
+The plugin checks for the API key in this order:
+
+1. WordPress admin settings (highest priority)
+2. PHP constant `MOVIE_BEARER_TOKEN`
+3. Environment variable `$_ENV['MOVIE_BEARER_TOKEN']` (lowest priority)
+
 ## Installation Command
 
 Please follow the below instruction to setup you plugin.

@@ -4,12 +4,20 @@
  * @returns
  */
 const APIResponsePromise = async (url = '') => {
+	// Get API token from environment variables (localized in gutenberg-starter.php)
+	const movieBearerToken = window.envVars?.MOVIE_BEARER_TOKEN || '';
+
+	if (!movieBearerToken) {
+		throw new Error(
+			'Movie API token is not configured. Please set MOVIE_BEARER_TOKEN in your .env file or WordPress admin (Settings > Gutenberg Starter).'
+		);
+	}
+
 	const options = {
 		method: 'GET',
 		headers: {
 			accept: 'application/json',
-			Authorization:
-				'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA',
+			Authorization: `Bearer ${movieBearerToken}`,
 		},
 	};
 	const getMovieAPIResponse = await fetch(url, options);
