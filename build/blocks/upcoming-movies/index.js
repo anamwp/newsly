@@ -302,7 +302,7 @@ var APIResponsePromise = /*#__PURE__*/function () {
   var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
     var _window$envVars;
     var url,
-      apiToken,
+      movieBearerToken,
       options,
       getMovieAPIResponse,
       getMovieAPIResponseJSON,
@@ -312,18 +312,18 @@ var APIResponsePromise = /*#__PURE__*/function () {
         case 0:
           url = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
           // Get API token from environment variables (localized in gutenberg-starter.php)
-          apiToken = ((_window$envVars = window.envVars) === null || _window$envVars === void 0 ? void 0 : _window$envVars.MOVIE_API_KEY) || '';
-          if (apiToken) {
+          movieBearerToken = ((_window$envVars = window.envVars) === null || _window$envVars === void 0 ? void 0 : _window$envVars.MOVIE_BEARER_TOKEN) || '';
+          if (movieBearerToken) {
             _context.next = 4;
             break;
           }
-          throw new Error('Movie API token is not configured. Please set MOVIE_API_KEY in your .env file or WordPress admin (Settings > Gutenberg Starter).');
+          throw new Error('Movie API token is not configured. Please set MOVIE_BEARER_TOKEN in your .env file or WordPress admin (Settings > Gutenberg Starter).');
         case 4:
           options = {
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: "Bearer ".concat(apiToken)
+              Authorization: "Bearer ".concat(movieBearerToken)
             }
           };
           _context.next = 7;
