@@ -63,8 +63,6 @@ class Admin_Options_Test extends WP_UnitTestCase {
 		
 		// Create a new instance to trigger hook registration
 		$options = new \Anam\GutenbergStarter\Admin\Options();
-		// how to check $options->gs_plugin_settings_page() check in the terminal console for debugging
-		// var_dump($options->gs_plugin_settings_page());
 
 		// Check if admin_menu hook is registered
 		$this->assertGreaterThan(
