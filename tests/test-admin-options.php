@@ -125,6 +125,7 @@ class Admin_Options_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test movie API key option functionality.
+	 * ✅✅✅
 	 */
 	public function test_movie_api_key_option() {
 		$test_key = 'test_api_key_123456';
@@ -145,6 +146,7 @@ class Admin_Options_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test settings page callback output.
+	 * ✅✅✅
 	 */
 	public function test_settings_page_callback_output() {
 		// Set up admin context
@@ -183,6 +185,7 @@ class Admin_Options_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test settings sanitization through WordPress register_setting.
+	 * ✅✅✅
 	 */
 	public function test_settings_sanitization() {
 		$this->options->register_settings();
