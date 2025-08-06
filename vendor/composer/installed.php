@@ -3,7 +3,7 @@
         'name' => 'theanamhossain/anam-gutenberg-starter',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '6e43a12133a7b9ca339a59b7ec6b75020b3758ac',
+        'reference' => '9ef076e84573d96293b27def6c46755274e9cf5b',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -108,7 +108,7 @@
         'doctrine/instantiator' => array(
             'pretty_version' => '2.0.x-dev',
             'version' => '2.0.9999999.9999999-dev',
-            'reference' => '8ec66b1425f6506905f6880a8c7cd85ba8537b00',
+            'reference' => '62eb6d408ec36853962daa00d056a14276442371',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/instantiator',
             'aliases' => array(),
@@ -135,16 +135,16 @@
         'myclabs/deep-copy' => array(
             'pretty_version' => '1.x-dev',
             'version' => '1.9999999.9999999.9999999-dev',
-            'reference' => '024473a478be9df5fdaca2c793f2232fe788e414',
+            'reference' => '07d290f0c47959fd5eed98c95ee5602db07e0b6a',
             'type' => 'library',
             'install_path' => __DIR__ . '/../myclabs/deep-copy',
             'aliases' => array(),
             'dev_requirement' => true,
         ),
         'nikic/php-parser' => array(
-            'pretty_version' => 'v5.4.0',
-            'version' => '5.4.0.0',
-            'reference' => '447a020a1f875a434d62f2a401f53b82a396e494',
+            'pretty_version' => 'v5.6.0',
+            'version' => '5.6.0.0',
+            'reference' => '221b0d0fdf1369c71047ad1d18bb5880017bbc56',
             'type' => 'library',
             'install_path' => __DIR__ . '/../nikic/php-parser',
             'aliases' => array(),
@@ -153,7 +153,7 @@
         'phar-io/manifest' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '54750ef60c58e43759730615a392c31c80e23176',
+            'reference' => '65f90285728eae4eae313b8b6ba11b2f5436038e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phar-io/manifest',
             'aliases' => array(
@@ -251,7 +251,7 @@
         'phpunit/phpunit' => array(
             'pretty_version' => '9.6.x-dev',
             'version' => '9.6.9999999.9999999-dev',
-            'reference' => 'ef7f9eecb0042f842b1ee755a48bef81ebcc6623',
+            'reference' => 'b7c2c3e1edc9d527552114182fc3dffc9baeda8b',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -613,7 +613,7 @@
         'theanamhossain/anam-gutenberg-starter' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '6e43a12133a7b9ca339a59b7ec6b75020b3758ac',
+            'reference' => '9ef076e84573d96293b27def6c46755274e9cf5b',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
