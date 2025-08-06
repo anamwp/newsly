@@ -9,3 +9,6 @@ report.txt
 test-results/
 playwright-report/
 coverage/
+coverage-html/
+coverage.xml
+coverage.txt

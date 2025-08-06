@@ -14,4 +14,21 @@
 			<exclude>./tests/test-sample.php</exclude>
 		</testsuite>
 	</testsuites>
+	
+	<coverage>
+		<include>
+			<directory suffix=".php">./includes/Admin</directory>
+			<!-- <directory suffix=".php">./src/</directory> -->
+		</include>
+		<exclude>
+			<directory>./tests/</directory>
+			<directory>./vendor/</directory>
+			<file>./gutenberg-starter.php</file>
+		</exclude>
+		<report>
+			<html outputDirectory="coverage-html"/>
+			<text outputFile="coverage.txt"/>
+			<clover outputFile="coverage.xml"/>
+		</report>
+	</coverage>
 </phpunit>
