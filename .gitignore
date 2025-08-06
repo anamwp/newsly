@@ -8,3 +8,4 @@ report.txt
 .phpunit.result.cache
 test-results/
 playwright-report/
+coverage/
