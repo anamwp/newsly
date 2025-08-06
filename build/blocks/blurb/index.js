@@ -373,7 +373,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 /***/ ((module) => {
 
 "use strict";
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/blurb","version":"0.1.0","title":"Blurb","category":"anam-starter","icon":"media-interactive","description":"","example":{"attributes":{"content":"Hello World","alignment":"right"}},"attributes":{"newcontent":{"type":"string","source":"html","selector":"h2","default":"Lorem ipsum dolor sit amet"},"newmessage":{"type":"string","source":"html","selector":"p","default":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."},"alignment":{"type":"string","default":"none"},"font_size":{"type":"number","default":"none"},"text_color":{"type":"string","default":"#000"},"content_color":{"type":"string","default":"#000"},"blurb_bg_color":{"type":"string","default":"#eee"}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/blurb","version":"0.1.0","title":"Blurb","category":"anam-starter","icon":"media-interactive","description":"","example":{"attributes":{}},"attributes":{"newcontent":{"type":"string","source":"html","selector":"h2","default":"Lorem ipsum dolor sit amet"},"newmessage":{"type":"string","source":"html","selector":"p","default":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus."},"alignment":{"type":"string","default":"none"},"font_size":{"type":"number","default":"none"},"text_color":{"type":"string","default":"#000"},"content_color":{"type":"string","default":"#000"},"blurb_bg_color":{"type":"string","default":"#eee"}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
 
 /***/ }),
 
@@ -492,9 +492,9 @@ function edit(_ref) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__.PanelRow, {
               children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_3__.__)('Set the blurb background color', 'gutenberg-starter')
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__.ColorPalette, {
-              onChange: function onChange(newFontSize) {
+              onChange: function onChange(newColor) {
                 setAttributes({
-                  blurb_bg_color: newFontSize
+                  blurb_bg_color: newColor
                 });
               }
             })]

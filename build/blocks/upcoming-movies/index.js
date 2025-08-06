@@ -300,7 +300,9 @@ __webpack_require__.r(__webpack_exports__);
  */
 var APIResponsePromise = /*#__PURE__*/function () {
   var _ref = (0,_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_0__["default"])(/*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee() {
+    var _window$gutenbergStar, _window$envVars;
     var url,
+      apiToken,
       options,
       getMovieAPIResponse,
       getMovieAPIResponseJSON,
@@ -309,29 +311,45 @@ var APIResponsePromise = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           url = _args.length > 0 && _args[0] !== undefined ? _args[0] : '';
+          // Get API token from multiple possible sources
+          apiToken = ''; // Method 1: WordPress localized data (from admin settings)
+          if ((_window$gutenbergStar = window.gutenbergStarterData) !== null && _window$gutenbergStar !== void 0 && _window$gutenbergStar.movieApiToken) {
+            apiToken = window.gutenbergStarterData.movieApiToken;
+          }
+
+          // Method 2: Environment variables (fallback)
+          if (!apiToken && (_window$envVars = window.envVars) !== null && _window$envVars !== void 0 && _window$envVars.MOVIE_API_KEY) {
+            apiToken = window.envVars.MOVIE_API_KEY;
+          }
+          if (apiToken) {
+            _context.next = 6;
+            break;
+          }
+          throw new Error('Movie API token is not configured. Please set it in the plugin settings or environment variables.');
+        case 6:
           options = {
             method: 'GET',
             headers: {
               accept: 'application/json',
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDQxMzQ5MmRiNWUyZTRjYTVlOTM0MDJjYTYyM2ZjYSIsIm5iZiI6MTcxOTIwNzU0OC45NzY5OCwic3ViIjoiNjY3OTA0YWNlZmRiOGMxNzc0MGI1MmZkIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.3LtMcOLpN8GfR8UiFDFPUYYHJVft69TrEzPssuTqnBA'
+              Authorization: "Bearer ".concat(apiToken)
             }
           };
-          _context.next = 4;
+          _context.next = 9;
           return fetch(url, options);
-        case 4:
+        case 9:
           getMovieAPIResponse = _context.sent;
-          _context.next = 7;
+          _context.next = 12;
           return getMovieAPIResponse.json();
-        case 7:
+        case 12:
           getMovieAPIResponseJSON = _context.sent;
           if (!(getMovieAPIResponseJSON.success === false)) {
-            _context.next = 10;
+            _context.next = 15;
             break;
           }
           throw new Error(getMovieAPIResponseJSON.status_message);
-        case 10:
+        case 15:
           return _context.abrupt("return", getMovieAPIResponseJSON);
-        case 11:
+        case 16:
         case "end":
           return _context.stop();
       }
