@@ -40,6 +40,6 @@ class Init {
 		 * Cron
 		 * Command - wp cron event run update_movie_block_event
 		 */
-		CRON\Movie::init();
+		// CRON\Movie::init();
 	}
 }
