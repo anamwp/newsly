@@ -55,6 +55,28 @@ class Admin_Options_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Test first-time instantiation to cover the singleton creation line.
+	 */
+	public function test_singleton_first_instantiation() {
+		// Clear any existing instance using reflection to test first-time creation
+		// ReflectionClass is a built-in PHP class that provides powerful runtime introspection capabilities - essentially letting you examine and analyze classes, their properties, methods, and other characteristics while your code is running.
+		$reflection = new ReflectionClass('\Anam\GutenbergStarter\Admin\Options');
+		$instance_property = $reflection->getProperty('instance');
+		$instance_property->setAccessible(true);
+		$instance_property->setValue(null, null);
+		
+		// This should trigger the "self::$instance = new self();" line (line 21)
+		$instance = \Anam\GutenbergStarter\Admin\Options::init();
+		
+		$this->assertInstanceOf('\Anam\GutenbergStarter\Admin\Options', $instance);
+		$this->assertNotNull($instance);
+		
+		// Verify subsequent calls return the same instance
+		$instance2 = \Anam\GutenbergStarter\Admin\Options::init();
+		$this->assertSame($instance, $instance2);
+	}
+
+	/**
 	 * Test that admin hooks are registered in admin context.
 	 */
 	public function test_admin_hooks_registration() {
