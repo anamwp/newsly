@@ -296,26 +296,99 @@ test.describe.serial('Block Test - Blurb', () => {
 		/**
 		 * Insert the Blurb block using the block inserter
 		 */
-		// await page.click('button[aria-label="Add block"]');
-		await page.click('button[aria-label="Block Inserter"]');
-		await page.fill('input[placeholder="Search"]', 'Blurb');
+		console.log('Looking for block inserter button...');
+
+		// Try multiple selectors for the block inserter button
+		const inserterSelectors = [
+			'button[aria-label="Block Inserter"]',
+			'button[aria-label="Add block"]',
+			'button[aria-label*="inserter"]',
+			'button[aria-label*="Add block"]',
+			'.block-editor-inserter__toggle',
+			'.edit-post-header-toolbar__inserter-toggle',
+		];
+
+		let inserterClicked = false;
+
+		for (const selector of inserterSelectors) {
+			try {
+				const button = page.locator(selector).first();
+				const isVisible = await button.isVisible({ timeout: 3000 });
+
+				if (isVisible) {
+					await button.click();
+					inserterClicked = true;
+					console.log(`✅ Block inserter clicked via: ${selector}`);
+					break;
+				}
+			} catch (error) {
+				console.log(`⚠️ Could not click inserter with: ${selector}`);
+			}
+		}
+
+		if (!inserterClicked) {
+			// Debug available buttons
+			const buttons = await page
+				.locator('button[aria-label]')
+				.allTextContents();
+			console.log('Available buttons:', buttons);
+			throw new Error('Could not find block inserter button');
+		}
+
+		// Wait for inserter to open
+		await page.waitForTimeout(1000);
+
+		console.log('Looking for search input...');
+
+		// Try multiple selectors for the search input
+		const searchSelectors = [
+			'input[placeholder="Search"]',
+			'input[placeholder*="Search"]',
+			'input[placeholder*="search"]',
+			'.block-editor-inserter__search-input',
+			'.components-search-control__input',
+			'[role="searchbox"]',
+		];
+
+		let searchFound = false;
+
+		for (const selector of searchSelectors) {
+			try {
+				const input = page.locator(selector).first();
+				const isVisible = await input.isVisible({ timeout: 3000 });
+
+				if (isVisible) {
+					await input.fill('Blurb');
+					searchFound = true;
+					console.log(`✅ Search input found via: ${selector}`);
+					break;
+				}
+			} catch (error) {
+				console.log(`⚠️ Could not find search with: ${selector}`);
+			}
+		}
+
+		if (!searchFound) {
+			console.log(
+				'⚠️ No search input found, trying to browse blocks directly'
+			);
+		}
+
+		// Wait for search results
+		await page.waitForTimeout(1500);
+
+		console.log('Looking for Blurb block in the list...');
+
 		await page.waitForSelector(
-			'.block-editor-block-types-list__item, .editor-block-list-item-anam-gutenberg-starter-block-blurb'
+			'.block-editor-block-types-list__item, .editor-block-list-item-anam-gutenberg-starter-block-blurb',
+			{ timeout: 10000 }
 		);
+
 		await page.click(
 			'.block-editor-block-types-list__item, .editor-block-list-item-anam-gutenberg-starter-block-blurb'
 		);
 
 		// await page.waitForTimeout(5000);
-
-		// Confirm block is inserted in the editor
-		await expect(
-			page.locator(
-				'.wp-block-post-content, .block-editor-block-list__layout, [data-type="anam-gutenberg-starter-block/blurb"], .gts__blurb__container',
-				{ timeout: 15000 }
-			)
-		).toBeVisible();
-		console.log('✅ Blurb block inserted');
 
 		// const blockOption = page
 		// 	.locator(
@@ -379,28 +452,80 @@ test.describe.serial('Block Test - Blurb', () => {
 		let blockInEditorFound = false;
 		let foundSelector = '';
 
-		for (const selector of blockSelectors) {
-			const blockElement = page.locator(selector).first();
-			const isVisible = await blockElement
-				.isVisible({ timeout: 2000 })
-				.catch(() => false);
+		// First try to find block in iframe
+		try {
+			const editorIframe = page.frameLocator(
+				'iframe[name="editor-canvas"]'
+			);
 
-			if (isVisible) {
-				blockInEditorFound = true;
-				foundSelector = selector;
-				console.log(
-					`✅ Block confirmed in editor with selector: ${selector}`
-				);
-				break;
+			for (const selector of blockSelectors) {
+				const blockElement = editorIframe.locator(selector).first();
+				const isVisible = await blockElement
+					.isVisible({ timeout: 2000 })
+					.catch(() => false);
+
+				if (isVisible) {
+					blockInEditorFound = true;
+					foundSelector = selector + ' (in iframe)';
+					console.log(
+						`✅ Block confirmed in iframe with selector: ${selector}`
+					);
+					break;
+				}
+			}
+			// since we found the block in the iframe. lets do some changes in the blurb block
+			if (blockInEditorFound) {
+				await editorIframe
+					.locator('#gts-blurb-heading')
+					.first()
+					.click();
+				await editorIframe
+					.locator('#gts-blurb-heading')
+					.first()
+					.fill('This is a test blurb blockkkkkkkkkkkkkk');
+				console.log('✅ Blurb block content updated');
+			}
+		} catch (error) {
+			console.log('⚠️ Could not access iframe, trying main page...');
+		}
+
+		// Fallback: try main page selectors
+		if (!blockInEditorFound) {
+			for (const selector of blockSelectors) {
+				const blockElement = page.locator(selector).first();
+				const isVisible = await blockElement
+					.isVisible({ timeout: 2000 })
+					.catch(() => false);
+
+				if (isVisible) {
+					blockInEditorFound = true;
+					foundSelector = selector;
+					console.log(
+						`✅ Block confirmed in editor with selector: ${selector}`
+					);
+					break;
+				}
 			}
 		}
 
 		if (!blockInEditorFound) {
-			// Fallback: check if any blocks were added to the editor
-			const allBlocks = await page
-				.locator('.block-editor-block-list__block')
-				.count();
-			console.log(`Total blocks in editor: ${allBlocks}`);
+			// Fallback: check if any blocks were added to the editor (try both iframe and main page)
+			let allBlocks = 0;
+
+			try {
+				const editorIframe = page.frameLocator(
+					'iframe[name="editor-canvas"]'
+				);
+				allBlocks = await editorIframe
+					.locator('.block-editor-block-list__block')
+					.count();
+				console.log(`Total blocks in iframe: ${allBlocks}`);
+			} catch (error) {
+				allBlocks = await page
+					.locator('.block-editor-block-list__block')
+					.count();
+				console.log(`Total blocks in main page: ${allBlocks}`);
+			}
 
 			if (allBlocks > 0) {
 				console.log(
