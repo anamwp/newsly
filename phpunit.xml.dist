@@ -17,8 +17,9 @@
 	
 	<coverage>
 		<include>
-			<directory suffix=".php">./includes/Admin/Options.php</directory>
-			<!-- <directory suffix=".php">./src/</directory> -->
+			<!-- <directory suffix=".php">./includes/Admin/Options.php</directory> -->
+			<directory suffix=".php">./includes/</directory>
+			<directory suffix=".php">./src/</directory>
 		</include>
 		<exclude>
 			<directory>./tests/</directory>
