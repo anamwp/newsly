@@ -6,8 +6,8 @@
  */
 
 // if ( PHP_MAJOR_VERSION >= 8 ) {
-// 	echo "The scaffolded tests cannot currently be run on PHP 8.0+. See https://github.com/wp-cli/scaffold-command/issues/285" . PHP_EOL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-// 	exit( 1 );
+// echo "The scaffolded tests cannot currently be run on PHP 8.0+. See https://github.com/wp-cli/scaffold-command/issues/285" . PHP_EOL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+// exit( 1 );
 // }
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
@@ -28,7 +28,7 @@ require_once "{$_tests_dir}/includes/functions.php";
  * Manually load the plugin being tested.
  */
 function _manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/gutenberg-starter.php';
+	require dirname( __DIR__ ) . '/gutenberg-starter.php';
 }
 
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
