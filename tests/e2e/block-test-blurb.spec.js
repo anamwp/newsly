@@ -563,5 +563,33 @@ test.describe.serial('Block Test - Blurb', () => {
 		}
 
 		console.log('✅ Frontend rendering verification complete');
+
+		// Now delete the page since I having the page url
+		if (postUrl) {
+			console.log(`Deleting test page: ${postUrl}`);
+			await page.goto(postUrl);
+			await page.waitForLoadState('networkidle');
+
+			// go to edit page
+			const editLink = page.locator('a:has-text("Edit Page")').first();
+			await editLink.click();
+
+			// Click the "Move to Trash" link
+			const trashLink = page.locator('button:has-text("Move to Trash")');
+			await trashLink.click();
+
+			// Confirm deletion
+			// Wait for confirmation modal to appear
+			await page.waitForSelector('.components-modal__content', {
+				timeout: 5000,
+			});
+
+			const confirmButton = page.locator(
+				'.components-modal__content button:has-text("Move to trash"), .components-modal__content button:has-text("Delete")'
+			);
+			await confirmButton.click();
+
+			console.log('✅ Test page deleted');
+		}
 	});
 });
