@@ -28,7 +28,6 @@ class Options_Settings_Test extends WP_UnitTestCase {
 
 	/**
 	 * Clean up after each test.
-	 * ✅✅✅
 	 */
 	public function tear_down() {
 		// Clean up any options that were set during testing.
@@ -39,7 +38,6 @@ class Options_Settings_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test that the movie API key option can be saved and retrieved.
-	 * ✅✅✅
 	 */
 	public function test_save_and_retrieve_movie_api_key() {
 		$test_api_key = 'test_movie_api_key_123456789';
@@ -73,7 +71,6 @@ class Options_Settings_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test API key validation and sanitization.
-	 * ✅✅✅
 	 */
 	public function test_api_key_sanitization() {
 		// Test with malicious input
@@ -179,7 +176,6 @@ class Options_Settings_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test option with autoload parameter.
-	 * ✅✅✅
 	 */
 	public function test_option_autoload() {
 		$test_api_key = 'autoload_test_api_key';
@@ -220,7 +216,6 @@ class Options_Settings_Test extends WP_UnitTestCase {
 
 	/**
 	 * Test option with WordPress filters.
-	 * ✅✅✅
 	 */
 	public function test_option_with_filters() {
 		$original_value = 'original_api_key';
