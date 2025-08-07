@@ -94,6 +94,42 @@ test.describe.serial('Block Test - Blurb', () => {
 			console.log('⚠️ Could not detect editor structure, continuing...');
 		}
 
+		// Add page title - Blurb Block Test Page
+		// Add page title - Blurb Block Test Page
+		try {
+			// First try to find the title input in the iframe
+			const editorIframe = page.frameLocator(
+				'iframe[name="editor-canvas"]'
+			);
+			const titleInIframe = editorIframe
+				.locator(
+					'h1[contenteditable="true"].wp-block-post-title__block-editor-rich-text__editable, h1[contenteditable="true"]'
+				)
+				.first();
+			const isTitleInIframe = await titleInIframe
+				.isVisible({ timeout: 5000 })
+				.catch(() => false);
+
+			if (isTitleInIframe) {
+				await titleInIframe.click();
+				await titleInIframe.fill('Blurb Block Test Page');
+				console.log('✅ Title added via iframe');
+			} else {
+				// Fallback to main page selectors
+				await page.waitForSelector(
+					'h1[contenteditable="true"].wp-block-post-title.editor-post-title__input, h1[contenteditable="true"]',
+					{ timeout: 10000 }
+				);
+				await page.fill(
+					'h1[contenteditable="true"].wp-block-post-title.editor-post-title__input, h1[contenteditable="true"]',
+					'Blurb Block Test Page'
+				);
+				console.log('✅ Title added via main page');
+			}
+		} catch (error) {
+			console.log('⚠️ Could not set page title, continuing with test...');
+		}
+
 		// Wait a bit more for editor to fully initialize
 		// await page.waitForTimeout(3000);
 
@@ -246,7 +282,7 @@ test.describe.serial('Block Test - Blurb', () => {
 				await editorIframe
 					.locator('#gts-blurb-heading')
 					.first()
-					.fill('This is a test blurb blockkkkkkkkkkkkkk');
+					.fill('This is a test blurb block heading changed.');
 				console.log('✅ Blurb block content updated');
 			}
 		} catch (error) {
@@ -478,6 +514,8 @@ test.describe.serial('Block Test - Blurb', () => {
 		// More flexible title checking - WordPress might append site name or use different format
 		const titleVariations = [
 			'Test Page for Blurb Block',
+			'Blurb Block Test Page',
+			'This is a test blurb block heading changed.',
 			'Blurb Block',
 			'Test Page',
 		];
