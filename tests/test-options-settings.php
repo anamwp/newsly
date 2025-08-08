@@ -32,7 +32,7 @@ class Options_Settings_Test extends WP_UnitTestCase {
 	public function tear_down() {
 		// Clean up any options that were set during testing.
 		delete_option( 'gutenberg_starter_movie_api_key' );
-
+		// Call parent tear_down to ensure proper cleanup.
 		parent::tear_down();
 	}
 

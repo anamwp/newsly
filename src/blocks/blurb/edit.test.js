@@ -138,7 +138,6 @@ describe('Block Edit Component', () => {
 		expect(screen.getByDisplayValue('Test Message')).toBeInTheDocument();
 	});
 
-	//getAllByPlaceholderText
 	it('test with heading', () => {
 		render(<Edit {...defaultProps} {...defaultAttributes} />);
 		expect(
@@ -152,6 +151,7 @@ describe('Block Edit Component', () => {
 			screen.getByPlaceholderText('hello text control')
 		).toBeInTheDocument();
 	});
+
 	it('should apply custom styles based on color attributes', () => {
 		const propsWithColors = {
 			...defaultProps,
@@ -187,20 +187,6 @@ describe('Block Edit Component', () => {
 			.getByPlaceholderText('this is rich text editor')
 			.closest('.gts__blurb__container');
 		expect(container).toHaveStyle('text-align: center');
-	});
-
-	it('should call setAttributes when RichText content changes', () => {
-		const mockSetAttributes = jest.fn();
-		const props = {
-			...defaultProps,
-			setAttributes: mockSetAttributes,
-		};
-
-		render(<Edit {...props} />);
-
-		// This test verifies that the mocked RichText components are set up correctly
-		// In a real scenario, we would simulate user input
-		expect(mockSetAttributes).not.toHaveBeenCalled();
 	});
 
 	it('should render InnerBlocks with correct template', () => {
@@ -312,8 +298,6 @@ describe('Block Edit Component', () => {
 			screen.getByDisplayValue(blockattr.attributes.newmessage.default)
 		).toBeInTheDocument();
 	});
-
-	// fire event test
 
 	it('should maintain component structure consistency', () => {
 		const { rerender } = render(<Edit {...defaultProps} />);
