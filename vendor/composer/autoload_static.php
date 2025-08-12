@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit86da225e4e73a507ff9575c84597ae0a
+class ComposerStaticInit2806d1f5392a20a353ef12aba139f741
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -52,6 +52,10 @@ class ComposerStaticInit86da225e4e73a507ff9575c84597ae0a
             'Psr\\Container\\' => 14,
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
+        ),
+        'M' => 
+        array (
+            'MabeEnum\\' => 9,
         ),
         'J' => 
         array (
@@ -170,6 +174,10 @@ class ComposerStaticInit86da225e4e73a507ff9575c84597ae0a
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
+        'MabeEnum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/marc-mabe/php-enum/src',
+        ),
         'JsonSchema\\' => 
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
@@ -260,6 +268,7 @@ class ComposerStaticInit86da225e4e73a507ff9575c84597ae0a
         'PHPCSUtils\\Internal\\NoFileCache' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/Internal/NoFileCache.php',
         'PHPCSUtils\\Internal\\StableCollections' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/Internal/StableCollections.php',
         'PHPCSUtils\\TestUtils\\ConfigDouble' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/TestUtils/ConfigDouble.php',
+        'PHPCSUtils\\TestUtils\\RulesetDouble' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/TestUtils/RulesetDouble.php',
         'PHPCSUtils\\TestUtils\\UtilityMethodTestCase' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/TestUtils/UtilityMethodTestCase.php',
         'PHPCSUtils\\Tokens\\Collections' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/Tokens/Collections.php',
         'PHPCSUtils\\Tokens\\TokenHelper' => __DIR__ . '/..' . '/phpcsstandards/phpcsutils/PHPCSUtils/Tokens/TokenHelper.php',
@@ -926,9 +935,9 @@ class ComposerStaticInit86da225e4e73a507ff9575c84597ae0a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit86da225e4e73a507ff9575c84597ae0a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit86da225e4e73a507ff9575c84597ae0a::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit86da225e4e73a507ff9575c84597ae0a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit2806d1f5392a20a353ef12aba139f741::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit2806d1f5392a20a353ef12aba139f741::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit2806d1f5392a20a353ef12aba139f741::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -3,7 +3,7 @@
         'name' => 'theanamhossain/anam-gutenberg-starter',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '9ef076e84573d96293b27def6c46755274e9cf5b',
+        'reference' => '893e9f727961981fead81141760c4184e3cb6cae',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'composer/ca-bundle' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '08c50d5ec4c6ced7d0271d2862dec8c1033283e6',
+            'reference' => 'ffca07b74cd354c1114a536f1c65eb827d740d2e',
             'type' => 'library',
             'install_path' => __DIR__ . '/./ca-bundle',
             'aliases' => array(
@@ -24,7 +24,7 @@
         'composer/class-map-generator' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'ffe442c5974c44a9343e37a0abcb1cc37319f5b9',
+            'reference' => '73dd304dc820196ab859003d822ea6656a0e243d',
             'type' => 'library',
             'install_path' => __DIR__ . '/./class-map-generator',
             'aliases' => array(
@@ -35,18 +35,18 @@
         'composer/composer' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'e58aad45b51c6b29b9f47800a182d7e86e654201',
+            'reference' => 'd2a4543db8adc6b3d4b2fb652c953db629328986',
             'type' => 'library',
             'install_path' => __DIR__ . '/./composer',
             'aliases' => array(
-                0 => '2.8.x-dev',
+                0 => '2.9.x-dev',
             ),
             'dev_requirement' => true,
         ),
         'composer/metadata-minifier' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2a7dc6ae0d81d1432ee25327e8aa7b518cc3d37f',
+            'reference' => '0a38292ff395f3716454613e3a6c6eaa422456c8',
             'type' => 'library',
             'install_path' => __DIR__ . '/./metadata-minifier',
             'aliases' => array(
@@ -57,7 +57,7 @@
         'composer/pcre' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'deb3871d20d5012eb5faa5a9caa71c44f151db49',
+            'reference' => 'fadb6382c5d62e4e59ca45a4e77d3a356b40c594',
             'type' => 'library',
             'install_path' => __DIR__ . '/./pcre',
             'aliases' => array(
@@ -79,7 +79,7 @@
         'composer/spdx-licenses' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '614a1b86ff628ca7e0713f733ee09f94569548b0',
+            'reference' => 'edf364cefe8c43501e21e88110aac10b284c3c9f',
             'type' => 'library',
             'install_path' => __DIR__ . '/./spdx-licenses',
             'aliases' => array(
@@ -117,19 +117,32 @@
         'graham-campbell/result-type' => array(
             'pretty_version' => '1.1.x-dev',
             'version' => '1.1.9999999.9999999-dev',
-            'reference' => '9d6c1d7ce69a3329936e603617e59ba205ab0a66',
+            'reference' => 'bdd52c41913b414f4ca7dcb34482babcd0e9bd58',
             'type' => 'library',
             'install_path' => __DIR__ . '/../graham-campbell/result-type',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'justinrainbow/json-schema' => array(
-            'pretty_version' => '5.x-dev',
-            'version' => '5.9999999.9999999.9999999-dev',
-            'reference' => 'feb2ca6dd1cebdaf1ed60a4c8de2e53ce11c4fd8',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '3763af105ab2781bd705418ba5fa2481049b8e84',
             'type' => 'library',
             'install_path' => __DIR__ . '/../justinrainbow/json-schema',
-            'aliases' => array(),
+            'aliases' => array(
+                0 => '6.x-dev',
+            ),
+            'dev_requirement' => true,
+        ),
+        'marc-mabe/php-enum' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '7159809e5cfa041dca28e61f7f7ae58063aae8ed',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../marc-mabe/php-enum',
+            'aliases' => array(
+                0 => '4.7.x-dev',
+            ),
             'dev_requirement' => true,
         ),
         'myclabs/deep-copy' => array(
@@ -173,7 +186,7 @@
         'phpcsstandards/phpcsextra' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '31ef149a1ee85ec0d355e58418d78d927e89d185',
+            'reference' => '70f03c415e82a43271088a28ab4b2897e34c2f0c',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsextra',
             'aliases' => array(
@@ -184,7 +197,7 @@
         'phpcsstandards/phpcsutils' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '8ef592afe141d07ab178ca85dca0853d35fbd61a',
+            'reference' => 'f7eb16f2fa4237d5db9e8fed8050239bee17a9bd',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../phpcsstandards/phpcsutils',
             'aliases' => array(
@@ -251,7 +264,7 @@
         'phpunit/phpunit' => array(
             'pretty_version' => '9.6.x-dev',
             'version' => '9.6.9999999.9999999-dev',
-            'reference' => 'b7c2c3e1edc9d527552114182fc3dffc9baeda8b',
+            'reference' => 'ea49afa29aeea25ea7bf9de9fdd7cab163cc0701',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
@@ -324,7 +337,7 @@
         'sebastian/comparator' => array(
             'pretty_version' => '4.0.x-dev',
             'version' => '4.0.9999999.9999999-dev',
-            'reference' => 'b247957a1c8dc81a671770f74b479c0a78a818f1',
+            'reference' => '67a2df3a62639eab2cc5906065e9805d4fd5dfc5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sebastian/comparator',
             'aliases' => array(),
@@ -369,7 +382,7 @@
         'sebastian/global-state' => array(
             'pretty_version' => '5.0.x-dev',
             'version' => '5.0.9999999.9999999-dev',
-            'reference' => 'bca7df1f32ee6fe93b4d4a9abbf69e13a4ada2c9',
+            'reference' => 'b6781316bdcd28260904e7cc18ec983d0d2ef4f6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sebastian/global-state',
             'aliases' => array(),
@@ -405,7 +418,7 @@
         'sebastian/recursion-context' => array(
             'pretty_version' => '4.0.x-dev',
             'version' => '4.0.9999999.9999999-dev',
-            'reference' => 'e75bd0f07204fec2a0af9b0f3cfe97d05f92efc1',
+            'reference' => '539c6691e0623af6dc6f9c20384c120f963465a0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../sebastian/recursion-context',
             'aliases' => array(),
@@ -472,7 +485,7 @@
         'squizlabs/php_codesniffer' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'a7d77cfeb333f382abfb44cc2d2e6296a4391d47',
+            'reference' => '916eb08bd9e2c0a27e2891c7a8494f9a29951b4c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../squizlabs/php_codesniffer',
             'aliases' => array(
@@ -481,9 +494,9 @@
             'dev_requirement' => true,
         ),
         'symfony/console' => array(
-            'pretty_version' => '7.3.x-dev',
-            'version' => '7.3.9999999.9999999-dev',
-            'reference' => 'eec43776d7ed956cbcc4ce92f7331c72fbf02040',
+            'pretty_version' => '7.4.x-dev',
+            'version' => '7.4.9999999.9999999-dev',
+            'reference' => 'd7cbab18d0708dbae75f8c4470f4fc5c5c88296c',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/console',
             'aliases' => array(),
@@ -501,18 +514,18 @@
             'dev_requirement' => true,
         ),
         'symfony/filesystem' => array(
-            'pretty_version' => '7.3.x-dev',
-            'version' => '7.3.9999999.9999999-dev',
-            'reference' => 'b8dce482de9d7c9fe2891155035a7248ab5c7fdb',
+            'pretty_version' => '7.4.x-dev',
+            'version' => '7.4.9999999.9999999-dev',
+            'reference' => '7d2dac345a4e20bcdedc5963ceea97ebe40e70ca',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/filesystem',
             'aliases' => array(),
             'dev_requirement' => true,
         ),
         'symfony/finder' => array(
-            'pretty_version' => '7.3.x-dev',
-            'version' => '7.3.9999999.9999999-dev',
-            'reference' => 'ec2344cf77a48253bbca6939aa3d2477773ea63d',
+            'pretty_version' => '7.4.x-dev',
+            'version' => '7.4.9999999.9999999-dev',
+            'reference' => '94fb6404fd96521977d11c309d91566d93cb83a6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/finder',
             'aliases' => array(),
@@ -530,7 +543,7 @@
         'symfony/polyfill-intl-grapheme' => array(
             'pretty_version' => '1.x-dev',
             'version' => '1.9999999.9999999.9999999-dev',
-            'reference' => 'b9123926e3b7bc2f98c02ad54f6a4b02b91a8abe',
+            'reference' => '380872130d3a5dd3ace2f4010d95125fde5d5c70',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-intl-grapheme',
             'aliases' => array(),
@@ -566,7 +579,7 @@
         'symfony/polyfill-php80' => array(
             'pretty_version' => '1.x-dev',
             'version' => '1.9999999.9999999.9999999-dev',
-            'reference' => '60328e362d4c2c802a54fcbf04f9d3fb892b4cf8',
+            'reference' => '0cc9dd0f17f61d8131e7df6b84bd344899fe2608',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/polyfill-php80',
             'aliases' => array(),
@@ -582,9 +595,9 @@
             'dev_requirement' => true,
         ),
         'symfony/process' => array(
-            'pretty_version' => '7.3.x-dev',
-            'version' => '7.3.9999999.9999999-dev',
-            'reference' => 'acece5e1423ba01df2f4cdf980dec483fd7b8ef2',
+            'pretty_version' => '7.4.x-dev',
+            'version' => '7.4.9999999.9999999-dev',
+            'reference' => 'f7f8c652703e1dd99c702cb39a196af39932c376',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/process',
             'aliases' => array(),
@@ -593,7 +606,7 @@
         'symfony/service-contracts' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5ad38698559cf88b6296629e19b15ef3239c9d7a',
+            'reference' => '45112560a3ba2d715666a509a0bc9521d10b6c43',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/service-contracts',
             'aliases' => array(
@@ -602,9 +615,9 @@
             'dev_requirement' => true,
         ),
         'symfony/string' => array(
-            'pretty_version' => '7.3.x-dev',
-            'version' => '7.3.9999999.9999999-dev',
-            'reference' => '373a11f2d03e71934a0023888edf3328a583e4ec',
+            'pretty_version' => '7.4.x-dev',
+            'version' => '7.4.9999999.9999999-dev',
+            'reference' => '08587b6ef645178c1095581c83c36b9f817041bb',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/string',
             'aliases' => array(),
@@ -613,7 +626,7 @@
         'theanamhossain/anam-gutenberg-starter' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '9ef076e84573d96293b27def6c46755274e9cf5b',
+            'reference' => '893e9f727961981fead81141760c4184e3cb6cae',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -631,7 +644,7 @@
         'vlucas/phpdotenv' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'a59a13791077fe3d44f90e7133eb68e7d22eaff2',
+            'reference' => '24ac4c74f91ee2c193fa1aaa5c249cb0822809af',
             'type' => 'library',
             'install_path' => __DIR__ . '/../vlucas/phpdotenv',
             'aliases' => array(
@@ -640,9 +653,9 @@
             'dev_requirement' => false,
         ),
         'wp-coding-standards/wpcs' => array(
-            'pretty_version' => '3.1.0',
-            'version' => '3.1.0.0',
-            'reference' => '9333efcbff231f10dfd9c56bb7b65818b4733ca7',
+            'pretty_version' => '3.2.0',
+            'version' => '3.2.0.0',
+            'reference' => 'd2421de7cec3274ae622c22c744de9a62c7925af',
             'type' => 'phpcodesniffer-standard',
             'install_path' => __DIR__ . '/../wp-coding-standards/wpcs',
             'aliases' => array(),

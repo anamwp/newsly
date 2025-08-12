@@ -383,7 +383,7 @@ final class Collections
     /**
      * OO scopes in which constants can be declared.
      *
-     * Note: traits can only declare constants since PHP 8.2.
+     * - PHP 8.2 added support for constants in traits.
      *
      * @since 1.0.0 Use the {@see Collections::ooConstantScopes()} method for access.
      *
@@ -415,7 +415,7 @@ final class Collections
     /**
      * OO scopes in which properties can be declared.
      *
-     * Note: interfaces can not declare properties.
+     * - PHP 8.4 added support for properties in interfaces.
      *
      * @since 1.0.0 Use the {@see Collections::ooPropertyScopes()} method for access.
      *
@@ -424,6 +424,7 @@ final class Collections
     private static $ooPropertyScopes = [
         \T_CLASS      => \T_CLASS,
         \T_ANON_CLASS => \T_ANON_CLASS,
+        \T_INTERFACE  => \T_INTERFACE,
         \T_TRAIT      => \T_TRAIT,
     ];
 
@@ -467,12 +468,16 @@ final class Collections
      * @var array<int|string, int|string>
      */
     private static $propertyModifierKeywords = [
-        \T_PUBLIC    => \T_PUBLIC,
-        \T_PRIVATE   => \T_PRIVATE,
-        \T_PROTECTED => \T_PROTECTED,
-        \T_STATIC    => \T_STATIC,
-        \T_VAR       => \T_VAR,
-        \T_READONLY  => \T_READONLY,
+        \T_PUBLIC        => \T_PUBLIC,
+        \T_PUBLIC_SET    => \T_PUBLIC_SET,
+        \T_PROTECTED     => \T_PROTECTED,
+        \T_PROTECTED_SET => \T_PROTECTED_SET,
+        \T_PRIVATE       => \T_PRIVATE,
+        \T_PRIVATE_SET   => \T_PRIVATE_SET,
+        \T_STATIC        => \T_STATIC,
+        \T_VAR           => \T_VAR,
+        \T_READONLY      => \T_READONLY,
+        \T_FINAL         => \T_FINAL,
     ];
 
     /**

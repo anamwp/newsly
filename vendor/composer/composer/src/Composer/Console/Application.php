@@ -280,7 +280,8 @@ class Application extends BaseApplication
                     if ($this->has($command->getName())) {
                         $io->writeError('<warning>Plugin command '.$command->getName().' ('.get_class($command).') would override a Composer command and has been skipped</warning>');
                     } else {
-                        $this->add($command);
+                        // Compatibility layer for symfony/console <7.4
+                        method_exists($this, 'addCommand') ? $this->addCommand($command) : $this->add($command);
                     }
                 }
             } catch (NoSslException $e) {
@@ -380,7 +381,9 @@ class Application extends BaseApplication
 
                                 $aliases = $composer['scripts-aliases'][$script] ?? [];
 
-                                $this->add(new Command\ScriptAliasCommand($script, $description, $aliases));
+                                $scriptAlias = new Command\ScriptAliasCommand($script, $description, $aliases);
+                                // Compatibility layer for symfony/console <7.4
+                                method_exists($this, 'addCommand') ? $this->addCommand($scriptAlias) : $this->add($scriptAlias);
                             }
                         }
                     }
@@ -502,6 +505,9 @@ class Application extends BaseApplication
             if (is_array($avastDetect) && count($avastDetect) !== 0) {
                 $io->writeError('<error>The following exception indicates a possible issue with the Avast Firewall</error>', true, IOInterface::QUIET);
                 $io->writeError('<error>Check https://getcomposer.org/local-issuer for details</error>', true, IOInterface::QUIET);
+            } else {
+                $io->writeError('<error>The following exception indicates a possible issue with a Firewall/Antivirus</error>', true, IOInterface::QUIET);
+                $io->writeError('<error>Check https://getcomposer.org/local-issuer for details</error>', true, IOInterface::QUIET);
             }
         }
 
@@ -600,7 +606,7 @@ class Application extends BaseApplication
      */
     protected function getDefaultCommands(): array
     {
-        $commands = array_merge(parent::getDefaultCommands(), [
+        return array_merge(parent::getDefaultCommands(), [
             new Command\AboutCommand(),
             new Command\ConfigCommand(),
             new Command\DependsCommand(),
@@ -631,13 +637,8 @@ class Application extends BaseApplication
             new Command\FundCommand(),
             new Command\ReinstallCommand(),
             new Command\BumpCommand(),
+            new Command\SelfUpdateCommand(),
         ]);
-
-        if (strpos(__FILE__, 'phar:') === 0 || '1' === Platform::getEnv('COMPOSER_TESTS_ARE_RUNNING')) {
-            $commands[] = new Command\SelfUpdateCommand();
-        }
-
-        return $commands;
     }
 
     /**

@@ -382,7 +382,7 @@ EOF;
             }
         }
         if (\count($ambiguousClasses) > 0) {
-            $this->io->writeError('<info>To resolve ambiguity in classes not under your control you can ignore them by path using <href='.OutputFormatter::escape('https://getcomposer.org/doc/04-schema.md#exclude-files-from-classmaps').'>exclude-files-from-classmap</>');
+            $this->io->writeError('<info>To resolve ambiguity in classes not under your control you can ignore them by path using <href='.OutputFormatter::escape('https://getcomposer.org/doc/04-schema.md#exclude-files-from-classmaps').'>exclude-from-classmap</>');
         }
 
         // output PSR violations which are not coming from the vendor dir
@@ -765,7 +765,7 @@ EOF;
             }
         }
 
-        if (strpos($path, '.phar') !== false) {
+        if (Preg::isMatch('{\.phar([\\\\/]|$)}', $path)) {
             $baseDir = "'phar://' . " . $baseDir;
         }
 
@@ -937,9 +937,8 @@ if (\$issues) {
             echo 'Composer detected issues in your platform:' . PHP_EOL.PHP_EOL . str_replace('You are running '.PHP_VERSION.'.', '', implode(PHP_EOL, \$issues)) . PHP_EOL.PHP_EOL;
         }
     }
-    trigger_error(
-        'Composer detected issues in your platform: ' . implode(' ', \$issues),
-        E_USER_ERROR
+    throw new \RuntimeException(
+        'Composer detected issues in your platform: ' . implode(' ', \$issues)
     );
 }
 
@@ -975,10 +974,7 @@ if (PHP_VERSION_ID < 50600) {
             echo \$err;
         }
     }
-    trigger_error(
-        \$err,
-        E_USER_ERROR
-    );
+    throw new RuntimeException(\$err);
 }
 
 require_once $vendorPathToTargetDirCode;
@@ -1205,6 +1201,7 @@ HEADER;
                 ]
             );
             $value = ltrim(Preg::replace('/^ */m', '    $0$0', $value));
+            $value = Preg::replace('/ +$/m', '', $value);
 
             $file .= sprintf("    public static $%s = %s;\n\n", $prop, $value);
             if ('files' !== $prop) {

@@ -80,7 +80,7 @@ final class Variables
      * Retrieve the visibility and implementation properties of a class member variable.
      *
      * Main differences with the PHPCS version:
-     * - Removed the parse error warning for properties in interfaces.
+     * - Removed the parse error warning for properties in enums (PHPCS 4.0 makes the same change).
      *   This will now throw the same _"$stackPtr is not a class member var"_ runtime exception as
      *   other non-property variables passed to the method.
      * - Defensive coding against incorrect calls to this method.
@@ -102,8 +102,12 @@ final class Variables
      *               array(
      *                 'scope'           => string,        // Public, private, or protected.
      *                 'scope_specified' => boolean,       // TRUE if the scope was explicitly specified.
+     *                 'set_scope'       => string|false,  // Scope for asymmetric visibility.
+     *                                                     // Either public, private, or protected or
+     *                                                     // FALSE if no set scope is specified.
      *                 'is_static'       => boolean,       // TRUE if the static keyword was found.
      *                 'is_readonly'     => boolean,       // TRUE if the readonly keyword was found.
+     *                 'is_final'        => boolean,       // TRUE if the final keyword was found.
      *                 'type'            => string,        // The type of the var (empty if no type specified).
      *                 'type_token'      => integer|false, // The stack pointer to the start of the type
      *                                                     // or FALSE if there is no type.
@@ -147,8 +151,10 @@ final class Variables
 
         $scope          = 'public';
         $scopeSpecified = false;
+        $setScope       = false;
         $isStatic       = false;
         $isReadonly     = false;
+        $isFinal        = false;
 
         $startOfStatement = $phpcsFile->findPrevious(
             [
@@ -178,11 +184,32 @@ final class Variables
                     $scope          = 'protected';
                     $scopeSpecified = true;
                     break;
+                case \T_PUBLIC_SET:
+                    $setScope = 'public';
+                    if ($scopeSpecified === false) {
+                        $scope = 'public';
+                    }
+                    break;
+                case \T_PROTECTED_SET:
+                    $setScope = 'protected';
+                    if ($scopeSpecified === false) {
+                        $scope = 'public';
+                    }
+                    break;
+                case \T_PRIVATE_SET:
+                    $setScope = 'private';
+                    if ($scopeSpecified === false) {
+                        $scope = 'public';
+                    }
+                    break;
                 case \T_STATIC:
                     $isStatic = true;
                     break;
                 case \T_READONLY:
                     $isReadonly = true;
+                    break;
+                case \T_FINAL:
+                    $isFinal = true;
                     break;
             }
         }
@@ -223,8 +250,10 @@ final class Variables
         $returnValue = [
             'scope'           => $scope,
             'scope_specified' => $scopeSpecified,
+            'set_scope'       => $setScope,
             'is_static'       => $isStatic,
             'is_readonly'     => $isReadonly,
+            'is_final'        => $isFinal,
             'type'            => $type,
             'type_token'      => $typeToken,
             'type_end_token'  => $typeEndToken,

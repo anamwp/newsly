@@ -85,7 +85,7 @@ class Config
      *
      * @var string
      */
-    const VERSION = '3.12.0';
+    const VERSION = '3.13.3';
 
     /**
      * Package stability; either stable, beta or alpha.
@@ -169,6 +169,21 @@ class Config
      * @var string[]
      */
     private $cliArgs = [];
+
+    /**
+     * A list of valid generators.
+     *
+     * {@internal Once support for PHP < 5.6 is dropped, this property should be refactored into a
+     * class constant.}
+     *
+     * @var array<string, string> Keys are the lowercase version of the generator name, while values
+     *                            are the associated PHP generator class.
+     */
+    private $validGenerators = [
+        'text'     => 'Text',
+        'html'     => 'HTML',
+        'markdown' => 'Markdown',
+    ];
 
     /**
      * Command line values that the user has supplied directly.
@@ -995,8 +1010,8 @@ class Config
                 }
 
                 self::$overriddenDefaults['stdinPath'] = true;
-            } else if (PHP_CODESNIFFER_CBF === false && substr($arg, 0, 12) === 'report-file=') {
-                if (isset(self::$overriddenDefaults['reportFile']) === true) {
+            } else if (substr($arg, 0, 12) === 'report-file=') {
+                if (PHP_CODESNIFFER_CBF === true || isset(self::$overriddenDefaults['reportFile']) === true) {
                     break;
                 }
 
@@ -1126,21 +1141,24 @@ class Config
                     break;
                 }
 
-                $extensions    = explode(',', substr($arg, 11));
-                $newExtensions = [];
-                foreach ($extensions as $ext) {
-                    $slash = strpos($ext, '/');
-                    if ($slash !== false) {
-                        // They specified the tokenizer too.
-                        list($ext, $tokenizer) = explode('/', $ext);
-                        $newExtensions[$ext]   = strtoupper($tokenizer);
-                        continue;
-                    }
+                $extensionsString = substr($arg, 11);
+                $newExtensions    = [];
+                if (empty($extensionsString) === false) {
+                    $extensions = explode(',', $extensionsString);
+                    foreach ($extensions as $ext) {
+                        $slash = strpos($ext, '/');
+                        if ($slash !== false) {
+                            // They specified the tokenizer too.
+                            list($ext, $tokenizer) = explode('/', $ext);
+                            $newExtensions[$ext]   = strtoupper($tokenizer);
+                            continue;
+                        }
 
-                    if (isset($this->extensions[$ext]) === true) {
-                        $newExtensions[$ext] = $this->extensions[$ext];
-                    } else {
-                        $newExtensions[$ext] = 'PHP';
+                        if (isset($this->extensions[$ext]) === true) {
+                            $newExtensions[$ext] = $this->extensions[$ext];
+                        } else {
+                            $newExtensions[$ext] = 'PHP';
+                        }
                     }
                 }
 
@@ -1215,7 +1233,22 @@ class Config
                     break;
                 }
 
-                $this->generator = substr($arg, 10);
+                $generatorName          = substr($arg, 10);
+                $lowerCaseGeneratorName = strtolower($generatorName);
+
+                if (isset($this->validGenerators[$lowerCaseGeneratorName]) === false) {
+                    $validOptions = implode(', ', $this->validGenerators);
+                    $validOptions = substr_replace($validOptions, ' and', strrpos($validOptions, ','), 1);
+                    $error        = sprintf(
+                        'ERROR: "%s" is not a valid generator. The following generators are supported: %s.'.PHP_EOL.PHP_EOL,
+                        $generatorName,
+                        $validOptions
+                    );
+                    $error       .= $this->printShortUsage(true);
+                    throw new DeepExitException($error, 3);
+                }
+
+                $this->generator = $this->validGenerators[$lowerCaseGeneratorName];
                 self::$overriddenDefaults['generator'] = true;
             } else if (substr($arg, 0, 9) === 'encoding=') {
                 if (isset(self::$overriddenDefaults['encoding']) === true) {
@@ -1266,7 +1299,7 @@ class Config
      * @param string $argument The name of the argument which is being processed.
      *
      * @return array<string>
-     * @throws DeepExitException When any of the provided codes are not valid as sniff codes.
+     * @throws \PHP_CodeSniffer\Exceptions\DeepExitException When any of the provided codes are not valid as sniff codes.
      */
     private function parseSniffCodes($input, $argument)
     {
@@ -1671,11 +1704,6 @@ class Config
             $configFile = dirname($path).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
         } else {
             $configFile = dirname(__DIR__).DIRECTORY_SEPARATOR.'CodeSniffer.conf';
-            if (is_file($configFile) === false
-                && strpos('@data_dir@', '@data_dir') === false
-            ) {
-                $configFile = '@data_dir@/PHP_CodeSniffer/CodeSniffer.conf';
-            }
         }
 
         if (is_file($configFile) === false) {

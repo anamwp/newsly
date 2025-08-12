@@ -11,7 +11,7 @@
 
 namespace PHP_CodeSniffer\Generators;
 
-use DOMDocument;
+use DOMElement;
 use DOMNode;
 use PHP_CodeSniffer\Config;
 
@@ -32,12 +32,7 @@ class Markdown extends Generator
         }
 
         ob_start();
-        foreach ($this->docFiles as $file) {
-            $doc = new DOMDocument();
-            $doc->load($file);
-            $documentation = $doc->getElementsByTagName('documentation')->item(0);
-            $this->processSniff($documentation);
-        }
+        parent::generate();
 
         $content = ob_get_contents();
         ob_end_clean();
@@ -62,6 +57,11 @@ class Markdown extends Generator
      */
     protected function printHeader()
     {
+        trigger_error(
+            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedHeader()" instead.',
+            E_USER_DEPRECATED
+        );
+
         echo $this->getFormattedHeader();
 
     }//end printHeader()
@@ -94,6 +94,11 @@ class Markdown extends Generator
      */
     protected function printFooter()
     {
+        trigger_error(
+            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedFooter()" instead.',
+            E_USER_DEPRECATED
+        );
+
         echo $this->getFormattedFooter();
 
     }//end printFooter()
@@ -162,6 +167,11 @@ class Markdown extends Generator
      */
     protected function printTextBlock(DOMNode $node)
     {
+        trigger_error(
+            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedTextBlock()" instead.',
+            E_USER_DEPRECATED
+        );
+
         echo $this->getFormattedTextBlock($node);
 
     }//end printTextBlock()
@@ -178,7 +188,12 @@ class Markdown extends Generator
      */
     protected function getFormattedTextBlock(DOMNode $node)
     {
-        $content = trim($node->nodeValue);
+        $content = $node->nodeValue;
+        if (empty($content) === true) {
+            return '';
+        }
+
+        $content = trim($content);
         $content = htmlspecialchars($content, (ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401));
         $content = str_replace('&lt;em&gt;', '*', $content);
         $content = str_replace('&lt;/em&gt;', '*', $content);
@@ -225,6 +240,11 @@ class Markdown extends Generator
      */
     protected function printCodeComparisonBlock(DOMNode $node)
     {
+        trigger_error(
+            'The '.__METHOD__.'() method is deprecated. Use "echo '.__CLASS__.'::getFormattedCodeComparisonBlock()" instead.',
+            E_USER_DEPRECATED
+        );
+
         echo $this->getFormattedCodeComparisonBlock($node);
 
     }//end printCodeComparisonBlock()
@@ -250,38 +270,81 @@ class Markdown extends Generator
             return '';
         }
 
-        $firstTitle = trim($firstCodeElm->getAttribute('title'));
-        $firstTitle = str_replace('  ', '&nbsp;&nbsp;', $firstTitle);
-        $first      = trim($firstCodeElm->nodeValue);
-        $first      = str_replace("\n", PHP_EOL.'    ', $first);
-        $first      = str_replace('<em>', '', $first);
-        $first      = str_replace('</em>', '', $first);
+        $firstTitle = $this->formatCodeTitle($firstCodeElm);
+        $first      = $this->formatCodeSample($firstCodeElm);
 
-        $secondTitle = trim($secondCodeElm->getAttribute('title'));
-        $secondTitle = str_replace('  ', '&nbsp;&nbsp;', $secondTitle);
-        $second      = trim($secondCodeElm->nodeValue);
-        $second      = str_replace("\n", PHP_EOL.'    ', $second);
-        $second      = str_replace('<em>', '', $second);
-        $second      = str_replace('</em>', '', $second);
+        $secondTitle = $this->formatCodeTitle($secondCodeElm);
+        $second      = $this->formatCodeSample($secondCodeElm);
 
-        $output  = '  <table>'.PHP_EOL;
-        $output .= '   <tr>'.PHP_EOL;
-        $output .= "    <th>$firstTitle</th>".PHP_EOL;
-        $output .= "    <th>$secondTitle</th>".PHP_EOL;
-        $output .= '   </tr>'.PHP_EOL;
-        $output .= '   <tr>'.PHP_EOL;
-        $output .= '<td>'.PHP_EOL.PHP_EOL;
-        $output .= "    $first".PHP_EOL.PHP_EOL;
-        $output .= '</td>'.PHP_EOL;
-        $output .= '<td>'.PHP_EOL.PHP_EOL;
-        $output .= "    $second".PHP_EOL.PHP_EOL;
-        $output .= '</td>'.PHP_EOL;
-        $output .= '   </tr>'.PHP_EOL;
-        $output .= '  </table>'.PHP_EOL;
+        $titleRow = '';
+        if ($firstTitle !== '' || $secondTitle !== '') {
+            $titleRow .= '   <tr>'.PHP_EOL;
+            $titleRow .= "    <th>$firstTitle</th>".PHP_EOL;
+            $titleRow .= "    <th>$secondTitle</th>".PHP_EOL;
+            $titleRow .= '   </tr>'.PHP_EOL;
+        }
+
+        $codeRow = '';
+        if ($first !== '' || $second !== '') {
+            $codeRow .= '   <tr>'.PHP_EOL;
+            $codeRow .= '<td>'.PHP_EOL.PHP_EOL;
+            $codeRow .= "    $first".PHP_EOL.PHP_EOL;
+            $codeRow .= '</td>'.PHP_EOL;
+            $codeRow .= '<td>'.PHP_EOL.PHP_EOL;
+            $codeRow .= "    $second".PHP_EOL.PHP_EOL;
+            $codeRow .= '</td>'.PHP_EOL;
+            $codeRow .= '   </tr>'.PHP_EOL;
+        }
+
+        $output = '';
+        if ($titleRow !== '' || $codeRow !== '') {
+            $output .= '  <table>'.PHP_EOL;
+            $output .= $titleRow;
+            $output .= $codeRow;
+            $output .= '  </table>'.PHP_EOL;
+        }
 
         return $output;
 
     }//end getFormattedCodeComparisonBlock()
+
+
+    /**
+     * Retrieve a code block title and prepare it for output as HTML.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return string
+     */
+    private function formatCodeTitle(DOMElement $codeElm)
+    {
+        $title = trim($codeElm->getAttribute('title'));
+        return str_replace('  ', '&nbsp;&nbsp;', $title);
+
+    }//end formatCodeTitle()
+
+
+    /**
+     * Retrieve a code block contents and prepare it for output as HTML.
+     *
+     * @param \DOMElement $codeElm The DOMElement object for a code block.
+     *
+     * @since 3.12.0
+     *
+     * @return string
+     */
+    private function formatCodeSample(DOMElement $codeElm)
+    {
+        $code = (string) $codeElm->nodeValue;
+        $code = trim($code);
+        $code = str_replace("\n", PHP_EOL.'    ', $code);
+        $code = str_replace(['<em>', '</em>'], '', $code);
+
+        return $code;
+
+    }//end formatCodeSample()
 
 
 }//end class
