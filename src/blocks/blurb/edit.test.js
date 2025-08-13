@@ -209,7 +209,7 @@ describe('Block Edit Component', () => {
 		// Check main container classes (the outermost div with useBlockProps)
 		const mainContainer =
 			screen.getByTestId('block-controls').parentElement;
-		expect(mainContainer).toHaveClass('wp-block-test'); // from useBlockProps mock
+		expect(mainContainer).toHaveClass('gts__blurb'); // from useBlockProps with custom className
 
 		// Check blurb container classes
 		const blurbContainer = screen

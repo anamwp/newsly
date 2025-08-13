@@ -1,29 +1,16 @@
+/**
+ * Edit Component Tests
+ *
+ * WordPress dependencies are mocked globally in __mocks__/@wordpress/
+ * Component-specific mocks are defined below for this test file only
+ */
+
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import Edit from './edit';
 import BlockJSON from './block.json';
 
-// Mock WordPress dependencies
-jest.mock('@wordpress/block-editor', () => ({
-	RichText: ({ children }) => <div data-testid="rich-text">{children}</div>,
-	useBlockProps: () => ({ className: 'gs-upcoming-movie-block' }),
-	InspectorControls: ({ children }) => (
-		<div data-testid="inspector-controls">{children}</div>
-	),
-}));
-
-jest.mock('@wordpress/element', () => ({
-	RawHTML: ({ children }) => <div data-testid="raw-html">{children}</div>,
-	useState: require('react').useState,
-	useRef: require('react').useRef,
-	useEffect: require('react').useEffect,
-}));
-
-jest.mock('@wordpress/i18n', () => ({
-	__: (str) => str,
-}));
-
-// Mock the components that are causing issues
+// Component-specific mocks
 jest.mock('./sidebarControl', () => {
 	return function SidebarControl() {
 		return <div data-testid="sidebar-control">Sidebar Control</div>;
