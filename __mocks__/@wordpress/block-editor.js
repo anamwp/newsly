@@ -1,7 +1,11 @@
 const React = require('react');
 
 module.exports = {
-	useBlockProps: jest.fn(() => ({ className: 'wp-block-test' })),
+	useBlockProps: jest.fn((props = {}) => {
+		// If className is provided in props, use it; otherwise use default
+		const className = props.className || 'wp-block-test';
+		return { ...props, className };
+	}),
 	RichText: jest.fn(
 		({
 			value,
