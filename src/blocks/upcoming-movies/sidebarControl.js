@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useSelect, withSelect, select } from '@wordpress/data';
+// import { useSelect, withSelect, select } from '@wordpress/data';
 import { InspectorControls } from '@wordpress/block-editor';
 import {
 	Panel,

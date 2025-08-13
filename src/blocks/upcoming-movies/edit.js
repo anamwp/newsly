@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelect, withSelect, select } from '@wordpress/data';
+// import { useSelect, withSelect, select } from '@wordpress/data';
 import { RichText, useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
 import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
