@@ -20,14 +20,14 @@ export default function sidebarControl({
 		<div>
 			<InspectorControls>
 				<PanelBody
-					title={__('Single Post Controls', 'gutenberg-starter')}
+					title={__('Single Post Controls', 'newsly')}
 					initialOpen={true}
 				>
 					<p className="single-post-category-picker">
 						<SelectControl
 							label={__(
 								'Choose Category',
-								'anam-gutenberg-starter'
+								'newsly'
 							)}
 							value={attributes.selectedCategroyId}
 							options={categories}
@@ -38,7 +38,7 @@ export default function sidebarControl({
 						<SelectControl
 							label={__(
 								'Choose post to display',
-								'anam-gutenberg-starter'
+								'newsly'
 							)}
 							options={attributes.selectedCategoryPosts}
 							onChange={handleSelectedPostData}
@@ -49,7 +49,7 @@ export default function sidebarControl({
 							<ToggleControl
 								label={__(
 									'Show Featured Image',
-									'gutenberg-starter'
+									'newsly'
 								)}
 								checked={attributes.showFeaturedImage}
 								onChange={handleFeaturedImageToggleControl}
@@ -59,7 +59,7 @@ export default function sidebarControl({
 					{attributes.selectedCategroyId && (
 						<p className="display-single-post-category-switch">
 							<ToggleControl
-								label={__('Show Category', 'gutenberg-starter')}
+								label={__('Show Category', 'newsly')}
 								checked={attributes.showCategory}
 								onChange={handleCategoryToggleControl}
 							/>
@@ -68,7 +68,7 @@ export default function sidebarControl({
 					{attributes.selectedCategroyId && (
 						<p className="display-single-post-excerpt-switch">
 							<ToggleControl
-								label={__('Show Excerpt', 'gutenberg-starter')}
+								label={__('Show Excerpt', 'newsly')}
 								checked={attributes.showExcerpt}
 								onChange={handleExcerptToggleControl}
 							/>

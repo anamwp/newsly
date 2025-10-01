@@ -14,7 +14,7 @@ const BlockMonitor = () => {
 		select('core/block-editor').getBlocks()
 	);
 	const restRouteForRemoveMeta =
-		'/wp-json/anam-gutenberg-starter-block/v1/remove-meta';
+		'/wp-json/newsly-block/v1/remove-meta';
 
 	useEffect(() => {
 		// Find removed blocks
@@ -24,7 +24,7 @@ const BlockMonitor = () => {
 		);
 
 		removedBlocks.forEach((block) => {
-			if (block.name === 'anam-gutenberg-starter-block/theatres-movies') {
+			if (block.name === 'newsly-block/theatres-movies') {
 				// split the block name to get the block slug
 				const blockSlug = block.name.split('/')[1];
 				/**

@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Anam Gutenberg Starter
+ * Plugin Name: Newsly
  * Plugin URI: https://anam.rocks
  * Description: A starter plugin to start your big idea.
  * Version: 1.0
@@ -8,7 +8,7 @@
  * Author URI: https://anam.rocks
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: 'gutenbergp-starter'
+ * Text Domain: 'newsly'
  */
 // If this file is called directly, abort.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,17 +21,19 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 
 /**
- * Include API configuration for Movie Lists Block
+ * Load plugin textdomain
  */
-require_once __DIR__ . '/src/blocks/movie-lists/api-config.php';
+add_action( 'init', function() {
+	load_plugin_textdomain( 'newsly', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+});
 
 
-final class Anam_Gutenberg_Starter {
+final class Newsly {
 
 	/**
 	 * plugin version
 	 */
-	const ANAM_GUTENBERG_STARTER_VERSION = '1.0';
+	const NEWSLY_VERSION = '1.0';
 	/**
 	 * construction of this plugin
 	 */
@@ -58,7 +60,7 @@ final class Anam_Gutenberg_Starter {
 	 * @return void
 	 */
 	public function load_text_domain() {
-		load_plugin_textdomain( 'gutenberg-starter' );
+		load_plugin_textdomain( 'newsly' );
 	}
 	/**
 	 * Define plugin
@@ -70,30 +72,30 @@ final class Anam_Gutenberg_Starter {
 		/**
 		 * return plugin version
 		 */
-		define( 'ANAM_GUTENBERG_STARTER_VERSION', self::ANAM_GUTENBERG_STARTER_VERSION );
+		define( 'NEWSLY_VERSION', self::NEWSLY_VERSION );
 		/**
 		 * return the main file name
 		 * C:\xampp\htdocs\devplugin\wp-content\plugins\gutenberg-starter\gutenberg-starter.php
 		 */
-		define( 'ANAM_GUTENBERG_STARTER_FILE', __FILE__ );
-		define( 'GUTENBERG_STARTER_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
+		define( 'NEWSLY_FILE', __FILE__ );
+		define( 'NEWSLY_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 		/**
 		 * return the plugin director
 		 * C:\xampp\htdocs\devplugin\wp-content\plugins\gutenberg-starter
 		 */
-		define( 'ANAM_GUTENBERG_STARTER_PATH', __DIR__ );
+		define( 'NEWSLY_PATH', __DIR__ );
 		/**
 		 * return the plugin directory with host
 		 * http://localhost/devplugin/wp-content/plugins/gutenberg-starter
 		 */
-		define( 'ANAM_GUTENBERG_STARTER_URL', plugins_url( '', ANAM_GUTENBERG_STARTER_FILE ) );
-		define( 'ANAM_GUTENBERG_STARTER_DIR_URL', plugin_dir_url( __FILE__ ) );
+		define( 'NEWSLY_URL', plugins_url( '', NEWSLY_FILE ) );
+		define( 'NEWSLY_DIR_URL', plugin_dir_url( __FILE__ ) );
 		/**
 		 * return the asset folder director
 		 * http://localhost/devplugin/wp-content/plugins/gutenberg-starter/assets
 		 */
-		define( 'ANAM_GUTENBERG_STARTER_ASSETS', ANAM_GUTENBERG_STARTER_URL . '/build' );
-		define( 'ANAM_GUTENBERG_STARTER_DIR_ASSETS', ANAM_GUTENBERG_STARTER_DIR_URL . 'build' );
+		define( 'NEWSLY_ASSETS', NEWSLY_URL . '/build' );
+		define( 'NEWSLY_DIR_ASSETS', NEWSLY_DIR_URL . 'build' );
 	}
 	/**
 	 * Add installation time
@@ -103,10 +105,10 @@ final class Anam_Gutenberg_Starter {
 	 * @return void
 	 */
 	public function activate() {
-		if ( ! get_option( 'anam_gutenberg_starter_installed' ) ) {
-			update_option( 'anam_gutenberg_starter_installed', time() );
+		if ( ! get_option( 'newsly_installed' ) ) {
+			update_option( 'newsly_installed', time() );
 		}
-		update_option( 'anam_gutenberg_starter_version', ANAM_GUTENBERG_STARTER_VERSION );
+		update_option( 'newsly_version', NEWSLY_VERSION );
 	}
 	/**
 	 * Load plugin resources
@@ -114,7 +116,7 @@ final class Anam_Gutenberg_Starter {
 	 * @return void
 	 */
 	public function load_plugin_resources() {
-		new Anam\GutenbergStarter\Init();
+		new Anam\Newsly\Init();
 	}
 }
 
@@ -135,18 +137,18 @@ if ( file_exists( __DIR__ . '/.env' ) && class_exists( 'Dotenv\Dotenv' ) ) {
  *
  * @return void
  */
-function handle_google_fonts() {
+function newsly_handle_google_fonts() {
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap', array(), null );
 }
-add_action( 'enqueue_block_editor_assets', 'handle_google_fonts' );
-add_action( 'wp_enqueue_scripts', 'handle_google_fonts' );
+add_action( 'enqueue_block_editor_assets', 'newsly_handle_google_fonts' );
+add_action( 'wp_enqueue_scripts', 'newsly_handle_google_fonts' );
 
 /**
  * Enqueue script for ajax pagination
  *
  * @return void
  */
-function gs_enqueue_ajax_pagination_script() {
+function newsly_enqueue_ajax_pagination_script() {
 	wp_enqueue_script( 'jquery' );
 	wp_localize_script(
 		'jquery',
@@ -167,13 +169,13 @@ function gs_enqueue_ajax_pagination_script() {
 		)
 	);
 }
-add_action( 'wp_enqueue_scripts', 'gs_enqueue_ajax_pagination_script' );
-add_action( 'enqueue_block_editor_assets', 'gs_enqueue_ajax_pagination_script' );
+add_action( 'wp_enqueue_scripts', 'newsly_enqueue_ajax_pagination_script' );
+add_action( 'enqueue_block_editor_assets', 'newsly_enqueue_ajax_pagination_script' );
 
 /**
  * Enquque build/css/index.css file
  */
-function gs_enqueue_block_assets() {
+function newsly_enqueue_block_assets() {
 	wp_enqueue_style(
 		'gs-plugin-style',
 		plugins_url( 'dist/css/main.css', __FILE__ ),
@@ -188,13 +190,13 @@ add_action( 'enqueue_block_assets', 'gs_enqueue_block_assets' );
  *
  * @return \Guest_Post_Submission
  */
-function anam_gutenberg_starter() {
-	return anam_gutenberg_Starter::init();
+function newsly() {
+	return newsly::init();
 }
 /**
  * kick start the plugin
  */
-anam_gutenberg_starter();
+newsly();
 
 /**
  * Create custom category of CGL block in gutenberg editor
@@ -202,16 +204,16 @@ anam_gutenberg_starter();
  * @param [type] $categories Custom category name.
  * @return Array
  */
-function prefix_register_layout_category_handler( $categories ) {
+function newsly_register_layout_category_handler( $categories ) {
 	$categories[] = array(
-		'slug'  => 'anam-starter',
-		'title' => 'Anam Starter',
+		'slug'  => 'newsly',
+		'title' => 'Newsly',
 	);
 	return $categories;
 }
 
 if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
-	add_filter( 'block_categories_all', 'prefix_register_layout_category_handler' );
+	add_filter( 'block_categories_all', 'newsly_register_layout_category_handler' );
 } else {
-	add_filter( 'block_categories', 'prefix_register_layout_category_handler' );
+	add_filter( 'block_categories', 'newsly_register_layout_category_handler' );
 }

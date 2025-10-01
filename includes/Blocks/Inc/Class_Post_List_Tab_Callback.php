@@ -8,7 +8,7 @@
  * @package gutenberg-starter
  */
 
-	namespace Anam\GutenbergStarter\Blocks\Inc;
+	namespace Anam\Newsly\Blocks\Inc;
 
 /**
  * Summary.
@@ -28,7 +28,7 @@ class Class_Post_List_Tab_Callback {
 	 *
 	 * @var string
 	 */
-	private static $block_name = 'anam-gutenberg-starter-block/post-lists-tab';
+	private static $block_name = 'newsly-block/post-lists-tab';
 
 	/**
 	 * Undocumented function
@@ -76,7 +76,7 @@ class Class_Post_List_Tab_Callback {
 	 *
 	 * @return void
 	 */
-	public function gs_handle_category_post_content() {
+	public function newsly_handle_category_post_content() {
 		/**
 		 * Verify nonce for security.
 		 */
@@ -158,7 +158,7 @@ class Class_Post_List_Tab_Callback {
 			<?php endwhile; ?>
 		<?php else : ?>
 			<div class="post card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8">
-				<h2 class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium"><?php echo esc_html( 'No Posts Found', 'gutenberg-starter' ); ?></h2>
+				<h2 class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium"><?php echo esc_html( 'No Posts Found', 'newsly' ); ?></h2>
 			</div>
 		<?php endif; ?>
 		<?php

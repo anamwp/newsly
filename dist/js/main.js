@@ -17,7 +17,7 @@ var BlockMonitor = function BlockMonitor() {
   var blocks = useSelect(function (select) {
     return select('core/block-editor').getBlocks();
   });
-  var restRouteForRemoveMeta = '/wp-json/anam-gutenberg-starter-block/v1/remove-meta';
+  var restRouteForRemoveMeta = '/wp-json/newsly-block/v1/remove-meta';
   useEffect(function () {
     // Find removed blocks
     var removedBlocks = prevBlocks.filter(function (prevBlock) {
@@ -26,7 +26,7 @@ var BlockMonitor = function BlockMonitor() {
       });
     });
     removedBlocks.forEach(function (block) {
-      if (block.name === 'anam-gutenberg-starter-block/theatres-movies') {
+      if (block.name === 'newsly-block/theatres-movies') {
         // split the block name to get the block slug
         var blockSlug = block.name.split('/')[1];
         /**

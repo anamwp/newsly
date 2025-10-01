@@ -34,7 +34,7 @@ $gutenberg_starter_post_list_tab_show_excerpt = $attributes['showExcerpt'] ?? fa
 >
 	<?php if ( count( $attributes['categories'] ) > 0 ) : ?>
 		<div class="tab mb-10 flex gap-2 p-4 pl-0" data-postid="<?php echo esc_attr( get_the_ID() ); ?>">
-			<button data-wp-on--click="actions.fetchCategoryPosts" class="active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm" ><?php echo esc_html( 'All', 'gutenberg-starter' ); ?></button>
+			<button data-wp-on--click="actions.fetchCategoryPosts" class="active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm" ><?php echo esc_html( 'All', 'newsly' ); ?></button>
 			<?php foreach ( $attributes['categories'] as $key => $site_category ) :
 				?>
 				<button data-cat-id="<?php echo esc_attr( $site_category['value'] ); ?>" data-cat-slug="<?php echo esc_attr( $site_category['slug'] ); ?>" class="tablinks no-underline px-4 py-2 font-semibold text-sm transition-all rounded-md capitalize bg-slate-50 hover:bg-slate-800 hover:text-white  text-slate-800 border border-slate-100 hover:border-slate-800 shadow-sm">
@@ -44,7 +44,7 @@ $gutenberg_starter_post_list_tab_show_excerpt = $attributes['showExcerpt'] ?? fa
 		</div>
 		<?php else : ?>
 			<div class="tab mb-10 flex gap-2 p-4 pl-0">
-				<button data-wp-on--click="actions.fetchCategoryPosts" class="active tablinks px-4 py-2 font-semibold text-sm bg-slate-800 transition-all text-white rounded-full shadow-sm" ><?php echo esc_html( 'All', 'gutenberg-starter' ); ?></button>
+				<button data-wp-on--click="actions.fetchCategoryPosts" class="active tablinks px-4 py-2 font-semibold text-sm bg-slate-800 transition-all text-white rounded-full shadow-sm" ><?php echo esc_html( 'All', 'newsly' ); ?></button>
 			</div>
 	<?php endif; ?>
 
@@ -89,7 +89,7 @@ $gutenberg_starter_post_list_tab_show_excerpt = $attributes['showExcerpt'] ?? fa
 			<?php endforeach; ?>
 		<?php else : ?>
 			<div class="post card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8">
-				<h2 class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium"><?php echo esc_html( 'No Posts Found', 'gutenberg-starter' ); ?></h2>
+				<h2 class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium"><?php echo esc_html( 'No Posts Found', 'newsly' ); ?></h2>
 			</div>
 		<?php endif; ?>
 	</div>

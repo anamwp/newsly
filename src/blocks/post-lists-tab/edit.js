@@ -130,7 +130,7 @@ export default function edit(props) {
 						<div>
 							{__(
 								'No featured image found',
-								'anam-gutenberg-starter'
+								'newsly'
 							)}
 						</div>
 					)}
@@ -201,7 +201,7 @@ export default function edit(props) {
 					href=""
 					className="active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm"
 				>
-					{__('All', 'gutenberg-starter')}
+					{__('All', 'newsly')}
 				</a>
 				{attributes.categories.length > 0 &&
 					attributes.categories.map((cat, index) => {
@@ -219,7 +219,7 @@ export default function edit(props) {
 			</nav>
 			<div className="post-lists grid grid-cols-3 gap-4">
 				{isLoading ? (
-					<p>{__('Loading...', 'gutenberg-starter')}</p>
+					<p>{__('Loading...', 'newsly')}</p>
 				) : null}
 				{attributes.fetchedPosts.length > 0 &&
 					attributes.fetchedPosts.map((post, index) => {

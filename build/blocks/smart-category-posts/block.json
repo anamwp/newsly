@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "anam-gutenberg-starter-block/smart-category-posts",
+  "name": "newsly-block/smart-category-posts",
   "version": "0.1.0",
   "title": "Smart Category Posts",
-  "category": "anam-starter",
+  "category": "newsly",
   "icon": "media-interactive",
   "description": "",
   "example": {},

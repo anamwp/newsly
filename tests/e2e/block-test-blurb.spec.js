@@ -225,12 +225,12 @@ test.describe.serial('Block Test - Blurb', () => {
 		console.log('Looking for Blurb block in the list...');
 
 		await page.waitForSelector(
-			'.block-editor-block-types-list__item, .editor-block-list-item-anam-gutenberg-starter-block-blurb',
+			'.block-editor-block-types-list__item, .editor-block-list-item-newsly-block-blurb',
 			{ timeout: 10000 }
 		);
 
 		await page.click(
-			'.block-editor-block-types-list__item, .editor-block-list-item-anam-gutenberg-starter-block-blurb'
+			'.block-editor-block-types-list__item, .editor-block-list-item-newsly-block-blurb'
 		);
 
 		// Wait for block to be inserted
@@ -240,7 +240,7 @@ test.describe.serial('Block Test - Blurb', () => {
 		console.log('Verifying block was inserted into editor...');
 
 		const blockSelectors = [
-			'[data-type*="anam-gutenberg-starter-block/blurb"]',
+			'[data-type*="newsly-block/blurb"]',
 			'[data-type*="blurb"]',
 			'.wp-block',
 			'[data-type*="gutenberg-starter"]',
@@ -551,8 +551,8 @@ test.describe.serial('Block Test - Blurb', () => {
 		// Look for our block content on the frontend
 		// The block might render with different selectors on frontend
 		const blockSelectors = [
-			'.wp-block-anam-gutenberg-starter-block-blurb',
-			'[class*="wp-block-anam-gutenberg-starter"]',
+			'.wp-block-newsly-block-blurb',
+			'[class*="wp-block-newsly"]',
 			'[class*="blurb"]',
 			'.wp-block',
 		];

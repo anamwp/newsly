@@ -25,14 +25,14 @@ export default function sidebarControl({
 		<div>
 			<InspectorControls>
 				<PanelBody
-					title={__('Single Post Controls', 'gutenberg-starter')}
+					title={__('Single Post Controls', 'newsly')}
 					initialOpen={true}
 				>
 					<p className="category-post-category-picker">
 						<SelectControl
 							label={__(
 								'Choose Category',
-								'anam-gutenberg-starter'
+								'newsly'
 							)}
 							value={attributes.selectedCategroyId}
 							options={categories}
@@ -44,7 +44,7 @@ export default function sidebarControl({
 							<SelectControl
 								label={__(
 									'Posts Found to display',
-									'gutenberg-starter'
+									'newsly'
 								)}
 								options={attributes.selectedCategoryPosts}
 								// onChange={handleSelectedPostData}
@@ -65,7 +65,7 @@ export default function sidebarControl({
 							<ToggleControl
 								label={__(
 									'Show Featured Image',
-									'gutenberg-starter'
+									'newsly'
 								)}
 								checked={attributes.showFeaturedImage}
 								onChange={handleFeaturedImageToggleControl}
@@ -75,7 +75,7 @@ export default function sidebarControl({
 					{attributes.selectedCategroyId && (
 						<p className="display-category-post-category-switch">
 							<ToggleControl
-								label={__('Show Category', 'gutenberg-starter')}
+								label={__('Show Category', 'newsly')}
 								checked={attributes.showCategory}
 								onChange={handleCategoryToggleControl}
 							/>
@@ -87,7 +87,7 @@ export default function sidebarControl({
 								<ToggleControl
 									label={__(
 										'Show Excerpt',
-										'gutenberg-starter'
+										'newsly'
 									)}
 									checked={attributes.showExcerpt}
 									onChange={handleExcerptToggleControl}
@@ -101,7 +101,7 @@ export default function sidebarControl({
 								<ToggleControl
 									label={__(
 										'Show Featured Post Excerpt',
-										'gutenberg-starter'
+										'newsly'
 									)}
 									checked={attributes.showFeaturedExcerpt}
 									onChange={
@@ -125,7 +125,7 @@ export default function sidebarControl({
 						attributes.postColumn === 4) && (
 						<p>
 							<SelectControl
-								label={__('Select Layout', 'gutenberg-starter')}
+								label={__('Select Layout', 'newsly')}
 								value={attributes.layout}
 								options={[
 									{

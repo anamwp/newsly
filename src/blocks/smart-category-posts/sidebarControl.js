@@ -17,14 +17,14 @@ export default function sidebarControl({
 		<div>
 			<InspectorControls>
 				<PanelBody
-					title={__('Post Card Controls', 'gutenberg-starter')}
+					title={__('Post Card Controls', 'newsly')}
 					initialOpen={true}
 				>
 					<p className="display-single-post-featured-image">
 						<ToggleControl
 							label={__(
 								'Show Featured Image',
-								'gutenberg-starter'
+								'newsly'
 							)}
 							checked={attributes.showFeaturedImage}
 							onChange={handleFeaturedImageToggleControl}
@@ -33,7 +33,7 @@ export default function sidebarControl({
 
 					<p className="display-single-post-category-switch">
 						<ToggleControl
-							label={__('Show Category', 'gutenberg-starter')}
+							label={__('Show Category', 'newsly')}
 							checked={attributes.showCategory}
 							onChange={handleCategoryToggleControl}
 						/>
@@ -41,7 +41,7 @@ export default function sidebarControl({
 
 					<p className="display-single-post-excerpt-switch">
 						<ToggleControl
-							label={__('Show Excerpt', 'gutenberg-starter')}
+							label={__('Show Excerpt', 'newsly')}
 							checked={attributes.showExcerpt}
 							onChange={handleExcerptToggleControl}
 						/>

@@ -245,7 +245,7 @@ function _unsupportedIterableToArray(r, a) {
   \****************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"anam-gutenberg-starter-block/smart-category-posts","version":"0.1.0","title":"Smart Category Posts","category":"anam-starter","icon":"media-interactive","description":"","example":{},"supports":{"interactivity":false},"attributes":{"label":{"type":"string","default":"hello from label"},"postId":{"type":"number","default":null},"categories":{"type":"array","default":[]},"fetchedPosts":{"type":"array","default":[]},"showExcerpt":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showFeaturedImage":{"type":"boolean","default":true}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":["file:./view.js"]}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"newsly-block/smart-category-posts","version":"0.1.0","title":"Smart Category Posts","category":"newsly","icon":"media-interactive","description":"","example":{},"supports":{"interactivity":false},"attributes":{"label":{"type":"string","default":"hello from label"},"postId":{"type":"number","default":null},"categories":{"type":"array","default":[]},"fetchedPosts":{"type":"array","default":[]},"showExcerpt":{"type":"boolean","default":true},"showCategory":{"type":"boolean","default":true},"showFeaturedImage":{"type":"boolean","default":true}},"textdomain":"gutenberg-starter","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":["file:./view.js"]}');
 
 /***/ }),
 
@@ -475,7 +475,7 @@ function edit(props) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
       className: "single-post-card",
       children: [attributes.showFeaturedImage && postData.featured_media == 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("div", {
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('No featured image found', 'anam-gutenberg-starter')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('No featured image found', 'newsly')
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_11__.Disabled, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("h3", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("a", {
@@ -523,7 +523,7 @@ function edit(props) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("a", {
         href: "",
         className: "active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm",
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('All', 'gutenberg-starter')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('All', 'newsly')
       }), attributes.categories.length > 0 && attributes.categories.map(function (cat, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("a", {
           style: {
@@ -537,7 +537,7 @@ function edit(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
       className: "post-lists grid grid-cols-3 gap-4",
       children: [isLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsx)("p", {
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Loading...', 'gutenberg-starter')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_12__.__)('Loading...', 'newsly')
       }) : null, attributes.fetchedPosts.length > 0 && attributes.fetchedPosts.map(function (post, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_13__.jsxs)("div", {
           className: "card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8",
@@ -719,7 +719,7 @@ function save(props) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
         href: "",
         className: "active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm",
-        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('All', 'gutenberg-starter')
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__.__)('All', 'newsly')
       }), attributes.categories.length > 0 && attributes.categories.map(function (cat, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("a", {
           style: {
@@ -796,26 +796,26 @@ function sidebarControl(_ref) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post Card Controls', 'gutenberg-starter'),
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Post Card Controls', 'newsly'),
         initialOpen: true,
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
           className: "display-single-post-featured-image",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Featured Image', 'gutenberg-starter'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Featured Image', 'newsly'),
             checked: attributes.showFeaturedImage,
             onChange: handleFeaturedImageToggleControl
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
           className: "display-single-post-category-switch",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Category', 'gutenberg-starter'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Category', 'newsly'),
             checked: attributes.showCategory,
             onChange: handleCategoryToggleControl
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
           className: "display-single-post-excerpt-switch",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
-            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Excerpt', 'gutenberg-starter'),
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Show Excerpt', 'newsly'),
             checked: attributes.showExcerpt,
             onChange: handleExcerptToggleControl
           })

@@ -1,10 +1,10 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "anam-gutenberg-starter-block/single-post",
+	"name": "newsly-block/single-post",
 	"version": "0.1.0",
 	"title": "Single Post",
-	"category": "anam-starter",
+	"category": "newsly",
 	"icon": "media-interactive",
 	"description": "",
 	"example": {},

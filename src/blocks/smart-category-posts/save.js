@@ -17,7 +17,7 @@ export default function save(props) {
 					href=""
 					className="active tablinks no-underline px-4 py-2 font-semibold transition-all text-sm bg-slate-800  bg-slate-50 text-white hover:bg-slate-800 hover:text-white border border-slate-100 rounded-md shadow-sm"
 				>
-					{__('All', 'gutenberg-starter')}
+					{__('All', 'newsly')}
 				</a>
 				{attributes.categories.length > 0 &&
 					attributes.categories.map((cat, index) => {

@@ -1,10 +1,10 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "anam-gutenberg-starter-block/post-lists-tab",
+  "name": "newsly-block/post-lists-tab",
   "version": "0.1.0",
   "title": "Post Lists Tab",
-  "category": "anam-starter",
+  "category": "newsly",
   "icon": "media-interactive",
   "description": "",
   "example": {},

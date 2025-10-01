@@ -1,5 +1,5 @@
 {
-	"name": "theanamhossain/anam-gutenberg-starter",
+	"name": "theanamhossain/newsly",
 	"description": "A starter plugin to start your next big idea",
 	"type": "wordpress-plugin",
 	"license": "GPLv2",
@@ -12,7 +12,7 @@
 	"minimum-stability": "dev",
 	"autoload": {
 		"psr-4": {
-			"Anam\\GutenbergStarter\\": "includes/"
+			"Anam\\Newsly\\": "includes/"
 		},
 		"files": []
 	},

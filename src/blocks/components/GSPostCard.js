@@ -55,7 +55,7 @@ const GSPostCard = (props) => {
 					<div className="mb-4">
 						{__(
 							'No featured image found',
-							'anam-gutenberg-starter'
+							'newsly'
 						)}
 					</div>
 				)}
