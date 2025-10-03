@@ -39,16 +39,18 @@ export default function edit(props) {
 	 * Fetched first 10 posts
 	 */
 	useEffect(() => {
+		console.log('attributes', attributes);
 		if(!attributes.selectedCategroyId || attributes.selectedCategroyId === '') {
+			const stickyParam = attributes.ignoreStickyPosts ? '&sticky=false' : '';
 			apiFetch({
-				path: `/wp/v2/posts?_embed&per_page=10`,
+				path: `/wp/v2/posts?_embed&per_page=10${stickyParam}`,
 			}).then((res) => {
 				setAttributes({
 					fetchedPosts: res,
 				});
 			});
 		}
-	}, [attributes.selectedCategroyId]);
+	}, [attributes.selectedCategroyId, attributes.ignoreStickyPosts]);
 
 	const handleNumberOfPostsChange = (numberOfPosts = attributes.numberOfPosts) => {
 		setAttributes({
@@ -76,8 +78,9 @@ export default function edit(props) {
 		 * from restapi endpoint
 		 * for specific category
 		 */
+		const stickyParam = attributes.ignoreStickyPosts ? '&sticky=false' : '';
 		apiFetch({
-			path: `/wp/v2/posts?categories=${catId}&_embed`,
+			path: `/wp/v2/posts?categories=${catId}&_embed${stickyParam}`,
 		})
 			.then((res) => {
 				console.log('res', res);
@@ -170,8 +173,9 @@ export default function edit(props) {
 		/**
 		 * fetch data from rest point
 		 */
+		const stickyParam = attributes.ignoreStickyPosts ? '&sticky=false' : '';
 		apiFetch({
-			path: `/wp/v2/posts/?include=${selectedPostId}&_embed`,
+			path: `/wp/v2/posts/?include=${selectedPostId}&_embed${stickyParam}`,
 		})
 			.then((res) => {
 				setAttributes({
