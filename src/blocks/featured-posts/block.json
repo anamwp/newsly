@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "newsly-block/featured-posts",
+	"version": "0.1.0",
+	"title": "Featured Posts",
+	"category": "newsly",
+	"icon": "media-interactive",
+	"description": "",
+	"example": {},
+	"attributes": {
+		"categories": {
+			"type": "array",
+			"default": []
+		},
+		"selectedCategroyId": {
+			"type": "string",
+			"default": ""
+		},
+		"selectedCategoryPosts": {
+			"type": "array",
+			"default": []
+		},
+		"fetchedPosts": {
+			"type": "array",
+			"default": []
+		},
+		"numberOfPosts": {
+			"type": "number",
+			"default": 4
+		},
+		"fetchedPostCategoryData": {
+			"type": "array",
+			"default": []
+		},
+		"showFeaturedImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"showExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"showCategory": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"textdomain": "gutenberg-starter",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

@@ -30,7 +30,7 @@ const GSPostCard = (props) => {
 	return (
 		<div
 			data-post-serial={numberKey}
-			className="gs__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
+			className="newsly__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
 		>
 			{/* 
 			if user want to show featured image 

@@ -36,6 +36,7 @@ class Block {
 		 * Register block type from metadata
 		 */
 		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/single-post' );
+		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/featured-posts' );
 		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/category-post' );
 		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/post-lists-tab' );
 		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/smart-category-posts' );
