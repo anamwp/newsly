@@ -508,6 +508,9 @@ video {
 .relative{
 	position: relative;
 }
+.sticky{
+	position: sticky;
+}
 .right-4{
 	right: 1rem;
 }

@@ -41,7 +41,7 @@ export default function edit(props) {
 	useEffect(() => {
 		if(!attributes.selectedCategroyId || attributes.selectedCategroyId === '') {
 			apiFetch({
-				path: `/wp/v2/posts?_embed&per_page=10`,
+				path: `/wp/v2/posts?_embed&per_page=10&sticky=true`,
 			}).then((res) => {
 				setAttributes({
 					fetchedPosts: res,
@@ -77,7 +77,7 @@ export default function edit(props) {
 		 * for specific category
 		 */
 		apiFetch({
-			path: `/wp/v2/posts?categories=${catId}&_embed`,
+			path: `/wp/v2/posts?categories=${catId}&_embed&sticky=true`,
 		})
 			.then((res) => {
 				console.log('res', res);
@@ -171,7 +171,7 @@ export default function edit(props) {
 		 * fetch data from rest point
 		 */
 		apiFetch({
-			path: `/wp/v2/posts/?include=${selectedPostId}&_embed`,
+			path: `/wp/v2/posts/?include=${selectedPostId}&_embed&sticky=true`,
 		})
 			.then((res) => {
 				setAttributes({
@@ -237,7 +237,7 @@ export default function edit(props) {
 			/>
 			{/* Show fallback message before category choosen */}
 			{attributes.fetchedPosts.length == 0 && (
-				<FallbackMessage message="Please select a post to display" />
+				<FallbackMessage message="No sticky posts found" />
 			)}
 			{/* show to first post from the choosen category listed post */}
 			{attributes.fetchedPosts &&
