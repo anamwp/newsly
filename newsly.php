@@ -183,7 +183,7 @@ function newsly_enqueue_block_assets() {
 		'1.0'
 	);
 }
-add_action( 'enqueue_block_assets', 'gs_enqueue_block_assets' );
+add_action( 'enqueue_block_assets', 'newsly_enqueue_block_assets' );
 
 /**
  * Initilize the main plugin
