@@ -6,7 +6,17 @@
 	.newsly__post_card__overlay {
 		position: relative;
 		min-height: 200px;
-		overflow: hidden;
+		.overlay-wrapper-as-link{
+			display: block;
+			height: 100%;
+			width: 100%;
+			position: relative;
+			z-index: 1;
+			overflow: hidden;
+			&:focus{
+				// outline: solid 2px #000;
+			}
+		}
 		.featured-image {
 			z-index: 0;
 			position: absolute;
@@ -34,15 +44,12 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: flex-end;
-			a:not(.single-category){
-				color: #fff;
-			}
 			.categories{
 				position: absolute;
 				top: 20px;
 				left: 20px;
 				z-index: 3;
-				a{
+				span{
 					display: none;
 					&:first-child{
 						display: inline-block;

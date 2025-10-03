@@ -30,90 +30,78 @@ const GSPostCardOverlay = (props) => {
 	return (
 		<div
 			data-post-serial={numberKey}
-			className="newsly__post_card__overlay bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
+			className="newsly__post_card__overlay bg-slate-200 rounded hover:bg-slate-300 transition-all"
 		>
-			{/* 
-			if user want to show featured image 
-			and post have featured image
-			*/}
-			{parentProps.attributes.showFeaturedImage &&
-				postData.featured_media !== 0 && (
-					<div className="mb-4 featured-image">
-						<img
-							className="inline-block w-full rounded"
-							src={featuredImage}
-							alt=""
-						/>
-					</div>
-				)}
-			{/* 
-			If user want to show featured image
-			but post have no featured image
-			*/}
-			{parentProps.attributes.showFeaturedImage &&
-				postData.featured_media == 0 && (
-					<div className="mb-4 no-featured-image">
-						{__(
-							'No featured image found',
-							'newsly'
-						)}
-					</div>
-				)}
-			<div className="content-container">
-				<div className="content-wrapper">
-					{/* 
-					Toggle category display
-					*/}
-					<div className="mb-3 categories">
-						{parentProps.attributes.showCategory &&
-							categories &&
-							categories.map((singleCat) => {
-								return (
-									<a
-										href={singleCat.link}
-										style={{ marginRight: '10px' }}
-										className="inline-block no-underline text-xs p-1 mr-1 uppercase ls-2 transition-all single-category"
-									>
-										{singleCat.name}
-									</a>
-								);
-							})}
-					</div>
-					{/* 
-					Disabled click inside editor
-					*/}
-					<a
-						href={postData.link}
-						className="inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2"
-					>
-						<h3>{postData.title.rendered}</h3>
-					</a>
-
-					{/* 
-					excerpt of the post
-					*/}
-					{/* <div>{postData.excerpt.rendered}</div> */}
-					{parentProps.attributes.showExcerpt &&
-						parentProps.attributes.layout === 'card' && (
-							<div
-								className="font-poppins text-slate-900 mt-2 excerpt"
-								dangerouslySetInnerHTML={{
-									__html: postData.excerpt.rendered,
-								}}
+			<a href={postData.link} className="overlay-wrapper-as-link rounded">
+				{/* 
+				if user want to show featured image 
+				and post have featured image
+				*/}
+				{parentProps.attributes.showFeaturedImage &&
+					postData.featured_media !== 0 && (
+						<div className="mb-4 featured-image">
+							<img
+								className="inline-block w-full rounded"
+								src={featuredImage}
+								alt=""
 							/>
-						)}
-					{numberKey === 0 &&
-						parentProps.attributes.layout === 'grid' &&
-						parentProps.attributes.showFeaturedExcerpt === true && (
-							<div
-								className="font-poppins text-slate-900 mt-2 excerpt"
-								dangerouslySetInnerHTML={{
-									__html: postData.excerpt.rendered,
-								}}
-							/>
-						)}
+						</div>
+					)}
+				{/* 
+				If user want to show featured image
+				but post have no featured image
+				*/}
+				{parentProps.attributes.showFeaturedImage &&
+					postData.featured_media == 0 && (
+						<div className="mb-4 no-featured-image">
+							{__(
+								'No featured image found',
+								'newsly'
+							)}
+						</div>
+					)}
+				<div className="content-container">
+					<div className="content-wrapper">
+						<div className="mb-3 categories">
+							{parentProps.attributes.showCategory &&
+								categories &&
+								categories.map((singleCat) => {
+									return (
+										<span
+											style={{ marginRight: '10px' }}
+											className="inline-block no-underline text-xs p-1 mr-1 uppercase ls-2 transition-all single-category"
+										>
+											{singleCat.name}
+										</span>
+									);
+								})}
+						</div>
+						<p 
+						className="inline-block w-full no-underline font-poppins text-xl text-white transition font-medium mb-2">
+							{postData.title.rendered}
+						</p>
+						{parentProps.attributes.showExcerpt &&
+							parentProps.attributes.layout === 'card' && (
+								<div
+									className="font-poppins text-slate-900 mt-2 excerpt"
+									dangerouslySetInnerHTML={{
+										__html: postData.excerpt.rendered,
+									}}
+								/>
+							)}
+						{numberKey === 0 &&
+							parentProps.attributes.layout === 'grid' &&
+							parentProps.attributes.showFeaturedExcerpt === true && (
+								<div
+									className="font-poppins text-slate-900 mt-2 excerpt"
+									dangerouslySetInnerHTML={{
+										__html: postData.excerpt.rendered,
+									}}
+								/>
+							)}
+					</div>
 				</div>
-			</div>
+			</a>
 		</div>
 	);
 };

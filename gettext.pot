@@ -3,6 +3,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: src/blocks/components/GSPostCardOverlay.js:57
+msgid "No featured image found"
+msgstr ""
+
 #: src/blocks/featured-posts/sidebarControl.js:23
 msgid "Featured Posts Controls"
 msgstr ""
