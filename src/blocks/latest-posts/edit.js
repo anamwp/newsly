@@ -219,6 +219,12 @@ export default function edit(props) {
 		});
 	};
 
+	const handleIgnoreStickyPostsToggleControl = () => {
+		setAttributes({
+			ignoreStickyPosts: !attributes.ignoreStickyPosts,
+		});
+	};
+
 	// console.log('selectedPostId', attributes);
 
 	return (
@@ -234,6 +240,7 @@ export default function edit(props) {
 				handleFeaturedImageToggleControl={
 					handleFeaturedImageToggleControl
 				}
+				handleIgnoreStickyPostsToggleControl={handleIgnoreStickyPostsToggleControl}
 			/>
 			{/* Show fallback message before category choosen */}
 			{attributes.fetchedPosts.length == 0 && (

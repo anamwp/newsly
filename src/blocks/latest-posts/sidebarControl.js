@@ -14,6 +14,7 @@ export default function sidebarControl({
 	handleCategoryToggleControl,
 	handleExcerptToggleControl,
 	handleFeaturedImageToggleControl,
+	handleIgnoreStickyPostsToggleControl,
 }) {
 	const { attributes, setAttributes } = props;
 
@@ -77,6 +78,13 @@ export default function sidebarControl({
 							/>
 						</p>
 					)}
+					<p className="display-featured-posts-category-switch">
+						<ToggleControl
+							label={__('Ignore Sticky Posts', 'newsly')}
+							checked={attributes.ignoreStickyPosts}
+							onChange={handleIgnoreStickyPostsToggleControl}
+						/>
+					</p>
 				</PanelBody>
 			</InspectorControls>
 	);

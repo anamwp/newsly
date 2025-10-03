@@ -44,6 +44,10 @@
 		"showCategory": {
 			"type": "boolean",
 			"default": true
+		},
+		"ignoreStickyPosts": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"textdomain": "gutenberg-starter",

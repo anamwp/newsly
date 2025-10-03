@@ -8,37 +8,49 @@ msgid "No featured image found"
 msgstr ""
 
 #: src/blocks/featured-posts copy/sidebarControl.js:23
+#: src/blocks/featured-posts/sidebarControl.js:24
 #: src/blocks/featured-posts/sidebarControl.js:23
-#: src/blocks/latest-posts/sidebarControl.js:23
+#: src/blocks/latest-posts/sidebarControl.js:24
 msgid "Featured Posts Controls"
 msgstr ""
 
 #: src/blocks/featured-posts copy/sidebarControl.js:28
+#: src/blocks/featured-posts/sidebarControl.js:29
 #: src/blocks/featured-posts/sidebarControl.js:28
-#: src/blocks/latest-posts/sidebarControl.js:28
+#: src/blocks/latest-posts/sidebarControl.js:29
 msgid "Choose Category"
 msgstr ""
 
 #: src/blocks/featured-posts copy/sidebarControl.js:39
+#: src/blocks/featured-posts/sidebarControl.js:40
 #: src/blocks/featured-posts/sidebarControl.js:39
-#: src/blocks/latest-posts/sidebarControl.js:39
+#: src/blocks/latest-posts/sidebarControl.js:40
 msgid "Number of Posts"
 msgstr ""
 
 #: src/blocks/featured-posts copy/sidebarControl.js:53
+#: src/blocks/featured-posts/sidebarControl.js:54
 #: src/blocks/featured-posts/sidebarControl.js:53
-#: src/blocks/latest-posts/sidebarControl.js:53
+#: src/blocks/latest-posts/sidebarControl.js:54
 msgid "Show Featured Image"
 msgstr ""
 
 #: src/blocks/featured-posts copy/sidebarControl.js:65
+#: src/blocks/featured-posts/sidebarControl.js:66
 #: src/blocks/featured-posts/sidebarControl.js:65
-#: src/blocks/latest-posts/sidebarControl.js:65
+#: src/blocks/latest-posts/sidebarControl.js:66
 msgid "Show Category"
 msgstr ""
 
 #: src/blocks/featured-posts copy/sidebarControl.js:74
+#: src/blocks/featured-posts/sidebarControl.js:75
 #: src/blocks/featured-posts/sidebarControl.js:74
-#: src/blocks/latest-posts/sidebarControl.js:74
+#: src/blocks/latest-posts/sidebarControl.js:75
 msgid "Show Excerpt"
+msgstr ""
+
+#: src/blocks/featured-posts/sidebarControl.js:83
+#: src/blocks/featured-posts/sidebarControl.js:82
+#: src/blocks/latest-posts/sidebarControl.js:83
+msgid "Ignore Sticky Posts"
 msgstr ""
