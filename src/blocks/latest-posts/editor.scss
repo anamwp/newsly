@@ -1,0 +1,66 @@
+.newsly_block__latest_posts{
+	display:grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+	.newsly__post_card__overlay {
+		position: relative;
+		min-height: 420px;
+		.overlay-wrapper-as-link{
+			display: block;
+			height: 100%;
+			width: 100%;
+			position: relative;
+			z-index: 1;
+			overflow: hidden;
+		}
+		.featured-image {
+			z-index: 0;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+		.content-container {
+			position: absolute;
+			bottom: 0;
+			padding: 20px;
+			left: 0;
+			z-index: 2;
+			color: #fff;
+			background: linear-gradient(65.99deg,#000 0,transparent 99.04%);
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-end;
+			.categories{
+				position: absolute;
+				top: 20px;
+				left: 20px;
+				z-index: 3;
+				span{
+					display: none;
+					&:first-child{
+						display: inline-block;
+						letter-spacing: 1px;
+					}
+				}
+			}
+		}
+
+		&:first-child{
+			// grid-column: span 2;
+			// grid-row: span 2;
+		}
+		&:nth-child(2){
+			// grid-row: span 2;
+		}
+	}
+}

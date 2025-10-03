@@ -3,30 +3,42 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/components/GSPostCardOverlay.js:57
+#: src/blocks/components/GSPostCardOverlay.js:62
 msgid "No featured image found"
 msgstr ""
 
+#: src/blocks/featured-posts copy/sidebarControl.js:23
 #: src/blocks/featured-posts/sidebarControl.js:23
+#: src/blocks/latest-posts/sidebarControl.js:23
 msgid "Featured Posts Controls"
 msgstr ""
 
+#: src/blocks/featured-posts copy/sidebarControl.js:28
 #: src/blocks/featured-posts/sidebarControl.js:28
+#: src/blocks/latest-posts/sidebarControl.js:28
 msgid "Choose Category"
 msgstr ""
 
+#: src/blocks/featured-posts copy/sidebarControl.js:39
 #: src/blocks/featured-posts/sidebarControl.js:39
+#: src/blocks/latest-posts/sidebarControl.js:39
 msgid "Number of Posts"
 msgstr ""
 
+#: src/blocks/featured-posts copy/sidebarControl.js:53
 #: src/blocks/featured-posts/sidebarControl.js:53
+#: src/blocks/latest-posts/sidebarControl.js:53
 msgid "Show Featured Image"
 msgstr ""
 
+#: src/blocks/featured-posts copy/sidebarControl.js:65
 #: src/blocks/featured-posts/sidebarControl.js:65
+#: src/blocks/latest-posts/sidebarControl.js:65
 msgid "Show Category"
 msgstr ""
 
+#: src/blocks/featured-posts copy/sidebarControl.js:74
 #: src/blocks/featured-posts/sidebarControl.js:74
+#: src/blocks/latest-posts/sidebarControl.js:74
 msgid "Show Excerpt"
 msgstr ""
