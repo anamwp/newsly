@@ -16,10 +16,21 @@ export default function save(props) {
 	return (
 		<div {...blockProps}>
 			<div className="cat-label">
-				{props.attributes.selectedCategroyName && (
+				{/* {props.attributes.selectedCategroyName && (
 					<p className="text-xl font-semibold capitalize mb-5">
 						{props.attributes.selectedCategroyName}
 					</p>
+				)} */}
+				{props.attributes.selectedCategories.length > 0 && (
+					<ul className="flex flex-wrap gap-2">
+						{props.attributes.selectedCategories.map((category) => (
+							<li key={category.id}>
+								<button className="bg-blue-500 text-white px-4 py-2 rounded-md capitalize" onClick={() => handleCategoryChange([category.id])}>
+									{category.label}
+								</button>
+							</li>
+						))}
+					</ul>
 				)}
 			</div>
 			<div

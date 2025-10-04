@@ -27,16 +27,11 @@ export default function edit(props) {
 			apiFetch({
 				path: '/wp/v2/categories?per_page=100&orderby=count&order=desc',
 			}).then((cat) => {
-				let catArr = [
-					{
-						label: 'Select a category',
-						value: '',
-					},
-				];
+				let catArr = [];
 				cat.map((cat) => {
 					catArr.push({
 						label: cat.name,
-						value: cat.id,
+						value: cat.id.toString(),
 					});
 				});
 				setAttributes({
@@ -65,26 +60,35 @@ export default function edit(props) {
 	/**
 	 * Set posts while change the category
 	 * Update dropdown list posts based on category selections
-	 * @param {*} selectedCatId - Category ID
+	 * @param {*} selectedCatIds - Array of Category IDs
 	 */
 	const handlePostsByCategory = (
-		selectedCatId = attributes.selectedCategroyId
+		selectedCatIds = attributes.selectedCategroyId
 	) => {
 		/**
-		 * if nothing passed
-		 * then assing catId from
-		 * attributes
+		 * if nothing passed or empty array
+		 * then reset all data
 		 */
-		let catId = selectedCatId
-			? selectedCatId
-			: attributes.selectedCategroyId;
+		if (!selectedCatIds || selectedCatIds.length === 0) {
+			setAttributes({
+				selectedCategories: [],
+				// selectedCategoryPosts: [],
+				fetchedPosts: [],
+				selectedPostId: null,
+			});
+			return;
+		}
+		console.log('selectedCatIds', selectedCatIds);
 		/**
 		 * fetch the data
 		 * from restapi endpoint
-		 * for specific category
+		 * for specific categories (comma-separated)
 		 */
+		const firstCatID = selectedCatIds[0];
+		console.log('firstCatID', firstCatID);
+		const categoriesParam = selectedCatIds.join(',');
 		apiFetch({
-			path: `/wp/v2/posts?categories=${catId}&per_page=24&_embed`,
+			path: `/wp/v2/posts?categories=${firstCatID}&per_page=24&_embed`,
 		})
 			.then((res) => {
 				let catPostsArr = [];
@@ -101,57 +105,48 @@ export default function edit(props) {
 				 * Update the dropdown list
 				 * based on category selection
 				 */
-				res.map((res) => {
-					catPostsArr.push({
-						label: res.title.rendered,
-						value: res.id,
-					});
-				});
+				// res.map((res) => {
+				// 	catPostsArr.push({
+				// 		label: res.title.rendered,
+				// 		value: res.id,
+				// 	});
+				// });
 				/**
 				 * Update Attrbutes [selectedCategoryPosts]
 				 */
-				setAttributes({
-					selectedCategoryPosts: catPostsArr,
-				});
+				// setAttributes({
+				// 	selectedCategoryPosts: catPostsArr,
+				// });
 			})
 			.catch((err) => console.log(err));
 	};
 	/**
 	 * Fire this function on change of the category selection from the sidebar control panel
 	 * handle category change
-	 * @param {*} selectedCat
+	 * @param {*} selectedCategoryIds - Array of selected category IDs
 	 */
-	const handleCategoryChange = (selectedCat) => {
+	const handleCategoryChange = (selectedCategoryIds) => {
+		// Convert selected IDs to category objects with id and label
+		const selectedCategories = selectedCategoryIds.map(catId => {
+			const category = attributes.categories.find(cat => cat.value === Number(catId));
+			return {
+				id: Number(catId),
+				label: category ? category.label : 'Unknown Category'
+			};
+		});
 		/**
-		 * if no value passed
-		 * then reset all data
-		 */
-		if (!selectedCat) {
-			setAttributes({
-				selectedCategroyId: '',
-				selectedCategoryPosts: [],
-				fetchedPosts: [],
-			});
-			return;
-		}
-		/**
-		 * Get the selected category option
-		 */
-		const selectedCatOption = attributes.categories.find(
-			(option) => option.value === parseInt(selectedCat)
-		);
-		/**
-		 * Update [selectedCategroyId] attribute for the selected category.
+		 * Update both [selectedCategroyId] and [selectedCategories] attributes.
 		 */
 		setAttributes({
-			selectedCategroyId: selectedCat,
-			selectedCategroyName: selectedCatOption.label,
+			selectedCategroyId: selectedCategoryIds || [],
+			selectedCategories: selectedCategories || [],
 		});
+		
 		/**
 		 * Update dropdown list posts based on category selections
 		 * Update attribute [selectedCategoryPosts] value for the new posts
 		 */
-		handlePostsByCategory(selectedCat);
+		handlePostsByCategory(selectedCategoryIds || []);
 	};
 	/**
 	 * Fallback message
@@ -216,14 +211,30 @@ export default function edit(props) {
 			/>
 			{/* Fallback message */}
 			{attributes.fetchedPosts.length == 0 && (
-				<FallbackMessage message="Please select a category to display posts" />
+				<FallbackMessage message="Please select one or more categories to display posts" />
 			)}
-			{/* Show the category name. */}
+			{/* Show the category names. */}
 			<div className="cat-label">
-				{attributes.selectedCategroyName && (
+				{attributes.selectedCategories.length > 0 && (
 					<p className="text-xl font-semibold capitalize mb-5">
-						{attributes.selectedCategroyName}
+						{attributes.selectedCategories.length === 1 
+							? attributes.selectedCategories[0].label
+							: `${attributes.selectedCategories.length} Categories Selected`
+						}
 					</p>
+				)}
+				{/* Show all categories as li and inside that li add category name as button */}
+				{/* {console.log('attributes.selectedCategories', attributes.selectedCategories)} */}
+				{attributes.selectedCategories.length > 0 && (
+					<ul className="flex flex-wrap gap-2">
+						{attributes.selectedCategories.map((category) => (
+							<li key={category.id}>
+								<button className="bg-blue-500 text-white px-4 py-2 rounded-md capitalize" onClick={() => handleCategoryChange([category.id])}>
+									{category.label}
+								</button>
+							</li>
+						))}
+					</ul>
 				)}
 			</div>
 			{/* Show posts from the selected category. */}

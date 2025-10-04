@@ -31,24 +31,25 @@ export default function sidebarControl({
 					<p className="category-post-category-picker">
 						<SelectControl
 							label={__(
-								'Choose Category',
+								'Choose Categories',
 								'newsly'
 							)}
 							value={attributes.selectedCategroyId}
 							options={categories}
 							onChange={handleCategoryChange}
+							multiple={true}
 						/>
 					</p>
-					{attributes.selectedCategroyId && (
+					{attributes.selectedCategroyId.length > 0 && (
 						<p>
-							<SelectControl
+							{/* <SelectControl
 								label={__(
 									'Posts Found to display',
 									'newsly'
 								)}
 								options={attributes.selectedCategoryPosts}
 								// onChange={handleSelectedPostData}
-							/>
+							/> */}
 							<RangeControl
 								label="Posts to show"
 								value={attributes.postsToShow ?? 4}
@@ -60,7 +61,7 @@ export default function sidebarControl({
 							/>
 						</p>
 					)}
-					{attributes.selectedCategroyId && (
+					{attributes.selectedCategories.length > 0 && (
 						<p className="display-category-post-featured-image">
 							<ToggleControl
 								label={__(
@@ -72,7 +73,7 @@ export default function sidebarControl({
 							/>
 						</p>
 					)}
-					{attributes.selectedCategroyId && (
+					{attributes.selectedCategories.length > 0 && (
 						<p className="display-category-post-category-switch">
 							<ToggleControl
 								label={__('Show Category', 'newsly')}
@@ -110,7 +111,7 @@ export default function sidebarControl({
 								/>
 							</p>
 						)}
-					{attributes.selectedCategroyId && (
+					{attributes.selectedCategories.length > 0 && (
 						<RangeControl
 							label="Post Column"
 							value={attributes.postColumn ?? 4}

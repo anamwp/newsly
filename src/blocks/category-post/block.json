@@ -26,8 +26,12 @@
 			"default": 3
 		},
 		"selectedCategroyId": {
-			"type": "string",
-			"default": ""
+			"type": "array",
+			"default": []
+		},
+		"selectedCategories": {
+			"type": "array",
+			"default": []
 		},
 		"selectedCategroyName": {
 			"type": "string",

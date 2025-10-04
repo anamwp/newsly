@@ -580,6 +580,9 @@ video {
 .flex-row{
 	flex-direction: row;
 }
+.flex-wrap{
+	flex-wrap: wrap;
+}
 .items-center{
 	align-items: center;
 }
@@ -651,6 +654,10 @@ video {
 .bg-violet-700{
 	--tw-bg-opacity: 1;
 	background-color: rgb(109 40 217 / var(--tw-bg-opacity, 1));
+}
+.bg-blue-500{
+	--tw-bg-opacity: 1;
+	background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
 }
 .object-cover{
 	-o-object-fit: cover;
