@@ -24,8 +24,9 @@ const GSPostCard = (props) => {
 	let parentProps = props.parent;
 	const featuredImage =
 		postData._embedded['wp:featuredmedia']?.[0]?.source_url;
+	const featuredImageAltText = postData._embedded['wp:featuredmedia']?.[0]?.alt_text;
 	const categories = postData._embedded['wp:term']?.[0] || [];
-	console.log('key', props);
+	// console.log('key', props);
 
 	return (
 		<div
@@ -42,7 +43,7 @@ const GSPostCard = (props) => {
 						<img
 							className="inline-block w-full rounded"
 							src={featuredImage}
-							alt=""
+							alt={featuredImageAltText || postData.title.rendered}
 						/>
 					</div>
 				)}

@@ -17,8 +17,8 @@
 	}
 	&.grid-3 {
 		.post-wrapper {
-			grid-template-columns: repeat(12, 1fr);
-			grid-template-rows: auto;
+			// grid-template-columns: repeat(12, 1fr);
+			// grid-template-rows: auto;
 			.gs__post_card {
 				&:nth-child(1) {
 					grid-column-start: 1;
@@ -46,8 +46,8 @@
 	}
 	&.grid-4 {
 		.post-wrapper {
-			grid-template-columns: repeat(12, 1fr);
-			grid-template-rows: auto;
+			// grid-template-columns: repeat(12, 1fr);
+			// grid-template-rows: auto;
 			.gs__post_card {
 				&:nth-child(1) {
 					grid-column-start: 1;
