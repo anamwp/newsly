@@ -202,26 +202,6 @@ export default function edit(props) {
 			showCategory: !attributes.showCategory,
 		});
 	};
-	/**
-	 * Show excerpt based on the selection for sidebar panel
-	 * for the post card
-	 * and update [showExcerpt] value
-	 */
-	const handleExcerptToggleControl = () => {
-		setAttributes({
-			showExcerpt: !attributes.showExcerpt,
-		});
-	};
-	/**
-	 * Show featured image based on the selection for sidebar panel
-	 * for the post card
-	 * and update [showFeaturedImage] value
-	 */
-	const handleFeaturedImageToggleControl = () => {
-		setAttributes({
-			showFeaturedImage: !attributes.showFeaturedImage,
-		});
-	};
 
 	const handleIgnoreStickyPostsToggleControl = () => {
 		setAttributes({
@@ -240,10 +220,6 @@ export default function edit(props) {
 				handleCategoryChange={handleCategoryChange}
 				// handleSelectedPostData={handleSelectedPostData}
 				handleCategoryToggleControl={handleCategoryToggleControl}
-				handleExcerptToggleControl={handleExcerptToggleControl}
-				handleFeaturedImageToggleControl={
-					handleFeaturedImageToggleControl
-				}
 				handleIgnoreStickyPostsToggleControl={handleIgnoreStickyPostsToggleControl}
 			/>
 			{/* Show fallback message before category choosen */}

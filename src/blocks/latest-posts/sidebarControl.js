@@ -10,10 +10,7 @@ export default function sidebarControl({
 	categories,
 	handleNumberOfPostsChange,
 	handleCategoryChange,
-// handleSelectedPostData,
 	handleCategoryToggleControl,
-	handleExcerptToggleControl,
-	handleFeaturedImageToggleControl,
 	handleIgnoreStickyPostsToggleControl,
 }) {
 	const { attributes, setAttributes } = props;
@@ -49,18 +46,6 @@ export default function sidebarControl({
 						/>
 					</p>
 					{attributes.selectedCategroyId && (
-						<p className="display-featured-posts-featured-image">
-							<ToggleControl
-								label={__(
-									'Show Featured Image',
-									'newsly'
-								)}
-								checked={attributes.showFeaturedImage}
-								onChange={handleFeaturedImageToggleControl}
-							/>
-						</p>
-					)}
-					{attributes.selectedCategroyId && (
 						<p className="display-featured-posts-category-switch">
 							<ToggleControl
 								label={__('Show Category', 'newsly')}
@@ -69,15 +54,7 @@ export default function sidebarControl({
 							/>
 						</p>
 					)}
-					{attributes.selectedCategroyId && (
-						<p className="display-featured-posts-excerpt-switch">
-							<ToggleControl
-								label={__('Show Excerpt', 'newsly')}
-								checked={attributes.showExcerpt}
-								onChange={handleExcerptToggleControl}
-							/>
-						</p>
-					)}
+					
 					<p className="display-featured-posts-category-switch">
 						<ToggleControl
 							label={__('Ignore Sticky Posts', 'newsly')}
