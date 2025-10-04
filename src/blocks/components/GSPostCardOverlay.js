@@ -1,4 +1,3 @@
-import { Disabled } from '@wordpress/components';
 /**
  * ❗️ Before use this component make sure below data is available ❗️
  * 👉 - postData._embedded['wp:featuredmedia']?.[0]?.source_url
@@ -25,7 +24,6 @@ const GSPostCardOverlay = (props) => {
 	const featuredImage =
 		postData._embedded['wp:featuredmedia']?.[0]?.source_url;
 	const categories = postData._embedded['wp:term']?.[0] || [];
-	// console.log('key', props);
 
 	return (
 		<div
@@ -37,29 +35,28 @@ const GSPostCardOverlay = (props) => {
 				if user want to show featured image 
 				and post have featured image
 				*/}
-				{parentProps.attributes.showFeaturedImage &&
-					postData.featured_media !== 0 && (
-						<div className="mb-4 featured-image">
-							<img
-								className="inline-block w-full rounded"
-								src={featuredImage}
-								alt=""
-							/>
-						</div>
-					)}
+				{postData.featured_media !== 0 && (
+					<div className="mb-4 featured-image">
+						<img
+							className="inline-block w-full rounded"
+							src={featuredImage}
+							alt=""
+						/>
+					</div>
+				)}
+
 				{/* 
 				If user want to show featured image
 				but post have no featured image
 				*/}
-				{parentProps.attributes.showFeaturedImage &&
-					postData.featured_media == 0 && (
-						<div className="mb-4 no-featured-image">
-							{__(
-								'No featured image found',
-								'newsly'
-							)}
-						</div>
-					)}
+				{postData.featured_media == 0 && (
+					<div className="mb-4 no-featured-image">
+						{__(
+							'No featured image found',
+							'newsly'
+						)}
+					</div>
+				)}
 				<div className="content-container">
 					<div className="content-wrapper">
 						<div className="mb-3 categories">
@@ -80,25 +77,6 @@ const GSPostCardOverlay = (props) => {
 						className="inline-block w-full no-underline font-poppins text-xl text-white transition font-medium mb-2">
 							{postData.title.rendered}
 						</p>
-						{parentProps.attributes.showExcerpt &&
-							parentProps.attributes.layout === 'card' && (
-								<div
-									className="font-poppins text-slate-900 mt-2 excerpt"
-									dangerouslySetInnerHTML={{
-										__html: postData.excerpt.rendered,
-									}}
-								/>
-							)}
-						{numberKey === 0 &&
-							parentProps.attributes.layout === 'grid' &&
-							parentProps.attributes.showFeaturedExcerpt === true && (
-								<div
-									className="font-poppins text-slate-900 mt-2 excerpt"
-									dangerouslySetInnerHTML={{
-										__html: postData.excerpt.rendered,
-									}}
-								/>
-							)}
 					</div>
 				</div>
 			</a>
