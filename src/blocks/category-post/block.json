@@ -72,10 +72,15 @@
 		"showFeaturedImage": {
 			"type": "boolean",
 			"default": true
+		},
+		"activeTab": {
+			"type": "number",
+			"default": null
 		}
 	},
 	"textdomain": "gutenberg-starter",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }

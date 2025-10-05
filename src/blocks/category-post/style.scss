@@ -2,6 +2,44 @@
 	.post-wrapper {
 		@apply gap-3;
 	}
+	
+	// Tab styling
+	.cat-label {
+		.border-b {
+			border-bottom: 1px solid #e5e7eb;
+			margin-bottom: 1.5rem;
+		}
+		
+		nav {
+			display: flex;
+			gap: 2rem;
+		}
+		
+		.category-tab {
+			padding: 0.5rem 0.25rem;
+			border-bottom: 2px solid transparent;
+			font-weight: 500;
+			font-size: 0.875rem;
+			text-transform: capitalize;
+			transition: all 0.2s ease-in-out;
+			background: none;
+			border: none;
+			cursor: pointer;
+			color: #6b7280;
+			
+			&.active {
+				border-bottom-color: #3b82f6;
+				color: #2563eb;
+			}
+			
+			&:not(.active) {
+				&:hover {
+					color: #374151;
+					border-bottom-color: #d1d5db;
+				}
+			}
+		}
+	}
 	/* styles.css */
 	.gs-cols-1 {
 		@apply grid-cols-1;

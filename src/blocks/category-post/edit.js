@@ -39,6 +39,30 @@ export default function edit(props) {
 				});
 			});
 	}, []);
+
+	/**
+	 * Ensure first category is active when selectedCategories are available
+	 */
+	useEffect(() => {
+		if (attributes.selectedCategories.length > 0 && !attributes.activeTab) {
+			console.log('Setting first category as active on load:', attributes.selectedCategories[0].id);
+			// If we have stored category data, use it; otherwise trigger a fetch
+			if (attributes.fetchedPostCategoryData && attributes.fetchedPostCategoryData[attributes.selectedCategories[0].id]) {
+				const firstCategoryPosts = attributes.fetchedPostCategoryData[attributes.selectedCategories[0].id];
+				console.log('Using stored posts for first category:', firstCategoryPosts.length);
+				setAttributes({
+					activeTab: attributes.selectedCategories[0].id,
+					fetchedPosts: [firstCategoryPosts],
+					selectedPostId: firstCategoryPosts.length > 0 ? firstCategoryPosts[0].id : null,
+				});
+			} else {
+				// If no stored data, just set the active tab and let the existing fetch handle posts
+				setAttributes({
+					activeTab: attributes.selectedCategories[0].id,
+				});
+			}
+		}
+	}, [attributes.selectedCategories, attributes.fetchedPostCategoryData]);
 	/**
 	 * Manage number of posts to show.
 	 * @param {number} postNumber
@@ -59,7 +83,7 @@ export default function edit(props) {
 	};
 	/**
 	 * Set posts while change the category
-	 * Update dropdown list posts based on category selections
+	 * Fetch posts for all selected categories and store them separately
 	 * @param {*} selectedCatIds - Array of Category IDs
 	 */
 	const handlePostsByCategory = (
@@ -69,54 +93,63 @@ export default function edit(props) {
 		 * if nothing passed or empty array
 		 * then reset all data
 		 */
+
 		if (!selectedCatIds || selectedCatIds.length === 0) {
 			setAttributes({
 				selectedCategories: [],
-				// selectedCategoryPosts: [],
 				fetchedPosts: [],
 				selectedPostId: null,
+				activeTab: null,
 			});
 			return;
 		}
 		console.log('selectedCatIds', selectedCatIds);
+		
 		/**
-		 * fetch the data
-		 * from restapi endpoint
-		 * for specific categories (comma-separated)
+		 * Fetch posts for all selected categories
+		 * Store them in an object with category ID as key
 		 */
-		const firstCatID = selectedCatIds[0];
-		console.log('firstCatID', firstCatID);
-		const categoriesParam = selectedCatIds.join(',');
-		apiFetch({
-			path: `/wp/v2/posts?categories=${firstCatID}&per_page=24&_embed`,
-		})
-			.then((res) => {
-				let catPostsArr = [];
-				/**
-				 * set response first data
-				 * to fetchPosts attribute
-				 * and set [selectedPostId] from the first ID of the fetched post
-				 */
-				setAttributes({
-					fetchedPosts: [res],
-					selectedPostId: res.length > 0 ? res[0].id : null,
+		const fetchPromises = selectedCatIds.map(catId => 
+			apiFetch({
+				path: `/wp/v2/posts?categories=${catId}&per_page=24&_embed`,
+			})
+		);
+		
+		Promise.all(fetchPromises)
+			.then((responses) => {
+				const categoryPostsData = {};
+				let firstCategoryPosts = [];
+				
+				responses.forEach((res, index) => {
+					const catId = selectedCatIds[index];
+					// Store as both string and number keys to avoid type issues
+					categoryPostsData[catId] = res;
+					categoryPostsData[String(catId)] = res;
+					categoryPostsData[Number(catId)] = res;
+					// console.log(`Storing posts for category ${catId}:`, res.length, 'posts');
+					// console.log('categoryPostsData', categoryPostsData);
+					
+					// Set first category posts as default
+					if (index === 0) {
+						firstCategoryPosts = res;
+					}
 				});
+				
+				// console.log('Final categoryPostsData:', categoryPostsData);
+				
 				/**
-				 * Update the dropdown list
-				 * based on category selection
+				 * Update attributes with all category posts data
+				 * Set first category as active by default
 				 */
-				// res.map((res) => {
-				// 	catPostsArr.push({
-				// 		label: res.title.rendered,
-				// 		value: res.id,
-				// 	});
-				// });
-				/**
-				 * Update Attrbutes [selectedCategoryPosts]
-				 */
-				// setAttributes({
-				// 	selectedCategoryPosts: catPostsArr,
-				// });
+				// console.log('Setting first category as active:', selectedCatIds[0]);
+				// console.log('First category posts:', firstCategoryPosts.length, 'posts');
+				
+				setAttributes({
+					fetchedPosts: [firstCategoryPosts],
+					selectedPostId: firstCategoryPosts.length > 0 ? firstCategoryPosts[0].id : null,
+					activeTab: selectedCatIds[0],
+					fetchedPostCategoryData: categoryPostsData,
+				});
 			})
 			.catch((err) => console.log(err));
 	};
@@ -126,9 +159,15 @@ export default function edit(props) {
 	 * @param {*} selectedCategoryIds - Array of selected category IDs
 	 */
 	const handleCategoryChange = (selectedCategoryIds) => {
+		console.log('selectedCategoryIds', selectedCategoryIds);
+		// debugger;
 		// Convert selected IDs to category objects with id and label
 		const selectedCategories = selectedCategoryIds.map(catId => {
-			const category = attributes.categories.find(cat => cat.value === Number(catId));
+			// console.log('catId', catId);
+			// console.log('catId', typeof catId);
+			// console.log('attributes.categories', attributes.categories);
+			const category = attributes.categories.find(cat => Number(cat.value) === Number(catId));
+			// console.log('category', category);
 			return {
 				id: Number(catId),
 				label: category ? category.label : 'Unknown Category'
@@ -141,12 +180,51 @@ export default function edit(props) {
 			selectedCategroyId: selectedCategoryIds || [],
 			selectedCategories: selectedCategories || [],
 		});
+		// debugger;
 		
 		/**
 		 * Update dropdown list posts based on category selections
 		 * Update attribute [selectedCategoryPosts] value for the new posts
 		 */
 		handlePostsByCategory(selectedCategoryIds || []);
+	};
+	
+	/**
+	 * Handle tab click to switch between categories
+	 * @param {number} categoryId - The ID of the category to switch to
+	 */
+	const handleTabClick = (categoryId) => {
+		// console.log('handleTabClick - categoryId:', categoryId, 'type:', typeof categoryId);
+		// console.log('fetchedPostCategoryData:', attributes.fetchedPostCategoryData);
+		
+		// Get posts for the selected category from stored data
+		const categoryPosts = attributes.fetchedPostCategoryData?.[categoryId] || [];
+		
+		// console.log('categoryPosts found:', categoryPosts);
+		
+		// If no posts found in stored data, fetch them directly
+		if (categoryPosts.length === 0) {
+			console.log('No posts found in stored data, fetching directly...');
+			apiFetch({
+				path: `/wp/v2/posts?categories=${categoryId}&per_page=24&_embed`,
+			})
+			.then((res) => {
+				console.log('Fetched posts for category', categoryId, ':', res.length);
+				setAttributes({
+					activeTab: categoryId,
+					fetchedPosts: [res],
+					selectedPostId: res.length > 0 ? res[0].id : null,
+				});
+			})
+			.catch((err) => console.log('Error fetching posts:', err));
+		} else {
+			// Update active tab and display posts for selected category
+			setAttributes({
+				activeTab: categoryId,
+				fetchedPosts: [categoryPosts],
+				selectedPostId: categoryPosts.length > 0 ? categoryPosts[0].id : null,
+			});
+		}
 	};
 	/**
 	 * Fallback message
@@ -191,6 +269,7 @@ export default function edit(props) {
 			showFeaturedExcerpt: !attributes.showFeaturedExcerpt,
 		});
 	};
+	console.log('attributes', attributes);
 
 	return (
 		<div {...blockProps}>
@@ -213,7 +292,7 @@ export default function edit(props) {
 			{attributes.fetchedPosts.length == 0 && (
 				<FallbackMessage message="Please select one or more categories to display posts" />
 			)}
-			{/* Show the category names. */}
+			{/* Show the category names as tabs. */}
 			<div className="cat-label">
 				{attributes.selectedCategories.length > 0 && (
 					<p className="text-xl font-semibold capitalize mb-5">
@@ -223,26 +302,39 @@ export default function edit(props) {
 						}
 					</p>
 				)}
-				{/* Show all categories as li and inside that li add category name as button */}
-				{/* {console.log('attributes.selectedCategories', attributes.selectedCategories)} */}
+				{/* Show all categories as tabs */}
 				{attributes.selectedCategories.length > 0 && (
-					<ul className="flex flex-wrap gap-2">
-						{attributes.selectedCategories.map((category) => (
-							<li key={category.id}>
-								<button className="bg-blue-500 text-white px-4 py-2 rounded-md capitalize" onClick={() => handleCategoryChange([category.id])}>
-									{category.label}
-								</button>
-							</li>
-						))}
-					</ul>
+					<div className="border-b border-gray-200 mb-6">
+						<nav className="-mb-px flex space-x-8">
+							{attributes.selectedCategories.map((category) => {
+								const isActive = attributes.activeTab === category.id;
+								// console.log(`Tab ${category.label} (${category.id}): activeTab=${attributes.activeTab}, isActive=${isActive}`);
+								return (
+									<button
+										key={category.id}
+										className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors duration-200 ${
+											isActive
+												? 'border-blue-500 text-blue-600'
+												: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+										}`}
+										onClick={() => handleTabClick(category.id)}
+									>
+										{category.label}
+									</button>
+								);
+							})}
+						</nav>
+					</div>
 				)}
 			</div>
 			{/* Show posts from the selected category. */}
 			<div
 				className={`post-wrapper grid gs-cols-${attributes.postColumn}`}
 			>
+				{/* {console.log('Rendering posts - selectedPostId:', attributes.selectedPostId, 'fetchedPosts length:', attributes.fetchedPosts.length, 'fetchedPosts[0] length:', attributes.fetchedPosts[0]?.length)} */}
 				{attributes.selectedPostId &&
 					attributes.fetchedPosts.length > 0 &&
+					attributes.fetchedPosts[0] &&
 					attributes.fetchedPosts[0]
 						.slice(0, attributes.postsToShow)
 						.map((post, index) => (
