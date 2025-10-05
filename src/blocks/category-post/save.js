@@ -9,13 +9,15 @@ export default function save(props) {
 			? `grid-${props.attributes.postColumn}`
 			: '';
 	const blockProps = useBlockProps.save({
-		className: `gts__category_post gs-cols-${props.attributes.postColumn} ${gridClass}`,
+		className: `newsly__category_post gs-cols-${props.attributes.postColumn} ${gridClass}`,
 		'data-categories': JSON.stringify(props.attributes.selectedCategories),
 		'data-active-tab': props.attributes.activeTab || (props.attributes.selectedCategories.length > 0 ? props.attributes.selectedCategories[0].id : null),
 		'data-posts-to-show': props.attributes.postsToShow,
 		'data-post-column': props.attributes.postColumn,
 	});
-	const postData = props.attributes.fetchedPosts;
+	const postData = props.attributes.allCategoryPosts;
+	console.log('postData', postData);
+	// debugger;
 
 	return (
 		<div {...blockProps}>
@@ -32,35 +34,56 @@ export default function save(props) {
 				{props.attributes.selectedCategories.length > 0 && (
 					<div className="border-b border-gray-200 mb-6">
 						<nav className="-mb-px flex space-x-8">
-							{props.attributes.selectedCategories.map((category, index) => (
-								<button
-									key={category.id}
-									className={`category-tab ${index === 0 ? 'active' : ''}`}
-									data-category-id={category.id}
-								>
-									{category.label}
-								</button>
-							))}
+							{props.attributes.selectedCategories.map((category, index) => {
+								const isActive = Number(props.attributes.activeTab) === Number(category.id);
+								console.log('isActive', isActive);
+								return (
+									<button
+										id={`category-tab-${category.id}`}
+										key={category.id}
+										className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors duration-200 ${
+											isActive
+												? 'border-blue-500 text-blue-600'
+												: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+										}`}
+										data-category-id={category.id}
+									>
+										{category.label}
+									</button>
+								)
+							})}
 						</nav>
 					</div>
 				)}
 			</div>
+			
 			<div
-				className={`post-wrapper grid gs-cols-${props.attributes.postColumn}`}
+				className={`post-wrapper`}
 			>
-				{postData.length > 0 &&
-					postData[0] &&
-					postData[0]
-						.slice(0, props.attributes.postsToShow)
-						.map((post, index) => (
-							<GSPostCard
-								key={index}
-								data={post}
-								parent={props}
-								numberKey={index}
-							/>
-						))}
+				{
+					// check if attributes.allCategoryPosts is an object then proceed
+					typeof props.attributes.allCategoryPosts === 'object' && Object.keys(props.attributes.allCategoryPosts).length > 0 && (
+						Object.entries(props.attributes.allCategoryPosts).map(([catID, post], index) => {	
+						// Object.values(props.attributes.allCategoryPosts).map((post, index) => {
+							// render as tab content
+							console.log('catID', catID);
+							console.log('post', post);
+							return (
+								<div key={index} className={`tab-content ${ Number(catID) === Number(props.attributes.activeTab) ? 'active grid' : 'hidden' }  gs-cols-${props.attributes.postColumn}`} id={`category-tab-content-${catID}`}>
+									{post.slice(0, props.attributes.postsToShow).map((post, index) => {
+										return <GSPostCard 
+										key={index} 
+										data={post} 
+										parent={props} 
+										/>;
+									})}
+								</div>
+							);
+						})
+					)
+				}
 			</div>
+			
 		</div>
 	);
 }

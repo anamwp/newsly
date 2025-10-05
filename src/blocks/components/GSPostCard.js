@@ -85,7 +85,9 @@ const GSPostCard = (props) => {
 				href={postData.link}
 				className="inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2"
 			>
-				<h3>{postData.title.rendered}</h3>
+				{/* <h3> */}
+					{postData.title.rendered}
+				{/* </h3> */}
 			</a>
 
 			{/* 

@@ -17,7 +17,7 @@ export default function edit(props) {
 	const gridClass =
 		attributes.layout === 'grid' ? `grid-${attributes.postColumn}` : '';
 	const blockProps = useBlockProps({
-		className: `gts__category_post gs-cols-${attributes.postColumn} ${gridClass}`,
+		className: `newsly__category_post gs-cols-${attributes.postColumn} ${gridClass}`,
 	});
 	/**
 	 * Fetch all categoris at first loading.
@@ -127,7 +127,7 @@ export default function edit(props) {
 					categoryPostsData[String(catId)] = res;
 					categoryPostsData[Number(catId)] = res;
 					// console.log(`Storing posts for category ${catId}:`, res.length, 'posts');
-					// console.log('categoryPostsData', categoryPostsData);
+					console.log('categoryPostsData', categoryPostsData);
 					
 					// Set first category posts as default
 					if (index === 0) {
@@ -148,7 +148,7 @@ export default function edit(props) {
 					fetchedPosts: [firstCategoryPosts],
 					selectedPostId: firstCategoryPosts.length > 0 ? firstCategoryPosts[0].id : null,
 					activeTab: selectedCatIds[0],
-					fetchedPostCategoryData: categoryPostsData,
+					allCategoryPosts: categoryPostsData,
 				});
 			})
 			.catch((err) => console.log(err));
@@ -194,37 +194,15 @@ export default function edit(props) {
 	 * @param {number} categoryId - The ID of the category to switch to
 	 */
 	const handleTabClick = (categoryId) => {
-		// console.log('handleTabClick - categoryId:', categoryId, 'type:', typeof categoryId);
-		// console.log('fetchedPostCategoryData:', attributes.fetchedPostCategoryData);
-		
 		// Get posts for the selected category from stored data
-		const categoryPosts = attributes.fetchedPostCategoryData?.[categoryId] || [];
+		const categoryPosts = attributes.allCategoryPosts?.[categoryId] || [];
 		
-		// console.log('categoryPosts found:', categoryPosts);
-		
-		// If no posts found in stored data, fetch them directly
-		if (categoryPosts.length === 0) {
-			console.log('No posts found in stored data, fetching directly...');
-			apiFetch({
-				path: `/wp/v2/posts?categories=${categoryId}&per_page=24&_embed`,
-			})
-			.then((res) => {
-				console.log('Fetched posts for category', categoryId, ':', res.length);
-				setAttributes({
-					activeTab: categoryId,
-					fetchedPosts: [res],
-					selectedPostId: res.length > 0 ? res[0].id : null,
-				});
-			})
-			.catch((err) => console.log('Error fetching posts:', err));
-		} else {
-			// Update active tab and display posts for selected category
-			setAttributes({
-				activeTab: categoryId,
-				fetchedPosts: [categoryPosts],
-				selectedPostId: categoryPosts.length > 0 ? categoryPosts[0].id : null,
-			});
-		}
+		// Update active tab and display posts for selected category
+		setAttributes({
+			activeTab: categoryId,
+			fetchedPosts: [categoryPosts],
+			selectedPostId: categoryPosts.length > 0 ? categoryPosts[0].id : null,
+		});
 	};
 	/**
 	 * Fallback message
@@ -270,7 +248,7 @@ export default function edit(props) {
 		});
 	};
 	console.log('attributes', attributes);
-
+	console.log('attributes.allCategoryPosts', attributes.allCategoryPosts);
 	return (
 		<div {...blockProps}>
 			<SidebarControl
@@ -311,6 +289,7 @@ export default function edit(props) {
 								// console.log(`Tab ${category.label} (${category.id}): activeTab=${attributes.activeTab}, isActive=${isActive}`);
 								return (
 									<button
+										id={`category-tab-${category.id}`}
 										key={category.id}
 										className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors duration-200 ${
 											isActive
@@ -327,24 +306,33 @@ export default function edit(props) {
 					</div>
 				)}
 			</div>
-			{/* Show posts from the selected category. */}
+			{/* Show posts from all categories, but hide inactive ones */}
 			<div
-				className={`post-wrapper grid gs-cols-${attributes.postColumn}`}
+				className={`post-wrapper`}
 			>
-				{/* {console.log('Rendering posts - selectedPostId:', attributes.selectedPostId, 'fetchedPosts length:', attributes.fetchedPosts.length, 'fetchedPosts[0] length:', attributes.fetchedPosts[0]?.length)} */}
-				{attributes.selectedPostId &&
-					attributes.fetchedPosts.length > 0 &&
-					attributes.fetchedPosts[0] &&
-					attributes.fetchedPosts[0]
-						.slice(0, attributes.postsToShow)
-						.map((post, index) => (
-							<GSPostCard
-								key={index}
-								data={post}
-								parent={props}
-								numberKey={index}
-							/>
-						))}
+				{
+					// check if attributes.allCategoryPosts is an object then proceed 
+					typeof attributes.allCategoryPosts === 'object' && Object.keys(attributes.allCategoryPosts).length > 0 && (
+						//  slice number of posts based on the attributes.postsToShow
+						Object.entries(attributes.allCategoryPosts).map(([catID, post], index) => {	
+						// Object.values(attributes.allCategoryPosts).map((post, index) => {
+							// render as tab content
+							// console.log('catID', catID);
+							// console.log('post', post);
+							return (
+								<div key={index} className={`tab-content ${ Number(catID) === Number(attributes.activeTab) ? 'active grid' : 'hidden' } gs-cols-${attributes.postColumn}`} id={`category-tab-content-${catID}`}>
+									{post.slice(0, attributes.postsToShow).map((post, index) => {
+										return <GSPostCard 
+										key={index} 
+										data={post} 
+										parent={props} 
+										/>;
+									})}
+								</div>
+							);
+						})
+					)
+				}
 			</div>
 		</div>
 	);

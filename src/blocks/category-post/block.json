@@ -76,7 +76,12 @@
 		"activeTab": {
 			"type": "number",
 			"default": null
+		},
+		"allCategoryPosts": {
+			"type": "object",
+			"default": {}
 		}
+
 	},
 	"textdomain": "gutenberg-starter",
 	"editorScript": "file:./index.js",
