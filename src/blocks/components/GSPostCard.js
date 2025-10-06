@@ -24,7 +24,8 @@ const GSPostCard = (props) => {
 	let parentProps = props.parent;
 	const featuredImage =
 		postData._embedded['wp:featuredmedia']?.[0]?.source_url;
-	const featuredImageAltText = postData._embedded['wp:featuredmedia']?.[0]?.alt_text;
+	const featuredImageAltText =
+		postData._embedded['wp:featuredmedia']?.[0]?.alt_text;
 	const categories = postData._embedded['wp:term']?.[0] || [];
 	// console.log('key', props);
 
@@ -43,7 +44,10 @@ const GSPostCard = (props) => {
 						<img
 							className="inline-block w-full rounded"
 							src={featuredImage}
-							alt={featuredImageAltText || `Featured Image for ${postData.title.rendered}`}
+							alt={
+								featuredImageAltText ||
+								`Featured Image for ${postData.title.rendered}`
+							}
 						/>
 					</div>
 				)}
@@ -54,10 +58,7 @@ const GSPostCard = (props) => {
 			{parentProps.attributes.showFeaturedImage &&
 				postData.featured_media == 0 && (
 					<div className="mb-4">
-						{__(
-							'No featured image found',
-							'newsly'
-						)}
+						{__('No featured image found', 'newsly')}
 					</div>
 				)}
 			{/* 
@@ -81,7 +82,8 @@ const GSPostCard = (props) => {
 					})}
 			</div>
 			{/* 
-			Disabled click inside editor
+			Note:
+			Links open a new window or tab - Solution: aria-label="opens a new tab”
 			*/}
 			<a
 				href={postData.link}

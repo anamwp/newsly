@@ -3,6 +3,73 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/components/GSPostCardOverlay.js:59
+#: src/blocks/category-post/sidebarControl.js:103
+msgid "Show Featured Post Excerpt"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:129
+msgid "Select Layout"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:28
+msgid "Single Post Controls"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:33
+msgid "Choose Categories"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:67
+#: src/blocks/category-post/sidebarControl.js:70
+#: src/blocks/category-post/sidebarControl.js:71
+#: src/blocks/featured-posts copy/sidebarControl.js:53
+#: src/blocks/featured-posts/sidebarControl.js:54
+msgid "Show Featured Image"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:79
+#: src/blocks/category-post/sidebarControl.js:82
+#: src/blocks/category-post/sidebarControl.js:83
+#: src/blocks/featured-posts copy/sidebarControl.js:65
+#: src/blocks/featured-posts/sidebarControl.js:66
+#: src/blocks/latest-posts/sidebarControl.js:51
+msgid "Show Category"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:89
+#: src/blocks/category-post/sidebarControl.js:92
+#: src/blocks/category-post/sidebarControl.js:93
+#: src/blocks/featured-posts copy/sidebarControl.js:74
+#: src/blocks/featured-posts/sidebarControl.js:75
+msgid "Show Excerpt"
+msgstr ""
+
+#: src/blocks/components/GSPostCard.js:61
+#: src/blocks/components/GSPostCard.js:57
+#: src/blocks/components/GSPostCardOverlay.js:63
 msgid "No featured image found"
+msgstr ""
+
+#: src/blocks/category-post/sidebarControl.js:34
+#: src/blocks/featured-posts copy/sidebarControl.js:28
+#: src/blocks/featured-posts/sidebarControl.js:29
+#: src/blocks/latest-posts/sidebarControl.js:26
+msgid "Choose Category"
+msgstr ""
+
+#: src/blocks/featured-posts copy/sidebarControl.js:23
+#: src/blocks/featured-posts/sidebarControl.js:24
+#: src/blocks/latest-posts/sidebarControl.js:21
+msgid "Featured Posts Controls"
+msgstr ""
+
+#: src/blocks/featured-posts copy/sidebarControl.js:39
+#: src/blocks/featured-posts/sidebarControl.js:40
+#: src/blocks/latest-posts/sidebarControl.js:37
+msgid "Number of Posts"
+msgstr ""
+
+#: src/blocks/featured-posts/sidebarControl.js:83
+#: src/blocks/latest-posts/sidebarControl.js:60
+msgid "Ignore Sticky Posts"
 msgstr ""
