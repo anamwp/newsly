@@ -29,7 +29,7 @@ const GSPostCard = (props) => {
 	// console.log('key', props);
 
 	return (
-		<div
+		<article
 			data-post-serial={numberKey}
 			className="newsly__post_card bg-slate-200 p-4 rounded hover:bg-slate-300 transition-all"
 		>
@@ -43,7 +43,7 @@ const GSPostCard = (props) => {
 						<img
 							className="inline-block w-full rounded"
 							src={featuredImage}
-							alt={featuredImageAltText || postData.title.rendered}
+							alt={featuredImageAltText || `Featured Image for ${postData.title.rendered}`}
 						/>
 					</div>
 				)}
@@ -66,12 +66,14 @@ const GSPostCard = (props) => {
 			<div className="mb-3">
 				{parentProps.attributes.showCategory &&
 					categories &&
-					categories.map((singleCat) => {
+					categories.map((singleCat, index) => {
 						return (
 							<a
+								key={index}
 								href={singleCat.link}
 								style={{ marginRight: '10px' }}
 								className="inline-block no-underline text-xs text-slate-600 bg-slate-100 hover:bg-slate-400 hover:text-white capitalize p-1 mr-1 rounded-md transition-all"
+								aria-label={`View posts in ${singleCat.name} category`}
 							>
 								{singleCat.name}
 							</a>
@@ -83,17 +85,15 @@ const GSPostCard = (props) => {
 			*/}
 			<a
 				href={postData.link}
+				aria-label={`Read more about ${postData.title.rendered}`}
 				className="inline-block w-full no-underline font-poppins text-xl text-slate-900 hover:text-slate-600 transition font-medium mb-2"
 			>
-				{/* <h3> */}
-					{postData.title.rendered}
-				{/* </h3> */}
+				{postData.title.rendered}
 			</a>
 
 			{/* 
 			excerpt of the post
 			*/}
-			{/* <div>{postData.excerpt.rendered}</div> */}
 			{parentProps.attributes.showExcerpt &&
 				parentProps.attributes.layout === 'card' && (
 					<div
@@ -113,7 +113,7 @@ const GSPostCard = (props) => {
 						}}
 					/>
 				)}
-		</div>
+		</article>
 	);
 };
 export default GSPostCard;

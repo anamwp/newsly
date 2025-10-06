@@ -316,14 +316,17 @@ export default function edit(props) {
 				className={`post-wrapper`}
 			>
 				{
-					// check if attributes.allCategoryPosts is an object then proceed 
 					typeof attributes.allCategoryPosts === 'object' && Object.keys(attributes.allCategoryPosts).length > 0 && (
-						//  slice number of posts based on the attributes.postsToShow
-						Object.entries(attributes.allCategoryPosts).map(([catID, post], index) => {	
-						// Object.values(attributes.allCategoryPosts).map((post, index) => {
-							// render as tab content
+						Object.entries(attributes.allCategoryPosts).map(([catID, post], index) => {
 							return (
-								<div key={index} className={`tab-content ${ Number(catID) === Number(attributes.activeTab) ? 'active grid' : 'hidden' } gs-cols-${attributes.postColumn} gap-5`} id={`category-tab-content-${catID}`}>
+								<div 
+								key={index} 
+								className={`tab-content ${ Number(catID) === Number(attributes.activeTab) ? 'active grid' : 'hidden' } gs-cols-${attributes.postColumn} gap-5`} 
+								id={`category-tab-content-${catID}`}
+								role="tabpanel"
+								aria-labelledby={`category-tab-${catID}`}
+								aria-hidden={Number(catID) === Number(attributes.activeTab) ? 'false' : 'true'}
+								>
 									{post.slice(0, attributes.postsToShow).map((post, index) => {
 										return <GSPostCard 
 										key={index} 

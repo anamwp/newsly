@@ -67,10 +67,8 @@ export default function save(props) {
 				className={`post-wrapper`}
 			>
 				{
-					// check if attributes.allCategoryPosts is an object then proceed
 					typeof props.attributes.allCategoryPosts === 'object' && Object.keys(props.attributes.allCategoryPosts).length > 0 && (
 						Object.entries(props.attributes.allCategoryPosts).map(([catID, post], index) => {
-							// render as tab content
 							return (
 								<div 
 									key={index} 
