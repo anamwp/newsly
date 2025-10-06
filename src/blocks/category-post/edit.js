@@ -283,14 +283,17 @@ export default function edit(props) {
 				{/* Show all categories as tabs */}
 				{attributes.selectedCategories.length > 0 && (
 					<div className="border-b border-gray-200 mb-6">
-						<nav className="-mb-px flex space-x-8">
+						<nav>
+							<ul className="-mb-px flex space-x-8">
 							{attributes.selectedCategories.map((category) => {
 								const isActive = attributes.activeTab === category.id;
-								// console.log(`Tab ${category.label} (${category.id}): activeTab=${attributes.activeTab}, isActive=${isActive}`);
 								return (
+									<li role="presentation" key={category.id}>
 									<button
+										role="tab"
+										aria-controls={`category-tab-content-${category.id}`}
+										aria-selected={isActive}
 										id={`category-tab-${category.id}`}
-										key={category.id}
 										className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors duration-200 ${
 											isActive
 												? 'border-blue-500 text-blue-600'
@@ -300,8 +303,10 @@ export default function edit(props) {
 									>
 										{category.label}
 									</button>
+									</li>
 								);
 							})}
+							</ul>
 						</nav>
 					</div>
 				)}
