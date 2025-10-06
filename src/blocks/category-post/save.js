@@ -16,8 +16,6 @@ export default function save(props) {
 		'data-post-column': props.attributes.postColumn,
 	});
 	const postData = props.attributes.allCategoryPosts;
-	console.log('postData', postData);
-	// debugger;
 
 	return (
 		<div {...blockProps}>
