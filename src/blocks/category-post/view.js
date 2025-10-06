@@ -39,6 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		allTabContents.forEach(content => {
 			content.className = 'tab-content hidden';
 			content.setAttribute('aria-hidden', 'true');
+			content.setAttribute('aria-expanded', 'false');
 		});
 		
 		// Show the selected tab content
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		if (categoryTabContent) {
 			categoryTabContent.className = 'tab-content active grid gs-cols-3 gap-5';
 			categoryTabContent.setAttribute('aria-hidden', 'false');
+			categoryTabContent.setAttribute('aria-expanded', 'true');
 		}
 		
 		// Update tab button states

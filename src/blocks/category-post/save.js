@@ -45,12 +45,13 @@ export default function save(props) {
 										aria-controls={`category-tab-content-${category.id}`}
 										aria-selected={isActive}
 										id={`category-tab-${category.id}`}
-										className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors duration-200 ${
-											isActive
-												? 'border-blue-500 text-blue-600'
-												: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-										}`}
-										data-category-id={category.id}
+									className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+										isActive
+											? 'border-blue-500 text-blue-600'
+											: 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+									}`}
+									tabindex="0"
+									data-category-id={category.id}
 									>
 										{category.label}
 									</button>
@@ -65,6 +66,8 @@ export default function save(props) {
 			
 			<div
 				className={`post-wrapper`}
+				aria-live="polite"
+				aria-atomic="true"
 			>
 				{
 					typeof props.attributes.allCategoryPosts === 'object' && Object.keys(props.attributes.allCategoryPosts).length > 0 && (
@@ -77,6 +80,7 @@ export default function save(props) {
 									role="tabpanel"
 									aria-labelledby={`category-tab-${catID}`}
 									aria-hidden={Number(catID) === Number(props.attributes.activeTab) ? 'false' : 'true'}
+									aria-expanded={Number(catID) === Number(props.attributes.activeTab) ? 'true' : 'false'}
 								>
 									{post.slice(0, props.attributes.postsToShow).map((post, index) => {
 										return <GSPostCard 
