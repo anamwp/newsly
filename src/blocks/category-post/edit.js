@@ -322,10 +322,8 @@ export default function edit(props) {
 						Object.entries(attributes.allCategoryPosts).map(([catID, post], index) => {	
 						// Object.values(attributes.allCategoryPosts).map((post, index) => {
 							// render as tab content
-							// console.log('catID', catID);
-							// console.log('post', post);
 							return (
-								<div key={index} className={`tab-content ${ Number(catID) === Number(attributes.activeTab) ? 'active grid' : 'hidden' } gs-cols-${attributes.postColumn}`} id={`category-tab-content-${catID}`}>
+								<div key={index} className={`tab-content ${ Number(catID) === Number(attributes.activeTab) ? 'active grid' : 'hidden' } gs-cols-${attributes.postColumn} gap-5`} id={`category-tab-content-${catID}`}>
 									{post.slice(0, attributes.postsToShow).map((post, index) => {
 										return <GSPostCard 
 										key={index} 

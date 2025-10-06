@@ -33,7 +33,7 @@ export default function save(props) {
 				{/* Show all categories as tabs */}
 				{props.attributes.selectedCategories.length > 0 && (
 					<div className="border-b border-gray-200 mb-6">
-						<nav>
+						<nav role="tablist" aria-label="Category tabs">
 							<ul className="-mb-px flex space-x-8">
 							{props.attributes.selectedCategories.map((category, index) => {
 								const isActive = Number(props.attributes.activeTab) === Number(category.id);
@@ -72,7 +72,14 @@ export default function save(props) {
 						Object.entries(props.attributes.allCategoryPosts).map(([catID, post], index) => {
 							// render as tab content
 							return (
-								<div key={index} className={`tab-content ${ Number(catID) === Number(props.attributes.activeTab) ? 'active grid' : 'hidden' }  gs-cols-${props.attributes.postColumn}`} id={`category-tab-content-${catID}`}>
+								<div 
+									key={index} 
+									className={`tab-content ${ Number(catID) === Number(props.attributes.activeTab) ? 'active grid' : 'hidden' }  gs-cols-${props.attributes.postColumn} gap-5`} 
+									id={`category-tab-content-${catID}`}
+									role="tabpanel"
+									aria-labelledby={`category-tab-${catID}`}
+									aria-hidden={Number(catID) === Number(props.attributes.activeTab) ? 'false' : 'true'}
+								>
 									{post.slice(0, props.attributes.postsToShow).map((post, index) => {
 										return <GSPostCard 
 										key={index} 

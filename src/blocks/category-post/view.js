@@ -14,11 +14,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		categoryTabs.forEach(tab => {
 			tab.classList.remove('border-blue-500', 'text-blue-600');
 			tab.classList.add('border-transparent', 'text-gray-500');
+			tab.setAttribute('aria-selected', 'false');
 		});
 		
 		// Add active styling to current tab
 		tab.classList.remove('border-transparent', 'text-gray-500');
 		tab.classList.add('border-blue-500', 'text-blue-600');
+		tab.setAttribute('aria-selected', 'true');
 		
 		// Focus the tab
 		tab.focus();
@@ -36,23 +38,27 @@ document.addEventListener('DOMContentLoaded', function() {
 		const allTabContents = document.querySelectorAll('[id^="category-tab-content-"]');
 		allTabContents.forEach(content => {
 			content.className = 'tab-content hidden';
+			content.setAttribute('aria-hidden', 'true');
 		});
 		
 		// Show the selected tab content
 		const categoryTabContent = document.getElementById(`category-tab-content-${categoryId}`);
 		if (categoryTabContent) {
-			categoryTabContent.className = 'tab-content active grid gs-cols-3';
+			categoryTabContent.className = 'tab-content active grid gs-cols-3 gap-5';
+			categoryTabContent.setAttribute('aria-hidden', 'false');
 		}
 		
 		// Update tab button states
 		categoryTabs.forEach(tab => {
 			tab.classList.remove('border-blue-500', 'text-blue-600');
 			tab.classList.add('border-transparent', 'text-gray-500');
+			tab.setAttribute('aria-selected', 'false');
 		});
 		
 		// Add active styling to current tab
 		tab.classList.remove('border-transparent', 'text-gray-500');
 		tab.classList.add('border-blue-500', 'text-blue-600');
+		tab.setAttribute('aria-selected', 'true');
 		
 		currentTabIndex = tabIndex;
 	}
