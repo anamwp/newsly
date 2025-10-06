@@ -237,7 +237,9 @@ export default function edit(props) {
 			/>
 			{/* Show fallback message before category choosen */}
 			{attributes.fetchedPosts.length == 0 && (
-				<FallbackMessage message="No sticky posts found" />
+				<div role="alert" aria-live="polite" aria-atomic="true">
+					<FallbackMessage message="No sticky posts found" />
+				</div>
 			)}
 			{/* show to first post from the choosen category listed post */}
 			{attributes.fetchedPosts &&

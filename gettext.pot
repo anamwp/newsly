@@ -45,8 +45,7 @@ msgid "Show Excerpt"
 msgstr ""
 
 #: src/blocks/components/GSPostCard.js:57
-#: src/blocks/components/GSPostCard.js:58
-#: src/blocks/components/GSPostCardOverlay.js:54
+#: src/blocks/components/GSPostCardOverlay.js:59
 msgid "No featured image found"
 msgstr ""
 

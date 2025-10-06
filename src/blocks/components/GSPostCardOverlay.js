@@ -23,14 +23,19 @@ const GSPostCardOverlay = (props) => {
 	let parentProps = props.parent;
 	const featuredImage =
 		postData._embedded['wp:featuredmedia']?.[0]?.source_url;
+	const featuredImageAltText = postData._embedded['wp:featuredmedia']?.[0]?.alt_text;
 	const categories = postData._embedded['wp:term']?.[0] || [];
 
 	return (
-		<div
+		<article
 			data-post-serial={numberKey}
 			className="newsly__post_card__overlay bg-slate-200 rounded hover:bg-slate-300 transition-all"
 		>
-			<a href={postData.link} className="overlay-wrapper-as-link rounded">
+			<a 
+				href={postData.link} 
+				aria-label={`Read more about ${postData.title.rendered}`}
+				className="overlay-wrapper-as-link rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+			>
 				{/* 
 				if user want to show featured image 
 				and post have featured image
@@ -40,7 +45,7 @@ const GSPostCardOverlay = (props) => {
 						<img
 							className="inline-block w-full rounded"
 							src={featuredImage}
-							alt=""
+									alt={featuredImageAltText || `Featured image for ${postData.title.rendered}`}
 						/>
 					</div>
 				)}
@@ -62,25 +67,28 @@ const GSPostCardOverlay = (props) => {
 						<div className="mb-3 categories">
 							{parentProps.attributes.showCategory &&
 								categories &&
-								categories.map((singleCat) => {
-									return (
-										<span
-											style={{ marginRight: '10px' }}
-											className="inline-block no-underline text-xs p-1 mr-1 uppercase ls-2 transition-all single-category"
-										>
-											{singleCat.name}
-										</span>
-									);
-								})}
+										categories.map((singleCat, index) => {
+											return (
+												<span
+													key={index}
+													style={{ marginRight: '10px' }}
+													className="inline-block no-underline text-xs p-1 mr-1 uppercase ls-2 transition-all single-category"
+												>
+													{singleCat.name}
+												</span>
+											);
+										})}
 						</div>
 						<p 
-						className="inline-block w-full no-underline font-poppins text-xl text-white transition font-medium mb-2">
+						className="inline-block w-full no-underline font-poppins text-xl text-white transition font-medium mb-2"
+						role="heading"
+						aria-level="3">
 							{postData.title.rendered}
 						</p>
 					</div>
 				</div>
 			</a>
-		</div>
+		</article>
 	);
 };
 export default GSPostCardOverlay;
