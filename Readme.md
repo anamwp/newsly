@@ -20,12 +20,12 @@ Please follow the below instruction to setup you plugin.
 
 #### How to translate a string
 
-`import { __ } from '@wordpress/i18n';
-console.log( __('My log text here', 'text-domain') );`
+`import { __ } from '@wordpress/i18n';`</br>
+`console.log( __('My log text here', 'text-domain') );`
 
 #### How to create a block inside src directory.
 
-`npx @wordpress/create-block@latest example-one --variant=dynamic --no-plugin`
+`npx @wordpress/create-block@latest example-one --variant=dynamic --no-plugin`</br>
 `npx @wordpress/create-block@latest example-two --variant=dynamic --no-plugin`
 
 ### Important links
@@ -43,15 +43,16 @@ console.log( __('My log text here', 'text-domain') );`
 
 #### PHP Unit
 
-setup
-check phpcs - `./vendor/bin/phpunit`
-if not work, need to setup testing environment
-to setup - `bin/install-wp-tests.sh newsly root '' localhost 6.4.3`
-After successful setup
-`vendor/bin/phpunit`
-`./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php --verbose`
-`vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php tests/test-options-settings.php --verbose`
-in case if it doesn't work, run composer
+#### setup
+
+check phpcs - `./vendor/bin/phpunit`</br>
+if not work, need to setup testing environment </br>
+to setup - `bin/install-wp-tests.sh newsly root '' localhost 6.4.3` </br>
+After successful setup</br>
+`vendor/bin/phpunit`</br>
+`./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php --verbose`</br>
+`vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php tests/test-options-settings.php --verbose`</br>
+in case if it doesn't work, run composer </br>
 `composer install`
 
 #### Playwright
