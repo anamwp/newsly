@@ -45,19 +45,23 @@ Please follow the below instruction to setup you plugin.
 
 #### setup
 
-check phpcs - `./vendor/bin/phpunit`</br>
-if not work, need to setup testing environment </br>
-to setup - `bin/install-wp-tests.sh newsly root '' localhost 6.4.3` </br>
-After successful setup</br>
-`vendor/bin/phpunit`</br>
-`./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php --verbose`</br>
-`vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php tests/test-options-settings.php --verbose`</br>
-in case if it doesn't work, run composer </br>
-`composer install`
+1. check phpcs - `./vendor/bin/phpunit`</br>
+
+2. if not work, need to setup testing environment </br>
+   to setup - `bin/install-wp-tests.sh newsly root '' localhost 6.4.3` </br>
+
+3. After successful setup</br>
+   `vendor/bin/phpunit`</br>
+   `./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php --verbose`</br>
+   `vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php tests/test-options-settings.php --verbose`</br>
+
+4. in case if it doesn't work, run composer </br>
+   `composer install`
 
 #### Playwright
 
 `npx playwright test tests/e2e/simple.spec.js --headed`
+
 To run all test
 `npx playwright test`
 
