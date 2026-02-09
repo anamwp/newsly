@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Includes fiels.
  *
@@ -13,19 +14,16 @@ namespace Anam\Newsly;
 /**
  * Inilize all necessary files.
  */
-class Init {
+class Init
+{
 	/**
 	 * Class constructor
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		/**
 		 * Gutenberg block
 		 */
 		Blocks\Block::init();
-		/**
-		 * Plugin Option Panel under settings menu.
-		 */
-		Admin\Options::init();
-		
 	}
 }
