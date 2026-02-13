@@ -6,12 +6,16 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import save from './save';
 
-jest.mock('@wordpress/block-editor', () =>
-	require('../__mocks__/wordpress-block-editor').wordPressBlockEditorSaveMock,
+jest.mock(
+	'@wordpress/block-editor',
+	() =>
+		require('../__mocks__/wordpress-block-editor')
+			.wordPressBlockEditorSaveMock,
 );
 
-jest.mock('@wordpress/i18n', () =>
-	require('../__mocks__/wordpress-i18n').wordPressI18nMock,
+jest.mock(
+	'@wordpress/i18n',
+	() => require('../__mocks__/wordpress-i18n').wordPressI18nMock,
 );
 
 jest.mock('./components', () => {
@@ -73,7 +77,9 @@ describe('Smart Category Posts Save Component', () => {
 
 	beforeEach(() => {
 		jest.clearAllMocks();
-		consoleLogSpy = jest.spyOn(global.console, 'log').mockImplementation(() => {});
+		consoleLogSpy = jest
+			.spyOn(global.console, 'log')
+			.mockImplementation(() => {});
 	});
 
 	afterEach(() => {
@@ -125,7 +131,7 @@ describe('Smart Category Posts Save Component', () => {
 					...baseProps.attributes,
 					showCategory: false,
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByTestId('post-category')).not.toBeInTheDocument();
@@ -139,7 +145,7 @@ describe('Smart Category Posts Save Component', () => {
 					...baseProps.attributes,
 					showExcerpt: false,
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.queryByText('Excerpt One')).not.toBeInTheDocument();
@@ -154,7 +160,7 @@ describe('Smart Category Posts Save Component', () => {
 					...baseProps.attributes,
 					fetchedPosts: [],
 				}}
-			/>
+			/>,
 		);
 
 		expect(container.querySelectorAll('.card')).toHaveLength(0);
@@ -168,7 +174,7 @@ describe('Smart Category Posts Save Component', () => {
 					...baseProps.attributes,
 					categories: [],
 				}}
-			/>
+			/>,
 		);
 
 		expect(screen.getByText('All')).toBeInTheDocument();

@@ -3,6 +3,39 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
+#: src/blocks/featured-posts/sidebarControl.js:23
+msgid "Featured Posts Controls"
+msgstr ""
+
+#: src/blocks/featured-posts/sidebarControl.js:28
+msgid "Choose Category"
+msgstr ""
+
+#: src/blocks/featured-posts/sidebarControl.js:39
+msgid "Number of Posts"
+msgstr ""
+
+#: src/blocks/featured-posts/sidebarControl.js:53
+msgid "Show Featured Image"
+msgstr ""
+
+#: src/blocks/featured-posts/sidebarControl.js:65
+msgid "Show Category"
+msgstr ""
+
+#: src/blocks/featured-posts/sidebarControl.js:74
+msgid "Show Excerpt"
+msgstr ""
+
+#: src/blocks/smart-category-posts/edit.js:137
+msgid "No featured image found"
+msgstr ""
+
+#: src/blocks/smart-category-posts/edit.js:210
 #: src/blocks/smart-category-posts/save.js:20
 msgid "All"
+msgstr ""
+
+#: src/blocks/smart-category-posts/edit.js:228
+msgid "Loading..."
 msgstr ""
