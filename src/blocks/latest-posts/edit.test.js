@@ -6,8 +6,9 @@ import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
 import edit from './edit';
 
-// Mock WordPress dependencies
+// Mock WordPress dependencies using shared mocks
 jest.mock('@wordpress/block-editor', () => ({
+	...require('../__mocks__/wordpress-block-editor').wordPressBlockEditorMock,
 	useBlockProps: jest.fn(() => ({
 		className: 'newsly_block__latest_posts',
 	})),
@@ -15,28 +16,25 @@ jest.mock('@wordpress/block-editor', () => ({
 
 jest.mock('@wordpress/api-fetch', () => ({
 	__esModule: true,
-	default: jest.fn(() => Promise.resolve([])),
+	default: require('../__mocks__/wordpress-api-fetch').wordPressApiFetchMock,
 }));
 
-jest.mock('@wordpress/element', () => ({
-	useState: jest.requireActual('react').useState,
-	useEffect: jest.requireActual('react').useEffect,
-	useContext: jest.fn(),
-	useRef: jest.fn(),
-}));
+jest.mock(
+	'@wordpress/element',
+	() => require('../__mocks__/wordpress-element').wordPressElementMock,
+);
 
-jest.mock('@wordpress/i18n', () => ({
-	__: jest.fn((text) => text),
-}));
+jest.mock(
+	'@wordpress/i18n',
+	() => require('../__mocks__/wordpress-i18n').wordPressI18nMock,
+);
 
-jest.mock('@wordpress/data', () => ({
-	useSelect: jest.fn(() => ({})),
-	withSelect: jest.fn((selector) => (Component) => Component),
-	select: jest.fn(() => ({})),
-	dispatch: jest.fn(() => ({})),
-	useDispatch: jest.fn(() => jest.fn()),
-}));
+jest.mock(
+	'@wordpress/data',
+	() => require('../__mocks__/wordpress-data').wordPressDataMock,
+);
 
+// Custom mock for @wordpress/components (not in shared mocks)
 jest.mock('@wordpress/components', () => {
 	const React = require('react');
 	return {
@@ -84,6 +82,7 @@ jest.mock('@wordpress/components', () => {
 	};
 });
 
+// Custom mock for SidebarControl (specific to this component)
 jest.mock('./sidebarControl', () => {
 	const React = require('react');
 	return function MockSidebarControl({
@@ -164,20 +163,10 @@ jest.mock('./sidebarControl', () => {
 	};
 });
 
-jest.mock('../components/GSPostCardOverlay', () => {
-	const React = require('react');
-	return function MockGSPostCardOverlay({ data, parent }) {
-		return React.createElement(
-			'div',
-			{
-				'data-testid': 'post-card',
-				'data-post-id': data ? data.id : '',
-				'data-post-title': data ? data.title.rendered : '',
-			},
-			data ? data.title.rendered : '',
-		);
-	};
-});
+jest.mock(
+	'../components/GSPostCardOverlay',
+	() => require('../__mocks__/GSPostCardOverlay').MockGSPostCardOverlay,
+);
 
 // Import the mocked apiFetch
 import apiFetch from '@wordpress/api-fetch';
