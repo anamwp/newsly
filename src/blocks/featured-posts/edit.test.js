@@ -127,6 +127,18 @@ jest.mock('./sidebarControl', () => {
 						handleNumberOfPostsChange &&
 						handleNumberOfPostsChange(parseInt(e.target.value)),
 				}),
+				// Add a button to test calling without arguments (default parameter)
+				React.createElement(
+					'button',
+					{
+						key: 'reset-posts-count',
+						'data-testid': 'reset-posts-count',
+						onClick: () =>
+							handleNumberOfPostsChange &&
+							handleNumberOfPostsChange(),
+					},
+					'Reset Posts Count',
+				),
 				React.createElement(
 					'button',
 					{
@@ -337,6 +349,28 @@ describe('Featured Posts Edit Component', () => {
 			// NaN will be set since parseInt('') = NaN
 			expect(mockProps.setAttributes).toHaveBeenCalledWith({
 				numberOfPosts: NaN,
+			});
+		});
+
+		test('handleNumberOfPostsChange uses default parameter when called without arguments', () => {
+			const propsWithCustomCount = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					numberOfPosts: 8,
+				},
+				setAttributes: jest.fn(),
+			};
+
+			render(React.createElement(edit, propsWithCustomCount));
+
+			// Click button that calls handleNumberOfPostsChange without arguments
+			const resetButton = screen.getByTestId('reset-posts-count');
+			fireEvent.click(resetButton);
+
+			// Should use the default parameter value from attributes.numberOfPosts
+			expect(propsWithCustomCount.setAttributes).toHaveBeenCalledWith({
+				numberOfPosts: 8,
 			});
 		});
 
