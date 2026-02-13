@@ -34,12 +34,15 @@ export default function edit(props) {
 					categories: catArr,
 				});
 			});
-	}, [ attributes.categories ]);
+	}, [attributes.categories]);
 	/**
 	 * Fetched first 10 posts
 	 */
 	useEffect(() => {
-		if(!attributes.selectedCategroyId || attributes.selectedCategroyId === '') {
+		if (
+			!attributes.selectedCategroyId ||
+			attributes.selectedCategroyId === ''
+		) {
 			apiFetch({
 				path: `/wp/v2/posts?_embed&per_page=10&sticky=true`,
 			}).then((res) => {
@@ -50,7 +53,9 @@ export default function edit(props) {
 		}
 	}, [attributes.selectedCategroyId]);
 
-	const handleNumberOfPostsChange = (numberOfPosts = attributes.numberOfPosts) => {
+	const handleNumberOfPostsChange = (
+		numberOfPosts = attributes.numberOfPosts,
+	) => {
 		setAttributes({
 			numberOfPosts: numberOfPosts,
 		});
@@ -61,7 +66,7 @@ export default function edit(props) {
 	 * @param {*} selectedCatId
 	 */
 	const handlePostsByCategory = (
-		selectedCatId = attributes.selectedCategroyId
+		selectedCatId = attributes.selectedCategroyId,
 	) => {
 		/**
 		 * if nothing passed
@@ -148,38 +153,38 @@ export default function edit(props) {
 	 * @param {*} newPostId
 	 * @returns
 	 */
-	const handleSelectedPostData = (newPostId) => {
-		let selectedPostId = newPostId ? newPostId : attributes.selectedPostId;
-		/**
-		 * set the new post ID
-		 * to selectedPostId attribute
-		 */
-		if (newPostId) {
-			setAttributes({
-				selectedPostId: newPostId,
-			});
-		}
-		/**
-		 * if there is no
-		 * selectedPostId
-		 * then return
-		 */
-		if (!selectedPostId) {
-			return;
-		}
-		/**
-		 * fetch data from rest point
-		 */
-		apiFetch({
-			path: `/wp/v2/posts/?include=${selectedPostId}&_embed&sticky=true`,
-		})
-			.then((res) => {
-				setAttributes({
-					fetchedPosts: res,
-				});
-			})
-			.catch((err) => console.log('err', err));
-	};
+	// const handleSelectedPostData = (newPostId) => {
+	// 	let selectedPostId = newPostId ? newPostId : attributes.selectedPostId;
+	// 	/**
+	// 	 * set the new post ID
+	// 	 * to selectedPostId attribute
+	// 	 */
+	// 	if (newPostId) {
+	// 		setAttributes({
+	// 			selectedPostId: newPostId,
+	// 		});
+	// 	}
+	// 	/**
+	// 	 * if there is no
+	// 	 * selectedPostId
+	// 	 * then return
+	// 	 */
+	// 	if (!selectedPostId) {
+	// 		return;
+	// 	}
+	// 	/**
+	// 	 * fetch data from rest point
+	// 	 */
+	// 	apiFetch({
+	// 		path: `/wp/v2/posts/?include=${selectedPostId}&_embed&sticky=true`,
+	// 	})
+	// 		.then((res) => {
+	// 			setAttributes({
+	// 				fetchedPosts: res,
+	// 			});
+	// 		})
+	// 		.catch((err) => console.log('err', err));
+	// };
 	/**
 	 * Fallback message
 	 * @param {*} props
@@ -244,14 +249,15 @@ export default function edit(props) {
 			{/* show to first post from the choosen category listed post */}
 			{attributes.fetchedPosts &&
 				attributes.fetchedPosts.length > 0 &&
-				attributes.fetchedPosts.slice(0, attributes.numberOfPosts).map((post) => (
-					<GSPostCardOverlay
-						key={post.id}
-						data={post}
-						parent={props}
-					/>
-				))
-			}
+				attributes.fetchedPosts
+					.slice(0, attributes.numberOfPosts)
+					.map((post) => (
+						<GSPostCardOverlay
+							key={post.id}
+							data={post}
+							parent={props}
+						/>
+					))}
 		</div>
 	);
 }

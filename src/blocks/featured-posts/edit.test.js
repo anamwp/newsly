@@ -8,7 +8,9 @@ import edit from './edit';
 
 // Mock WordPress dependencies
 jest.mock('@wordpress/block-editor', () => ({
-	useBlockProps: jest.fn(() => ({ className: 'newsly_block__featured_posts' })),
+	useBlockProps: jest.fn(() => ({
+		className: 'newsly_block__featured_posts',
+	})),
 }));
 
 jest.mock('@wordpress/api-fetch', () => ({
@@ -38,87 +40,143 @@ jest.mock('@wordpress/data', () => ({
 jest.mock('@wordpress/components', () => {
 	const React = require('react');
 	return {
-		PanelBody: jest.fn(({ children }) => React.createElement('div', { 'data-testid': 'panel-body' }, children)),
-		SelectControl: jest.fn(({ onChange, options }) => 
-			React.createElement('select', { 
-				'data-testid': 'select-control',
-				onChange: (e) => onChange && onChange(e.target.value)
-			}, options ? options.map(opt => 
-				React.createElement('option', { key: opt.value, value: opt.value }, opt.label)
-			) : [])
+		PanelBody: jest.fn(({ children }) =>
+			React.createElement(
+				'div',
+				{ 'data-testid': 'panel-body' },
+				children,
+			),
 		),
-		ToggleControl: jest.fn(({ onChange, checked }) => 
-			React.createElement('input', { 
+		SelectControl: jest.fn(({ onChange, options }) =>
+			React.createElement(
+				'select',
+				{
+					'data-testid': 'select-control',
+					onChange: (e) => onChange && onChange(e.target.value),
+				},
+				options
+					? options.map((opt) =>
+							React.createElement(
+								'option',
+								{ key: opt.value, value: opt.value },
+								opt.label,
+							),
+					  )
+					: [],
+			),
+		),
+		ToggleControl: jest.fn(({ onChange, checked }) =>
+			React.createElement('input', {
 				'data-testid': 'toggle-control',
 				type: 'checkbox',
 				checked: checked,
-				onChange: (e) => onChange && onChange(e.target.checked)
-			})
+				onChange: (e) => onChange && onChange(e.target.checked),
+			}),
 		),
-		RangeControl: jest.fn(({ onChange, value }) => 
-			React.createElement('input', { 
+		RangeControl: jest.fn(({ onChange, value }) =>
+			React.createElement('input', {
 				'data-testid': 'range-control',
 				type: 'range',
 				value: value,
-				onChange: (e) => onChange && onChange(parseInt(e.target.value))
-			})
+				onChange: (e) => onChange && onChange(parseInt(e.target.value)),
+			}),
 		),
 	};
 });
 
 jest.mock('./sidebarControl', () => {
 	const React = require('react');
-	return function MockSidebarControl({ 
-		props, 
-		categories, 
-		handleNumberOfPostsChange, 
+	return function MockSidebarControl({
+		props,
+		categories,
+		handleNumberOfPostsChange,
 		handleCategoryChange,
 		handleCategoryToggleControl,
 		handleExcerptToggleControl,
-		handleFeaturedImageToggleControl
+		handleFeaturedImageToggleControl,
 	}) {
-		return React.createElement('div', { 'data-testid': 'sidebar-control' }, [
-			React.createElement('select', {
-				key: 'category-select',
-				'data-testid': 'category-select',
-				onChange: (e) => handleCategoryChange && handleCategoryChange(e.target.value),
-			}, categories ? categories.map(cat => 
-				React.createElement('option', { key: cat.value, value: cat.value }, cat.label)
-			) : []),
-			React.createElement('input', {
-				key: 'number-input',
-				'data-testid': 'number-input',
-				type: 'number',
-				defaultValue: props.attributes.numberOfPosts,
-				onChange: (e) => handleNumberOfPostsChange && handleNumberOfPostsChange(parseInt(e.target.value)),
-			}),
-			React.createElement('button', {
-				key: 'category-toggle',
-				'data-testid': 'category-toggle',
-				onClick: () => handleCategoryToggleControl && handleCategoryToggleControl(),
-			}, 'Toggle Category'),
-			React.createElement('button', {
-				key: 'excerpt-toggle',
-				'data-testid': 'excerpt-toggle',
-				onClick: () => handleExcerptToggleControl && handleExcerptToggleControl(),
-			}, 'Toggle Excerpt'),
-			React.createElement('button', {
-				key: 'featured-image-toggle',
-				'data-testid': 'featured-image-toggle',
-				onClick: () => handleFeaturedImageToggleControl && handleFeaturedImageToggleControl(),
-			}, 'Toggle Featured Image'),
-		]);
+		return React.createElement(
+			'div',
+			{ 'data-testid': 'sidebar-control' },
+			[
+				React.createElement(
+					'select',
+					{
+						key: 'category-select',
+						'data-testid': 'category-select',
+						onChange: (e) =>
+							handleCategoryChange &&
+							handleCategoryChange(e.target.value),
+					},
+					categories
+						? categories.map((cat) =>
+								React.createElement(
+									'option',
+									{ key: cat.value, value: cat.value },
+									cat.label,
+								),
+						  )
+						: [],
+				),
+				React.createElement('input', {
+					key: 'number-input',
+					'data-testid': 'number-input',
+					type: 'number',
+					defaultValue: props.attributes.numberOfPosts,
+					onChange: (e) =>
+						handleNumberOfPostsChange &&
+						handleNumberOfPostsChange(parseInt(e.target.value)),
+				}),
+				React.createElement(
+					'button',
+					{
+						key: 'category-toggle',
+						'data-testid': 'category-toggle',
+						onClick: () =>
+							handleCategoryToggleControl &&
+							handleCategoryToggleControl(),
+					},
+					'Toggle Category',
+				),
+				React.createElement(
+					'button',
+					{
+						key: 'excerpt-toggle',
+						'data-testid': 'excerpt-toggle',
+						onClick: () =>
+							handleExcerptToggleControl &&
+							handleExcerptToggleControl(),
+					},
+					'Toggle Excerpt',
+				),
+				React.createElement(
+					'button',
+					{
+						key: 'featured-image-toggle',
+						'data-testid': 'featured-image-toggle',
+						onClick: () =>
+							handleFeaturedImageToggleControl &&
+							handleFeaturedImageToggleControl(),
+					},
+					'Toggle Featured Image',
+				),
+			],
+		);
 	};
 });
 
 jest.mock('../components/GSPostCardOverlay', () => {
 	const React = require('react');
 	return function MockGSPostCardOverlay({ data, parent }) {
-		return React.createElement('div', { 
-			'data-testid': 'post-card',
-			'data-post-id': data ? data.id : '',
-			'data-post-title': data ? data.title.rendered : ''
-		}, data ? data.title.rendered : '');
+		return React.createElement(
+			'div',
+			{
+				'data-testid': 'post-card',
+				'data-post-id': data ? data.id : '',
+				'data-post-title': data ? data.title.rendered : '',
+			},
+			data ? data.title.rendered : '',
+		);
 	};
 });
 
@@ -141,9 +199,9 @@ describe('Featured Posts Edit Component', () => {
 
 	const mockCategories = [
 		{ label: 'Select a category', value: '' },
-		{ label: 'Technology', value: 1 },
-		{ label: 'Sports', value: 2 },
-		{ label: 'News', value: 3 },
+		{ label: 'Technology', value: '1' },
+		{ label: 'Sports', value: '2' },
+		{ label: 'News', value: '3' },
 	];
 
 	const mockPosts = [
@@ -152,7 +210,9 @@ describe('Featured Posts Edit Component', () => {
 			title: { rendered: 'Test Post 1' },
 			link: 'https://example.com/post-1',
 			_embedded: {
-				'wp:featuredmedia': [{ source_url: 'image1.jpg', alt_text: 'Test image 1' }],
+				'wp:featuredmedia': [
+					{ source_url: 'image1.jpg', alt_text: 'Test image 1' },
+				],
 				'wp:term': [[{ name: 'Technology', link: '/tech' }]],
 			},
 		},
@@ -161,7 +221,9 @@ describe('Featured Posts Edit Component', () => {
 			title: { rendered: 'Test Post 2' },
 			link: 'https://example.com/post-2',
 			_embedded: {
-				'wp:featuredmedia': [{ source_url: 'image2.jpg', alt_text: 'Test image 2' }],
+				'wp:featuredmedia': [
+					{ source_url: 'image2.jpg', alt_text: 'Test image 2' },
+				],
 				'wp:term': [[{ name: 'Sports', link: '/sports' }]],
 			},
 		},
@@ -188,7 +250,9 @@ describe('Featured Posts Edit Component', () => {
 
 		test('renders fallback message when no posts', () => {
 			render(React.createElement(edit, mockProps));
-			expect(screen.getByText('No sticky posts found')).toBeInTheDocument();
+			expect(
+				screen.getByText('No sticky posts found'),
+			).toBeInTheDocument();
 		});
 
 		test('renders posts when available', () => {
@@ -200,7 +264,6 @@ describe('Featured Posts Edit Component', () => {
 				},
 			};
 			render(React.createElement(edit, propsWithPosts));
-			
 			const postCards = screen.getAllByTestId('post-card');
 			expect(postCards).toHaveLength(2);
 			expect(screen.getByText('Test Post 1')).toBeInTheDocument();
@@ -217,16 +280,16 @@ describe('Featured Posts Edit Component', () => {
 				},
 			};
 			render(React.createElement(edit, propsWithPosts));
-			
+
 			const postCards = screen.getAllByTestId('post-card');
 			expect(postCards).toHaveLength(1);
 		});
 	});
 
 	describe('Event Handlers', () => {
-		test('handleNumberOfPostsChange updates numberOfPosts attribute', () => {
+		test('handleNumberOfPostsChange updates numberOfPosts attribute with valid number', () => {
 			render(React.createElement(edit, mockProps));
-			
+
 			const numberInput = screen.getByTestId('number-input');
 			fireEvent.change(numberInput, { target: { value: '3' } });
 
@@ -235,9 +298,51 @@ describe('Featured Posts Edit Component', () => {
 			});
 		});
 
+		test('handleNumberOfPostsChange updates with different valid numbers', () => {
+			render(React.createElement(edit, mockProps));
+
+			const numberInput = screen.getByTestId('number-input');
+
+			// Test with value 10
+			fireEvent.change(numberInput, { target: { value: '10' } });
+			expect(mockProps.setAttributes).toHaveBeenCalledWith({
+				numberOfPosts: 10,
+			});
+
+			// Test with value 1
+			fireEvent.change(numberInput, { target: { value: '1' } });
+			expect(mockProps.setAttributes).toHaveBeenCalledWith({
+				numberOfPosts: 1,
+			});
+		});
+
+		test('handleNumberOfPostsChange handles zero value', () => {
+			render(React.createElement(edit, mockProps));
+
+			const numberInput = screen.getByTestId('number-input');
+			fireEvent.change(numberInput, { target: { value: '0' } });
+
+			expect(mockProps.setAttributes).toHaveBeenCalledWith({
+				numberOfPosts: 0,
+			});
+		});
+
+		test('handleNumberOfPostsChange handles NaN from empty string', () => {
+			render(React.createElement(edit, mockProps));
+
+			const numberInput = screen.getByTestId('number-input');
+			// Empty string will become NaN when parseInt
+			fireEvent.change(numberInput, { target: { value: '' } });
+
+			// NaN will be set since parseInt('') = NaN
+			expect(mockProps.setAttributes).toHaveBeenCalledWith({
+				numberOfPosts: NaN,
+			});
+		});
+
 		test('handleCategoryChange resets data when no category selected', () => {
 			render(React.createElement(edit, mockProps));
-			
+
 			const categorySelect = screen.getByTestId('category-select');
 			fireEvent.change(categorySelect, { target: { value: '' } });
 
@@ -247,12 +352,131 @@ describe('Featured Posts Edit Component', () => {
 				fetchedPosts: [],
 			});
 		});
+
+		test('handleCategoryChange updates selectedCategroyId when category is selected', async () => {
+			// Suppress console.log for this test
+			const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+
+			/**
+			 * 
+			const mockCategories = [
+				{ label: 'Select a category', value: '' },
+				{ label: 'Technology', value: '1' },
+				{ label: 'Sports', value: '2' },
+				{ label: 'News', value: '3' },
+			];
+			 */
+			const propsWithCategories = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					categories: mockCategories,
+				},
+				setAttributes: jest.fn(),
+			};
+
+			const mockCategoryPosts = [
+				{
+					id: 10,
+					title: { rendered: 'Tech Post 1' },
+					link: 'https://example.com/tech-1',
+				},
+			];
+
+			// First apiFetch call: sticky posts from useEffect when selectedCategroyId is empty
+			apiFetch.mockResolvedValueOnce([]);
+			// Second apiFetch call: posts by category when category is selected
+			apiFetch.mockResolvedValueOnce(mockCategoryPosts);
+
+			render(React.createElement(edit, propsWithCategories));
+
+			// Wait for initial useEffect to complete
+			await waitFor(() => {
+				expect(apiFetch).toHaveBeenCalledWith({
+					path: '/wp/v2/posts?_embed&per_page=10&sticky=true',
+				});
+			});
+
+			const categorySelect = screen.getByTestId('category-select');
+			fireEvent.change(categorySelect, { target: { value: '1' } });
+
+			// First call: updates selectedCategroyId
+			expect(propsWithCategories.setAttributes).toHaveBeenCalledWith({
+				selectedCategroyId: '1',
+			});
+
+			// Wait for API call to complete
+			await waitFor(() => {
+				expect(apiFetch).toHaveBeenCalledWith({
+					path: '/wp/v2/posts?categories=1&_embed&sticky=true',
+				});
+			});
+
+			// Second call: updates fetchedPosts
+			await waitFor(() => {
+				expect(propsWithCategories.setAttributes).toHaveBeenCalledWith({
+					fetchedPosts: mockCategoryPosts,
+				});
+			});
+
+			// Third call: updates selectedCategoryPosts
+			await waitFor(() => {
+				expect(propsWithCategories.setAttributes).toHaveBeenCalledWith({
+					selectedCategoryPosts: [
+						{ label: 'Tech Post 1', value: 10 },
+					],
+				});
+			});
+
+			// Restore console.log
+			consoleSpy.mockRestore();
+		});
+
+		test('handleCategoryChange calls handlePostsByCategory with falsy value', async () => {
+			const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
+
+			const propsWithCategories = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					categories: mockCategories,
+					selectedCategroyId: '2', // Already has a category selected
+				},
+				setAttributes: jest.fn(),
+			};
+
+			const mockCategoryPosts = [
+				{
+					id: 20,
+					title: { rendered: 'Sports Post' },
+					link: 'https://example.com/sports-1',
+				},
+			];
+
+			// Mock API call for category posts
+			apiFetch.mockResolvedValueOnce(mockCategoryPosts);
+
+			render(React.createElement(edit, propsWithCategories));
+
+			const categorySelect = screen.getByTestId('category-select');
+			// Select a category - this will call handlePostsByCategory
+			fireEvent.change(categorySelect, { target: { value: '2' } });
+
+			// Wait for API call
+			await waitFor(() => {
+				expect(apiFetch).toHaveBeenCalledWith({
+					path: '/wp/v2/posts?categories=2&_embed&sticky=true',
+				});
+			});
+
+			consoleSpy.mockRestore();
+		});
 	});
 
 	describe('Toggle Controls', () => {
 		test('handleCategoryToggleControl toggles showCategory attribute', () => {
 			render(React.createElement(edit, mockProps));
-			
+
 			const categoryToggle = screen.getByTestId('category-toggle');
 			fireEvent.click(categoryToggle);
 
@@ -263,7 +487,7 @@ describe('Featured Posts Edit Component', () => {
 
 		test('handleExcerptToggleControl toggles showExcerpt attribute', () => {
 			render(React.createElement(edit, mockProps));
-			
+
 			const excerptToggle = screen.getByTestId('excerpt-toggle');
 			fireEvent.click(excerptToggle);
 
@@ -274,8 +498,10 @@ describe('Featured Posts Edit Component', () => {
 
 		test('handleFeaturedImageToggleControl toggles showFeaturedImage attribute', () => {
 			render(React.createElement(edit, mockProps));
-			
-			const featuredImageToggle = screen.getByTestId('featured-image-toggle');
+
+			const featuredImageToggle = screen.getByTestId(
+				'featured-image-toggle',
+			);
 			fireEvent.click(featuredImageToggle);
 
 			expect(mockProps.setAttributes).toHaveBeenCalledWith({
@@ -294,8 +520,10 @@ describe('Featured Posts Edit Component', () => {
 				},
 			};
 			render(React.createElement(edit, propsWithEmptyPosts));
-			
-			expect(screen.getByText('No sticky posts found')).toBeInTheDocument();
+
+			expect(
+				screen.getByText('No sticky posts found'),
+			).toBeInTheDocument();
 		});
 
 		test('handles zero numberOfPosts', () => {
@@ -308,7 +536,7 @@ describe('Featured Posts Edit Component', () => {
 				},
 			};
 			render(React.createElement(edit, propsWithZeroPosts));
-			
+
 			const postCards = screen.queryAllByTestId('post-card');
 			expect(postCards).toHaveLength(0);
 		});
@@ -326,7 +554,9 @@ describe('Featured Posts Edit Component', () => {
 			render(React.createElement(edit, mockProps));
 
 			await waitFor(() => {
-				expect(apiFetch).toHaveBeenCalledWith({ path: '/wp/v2/categories' });
+				expect(apiFetch).toHaveBeenCalledWith({
+					path: '/wp/v2/categories',
+				});
 			});
 
 			await waitFor(() => {
@@ -352,6 +582,29 @@ describe('Featured Posts Edit Component', () => {
 			});
 		});
 
+		test('does not fetch sticky posts when category is already selected', async () => {
+			const propsWithCategory = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					selectedCategroyId: '1',
+				},
+			};
+
+			render(React.createElement(edit, propsWithCategory));
+
+			// Should not call apiFetch for sticky posts when category is selected
+			await waitFor(() => {
+				expect(
+					screen.getByTestId('sidebar-control'),
+				).toBeInTheDocument();
+			});
+
+			// Verify sticky posts endpoint was not called
+			expect(apiFetch).not.toHaveBeenCalledWith({
+				path: '/wp/v2/posts?_embed&per_page=10&sticky=true',
+			});
+		});
 	});
 
 	describe('Data Processing', () => {
@@ -385,11 +638,52 @@ describe('Featured Posts Edit Component', () => {
 
 			await waitFor(() => {
 				expect(mockProps.setAttributes).toHaveBeenCalledWith({
-					categories: [
-						{ label: 'Select a category', value: '' },
-					],
+					categories: [{ label: 'Select a category', value: '' }],
 				});
 			});
+		});
+	});
+
+	describe('Error Handling', () => {
+		test('handles error in handlePostsByCategory API call', async () => {
+			const consoleLogSpy = jest
+				.spyOn(console, 'log')
+				.mockImplementation();
+
+			const propsWithCategories = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					categories: mockCategories,
+				},
+				setAttributes: jest.fn(),
+			};
+
+			// First apiFetch call: sticky posts from useEffect
+			apiFetch.mockResolvedValueOnce([]);
+			// Second apiFetch call: category posts - will fail
+			apiFetch.mockRejectedValueOnce(
+				new Error('Failed to fetch category posts'),
+			);
+
+			render(React.createElement(edit, propsWithCategories));
+
+			// Wait for initial useEffect to complete
+			await waitFor(() => {
+				expect(apiFetch).toHaveBeenCalledWith({
+					path: '/wp/v2/posts?_embed&per_page=10&sticky=true',
+				});
+			});
+
+			const categorySelect = screen.getByTestId('category-select');
+			fireEvent.change(categorySelect, { target: { value: '1' } });
+
+			// Wait for error to be logged
+			await waitFor(() => {
+				expect(consoleLogSpy).toHaveBeenCalledWith(expect.any(Error));
+			});
+
+			consoleLogSpy.mockRestore();
 		});
 	});
 

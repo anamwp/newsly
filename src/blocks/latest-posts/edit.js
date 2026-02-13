@@ -34,14 +34,19 @@ export default function edit(props) {
 					categories: catArr,
 				});
 			});
-	}, [ attributes.categories ]);
+	}, [attributes.categories]);
 	/**
 	 * Fetched first 10 posts
 	 */
 	useEffect(() => {
-		console.log('attributes', attributes);
-		if(!attributes.selectedCategroyId || attributes.selectedCategroyId === '') {
-			const stickyParam = attributes.ignoreStickyPosts ? '&sticky=false' : '';
+		// console.log('attributes', attributes);
+		if (
+			!attributes.selectedCategroyId ||
+			attributes.selectedCategroyId === ''
+		) {
+			const stickyParam = attributes.ignoreStickyPosts
+				? '&sticky=false'
+				: '';
 			apiFetch({
 				path: `/wp/v2/posts?_embed&per_page=10${stickyParam}`,
 			}).then((res) => {
@@ -52,7 +57,9 @@ export default function edit(props) {
 		}
 	}, [attributes.selectedCategroyId, attributes.ignoreStickyPosts]);
 
-	const handleNumberOfPostsChange = (numberOfPosts = attributes.numberOfPosts) => {
+	const handleNumberOfPostsChange = (
+		numberOfPosts = attributes.numberOfPosts,
+	) => {
 		setAttributes({
 			numberOfPosts: numberOfPosts,
 		});
@@ -63,7 +70,7 @@ export default function edit(props) {
 	 * @param {*} selectedCatId
 	 */
 	const handlePostsByCategory = (
-		selectedCatId = attributes.selectedCategroyId
+		selectedCatId = attributes.selectedCategroyId,
 	) => {
 		/**
 		 * if nothing passed
@@ -83,7 +90,7 @@ export default function edit(props) {
 			path: `/wp/v2/posts?categories=${catId}&_embed${stickyParam}`,
 		})
 			.then((res) => {
-				console.log('res', res);
+				// console.log('res', res);
 				let catPostsArr = [];
 				/**
 				 * set response first data
@@ -151,39 +158,39 @@ export default function edit(props) {
 	 * @param {*} newPostId
 	 * @returns
 	 */
-	const handleSelectedPostData = (newPostId) => {
-		let selectedPostId = newPostId ? newPostId : attributes.selectedPostId;
-		/**
-		 * set the new post ID
-		 * to selectedPostId attribute
-		 */
-		if (newPostId) {
-			setAttributes({
-				selectedPostId: newPostId,
-			});
-		}
-		/**
-		 * if there is no
-		 * selectedPostId
-		 * then return
-		 */
-		if (!selectedPostId) {
-			return;
-		}
-		/**
-		 * fetch data from rest point
-		 */
-		const stickyParam = attributes.ignoreStickyPosts ? '&sticky=false' : '';
-		apiFetch({
-			path: `/wp/v2/posts/?include=${selectedPostId}&_embed${stickyParam}`,
-		})
-			.then((res) => {
-				setAttributes({
-					fetchedPosts: res,
-				});
-			})
-			.catch((err) => console.log('err', err));
-	};
+	// const handleSelectedPostData = (newPostId) => {
+	// 	let selectedPostId = newPostId ? newPostId : attributes.selectedPostId;
+	// 	/**
+	// 	 * set the new post ID
+	// 	 * to selectedPostId attribute
+	// 	 */
+	// 	if (newPostId) {
+	// 		setAttributes({
+	// 			selectedPostId: newPostId,
+	// 		});
+	// 	}
+	// 	/**
+	// 	 * if there is no
+	// 	 * selectedPostId
+	// 	 * then return
+	// 	 */
+	// 	if (!selectedPostId) {
+	// 		return;
+	// 	}
+	// 	/**
+	// 	 * fetch data from rest point
+	// 	 */
+	// 	const stickyParam = attributes.ignoreStickyPosts ? '&sticky=false' : '';
+	// 	apiFetch({
+	// 		path: `/wp/v2/posts/?include=${selectedPostId}&_embed${stickyParam}`,
+	// 	})
+	// 		.then((res) => {
+	// 			setAttributes({
+	// 				fetchedPosts: res,
+	// 			});
+	// 		})
+	// 		.catch((err) => console.log('err', err));
+	// };
 	/**
 	 * Fallback message
 	 * @param {*} props
@@ -220,7 +227,9 @@ export default function edit(props) {
 				handleCategoryChange={handleCategoryChange}
 				// handleSelectedPostData={handleSelectedPostData}
 				handleCategoryToggleControl={handleCategoryToggleControl}
-				handleIgnoreStickyPostsToggleControl={handleIgnoreStickyPostsToggleControl}
+				handleIgnoreStickyPostsToggleControl={
+					handleIgnoreStickyPostsToggleControl
+				}
 			/>
 			{/* Show fallback message before category choosen */}
 			{attributes.fetchedPosts.length == 0 && (
@@ -229,14 +238,15 @@ export default function edit(props) {
 			{/* show to first post from the choosen category listed post */}
 			{attributes.fetchedPosts &&
 				attributes.fetchedPosts.length > 0 &&
-				attributes.fetchedPosts.slice(0, attributes.numberOfPosts).map((post) => (
-					<GSPostCardOverlay
-						key={post.id}
-						data={post}
-						parent={props}
-					/>
-				))
-			}
+				attributes.fetchedPosts
+					.slice(0, attributes.numberOfPosts)
+					.map((post) => (
+						<GSPostCardOverlay
+							key={post.id}
+							data={post}
+							parent={props}
+						/>
+					))}
 		</div>
 	);
 }
