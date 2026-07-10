@@ -7,30 +7,18 @@ import React from 'react';
 import save from './save';
 
 // Mock WordPress dependencies
-jest.mock('@wordpress/block-editor', () => ({
-	useBlockProps: {
-		save: jest.fn((props) => props || {}),
-	},
-}));
+jest.mock('@wordpress/block-editor', () =>
+	require('../__mocks__').getWordPressBlockEditorSaveMock(),
+);
 
-jest.mock('@wordpress/i18n', () => ({
-	__: jest.fn((text) => text),
-}));
+jest.mock('@wordpress/i18n', () =>
+	require('../__mocks__').getWordPressI18nMock(),
+);
 
-jest.mock('../components/GSPostCardOverlay', () => {
-	const React = require('react');
-	return function MockGSPostCardOverlay({ data, parent }) {
-		return React.createElement(
-			'div',
-			{
-				'data-testid': 'post-card',
-				'data-post-id': data ? data.id : '',
-				'data-post-title': data ? data.title.rendered : '',
-			},
-			data ? data.title.rendered : '',
-		);
-	};
-});
+jest.mock(
+	'../components/GSPostCardOverlay',
+	() => require('../__mocks__/GSPostCardOverlay').MockGSPostCardOverlay,
+);
 
 describe('Featured Posts Save Component', () => {
 	const mockProps = {
@@ -237,6 +225,21 @@ describe('Featured Posts Save Component', () => {
 			expect(useBlockProps.save).toHaveBeenCalledWith({
 				className: 'newsly_block__featured_posts',
 			});
+		});
+		/**
+		 * todo: Compare upper test with the one below. The upper test is more specific and checks for the correct class name, while the lower test only checks for the presence of the block class name. Consider keeping both tests if they serve different purposes, or remove one if they are redundant.
+		 */
+		test('renders with correct block class name', () => {
+			const { container } = render(React.createElement(save, mockProps));
+			const blockElement = container.querySelector(
+				'.newsly_block__featured_posts',
+			);
+			expect(blockElement).toBeInTheDocument();
+			// better approach
+			// querySelector + toBeInTheDocument() works, but if there's only ever one root element, this is slightly cleaner
+			expect(container.firstChild).toHaveClass(
+				'newsly_block__featured_posts',
+			);
 		});
 
 		test('applies block props to wrapper div', () => {
