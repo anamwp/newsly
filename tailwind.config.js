@@ -4,7 +4,6 @@ module.exports = {
 		extend: {
 			colors: {}, // Extend Tailwind's default colors
 			fontFamily: {
-				roboto: 'Roboto, sans-serif',
 				poppins: 'Poppins, sans-serif',
 			}, // Extend Tailwind's default font families
 		},
