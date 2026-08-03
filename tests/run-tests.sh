@@ -1,74 +1,71 @@
 #!/bin/bash
 
-# Script to run admin-related tests for Gutenberg Starter plugin
-# Usage: ./tests/run-admin-tests.sh
+# Minimal PHPUnit sanity-check runner for Newsly.
+# Confirms bootstrap.php + PHPUnit + the WP test environment are wired up
+# correctly, so real unit tests have a known-good foundation to build on.
+# Usage: ./tests/run-tests.sh
 
-echo "🧪 Running Gutenberg Starter Admin Tests..."
-echo "============================================="
+echo "=== Newsly - PHPUnit Sanity Check ==="
+echo ""
 
-# Check if we're in the right directory
-if [ ! -f "gutenberg-starter.php" ]; then
-    echo "❌ Error: Please run this script from the plugin root directory"
-    exit 1
-fi
+PLUGIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+TEST_DIR="$PLUGIN_DIR/tests"
 
 # Check if PHPUnit is available
-if [ ! -f "vendor/bin/phpunit" ]; then
-    echo "❌ Error: PHPUnit not found. Please run 'composer install' first"
+PHPUNIT_CMD=""
+if [ -f "$PLUGIN_DIR/vendor/bin/phpunit" ]; then
+    PHPUNIT_CMD="$PLUGIN_DIR/vendor/bin/phpunit"
+    echo "✅ Found PHPUnit at: $PHPUNIT_CMD"
+elif command -v phpunit &> /dev/null; then
+    PHPUNIT_CMD="phpunit"
+    echo "✅ Found PHPUnit in system PATH"
+else
+    echo "❌ PHPUnit is not installed"
+    echo "Please install PHPUnit via Composer:"
+    echo "  composer install --dev"
     exit 1
 fi
 
 # Check if WordPress test environment is set up
-if [ ! -f "tests/bootstrap.php" ]; then
-    echo "❌ Error: WordPress test environment not found"
-    echo "   Please run './setup-wp-tests.sh' to set up the test environment"
+if [ -z "$WP_TESTS_DIR" ]; then
+    echo "⚠️  WP_TESTS_DIR environment variable is not set"
+    echo "Trying to use default location: /tmp/wordpress-tests-lib"
+    export WP_TESTS_DIR="/tmp/wordpress-tests-lib"
+    echo ""
+
+    if [ ! -d "$WP_TESTS_DIR" ]; then
+        echo "❌ WordPress test environment not found at $WP_TESTS_DIR"
+        echo "Please set up WordPress test environment first:"
+        echo ""
+        echo "1. Download install script:"
+        echo "   curl -O https://raw.githubusercontent.com/wp-cli/sample-plugin/master/bin/install-wp-tests.sh"
+        echo ""
+        echo "2. Make it executable:"
+        echo "   chmod +x install-wp-tests.sh"
+        echo ""
+        echo "3. Run installation:"
+        echo "   ./install-wp-tests.sh wordpress_test root '' localhost latest"
+        echo ""
+        echo "4. Export environment variable:"
+        echo "   export WP_TESTS_DIR=/tmp/wordpress-tests-lib"
+        echo ""
+        exit 1
+    fi
+else
+    echo "✅ Using WP_TESTS_DIR: $WP_TESTS_DIR"
+fi
+
+echo ""
+echo "🧪 Running sample test to verify setup..."
+echo "================================="
+echo ""
+
+if $PHPUNIT_CMD --bootstrap "$TEST_DIR/bootstrap.php" "$TEST_DIR/test-sample.php" --verbose; then
+    echo "✅ Test environment is working!"
+else
+    echo "❌ Test environment has issues. Please check the error above."
     exit 1
 fi
 
-echo "📋 Available test suites:"
-echo "  1. All tests"
-echo "  2. Admin Options tests (AdminOptionsTest.php)"
-echo "  3. Settings API tests (OptionsSettingsTest.php)"
-echo "  4. Specific test file"
 echo ""
-
-# Run all tests by default or accept parameter
-case "${1:-all}" in
-    "1"|"all")
-        echo "🏃 Running all admin tests..."
-        ./vendor/bin/phpunit --configuration phpunit.xml.dist --verbose
-        ;;
-    "2"|"admin"|"options")
-        echo "🏃 Running Admin Options tests..."
-        ./vendor/bin/phpunit --configuration phpunit.xml.dist tests/AdminOptionsTest.php --verbose
-        ;;
-    "3"|"settings"|"api")
-        echo "🏃 Running Settings API tests..."
-        ./vendor/bin/phpunit --configuration phpunit.xml.dist tests/OptionsSettingsTest.php --verbose
-        ;;
-    *)
-        if [ -f "tests/$1" ]; then
-            echo "🏃 Running specific test file: $1"
-            ./vendor/bin/phpunit --configuration phpunit.xml.dist "tests/$1" --verbose
-        else
-            echo "❌ Error: Test file 'tests/$1' not found"
-            echo ""
-            echo "Available test files:"
-            ls -1 tests/*Test.php 2>/dev/null || echo "  No test files found"
-            exit 1
-        fi
-        ;;
-esac
-
-echo ""
-echo "✅ Test execution completed!"
-echo ""
-echo "📊 Test Summary:"
-echo "  • AdminOptionsTest.php: Tests the main Options class functionality (12 tests)"
-echo "  • OptionsSettingsTest.php: Tests WordPress Settings API integration (12 tests)"
-echo ""
-echo "🔧 To run individual test methods:"
-echo "  ./vendor/bin/phpunit --filter test_method_name tests/AdminOptionsTest.php"
-echo ""
-echo "📖 For more PHPUnit options:"
-echo "  ./vendor/bin/phpunit --help"
+echo "=== Test Completed ==="

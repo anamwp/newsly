@@ -35,13 +35,15 @@ const { renderToString, createElement } = jest.requireActual('@wordpress/element
 
 ## PHP Unit
 
+There's no PHP feature code under unit test right now — `tests/test-sample.php` is kept only as a canary to confirm the WP test environment/PHPUnit toolchain still works, so real tests can be added later without first debugging the harness. See `tests/README.md`.
+
 1. Check phpcs / run once: `./vendor/bin/phpunit`
 2. If that fails, set up the WP test environment: `bin/install-wp-tests.sh newsly root '' localhost 6.4.3`
-3. After setup:
+3. After setup, run the sanity check:
    ```
-   vendor/bin/phpunit
-   ./vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php --verbose
-   vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-admin-options.php tests/test-options-settings.php --verbose
+   ./tests/run-tests.sh
+   # or directly:
+   vendor/bin/phpunit --bootstrap tests/bootstrap.php tests/test-sample.php --verbose
    ```
 4. If it still doesn't work, re-run `composer install`.
 
