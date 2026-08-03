@@ -35,7 +35,6 @@ export default function save(props) {
 							<ul className="-mb-px flex space-x-8">
 							{props.attributes.selectedCategories.map((category, index) => {
 								const isActive = Number(props.attributes.activeTab) === Number(category.id);
-								console.log('isActive', isActive);
 								return (
 									<li role="presentation" key={category.id}>
 									<button
@@ -70,15 +69,16 @@ export default function save(props) {
 				{
 					typeof props.attributes.allCategoryPosts === 'object' && Object.keys(props.attributes.allCategoryPosts).length > 0 && (
 						Object.entries(props.attributes.allCategoryPosts).map(([catID, post], index) => {
+							const isActivePanel = Number(catID) === Number(props.attributes.activeTab);
 							return (
-								<div 
-									key={index} 
-									className={`tab-content ${ Number(catID) === Number(props.attributes.activeTab) ? 'active grid' : 'hidden' }  gs-cols-${props.attributes.postColumn} gap-5`} 
+								<div
+									key={index}
+									className={`tab-content ${ isActivePanel ? 'active grid' : 'hidden' }  gs-cols-${props.attributes.postColumn} gap-5`}
 									id={`category-tab-content-${catID}`}
 									role="tabpanel"
 									aria-labelledby={`category-tab-${catID}`}
-									aria-hidden={Number(catID) === Number(props.attributes.activeTab) ? 'false' : 'true'}
-									aria-expanded={Number(catID) === Number(props.attributes.activeTab) ? 'true' : 'false'}
+									aria-hidden={isActivePanel ? 'false' : 'true'}
+									aria-expanded={isActivePanel ? 'true' : 'false'}
 								>
 									{post.slice(0, props.attributes.postsToShow).map((post, index) => {
 										return <GSPostCard 

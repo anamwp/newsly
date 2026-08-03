@@ -2,9 +2,78 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import GSPostCard from '../components/GSPostCard';
+
+/**
+ * Selecting many categories at once (e.g. shift-click a large range in the
+ * sidebar's multi-select) fires one parallel REST request per category and
+ * stores each category's full post list in the block's attributes. Beyond a
+ * handful of categories this payload can grow large enough to be truncated
+ * during save, corrupting the block's markup. Cap the selection instead of
+ * letting it grow unbounded.
+ */
+const MAX_SELECTABLE_CATEGORIES = 10;
+
+/**
+ * Fallback message shown before any category is selected.
+ * Hoisted out of `edit` so it keeps a stable identity across renders.
+ * @param {Object} props
+ * @param {string} props.message
+ * @returns {JSX.Element}
+ */
+function FallbackMessage({ message }) {
+	return <p>{message}</p>;
+}
+
+/**
+ * Trims a full `/wp/v2/posts?...&_embed` response object down to only the
+ * fields GSPostCard actually reads, before it gets persisted into block
+ * attributes.
+ *
+ * The raw `_embed`'d response includes the full WP attachment object per
+ * featured image (every registered image size, each with its own
+ * width/height/filesize/mime_type/source_url/media_details/guid/etc.) and
+ * full taxonomy term objects (_links, meta, description, ...) - none of
+ * which GSPostCard uses. Storing that raw data in allCategoryPosts/
+ * fetchedPosts bloats the block's serialized post_content; with a few
+ * categories selected this routinely reaches several hundred KB, which can
+ * get truncated somewhere in the save pipeline and corrupt the block's HTML
+ * comment, causing Gutenberg's "Attempt Block Recovery" prompt on reload.
+ *
+ * @param {Object} post - a single raw post object from the REST API
+ * @returns {Object} the trimmed post, same shape GSPostCard.js expects
+ */
+function slimPostForStorage(post) {
+	const featuredMedia = post._embedded?.['wp:featuredmedia']?.[0];
+	const termGroups = post._embedded?.['wp:term'] || [];
+
+	return {
+		id: post.id,
+		link: post.link,
+		featured_media: post.featured_media,
+		title: { rendered: post.title?.rendered ?? '' },
+		excerpt: { rendered: post.excerpt?.rendered ?? '' },
+		categories: post.categories,
+		_embedded: {
+			'wp:featuredmedia': featuredMedia
+				? [
+						{
+							source_url: featuredMedia.source_url,
+							alt_text: featuredMedia.alt_text,
+						},
+				  ]
+				: [],
+			'wp:term': termGroups.map((group) =>
+				(group || []).map((term) => ({
+					name: term.name,
+					link: term.link,
+				})),
+			),
+		},
+	};
+}
 
 export default function edit(props) {
 	/**
@@ -41,28 +110,33 @@ export default function edit(props) {
 	}, []);
 
 	/**
-	 * Ensure first category is active when selectedCategories are available
+	 * Ensure first category is active when the block loads with
+	 * previously saved selectedCategories but no activeTab yet.
+	 * Runs once on mount only - once a category is chosen interactively,
+	 * handleCategoryChange/handlePostsByCategory set activeTab directly.
 	 */
 	useEffect(() => {
 		if (attributes.selectedCategories.length > 0 && !attributes.activeTab) {
-			console.log('Setting first category as active on load:', attributes.selectedCategories[0].id);
-			// If we have stored category data, use it; otherwise trigger a fetch
-			if (attributes.fetchedPostCategoryData && attributes.fetchedPostCategoryData[attributes.selectedCategories[0].id]) {
-				const firstCategoryPosts = attributes.fetchedPostCategoryData[attributes.selectedCategories[0].id];
-				console.log('Using stored posts for first category:', firstCategoryPosts.length);
+			const firstCategoryId = attributes.selectedCategories[0].id;
+			const storedPosts =
+				attributes.fetchedPostCategoryData &&
+				attributes.fetchedPostCategoryData[firstCategoryId];
+
+			if (storedPosts) {
 				setAttributes({
-					activeTab: attributes.selectedCategories[0].id,
-					fetchedPosts: [firstCategoryPosts],
-					selectedPostId: firstCategoryPosts.length > 0 ? firstCategoryPosts[0].id : null,
+					activeTab: firstCategoryId,
+					fetchedPosts: [storedPosts],
+					selectedPostId: storedPosts.length > 0 ? storedPosts[0].id : null,
 				});
 			} else {
 				// If no stored data, just set the active tab and let the existing fetch handle posts
 				setAttributes({
-					activeTab: attributes.selectedCategories[0].id,
+					activeTab: firstCategoryId,
 				});
 			}
 		}
-	}, [attributes.selectedCategories, attributes.fetchedPostCategoryData]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 	/**
 	 * Manage number of posts to show.
 	 * @param {number} postNumber
@@ -82,13 +156,24 @@ export default function edit(props) {
 		});
 	};
 	/**
+	 * Tracks the most recent handlePostsByCategory call so that a slower,
+	 * older request can't overwrite state set by a newer one.
+	 */
+	const latestPostsRequestIdRef = useRef(0);
+
+	/**
+	 * True while the posts for the current category selection are being
+	 * fetched, so the editor can show a loading message instead of stale or
+	 * empty content.
+	 */
+	const [isFetchingPosts, setIsFetchingPosts] = useState(false);
+
+	/**
 	 * Set posts while change the category
 	 * Fetch posts for all selected categories and store them separately
 	 * @param {*} selectedCatIds - Array of Category IDs
 	 */
-	const handlePostsByCategory = (
-		selectedCatIds = attributes.selectedCategroyId
-	) => {
+	const handlePostsByCategory = (selectedCatIds) => {
 		/**
 		 * if nothing passed or empty array
 		 * then reset all data
@@ -100,58 +185,69 @@ export default function edit(props) {
 				fetchedPosts: [],
 				selectedPostId: null,
 				activeTab: null,
+				allCategoryPosts: {},
 			});
 			return;
 		}
-		console.log('selectedCatIds', selectedCatIds);
-		
+
+		const requestId = ++latestPostsRequestIdRef.current;
+		setIsFetchingPosts(true);
+
 		/**
 		 * Fetch posts for all selected categories
 		 * Store them in an object with category ID as key
 		 */
-		const fetchPromises = selectedCatIds.map(catId => 
+		const fetchPromises = selectedCatIds.map(catId =>
 			apiFetch({
 				path: `/wp/v2/posts?categories=${catId}&per_page=24&_embed`,
 			})
 		);
-		
+
 		Promise.all(fetchPromises)
 			.then((responses) => {
+				// Ignore stale responses from a category change that's since been superseded.
+				if (requestId !== latestPostsRequestIdRef.current) {
+					return;
+				}
+
 				const categoryPostsData = {};
 				let firstCategoryPosts = [];
-				
+
 				responses.forEach((res, index) => {
 					const catId = selectedCatIds[index];
-					// Store as both string and number keys to avoid type issues
-					categoryPostsData[catId] = res;
-					categoryPostsData[String(catId)] = res;
-					categoryPostsData[Number(catId)] = res;
-					// console.log(`Storing posts for category ${catId}:`, res.length, 'posts');
-					console.log('categoryPostsData', categoryPostsData);
-					
+					const slimmedPosts = res.map(slimPostForStorage);
+					categoryPostsData[catId] = slimmedPosts;
+
 					// Set first category posts as default
 					if (index === 0) {
-						firstCategoryPosts = res;
+						firstCategoryPosts = slimmedPosts;
 					}
 				});
-				
-				// console.log('Final categoryPostsData:', categoryPostsData);
-				
+
 				/**
 				 * Update attributes with all category posts data
 				 * Set first category as active by default
 				 */
-				// console.log('Setting first category as active:', selectedCatIds[0]);
-				// console.log('First category posts:', firstCategoryPosts.length, 'posts');
-				
 				setAttributes({
 					fetchedPosts: [firstCategoryPosts],
 					selectedPostId: firstCategoryPosts.length > 0 ? firstCategoryPosts[0].id : null,
-					activeTab: selectedCatIds[0],
+					// block.json declares activeTab as type "number" - must not
+					// store the raw string category id here, or WordPress's
+					// attribute validation silently discards it on reload
+					// (falls back to the declared default: null), causing
+					// "Attempt Block Recovery" even though the rest of the
+					// block's stored markup is otherwise correct.
+					activeTab: Number(selectedCatIds[0]),
 					allCategoryPosts: categoryPostsData,
 				});
+				setIsFetchingPosts(false);
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.error(err);
+				if (requestId === latestPostsRequestIdRef.current) {
+					setIsFetchingPosts(false);
+				}
+			});
 	};
 	/**
 	 * Fire this function on change of the category selection from the sidebar control panel
@@ -159,15 +255,27 @@ export default function edit(props) {
 	 * @param {*} selectedCategoryIds - Array of selected category IDs
 	 */
 	const handleCategoryChange = (selectedCategoryIds) => {
-		console.log('selectedCategoryIds', selectedCategoryIds);
-		// debugger;
+		// Cap how many categories can be selected at once (e.g. a shift-click
+		// range-select can otherwise select dozens at a time, firing that many
+		// parallel fetches and bloating the block's stored attributes).
+		if (selectedCategoryIds.length > MAX_SELECTABLE_CATEGORIES) {
+			window.alert(
+				`You can select up to ${MAX_SELECTABLE_CATEGORIES} categories at a time. Only the first ${MAX_SELECTABLE_CATEGORIES} of your selection will be used.`
+			);
+			selectedCategoryIds = selectedCategoryIds.slice(
+				0,
+				MAX_SELECTABLE_CATEGORIES
+			);
+		}
+
+		// Build a lookup once instead of re-scanning attributes.categories for every id.
+		const categoryByValue = new Map(
+			attributes.categories.map((cat) => [Number(cat.value), cat])
+		);
+
 		// Convert selected IDs to category objects with id and label
 		const selectedCategories = selectedCategoryIds.map(catId => {
-			// console.log('catId', catId);
-			// console.log('catId', typeof catId);
-			// console.log('attributes.categories', attributes.categories);
-			const category = attributes.categories.find(cat => Number(cat.value) === Number(catId));
-			// console.log('category', category);
+			const category = categoryByValue.get(Number(catId));
 			return {
 				id: Number(catId),
 				label: category ? category.label : 'Unknown Category'
@@ -177,16 +285,15 @@ export default function edit(props) {
 		 * Update both [selectedCategroyId] and [selectedCategories] attributes.
 		 */
 		setAttributes({
-			selectedCategroyId: selectedCategoryIds || [],
-			selectedCategories: selectedCategories || [],
+			selectedCategroyId: selectedCategoryIds,
+			selectedCategories,
 		});
-		// debugger;
-		
+
 		/**
 		 * Update dropdown list posts based on category selections
 		 * Update attribute [selectedCategoryPosts] value for the new posts
 		 */
-		handlePostsByCategory(selectedCategoryIds || []);
+		handlePostsByCategory(selectedCategoryIds);
 	};
 	
 	/**
@@ -203,14 +310,6 @@ export default function edit(props) {
 			fetchedPosts: [categoryPosts],
 			selectedPostId: categoryPosts.length > 0 ? categoryPosts[0].id : null,
 		});
-	};
-	/**
-	 * Fallback message
-	 * @param {string} props
-	 * @returns HTML
-	 */
-	const FallbackMessage = (props) => {
-		return <p>{props.message}</p>;
 	};
 	/**
 	 * Show featured image based on the selection for sidebar panel
@@ -247,8 +346,6 @@ export default function edit(props) {
 			showFeaturedExcerpt: !attributes.showFeaturedExcerpt,
 		});
 	};
-	console.log('attributes', attributes);
-	console.log('attributes.allCategoryPosts', attributes.allCategoryPosts);
 	return (
 		<div {...blockProps}>
 			<SidebarControl
@@ -265,9 +362,10 @@ export default function edit(props) {
 				handleFeaturedImageToggleControl={
 					handleFeaturedImageToggleControl
 				}
+				isFetchingPosts={isFetchingPosts}
 			/>
 			{/* Fallback message */}
-			{attributes.fetchedPosts.length == 0 && (
+			{!isFetchingPosts && attributes.fetchedPosts.length == 0 && (
 				<FallbackMessage message="Please select one or more categories to display posts" />
 			)}
 			{/* Show the category names as tabs. */}
@@ -286,7 +384,7 @@ export default function edit(props) {
 										<nav role="tablist" aria-label="Category tabs">
 											<ul className="-mb-px flex space-x-8">
 							{attributes.selectedCategories.map((category) => {
-								const isActive = attributes.activeTab === category.id;
+								const isActive = Number(attributes.activeTab) === Number(category.id);
 								return (
 									<li role="presentation" key={category.id}>
 									<button
@@ -313,6 +411,20 @@ export default function edit(props) {
 				)}
 			</div>
 			{/* Show posts from all categories, but hide inactive ones */}
+			<div className="post-wrapper-container relative">
+				{isFetchingPosts && (
+					<div
+						role="status"
+						aria-live="polite"
+						className="absolute top-0 left-0 z-10 flex items-center gap-2 rounded-br bg-white/90 px-3 py-1.5 text-xs text-slate-700 shadow-sm"
+					>
+						<span
+							className="inline-block h-3 w-3 animate-spin rounded-full border-2 border-slate-400 border-t-transparent"
+							aria-hidden="true"
+						></span>
+						{__('Loading posts…', 'newsly')}
+					</div>
+				)}
 				<div
 					className={`post-wrapper`}
 					aria-live="polite"
@@ -321,21 +433,22 @@ export default function edit(props) {
 				{
 					typeof attributes.allCategoryPosts === 'object' && Object.keys(attributes.allCategoryPosts).length > 0 && (
 						Object.entries(attributes.allCategoryPosts).map(([catID, post], index) => {
+							const isActivePanel = Number(catID) === Number(attributes.activeTab);
 							return (
-								<div 
-								key={index} 
-								className={`tab-content ${ Number(catID) === Number(attributes.activeTab) ? 'active grid' : 'hidden' } gs-cols-${attributes.postColumn} gap-5`} 
+								<div
+								key={index}
+								className={`tab-content ${ isActivePanel ? 'active grid' : 'hidden' } gs-cols-${attributes.postColumn} gap-5`}
 								id={`category-tab-content-${catID}`}
 								role="tabpanel"
 								aria-labelledby={`category-tab-${catID}`}
-												aria-hidden={Number(catID) === Number(attributes.activeTab) ? 'false' : 'true'}
-												aria-expanded={Number(catID) === Number(attributes.activeTab) ? 'true' : 'false'}
+												aria-hidden={isActivePanel ? 'false' : 'true'}
+												aria-expanded={isActivePanel ? 'true' : 'false'}
 								>
 									{post.slice(0, attributes.postsToShow).map((post, index) => {
-										return <GSPostCard 
-										key={index} 
-										data={post} 
-										parent={props} 
+										return <GSPostCard
+										key={index}
+										data={post}
+										parent={props}
 										/>;
 									})}
 								</div>
@@ -343,6 +456,7 @@ export default function edit(props) {
 						})
 					)
 				}
+				</div>
 			</div>
 		</div>
 	);

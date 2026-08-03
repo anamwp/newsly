@@ -169,4 +169,53 @@ describe('Category Posts Save Component', () => {
 			container.querySelector('[role="tablist"]'),
 		).not.toBeInTheDocument();
 	});
+
+	test('omits the grid class when layout is not grid', () => {
+		const propsNonGrid = {
+			attributes: {
+				...baseProps.attributes,
+				layout: 'card',
+			},
+		};
+
+		const SaveComponent = save;
+		const { container } = render(<SaveComponent {...propsNonGrid} />);
+		const wrapper = container.firstChild;
+
+		expect(wrapper.className).not.toMatch(/grid-\d/);
+	});
+
+	test('falls back to the first selected category id for data-active-tab when activeTab is unset', () => {
+		const propsNoActiveTab = {
+			attributes: {
+				...baseProps.attributes,
+				activeTab: null,
+			},
+		};
+
+		const SaveComponent = save;
+		const { container } = render(<SaveComponent {...propsNoActiveTab} />);
+		const wrapper = container.firstChild;
+
+		expect(wrapper).toHaveAttribute('data-active-tab', '1');
+	});
+
+	test('omits data-active-tab when neither activeTab nor a selected category is available', () => {
+		const propsNoCatsNoActiveTab = {
+			attributes: {
+				...baseProps.attributes,
+				selectedCategories: [],
+				allCategoryPosts: {},
+				activeTab: null,
+			},
+		};
+
+		const SaveComponent = save;
+		const { container } = render(
+			<SaveComponent {...propsNoCatsNoActiveTab} />,
+		);
+		const wrapper = container.firstChild;
+
+		expect(wrapper).not.toHaveAttribute('data-active-tab');
+	});
 });

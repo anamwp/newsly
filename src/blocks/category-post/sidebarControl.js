@@ -18,6 +18,7 @@ export default function sidebarControl({
 	handleExcerptToggleControl,
 	handleFeaturedExcerptToggleControl,
 	handleFeaturedImageToggleControl,
+	isFetchingPosts,
 }) {
 	const { attributes, setAttributes } = props;
 
@@ -40,6 +41,15 @@ export default function sidebarControl({
 							multiple={true}
 						/>
 					</p>
+					{isFetchingPosts && (
+						<p
+							role="status"
+							aria-live="polite"
+							className="category-post-loading-posts text-xs text-slate-600 mb-2"
+						>
+							{__('Loading posts…', 'newsly')}
+						</p>
+					)}
 					{attributes.selectedCategroyId.length > 0 && (
 						<p>
 							{/* <SelectControl
