@@ -1,5 +1,47 @@
-.wp-block-newsly-block-post-lists-tab {
-	// @tailwind base;
-	// @tailwind components;
-	// @tailwind utilities;
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+
+// render.php does not call get_block_wrapper_attributes(), so the frontend
+// markup is never wrapped in `.wp-block-newsly-block-post-lists-tab` — scope
+// off `.newsly__post_list_tab` (the wrapper render.php actually outputs)
+// instead.
+.newsly__post_list_tab {
+	// Category tab buttons.
+	.tablinks {
+		@apply bg-slate-50 text-slate-800 border-slate-100;
+
+		&:hover {
+			@apply bg-slate-800 text-white border-slate-800;
+		}
+
+		&.active {
+			@apply bg-slate-800 text-white;
+		}
+	}
+
+	// Post card.
+	.post-card {
+		@apply border-slate-200;
+
+		&__title {
+			@apply text-slate-900;
+
+			&:hover {
+				@apply text-slate-600;
+			}
+		}
+
+		&__category {
+			@apply bg-slate-100 text-slate-600;
+
+			&:hover {
+				@apply bg-slate-300 text-slate-800;
+			}
+		}
+
+		&__excerpt {
+			@apply text-slate-600;
+		}
+	}
 }

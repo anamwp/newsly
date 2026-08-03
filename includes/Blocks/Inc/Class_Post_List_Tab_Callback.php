@@ -119,7 +119,7 @@ class Class_Post_List_Tab_Callback {
 					'excerpt' => get_the_excerpt( $post_id ),
 				);
 				?>
-				<div class="post card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8">
+				<div class="post-card shadow-md hover:shadow-lg rounded border-solid border-x border-y p-8">
 					<?php if ( $show_featured_image ) : ?>
 					<div class="thumbnail card__img rounded">
 						<?php if ( has_post_thumbnail( $post_id ) ) : ?>
@@ -131,7 +131,7 @@ class Class_Post_List_Tab_Callback {
 						<?php endif; ?>
 					</div>
 					<?php endif; ?>
-					<a class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium" href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>">
+					<a class="post-card__title mt-4 inline-block font-poppins text-xl transition font-medium" href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>">
 						<h2><?php echo esc_html( $post['title'] ); ?></h2>
 					</a>
 					<?php if ( $show_category ) : ?>
@@ -142,7 +142,7 @@ class Class_Post_List_Tab_Callback {
 						if ( count( $categories ) > 0 ) :
 							foreach ( $categories as $cat ) :
 								?>
-								<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" class="inline-block text-xs text-slate-600 hover:text-slate-800 bg-slate-100 hover:bg-slate-300 capitalize p-1 mr-1 rounded-md transition-all">
+								<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" class="post-card__category inline-block text-xs capitalize p-1 mr-1 rounded-md transition-all">
 									<?php echo esc_html( $cat->name ); ?>
 								</a>
 								<?php
@@ -152,13 +152,13 @@ class Class_Post_List_Tab_Callback {
 					</div>
 					<?php endif; ?>
 					<?php if ( $show_excerpt ) : ?>
-					<div class="text-slate-600 mt-2"><?php echo wp_kses_post( $post['excerpt'] ); ?></div>
+					<div class="post-card__excerpt mt-2"><?php echo wp_kses_post( $post['excerpt'] ); ?></div>
 					<?php endif; ?>
 				</div>
 			<?php endwhile; ?>
 		<?php else : ?>
-			<div class="post card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8">
-				<h2 class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium"><?php echo esc_html__( 'No Posts Found', 'newsly' ); ?></h2>
+			<div class="post-card shadow-md hover:shadow-lg rounded border-solid border-x border-y p-8">
+				<h2 class="post-card__title mt-4 inline-block font-poppins text-xl transition font-medium"><?php echo esc_html__( 'No Posts Found', 'newsly' ); ?></h2>
 			</div>
 		<?php endif; ?>
 		<?php

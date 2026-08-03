@@ -20,10 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			tabs.forEach((t) => {
 				const active = t === tab;
 				t.classList.toggle('active', active);
-				t.classList.toggle('bg-slate-800', active);
-				t.classList.toggle('text-white', active);
-				t.classList.toggle('bg-slate-50', !active);
-				t.classList.toggle('text-slate-800', !active);
 				t.setAttribute('aria-selected', active ? 'true' : 'false');
 			});
 		}
