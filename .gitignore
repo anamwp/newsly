@@ -12,3 +12,4 @@ coverage/
 coverage-html/
 coverage.xml
 coverage.txt
+.playwright-mcp
