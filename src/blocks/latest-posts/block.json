@@ -42,7 +42,7 @@
 			"default": false
 		}
 	},
-	"textdomain": "gutenberg-starter",
+	"textdomain": "newsly",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css"
