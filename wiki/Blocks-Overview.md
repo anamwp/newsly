@@ -10,7 +10,7 @@ Displays posts filtered by one or more selected categories, rendered as a tabbed
 
 - A native `<select multiple>` category picker is capped at 10 selections (`MAX_SELECTABLE_CATEGORIES` in `edit.js`) to avoid triggering a very large per-post payload.
 - Frontend tab switching is powered by `view.js` and is scoped per block instance (multiple Category Post blocks can coexist on one page).
-- See [Known Issues & Fixes](Known-Issues-And-Fixes) for the history of production bugs found in this block — it has the deepest audit trail of the five.
+- See [Known Issues & Fixes](Known-Issues-And-Fixes) for the history of production bugs found in this block — it has the deepest audit trail of the four.
 
 ## Featured Posts
 
@@ -28,13 +28,7 @@ Structurally near-identical to Featured Posts, plus a "sticky posts" option and 
 
 `src/blocks/post-lists-tab/` — `newsly-block/post-lists-tab`
 
-Tabbed interface for browsing multiple post lists with dynamic switching between them.
-
-## Smart Category Posts
-
-`src/blocks/smart-category-posts/` — `anam-gutenberg-starter-block/smart-category-posts`
-
-Category-based post display with its own local `components.js`/`getFeaturedImage.js` (not shared with the other blocks). Historically the least mature of the five blocks — see its audit history in [Known Issues & Fixes](Known-Issues-And-Fixes).
+Tabbed interface for browsing multiple post lists, with server-side category filtering: each tab click hits `admin-ajax.php` (`Class_Post_List_Tab_Callback`) and swaps in freshly-queried posts, so results can't go stale the way a save-time snapshot (like Category Post's) can.
 
 ## Shared components (`src/blocks/components/`)
 
