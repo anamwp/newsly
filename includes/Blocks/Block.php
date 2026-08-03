@@ -1,7 +1,9 @@
 <?php
-	namespace Anam\Newsly\Blocks;
 
-class Block {
+namespace Anam\Newsly\Blocks;
+
+class Block
+{
 	/**
 	 * Undocumented variable
 	 *
@@ -13,8 +15,9 @@ class Block {
 	 *
 	 * @return void
 	 */
-	public static function init() {
-		if ( null === self::$instance ) {
+	public static function init()
+	{
+		if (null === self::$instance) {
 			self::$instance = new self();
 		}
 		return self::$instance;
@@ -23,22 +26,24 @@ class Block {
 	/**
 	 * Initiate Class
 	 */
-	public function __construct() {
-		add_action( 'init', array( $this, 'register_block' ) );
+	public function __construct()
+	{
+		add_action('init', array($this, 'register_block'));
 	}
 	/**
 	 * Register Block
 	 *
 	 * @return void
 	 */
-	public function register_block() {
+	public function register_block()
+	{
 		/**
 		 * Register block type from metadata
 		 */
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/single-post' );
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/featured-posts' );
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/latest-posts' );
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/category-post' );
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/single-post');
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/featured-posts'); // jest| playwright -test done
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/latest-posts'); // test done
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/category-post'); // jest| playwright - test done
 		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/post-lists-tab' );
 		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/smart-category-posts' );
 		// register_block_type_from_metadata(
@@ -48,7 +53,4 @@ class Block {
 		// 	)
 		// );
 	}
-	
 }
-
-?>

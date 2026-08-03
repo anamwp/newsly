@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: Newsly
  * Plugin URI: https://anam.rocks
@@ -11,24 +12,26 @@
  * Text Domain: 'newsly'
  */
 // If this file is called directly, abort.
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
 	exit;
 }
 /**
  * Autoload vendor folder
  */
 require_once __DIR__ . '/vendor/autoload.php';
+
 use Dotenv\Dotenv;
 
 /**
  * Load plugin textdomain
  */
-add_action( 'init', function() {
-	load_plugin_textdomain( 'newsly', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+add_action('init', function () {
+	load_plugin_textdomain('newsly', false, dirname(plugin_basename(__FILE__)) . '/languages');
 });
 
 
-final class Newsly {
+final class Newsly
+{
 
 	/**
 	 * plugin version
@@ -37,19 +40,21 @@ final class Newsly {
 	/**
 	 * construction of this plugin
 	 */
-	private function __construct() {
+	private function __construct()
+	{
 		$this->define_constants();
-		register_activation_hook( __FILE__, array( $this, 'activate' ) );
-		add_action( 'plugins_loaded', array( $this, 'load_plugin_resources' ) );
+		register_activation_hook(__FILE__, array($this, 'activate'));
+		add_action('plugins_loaded', array($this, 'load_plugin_resources'));
 	}
 	/**
 	 * Initialize the plugin
 	 *
 	 * @return void
 	 */
-	public static function init() {
+	public static function init()
+	{
 		static $instance = false;
-		if ( ! $instance ) {
+		if (! $instance) {
 			$instance = new self();
 		}
 		return $instance;
@@ -59,8 +64,9 @@ final class Newsly {
 	 *
 	 * @return void
 	 */
-	public function load_text_domain() {
-		load_plugin_textdomain( 'newsly' );
+	public function load_text_domain()
+	{
+		load_plugin_textdomain('newsly');
 	}
 	/**
 	 * Define plugin
@@ -68,34 +74,34 @@ final class Newsly {
 	 *
 	 * @return void
 	 */
-	public function define_constants() {
+	public function define_constants()
+	{
 		/**
 		 * return plugin version
 		 */
-		define( 'NEWSLY_VERSION', self::NEWSLY_VERSION );
+		define('NEWSLY_VERSION', self::NEWSLY_VERSION);
 		/**
 		 * return the main file name
-		 * C:\xampp\htdocs\devplugin\wp-content\plugins\gutenberg-starter\gutenberg-starter.php
 		 */
-		define( 'NEWSLY_FILE', __FILE__ );
-		define( 'NEWSLY_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
+		define('NEWSLY_FILE', __FILE__);
+		define('NEWSLY_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 		/**
 		 * return the plugin director
-		 * C:\xampp\htdocs\devplugin\wp-content\plugins\gutenberg-starter
+		 * C:\xampp\htdocs\devplugin\wp-content\plugins\newsly
 		 */
-		define( 'NEWSLY_PATH', __DIR__ );
+		define('NEWSLY_PATH', __DIR__);
 		/**
 		 * return the plugin directory with host
-		 * http://localhost/devplugin/wp-content/plugins/gutenberg-starter
+		 * http://localhost/devplugin/wp-content/plugins/newsly
 		 */
-		define( 'NEWSLY_URL', plugins_url( '', NEWSLY_FILE ) );
-		define( 'NEWSLY_DIR_URL', plugin_dir_url( __FILE__ ) );
+		define('NEWSLY_URL', plugins_url('', NEWSLY_FILE));
+		define('NEWSLY_DIR_URL', plugin_dir_url(__FILE__));
 		/**
 		 * return the asset folder director
-		 * http://localhost/devplugin/wp-content/plugins/gutenberg-starter/assets
+		 * http://localhost/devplugin/wp-content/plugins/newsly/assets
 		 */
-		define( 'NEWSLY_ASSETS', NEWSLY_URL . '/build' );
-		define( 'NEWSLY_DIR_ASSETS', NEWSLY_DIR_URL . 'build' );
+		define('NEWSLY_ASSETS', NEWSLY_URL . '/build');
+		define('NEWSLY_DIR_ASSETS', NEWSLY_DIR_URL . 'build');
 	}
 	/**
 	 * Add installation time
@@ -104,18 +110,20 @@ final class Newsly {
 	 *
 	 * @return void
 	 */
-	public function activate() {
-		if ( ! get_option( 'newsly_installed' ) ) {
-			update_option( 'newsly_installed', time() );
+	public function activate()
+	{
+		if (! get_option('newsly_installed')) {
+			update_option('newsly_installed', time());
 		}
-		update_option( 'newsly_version', NEWSLY_VERSION );
+		update_option('newsly_version', NEWSLY_VERSION);
 	}
 	/**
 	 * Load plugin resources
 	 *
 	 * @return void
 	 */
-	public function load_plugin_resources() {
+	public function load_plugin_resources()
+	{
 		new Anam\Newsly\Init();
 	}
 }
@@ -124,8 +132,8 @@ final class Newsly {
  * Load the .env file if it exists
  * and set the environment variables
  */
-if ( file_exists( __DIR__ . '/.env' ) && class_exists( 'Dotenv\Dotenv' ) ) {
-	$gs_dotenv = \Dotenv\Dotenv::createImmutable( __DIR__ );
+if (file_exists(__DIR__ . '/.env') && class_exists('Dotenv\Dotenv')) {
+	$gs_dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
 	$gs_dotenv->load();
 }
 
@@ -137,60 +145,64 @@ if ( file_exists( __DIR__ . '/.env' ) && class_exists( 'Dotenv\Dotenv' ) ) {
  *
  * @return void
  */
-function newsly_handle_google_fonts() {
-	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap', array(), null );
+function newsly_handle_google_fonts()
+{
+	wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap', array(), null);
 }
-add_action( 'enqueue_block_editor_assets', 'newsly_handle_google_fonts' );
-add_action( 'wp_enqueue_scripts', 'newsly_handle_google_fonts' );
+add_action('enqueue_block_editor_assets', 'newsly_handle_google_fonts');
+add_action('wp_enqueue_scripts', 'newsly_handle_google_fonts');
 
 /**
  * Enqueue script for ajax pagination
  *
  * @return void
  */
-function newsly_enqueue_ajax_pagination_script() {
-	wp_enqueue_script( 'jquery' );
+function newsly_enqueue_ajax_pagination_script()
+{
+	wp_enqueue_script('jquery');
 	wp_localize_script(
 		'jquery',
 		'anamajaxpagination',
 		array(
-			'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			'gs_ajax_nonce'   => wp_create_nonce( 'gs_ajax_nonce' )
+			'ajaxurl' => admin_url('admin-ajax.php'),
+			'gs_ajax_nonce'   => wp_create_nonce('gs_ajax_nonce')
 		)
 	);
 	wp_localize_script(
 		'jquery',
 		'envVars',
 		array(
-			'GS_SITE_URL'        => getenv( 'GS_SITE_URL' ),
-			'WC_CONSUMER_KEY'    => getenv( 'WC_CONSUMER_KEY' ),
-			'WC_CONSUMER_SECRET' => getenv( 'WC_CONSUMER_SECRET' ),
-			'MOVIE_BEARER_TOKEN' => getenv( 'MOVIE_BEARER_TOKEN' ),
+			'GS_SITE_URL'        => getenv('GS_SITE_URL'),
+			'WC_CONSUMER_KEY'    => getenv('WC_CONSUMER_KEY'),
+			'WC_CONSUMER_SECRET' => getenv('WC_CONSUMER_SECRET'),
+			'MOVIE_BEARER_TOKEN' => getenv('MOVIE_BEARER_TOKEN'),
 		)
 	);
 }
-add_action( 'wp_enqueue_scripts', 'newsly_enqueue_ajax_pagination_script' );
-add_action( 'enqueue_block_editor_assets', 'newsly_enqueue_ajax_pagination_script' );
+add_action('wp_enqueue_scripts', 'newsly_enqueue_ajax_pagination_script');
+add_action('enqueue_block_editor_assets', 'newsly_enqueue_ajax_pagination_script');
 
 /**
  * Enquque build/css/index.css file
  */
-function newsly_enqueue_block_assets() {
+function newsly_enqueue_block_assets()
+{
 	wp_enqueue_style(
 		'gs-plugin-style',
-		plugins_url( 'dist/css/main.css', __FILE__ ),
+		plugins_url('dist/css/main.css', __FILE__),
 		array(),
 		'1.0'
 	);
 }
-add_action( 'enqueue_block_assets', 'newsly_enqueue_block_assets' );
+add_action('enqueue_block_assets', 'newsly_enqueue_block_assets');
 
 /**
  * Initilize the main plugin
  *
  * @return \Guest_Post_Submission
  */
-function newsly() {
+function newsly()
+{
 	return newsly::init();
 }
 /**
@@ -204,7 +216,8 @@ newsly();
  * @param [type] $categories Custom category name.
  * @return Array
  */
-function newsly_register_layout_category_handler( $categories ) {
+function newsly_register_layout_category_handler($categories)
+{
 	$categories[] = array(
 		'slug'  => 'newsly',
 		'title' => 'Newsly',
@@ -212,8 +225,8 @@ function newsly_register_layout_category_handler( $categories ) {
 	return $categories;
 }
 
-if ( version_compare( get_bloginfo( 'version' ), '5.8', '>=' ) ) {
-	add_filter( 'block_categories_all', 'newsly_register_layout_category_handler' );
+if (version_compare(get_bloginfo('version'), '5.8', '>=')) {
+	add_filter('block_categories_all', 'newsly_register_layout_category_handler');
 } else {
-	add_filter( 'block_categories', 'newsly_register_layout_category_handler' );
+	add_filter('block_categories', 'newsly_register_layout_category_handler');
 }
