@@ -198,8 +198,6 @@ add_action('enqueue_block_assets', 'newsly_enqueue_block_assets');
 
 /**
  * Initilize the main plugin
- *
- * @return \Guest_Post_Submission
  */
 function newsly()
 {
@@ -211,10 +209,10 @@ function newsly()
 newsly();
 
 /**
- * Create custom category of CGL block in gutenberg editor
+ * Create custom category of newsly block in gutenberg editor
  *
- * @param [type] $categories Custom category name.
- * @return Array
+ * @param array $categories Existing block categories.
+ * @return array Modified block categories.
  */
 function newsly_register_layout_category_handler($categories)
 {

@@ -22,7 +22,7 @@ class Block
 		}
 		return self::$instance;
 	}
-	public $movie_list_callback_instance;
+	// public $movie_list_callback_instance;
 	/**
 	 * Initiate Class
 	 */
@@ -40,10 +40,9 @@ class Block
 		/**
 		 * Register block type from metadata
 		 */
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/single-post');
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/featured-posts'); // jest| playwright -test done
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/latest-posts'); // test done
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/category-post'); // jest| playwright - test done
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/featured-posts'); // jest | playwright - test done
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/latest-posts'); // jest | playwright - test done
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/category-post'); // jest | playwright - test done
 		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/post-lists-tab' );
 		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/smart-category-posts' );
 		// register_block_type_from_metadata(
