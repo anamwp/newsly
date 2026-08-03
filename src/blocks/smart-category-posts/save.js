@@ -5,11 +5,8 @@ import GetFeaturedImage from './getFeaturedImage';
 import { useBlockProps } from '@wordpress/block-editor';
 
 export default function save(props) {
-	console.log('props', props);
 	const { attributes } = props;
 	const blockProps = useBlockProps.save();
-	console.log('attributes', attributes);
-	console.log('attributes fetchedPosts', attributes.fetchedPosts);
 	return (
 		<div {...blockProps}>
 			<nav className="tab mb-10 flex gap-2 p-4 pl-0">
@@ -41,19 +38,19 @@ export default function save(props) {
 								key={index}
 								className="card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8"
 							>
-								{/* {attributes.showFeaturedImage &&
+								{attributes.showFeaturedImage &&
 									post.featured_media !== 0 && (
 										<GetFeaturedImage
 											postId={post.featured_media}
 										/>
-									)} */}
+									)}
 								<h2 className="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium">
 									{post.title.rendered}
 								</h2>
 								{attributes.showCategory && (
 									<RenderPostCategoryData
 										catArr={post.categories}
-										// parentProps={parentProps}
+										categories={attributes.categories}
 									/>
 								)}
 								{attributes.showExcerpt && (

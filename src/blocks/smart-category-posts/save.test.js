@@ -180,4 +180,34 @@ describe('Smart Category Posts Save Component', () => {
 		expect(screen.getByText('All')).toBeInTheDocument();
 		expect(screen.queryByText('Tech')).not.toBeInTheDocument();
 	});
+
+	test('renders featured image when showFeaturedImage is true and post has one', () => {
+		const SaveComponent = save;
+		render(
+			<SaveComponent
+				attributes={{
+					...baseProps.attributes,
+					fetchedPosts: [{ ...mockPosts[0], featured_media: 5 }],
+					showFeaturedImage: true,
+				}}
+			/>,
+		);
+
+		expect(screen.getByTestId('featured-image')).toBeInTheDocument();
+	});
+
+	test('does not render featured image when post has no featured media', () => {
+		const SaveComponent = save;
+		render(
+			<SaveComponent
+				attributes={{
+					...baseProps.attributes,
+					fetchedPosts: mockPosts, // featured_media: 0
+					showFeaturedImage: true,
+				}}
+			/>,
+		);
+
+		expect(screen.queryByTestId('featured-image')).not.toBeInTheDocument();
+	});
 });

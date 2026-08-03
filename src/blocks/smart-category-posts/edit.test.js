@@ -341,4 +341,56 @@ describe('Smart Category Posts Edit Component', () => {
 		expect(screen.getByText('Post Two')).toBeInTheDocument();
 		expect(screen.getAllByTestId('post-category')).toHaveLength(2);
 	});
+
+	test('renders featured image when showFeaturedImage is true and post has one', async () => {
+		const postsWithFeaturedMedia = [
+			{ ...mockPosts[0], featured_media: 5 },
+		];
+		const propsWithFeaturedImage = {
+			...mockProps,
+			attributes: {
+				...mockProps.attributes,
+				fetchedPosts: postsWithFeaturedMedia,
+				showFeaturedImage: true,
+			},
+		};
+
+		const EditComponent = edit;
+		render(<EditComponent {...propsWithFeaturedImage} />);
+
+		await waitFor(() => expect(apiFetch).toHaveBeenCalled());
+
+		expect(screen.getByTestId('featured-image')).toBeInTheDocument();
+	});
+
+	test('does not render featured image when post has no featured media', async () => {
+		const propsWithoutFeaturedMedia = {
+			...mockProps,
+			attributes: {
+				...mockProps.attributes,
+				fetchedPosts: mockPosts, // featured_media: 0
+				showFeaturedImage: true,
+			},
+		};
+
+		const EditComponent = edit;
+		render(<EditComponent {...propsWithoutFeaturedMedia} />);
+
+		await waitFor(() => expect(apiFetch).toHaveBeenCalled());
+
+		expect(screen.queryByTestId('featured-image')).not.toBeInTheDocument();
+	});
+
+	test('logs an error when the initial posts fetch fails', async () => {
+		apiFetch.mockReset();
+		apiFetch.mockResolvedValueOnce([]); // categories fetch
+		apiFetch.mockRejectedValueOnce(new Error('boom')); // posts fetch fails
+
+		const EditComponent = edit;
+		render(<EditComponent {...mockProps} />);
+
+		await waitFor(() => {
+			expect(consoleErrorSpy).toHaveBeenCalledWith(expect.any(Error));
+		});
+	});
 });

@@ -1,40 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import apiFetch from '@wordpress/api-fetch';
-import { RawHTML, useRef } from '@wordpress/element';
+import React from 'react';
 
-export default function RenderPostCategoryData(props) {
-	let postArr = props.catArr.toString();
-	const [catData, setCatData] = useState(null);
-	// const {attributes, setAttributes} = props.parentProps;
-
-	useEffect(() => {
-		if (postArr) {
-			apiFetch({
-				path: `/wp/v2/categories?include=${postArr}`,
-			})
-				.then((res) => {
-					setCatData(res);
-				})
-				.catch((err) => console.log(err));
-		}
-	}, [postArr]);
+/**
+ * Renders the category names for a single post.
+ *
+ * Looks the names up locally in the block's already-fetched category
+ * list (attributes.categories) instead of issuing a REST request per
+ * post - the parent block fetches the full category list once on mount,
+ * so there is no need for every post card to hit the API again.
+ *
+ * @param {Object} props
+ * @param {number[]} props.catArr - category IDs assigned to this post
+ * @param {Object[]} props.categories - all categories: [{label, value, slug, link}]
+ * @returns {JSX.Element}
+ */
+export default function RenderPostCategoryData({ catArr = [], categories = [] }) {
+	const matchedCategories = categories.filter((category) =>
+		catArr.includes(category.value),
+	);
 
 	return (
 		<div>
-			{!catData && <p>Fetching Data</p>}
-			{catData &&
-				Array.isArray(catData) &&
-				catData.map((singleCat, index) => {
-					return (
-						<a
-							key={singleCat.id || index}
-							href={singleCat.link}
-							style={{ marginRight: '10px' }}
-						>
-							{singleCat.name}
-						</a>
-					);
-				})}
+			{matchedCategories.length === 0 && <p>Fetching Data</p>}
+			{matchedCategories.map((category) => (
+				<a
+					key={category.value}
+					href={category.link}
+					style={{ marginRight: '10px' }}
+				>
+					{category.label}
+				</a>
+			))}
 		</div>
 	);
 }
