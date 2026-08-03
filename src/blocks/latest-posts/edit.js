@@ -2,9 +2,20 @@ import { __ } from '@wordpress/i18n';
 import React from 'react';
 import { useBlockProps } from '@wordpress/block-editor';
 import SidebarControl from './sidebarControl';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import GSPostCardOverlay from '../components/GSPostCardOverlay';
+
+/**
+ * Fallback message shown before any posts are available.
+ * Hoisted out of `edit` so it keeps a stable identity across renders.
+ * @param {Object} props
+ * @param {string} props.message
+ * @returns {JSX.Element}
+ */
+function FallbackMessage({ message }) {
+	return <p>{message}</p>;
+}
 
 export default function edit(props) {
 	const blockProps = useBlockProps({
@@ -34,12 +45,11 @@ export default function edit(props) {
 					categories: catArr,
 				});
 			});
-	}, [attributes.categories]);
+	}, [attributes.categories.length]);
 	/**
 	 * Fetched first 10 posts
 	 */
 	useEffect(() => {
-		// console.log('attributes', attributes);
 		if (
 			!attributes.selectedCategroyId ||
 			attributes.selectedCategroyId === ''
@@ -66,20 +76,18 @@ export default function edit(props) {
 	};
 
 	/**
-	 * Set posts while change the category
-	 * @param {*} selectedCatId
+	 * Tracks the most recent handlePostsByCategory call so that a slower,
+	 * older request can't overwrite state set by a newer one.
 	 */
-	const handlePostsByCategory = (
-		selectedCatId = attributes.selectedCategroyId,
-	) => {
-		/**
-		 * if nothing passed
-		 * then assing catId from
-		 * attributes
-		 */
-		let catId = selectedCatId
-			? selectedCatId
-			: attributes.selectedCategroyId;
+	const latestPostsRequestIdRef = useRef(0);
+
+	/**
+	 * Set posts while change the category
+	 * @param {*} catId
+	 */
+	const handlePostsByCategory = (catId) => {
+		const requestId = ++latestPostsRequestIdRef.current;
+
 		/**
 		 * fetch the data
 		 * from restapi endpoint
@@ -90,7 +98,11 @@ export default function edit(props) {
 			path: `/wp/v2/posts?categories=${catId}&_embed${stickyParam}`,
 		})
 			.then((res) => {
-				// console.log('res', res);
+				// Ignore stale responses from a category change that's since been superseded.
+				if (requestId !== latestPostsRequestIdRef.current) {
+					return;
+				}
+
 				let catPostsArr = [];
 				/**
 				 * set response first data
@@ -99,7 +111,6 @@ export default function edit(props) {
 				 */
 				setAttributes({
 					fetchedPosts: res,
-					// selectedPostId: res.length > 0 ? res[0].id : null,
 				});
 				/**
 				 * Update the dropdown list
@@ -118,7 +129,7 @@ export default function edit(props) {
 					selectedCategoryPosts: catPostsArr,
 				});
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.error(err));
 	};
 	/**
 	 * Fire this function on change of the category selection from the sidebar control panel
@@ -151,55 +162,6 @@ export default function edit(props) {
 		handlePostsByCategory(selectedCat);
 	};
 	/**
-	 * Fire this function on chnage of posts selection from the sidebar control panel
-	 * Its main function is to Fetch posts by id
-	 * and then assign data to [fetchedPosts] attribute
-	 *
-	 * @param {*} newPostId
-	 * @returns
-	 */
-	// const handleSelectedPostData = (newPostId) => {
-	// 	let selectedPostId = newPostId ? newPostId : attributes.selectedPostId;
-	// 	/**
-	// 	 * set the new post ID
-	// 	 * to selectedPostId attribute
-	// 	 */
-	// 	if (newPostId) {
-	// 		setAttributes({
-	// 			selectedPostId: newPostId,
-	// 		});
-	// 	}
-	// 	/**
-	// 	 * if there is no
-	// 	 * selectedPostId
-	// 	 * then return
-	// 	 */
-	// 	if (!selectedPostId) {
-	// 		return;
-	// 	}
-	// 	/**
-	// 	 * fetch data from rest point
-	// 	 */
-	// 	const stickyParam = attributes.ignoreStickyPosts ? '&sticky=false' : '';
-	// 	apiFetch({
-	// 		path: `/wp/v2/posts/?include=${selectedPostId}&_embed${stickyParam}`,
-	// 	})
-	// 		.then((res) => {
-	// 			setAttributes({
-	// 				fetchedPosts: res,
-	// 			});
-	// 		})
-	// 		.catch((err) => console.log('err', err));
-	// };
-	/**
-	 * Fallback message
-	 * @param {*} props
-	 * @returns
-	 */
-	const FallbackMessage = (props) => {
-		return <p>{props.message}</p>;
-	};
-	/**
 	 * Show Category based on the selection for sidebar panel
 	 * for the post card
 	 * and update [showCategory] value
@@ -216,8 +178,6 @@ export default function edit(props) {
 		});
 	};
 
-	// console.log('selectedPostId', attributes);
-
 	return (
 		<div {...blockProps}>
 			<SidebarControl
@@ -225,7 +185,6 @@ export default function edit(props) {
 				categories={attributes.categories}
 				handleNumberOfPostsChange={handleNumberOfPostsChange}
 				handleCategoryChange={handleCategoryChange}
-				// handleSelectedPostData={handleSelectedPostData}
 				handleCategoryToggleControl={handleCategoryToggleControl}
 				handleIgnoreStickyPostsToggleControl={
 					handleIgnoreStickyPostsToggleControl

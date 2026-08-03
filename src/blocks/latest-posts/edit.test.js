@@ -477,6 +477,15 @@ describe('Latest Posts Edit Component', () => {
 
 			const EditComponent = edit;
 			render(<EditComponent {...propsWithCategory} />);
+
+			const categorySelect = screen.getByTestId('category-select');
+			fireEvent.change(categorySelect, { target: { value: '' } });
+
+			expect(mockProps.setAttributes).toHaveBeenCalledWith({
+				selectedCategroyId: '',
+				selectedCategoryPosts: [],
+				fetchedPosts: [],
+			});
 		});
 
 		test('updates selectedCategroyId and fetches posts for selected category', async () => {
@@ -625,6 +634,116 @@ describe('Latest Posts Edit Component', () => {
 					screen.getByTestId('sidebar-control'),
 				).toBeInTheDocument();
 			});
+
+			// Fully drain the second apiFetch call's promise chain before
+			// this test ends, so it can't leak into later tests.
+			await waitFor(() => {
+				expect(mockProps.setAttributes).toHaveBeenCalledWith(
+					expect.objectContaining({ fetchedPosts: [] }),
+				);
+			});
+		});
+
+		test('logs an error when the category-specific fetch fails', async () => {
+			const consoleErrorSpy = jest
+				.spyOn(console, 'error')
+				.mockImplementation(() => {});
+
+			// Guard against any queued mock values leftover from earlier tests.
+			apiFetch.mockReset();
+			apiFetch
+				.mockResolvedValueOnce([]) // initial posts fetch
+				.mockRejectedValueOnce(new Error('boom')); // category-specific posts fetch fails
+
+			const propsWithCategories = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					categories: mockCategories,
+				},
+			};
+
+			const EditComponent = edit;
+			render(<EditComponent {...propsWithCategories} />);
+
+			await waitFor(() => expect(apiFetch).toHaveBeenCalledTimes(1));
+
+			const categorySelect = screen.getByTestId('category-select');
+			fireEvent.change(categorySelect, { target: { value: '1' } });
+
+			await waitFor(() => {
+				expect(consoleErrorSpy).toHaveBeenCalledWith(
+					expect.any(Error),
+				);
+			});
+
+			consoleErrorSpy.mockRestore();
+		});
+
+		test('ignores a stale category-fetch response superseded by a newer request', async () => {
+			// Guard against any queued mock values leftover from earlier tests.
+			apiFetch.mockReset();
+
+			const resolvers = [];
+			apiFetch.mockImplementation(
+				() =>
+					new Promise((resolve) => {
+						resolvers.push(resolve);
+					}),
+			);
+
+			const propsWithCategories = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					categories: mockCategories,
+					// Already has a category selected so the mount effect
+					// doesn't also fetch sticky posts and add a resolver.
+					selectedCategroyId: '3',
+				},
+			};
+
+			const EditComponent = edit;
+			render(<EditComponent {...propsWithCategories} />);
+
+			const categorySelect = screen.getByTestId('category-select');
+
+			// First (soon to be stale) category change.
+			fireEvent.change(categorySelect, { target: { value: '1' } });
+			await waitFor(() => expect(resolvers.length).toBe(1));
+			const staleResolve = resolvers.shift();
+
+			// Second (fresh) category change fired before the first resolves.
+			fireEvent.change(categorySelect, { target: { value: '2' } });
+			await waitFor(() => expect(resolvers.length).toBe(1));
+			const freshResolve = resolvers.shift();
+
+			mockProps.setAttributes.mockClear();
+
+			// The newer request resolves first.
+			freshResolve([{ id: 20, title: { rendered: 'Fresh Post' } }]);
+
+			await waitFor(() => {
+				expect(mockProps.setAttributes).toHaveBeenCalledWith(
+					expect.objectContaining({
+						fetchedPosts: [
+							{ id: 20, title: { rendered: 'Fresh Post' } },
+						],
+					}),
+				);
+			});
+
+			const callsAfterFreshResolved =
+				mockProps.setAttributes.mock.calls.length;
+
+			// The older request resolving afterwards must be ignored.
+			staleResolve([{ id: 999, title: { rendered: 'Stale Post' } }]);
+
+			await new Promise((resolve) => setTimeout(resolve, 0));
+
+			expect(mockProps.setAttributes.mock.calls.length).toBe(
+				callsAfterFreshResolved,
+			);
 		});
 	});
 	describe('handleCategoryToggleControl', () => {
