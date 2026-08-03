@@ -3,13 +3,13 @@
 /**
  * Plugin Name: Newsly
  * Plugin URI: https://anam.rocks
- * Description: A starter plugin to start your big idea.
+ * Description: Dynamic Gutenberg blocks for displaying news posts, categories, and featured content.
  * Version: 1.0
  * Author: Anam
  * Author URI: https://anam.rocks
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: 'newsly'
+ * Text Domain: newsly
  */
 // If this file is called directly, abort.
 if (! defined('ABSPATH')) {
@@ -19,8 +19,6 @@ if (! defined('ABSPATH')) {
  * Autoload vendor folder
  */
 require_once __DIR__ . '/vendor/autoload.php';
-
-use Dotenv\Dotenv;
 
 /**
  * Load plugin textdomain
@@ -129,25 +127,19 @@ final class Newsly
 }
 
 /**
- * Load the .env file if it exists
- * and set the environment variables
- */
-if (file_exists(__DIR__ . '/.env') && class_exists('Dotenv\Dotenv')) {
-	$gs_dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
-	$gs_dotenv->load();
-}
-
-
-/**
  * Manage fonts in the editor
- * 
+ *
+ * Self-hosted: only Poppins 500 (normal) is used anywhere in the
+ * blocks' markup (always paired with the `font-poppins font-medium`
+ * classes), so that's the only weight bundled.
+ *
  * ref: https://developer.wordpress.org/block-editor/how-to-guides/enqueueing-assets-in-the-editor/
  *
  * @return void
  */
 function newsly_handle_google_fonts()
 {
-	wp_enqueue_style('google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap', array(), null);
+	wp_enqueue_style('newsly-fonts', plugins_url('assets/fonts/fonts.css', NEWSLY_FILE), array(), NEWSLY_VERSION);
 }
 add_action('enqueue_block_editor_assets', 'newsly_handle_google_fonts');
 add_action('wp_enqueue_scripts', 'newsly_handle_google_fonts');
@@ -165,17 +157,7 @@ function newsly_enqueue_ajax_pagination_script()
 		'anamajaxpagination',
 		array(
 			'ajaxurl' => admin_url('admin-ajax.php'),
-			'gs_ajax_nonce'   => wp_create_nonce('gs_ajax_nonce')
-		)
-	);
-	wp_localize_script(
-		'jquery',
-		'envVars',
-		array(
-			'GS_SITE_URL'        => getenv('GS_SITE_URL'),
-			'WC_CONSUMER_KEY'    => getenv('WC_CONSUMER_KEY'),
-			'WC_CONSUMER_SECRET' => getenv('WC_CONSUMER_SECRET'),
-			'MOVIE_BEARER_TOKEN' => getenv('MOVIE_BEARER_TOKEN'),
+			'newsly_ajax_nonce'   => wp_create_nonce('newsly_ajax_nonce')
 		)
 	);
 }
@@ -188,7 +170,7 @@ add_action('enqueue_block_editor_assets', 'newsly_enqueue_ajax_pagination_script
 function newsly_enqueue_block_assets()
 {
 	wp_enqueue_style(
-		'gs-plugin-style',
+		'newsly-plugin-style',
 		plugins_url('dist/css/main.css', __FILE__),
 		array(),
 		'1.0'
