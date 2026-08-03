@@ -22,7 +22,7 @@ jest.mock('@wordpress/element', () => ({
 	useState: jest.requireActual('react').useState,
 	useEffect: jest.requireActual('react').useEffect,
 	useContext: jest.fn(),
-	useRef: jest.fn(),
+	useRef: jest.requireActual('react').useRef,
 }));
 
 jest.mock('@wordpress/i18n', () => ({
@@ -578,18 +578,36 @@ describe('Featured Posts Edit Component', () => {
 
 	describe('API Integration', () => {
 		test('fetches categories on mount when categories array is empty', async () => {
+			const mockStickyPosts = [
+				{ categories: [1, 2] },
+				{ categories: [2] },
+			];
 			const mockCategoryData = [
 				{ id: 1, name: 'Technology' },
 				{ id: 2, name: 'Sports' },
 			];
 
-			apiFetch.mockResolvedValueOnce(mockCategoryData);
+			apiFetch.mockImplementation(({ path }) => {
+				if (path.startsWith('/wp/v2/posts?sticky=true')) {
+					return Promise.resolve(mockStickyPosts);
+				}
+				if (path.startsWith('/wp/v2/categories?include=')) {
+					return Promise.resolve(mockCategoryData);
+				}
+				return Promise.resolve([]);
+			});
 
 			render(React.createElement(edit, mockProps));
 
 			await waitFor(() => {
 				expect(apiFetch).toHaveBeenCalledWith({
-					path: '/wp/v2/categories',
+					path: '/wp/v2/posts?sticky=true&per_page=100&_fields=categories',
+				});
+			});
+
+			await waitFor(() => {
+				expect(apiFetch).toHaveBeenCalledWith({
+					path: '/wp/v2/categories?include=1,2&per_page=100',
 				});
 			});
 
@@ -602,6 +620,29 @@ describe('Featured Posts Edit Component', () => {
 					],
 				});
 			});
+		});
+
+		test('sets only the placeholder option when no sticky posts have categories', async () => {
+			apiFetch.mockImplementation(({ path }) => {
+				if (path.startsWith('/wp/v2/posts?sticky=true')) {
+					return Promise.resolve([]);
+				}
+				return Promise.resolve([]);
+			});
+
+			render(React.createElement(edit, mockProps));
+
+			await waitFor(() => {
+				expect(mockProps.setAttributes).toHaveBeenCalledWith({
+					categories: [{ label: 'Select a category', value: '' }],
+				});
+			});
+
+			expect(apiFetch).not.toHaveBeenCalledWith(
+				expect.objectContaining({
+					path: expect.stringContaining('/wp/v2/categories?include='),
+				}),
+			);
 		});
 
 		test('fetches sticky posts when no category is selected', async () => {
@@ -643,13 +684,22 @@ describe('Featured Posts Edit Component', () => {
 
 	describe('Data Processing', () => {
 		test('processes category data correctly with mapping', async () => {
+			const mockStickyPosts = [{ categories: [1, 2, 3] }];
 			const mockCategoryData = [
 				{ id: 1, name: 'Technology' },
 				{ id: 2, name: 'Sports' },
 				{ id: 3, name: 'News' },
 			];
 
-			apiFetch.mockResolvedValueOnce(mockCategoryData);
+			apiFetch.mockImplementation(({ path }) => {
+				if (path.startsWith('/wp/v2/posts?sticky=true')) {
+					return Promise.resolve(mockStickyPosts);
+				}
+				if (path.startsWith('/wp/v2/categories?include=')) {
+					return Promise.resolve(mockCategoryData);
+				}
+				return Promise.resolve([]);
+			});
 
 			render(React.createElement(edit, mockProps));
 
@@ -680,8 +730,8 @@ describe('Featured Posts Edit Component', () => {
 
 	describe('Error Handling', () => {
 		test('handles error in handlePostsByCategory API call', async () => {
-			const consoleLogSpy = jest
-				.spyOn(console, 'log')
+			const consoleErrorSpy = jest
+				.spyOn(console, 'error')
 				.mockImplementation();
 
 			const propsWithCategories = {
@@ -714,10 +764,77 @@ describe('Featured Posts Edit Component', () => {
 
 			// Wait for error to be logged
 			await waitFor(() => {
-				expect(consoleLogSpy).toHaveBeenCalledWith(expect.any(Error));
+				expect(consoleErrorSpy).toHaveBeenCalledWith(
+					expect.any(Error),
+				);
 			});
 
-			consoleLogSpy.mockRestore();
+			consoleErrorSpy.mockRestore();
+		});
+
+		test('ignores a stale category-fetch response superseded by a newer request', async () => {
+			const resolvers = [];
+			apiFetch.mockImplementation(
+				() =>
+					new Promise((resolve) => {
+						resolvers.push(resolve);
+					}),
+			);
+
+			const propsWithCategories = {
+				...mockProps,
+				attributes: {
+					...mockProps.attributes,
+					categories: mockCategories,
+					// Already has a category selected so the mount effect
+					// doesn't also fetch sticky posts and add a resolver.
+					selectedCategroyId: '3',
+				},
+				setAttributes: jest.fn(),
+			};
+
+			render(React.createElement(edit, propsWithCategories));
+
+			const categorySelect = screen.getByTestId('category-select');
+
+			// First (soon to be stale) category change.
+			fireEvent.change(categorySelect, { target: { value: '1' } });
+			await waitFor(() => expect(resolvers.length).toBe(1));
+			const staleResolve = resolvers.shift();
+
+			// Second (fresh) category change fired before the first resolves.
+			fireEvent.change(categorySelect, { target: { value: '2' } });
+			await waitFor(() => expect(resolvers.length).toBe(1));
+			const freshResolve = resolvers.shift();
+
+			propsWithCategories.setAttributes.mockClear();
+
+			// The newer request resolves first.
+			freshResolve([
+				{ id: 20, title: { rendered: 'Sports Post' } },
+			]);
+
+			await waitFor(() => {
+				expect(
+					propsWithCategories.setAttributes,
+				).toHaveBeenCalledWith({
+					fetchedPosts: [
+						{ id: 20, title: { rendered: 'Sports Post' } },
+					],
+				});
+			});
+
+			const callsAfterFreshResolved =
+				propsWithCategories.setAttributes.mock.calls.length;
+
+			// The older request resolving afterwards must be ignored.
+			staleResolve([{ id: 999, title: { rendered: 'Stale Post' } }]);
+
+			await new Promise((resolve) => setTimeout(resolve, 0));
+
+			expect(
+				propsWithCategories.setAttributes.mock.calls.length,
+			).toBe(callsAfterFreshResolved);
 		});
 	});
 
