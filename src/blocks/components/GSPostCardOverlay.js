@@ -1,3 +1,5 @@
+import React from 'react';
+import { __ } from '@wordpress/i18n';
 /**
  * ❗️ Before use this component make sure below data is available ❗️
  * 👉 - postData._embedded['wp:featuredmedia']?.[0]?.source_url
