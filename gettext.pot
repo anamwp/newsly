@@ -3,14 +3,10 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "X-Generator: babel-plugin-makepot\n"
 
-#: src/blocks/post-lists-tab/edit.js:131
-msgid "No featured image found"
-msgstr ""
-
-#: src/blocks/post-lists-tab/edit.js:204
+#: src/blocks/post-lists-tab/edit.js:140
 msgid "All"
 msgstr ""
 
-#: src/blocks/post-lists-tab/edit.js:222
+#: src/blocks/post-lists-tab/edit.js:158
 msgid "Loading..."
 msgstr ""

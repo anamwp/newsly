@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelect, withSelect, select } from '@wordpress/data';
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from '@wordpress/server-side-render';
 import GetFeaturedImage from './getFeaturedImage';
 import SidebarControl from './sidebarControl';
@@ -8,7 +8,6 @@ import { RawHTML, useState, useRef, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
 import RenderPostCategoryData from './components';
-import { Disabled } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 export default function edit(props) {
@@ -53,7 +52,10 @@ export default function edit(props) {
 				});
 				setIsLoading(false);
 			})
-			.catch((err) => console.log('err', err));
+			.catch((err) => {
+				console.log('err', err);
+				setIsLoading(false);
+			});
 	}, []);
 
 	/**
@@ -94,72 +96,6 @@ export default function edit(props) {
 		[attributes.selectedCategroyId]
 	);
 
-	/**
-	 * Fallback message
-	 * @param {*} props
-	 * @returns
-	 */
-	const FallbackMessage = (props) => {
-		return <p>{props.message}</p>;
-	};
-	/**
-	 * component to display post card
-	 * @param {*} props
-	 * @returns
-	 * post card content
-	 */
-	const PostCard = (props) => {
-		let postData = props.data;
-		let parentProps = props.parent;
-		return (
-			<div className="single-post-card">
-				{/* 
-                if user want to show featured image 
-                and post have featured image
-                */}
-				{/* {attributes.showFeaturedImage &&
-					postData.featured_media !== 0 && (
-						<GetFeaturedImage postId={postData.featured_media} />
-					)} */}
-				{/* 
-                If user want to show featured image
-                but post have no featured image
-                */}
-				{attributes.showFeaturedImage &&
-					postData.featured_media == 0 && (
-						<div>
-							{__(
-								'No featured image found',
-								'newsly'
-							)}
-						</div>
-					)}
-				{/* 
-                Toggle category display
-                */}
-				{/* {attributes.showCategory && (
-					<RenderPostCategoryData
-						catArr={postData.categories}
-						parentProps={parentProps}
-					/>
-				)} */}
-				{/* 
-                disabled click inside editor
-                */}
-				<Disabled>
-					<h3>
-						<a href={postData.link}>{postData.title.rendered}</a>
-					</h3>
-				</Disabled>
-				{/* 
-                excerpt of the post
-                */}
-				{attributes.showExcerpt && (
-					<RichText tagName="p" value={postData.excerpt.rendered} />
-				)}
-			</div>
-		);
-	};
 	/**
 	 * handle category display control
 	 * in post card
