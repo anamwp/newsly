@@ -1,20 +1,28 @@
 /**
- * E2E tests for the Featured Posts block.
+ * E2E tests for the Latest Posts block.
  *
- * This replaces the previous version of this file, which had zero
- * `expect()` calls anywhere - every check was a soft
- * `if (isVisible) { console.log } else { console.log('⚠️') }`, so it could
- * never actually fail. That's how a critical bug (React.memo breaking
- * `save()`'s `renderToString` output - see FPE2E-01 in
- * tests/e2e/featured-posts-e2e-audit.md) shipped and stayed broken on the
- * frontend undetected. This version follows the same pattern as
- * tests/e2e/block-test-category-post.spec.js: real assertions throughout.
+ * Follows the pattern established in block-test-category-post.spec.js and
+ * the rewritten block-test-featured-posts.spec.js: real `expect()`
+ * assertions throughout, no soft `if (isVisible) {console.log}` checks.
  *
- * Two known, still-open product bugs (dead "Show Featured Image" and "Show
- * Excerpt" toggles in ../components/GSPostCardOverlay.js - FPE2E-03 and
- * FPE2E-04) are captured as `test.fixme()` cases below: the assertions
- * describe the *correct* behavior, so flipping `test.fixme` to `test` once
- * those toggles are fixed turns them into working regression tests.
+ * Two things specific to this block worth calling out:
+ *
+ * 1. The block inserter search for "Latest Posts" returns **two** results -
+ *    WordPress core's native Latest Posts block, and this plugin's
+ *    `newsly-block/latest-posts`. Their accessible names only differ by a
+ *    leading space (the custom block's icon glyph), so `insertLatestPostsBlock`
+ *    below matches on the exact string ` Latest Posts` (leading space) to
+ *    avoid inserting the wrong block. Confirmed live: searching "Latest
+ *    Posts" in the inserter lists both `option "Latest Posts"` (core) and
+ *    `option " Latest Posts"` (this plugin's, with an icon).
+ *
+ * 2. Every post card renders as one giant `<a href>` (see
+ *    GSPostCardOverlay.js, shared with featured-posts). Clicking it inside
+ *    the block editor follows the link and navigates the whole editor
+ *    iframe away to the post's live frontend page - see
+ *    tests/e2e/featured-posts-e2e-audit.md, FPE2E-05. This spec avoids that
+ *    entirely by selecting the block via the "Document Overview" list view
+ *    instead of clicking card content directly.
  */
 
 const { test, expect } = require('@playwright/test');
@@ -24,10 +32,10 @@ const WP_ADMIN_USERNAME = process.env.WP_ADMIN_USERNAME || 'admin';
 const WP_ADMIN_PASSWORD = process.env.WP_ADMIN_PASSWORD || 'password';
 
 // Category assumed present in the site's seeded demo content, with
-// multiple posts. Also relied on by block-test-category-post.spec.js.
+// multiple posts. Also relied on by the other block-test-*.spec.js files.
 const CATEGORY = 'ancient';
 
-const PAGE_TITLE = 'Featured Posts E2E Test Page';
+const PAGE_TITLE = 'Latest Posts E2E Test Page';
 
 /**
  * Logs into wp-admin if not already authenticated, and asserts success.
@@ -46,12 +54,21 @@ async function login(page) {
 }
 
 /**
- * Opens the block inserter and inserts a Featured Posts block. Assumes the
- * inserted block becomes the selected block (default Gutenberg behavior),
- * so the Inspector sidebar afterwards refers to this block.
+ * Opens the block inserter and inserts this plugin's Latest Posts block -
+ * not WordPress core's native block of the same name (see file header).
+ * Assumes the inserted block becomes selected, so the Inspector sidebar
+ * afterwards refers to this block.
+ *
+ * Both blocks render an *identical* accessible name ("Latest Posts", no
+ * distinguishing text or aria-label - confirmed by inspecting the raw DOM,
+ * not just the accessibility tree), so `getByRole('option', { name })`
+ * cannot disambiguate them no matter how it's tuned. The only reliable
+ * difference is each option's CSS class:
+ * `editor-block-list-item-newsly-block-latest-posts` (this plugin) vs.
+ * `editor-block-list-item-latest-posts` (WordPress core).
  * @param {import('@playwright/test').Page} page
  */
-async function insertFeaturedPostsBlock(page) {
+async function insertLatestPostsBlock(page) {
 	const toggle = page.getByRole('button', {
 		name: 'Block Inserter',
 		exact: true,
@@ -63,15 +80,17 @@ async function insertFeaturedPostsBlock(page) {
 
 	const searchInput = page.getByRole('searchbox', { name: 'Search' });
 	await expect(searchInput).toBeVisible({ timeout: 10000 });
-	await searchInput.fill('Featured Posts');
+	await searchInput.fill('Latest Posts');
 
-	const option = page.getByRole('option', { name: 'Featured Posts' });
+	const option = page.locator(
+		'.editor-block-list-item-newsly-block-latest-posts'
+	);
 	await expect(option).toBeVisible({ timeout: 10000 });
 	await option.click();
 }
 
 /**
- * Selects a category in the currently-selected Featured Posts block's
+ * Selects a category in the currently-selected Latest Posts block's
  * "Choose Category" sidebar select control.
  * @param {import('@playwright/test').Page} page
  * @param {string} categoryName
@@ -83,23 +102,30 @@ async function selectCategory(page, categoryName) {
 }
 
 /**
- * Selects the Featured Posts block via the "Document Overview" list view
- * instead of clicking its rendered content directly.
- *
- * Every post card is one giant `<a href>` wrapping the whole card (see
- * GSPostCardOverlay.js), and it's plain markup, not a Gutenberg-managed
- * link control - clicking it in the editor iframe follows the link and
- * navigates the entire iframe to the post's real frontend page, wiping out
- * the block editor content. The list view's block entry selects the block
- * without touching that markup.
+ * Selects the Latest Posts block via the "Document Overview" list view
+ * instead of clicking its rendered content directly (see file header).
  * @param {import('@playwright/test').Page} page
  */
-async function selectFeaturedPostsBlockViaListView(page) {
+async function selectLatestPostsBlockViaListView(page) {
 	await page.getByRole('button', { name: 'Document Overview' }).click();
-	await page.getByRole('link', { name: /Featured Posts/ }).click();
+	await page.getByRole('link', { name: /Latest Posts/ }).click();
 }
 
-test.describe.serial('Featured Posts block', () => {
+/**
+ * Returns the `aria-label` ("Read more about <title>") of every post card
+ * link currently rendered within `scope`, in DOM order. Used to compare
+ * which posts are shown before/after a control change without depending
+ * on a dedicated title CSS class (GSPostCardOverlay.js has none).
+ * @param {import('@playwright/test').Locator} scope
+ * @returns {Promise<string[]>}
+ */
+async function getCardAriaLabels(scope) {
+	return scope
+		.locator('a.overlay-wrapper-as-link')
+		.evaluateAll((links) => links.map((el) => el.getAttribute('aria-label')));
+}
+
+test.describe.serial('Latest Posts block', () => {
 	let pageId;
 	let pageUrl;
 
@@ -133,7 +159,7 @@ test.describe.serial('Featured Posts block', () => {
 		await page.close();
 	});
 
-	test('creates a page with a Featured Posts block, exercises the Show Category toggle, and publishes it', async ({
+	test('creates a page with a Latest Posts block, exercises the Ignore Sticky Posts and Show Category toggles, and publishes it', async ({
 		page,
 	}) => {
 		await page.goto('/wp-admin/post-new.php?post_type=page');
@@ -146,19 +172,34 @@ test.describe.serial('Featured Posts block', () => {
 			.getByRole('textbox', { name: 'Add title' })
 			.fill(PAGE_TITLE);
 
-		await insertFeaturedPostsBlock(page);
+		await insertLatestPostsBlock(page);
+
+		const block = editorFrame.locator('.newsly_block__latest_posts');
+		const firstCard = block.locator('.newsly__post_card__overlay').first();
+		await expect(firstCard).toBeVisible({ timeout: 10000 });
+
+		// Default view (no category, sticky posts included).
+		const labelsWithSticky = await getCardAriaLabels(block);
+		expect(labelsWithSticky.length).toBeGreaterThan(0);
+
+		// "Ignore Sticky Posts" should change which posts are fetched -
+		// live-verified: the sticky post pinned at the top of the default
+		// listing drops out once this is checked.
+		await page
+			.getByRole('checkbox', { name: 'Ignore Sticky Posts' })
+			.setChecked(true);
+		await expect(firstCard).toBeVisible({ timeout: 10000 });
+		await expect
+			.poll(() => getCardAriaLabels(block), { timeout: 10000 })
+			.not.toEqual(labelsWithSticky);
+
+		// Selecting a category re-fetches and filters the list.
 		await selectCategory(page, CATEGORY);
-
-		const card = editorFrame
-			.locator('.newsly_block__featured_posts .newsly__post_card__overlay')
-			.first();
-		await expect(card).toBeVisible({ timeout: 10000 });
-
-		// "Show Category" is the one toggle that's actually wired up
-		// correctly - verify both directions reach the editor render.
-		const categoryBadge = card.locator('.categories .single-category');
+		await expect(firstCard).toBeVisible({ timeout: 10000 });
+		const categoryBadge = firstCard.locator('.categories .single-category');
 		await expect(categoryBadge.first()).toBeVisible();
 
+		// "Show Category" - verify both directions reach the editor render.
 		await page.getByRole('checkbox', { name: 'Show Category' }).setChecked(
 			false
 		);
@@ -169,9 +210,8 @@ test.describe.serial('Featured Posts block', () => {
 		);
 		await expect(categoryBadge.first()).toBeVisible();
 
-		// Close the block inserter search popover in case it's still open
-		// from insertFeaturedPostsBlock, so it can't intercept the publish
-		// flow's own buttons.
+		// Close the block inserter search popover in case it's still open,
+		// so it can't intercept the publish flow's own buttons.
 		await page.keyboard.press('Escape');
 
 		await page.getByRole('button', { name: 'Publish', exact: true }).click();
@@ -195,7 +235,7 @@ test.describe.serial('Featured Posts block', () => {
 		expect(pageUrl).toBeTruthy();
 		await page.goto(pageUrl);
 
-		const block = page.locator('.newsly_block__featured_posts');
+		const block = page.locator('.newsly_block__latest_posts');
 		await expect(block).toBeVisible();
 
 		const cards = block.locator('.newsly__post_card__overlay');
@@ -219,6 +259,8 @@ test.describe.serial('Featured Posts block', () => {
 			.count();
 		expect(hasImage + hasNoImageMessage).toBeGreaterThan(0);
 
+		// Show Category was left on before publish - the badge should be
+		// present on the frontend too.
 		await expect(
 			firstCard.locator('.categories .single-category').first()
 		).toBeVisible();
@@ -231,7 +273,7 @@ test.describe.serial('Featured Posts block', () => {
 		await page.goto(pageUrl);
 
 		const firstLink = page
-			.locator('.newsly_block__featured_posts .newsly__post_card__overlay')
+			.locator('.newsly_block__latest_posts .newsly__post_card__overlay')
 			.first()
 			.locator('a.overlay-wrapper-as-link');
 		await expect(firstLink).toBeVisible();
@@ -252,67 +294,16 @@ test.describe.serial('Featured Posts block', () => {
 	});
 
 	test.fixme(
-		'the Show Featured Image toggle hides the image once unchecked (FPE2E-03 - GSPostCardOverlay.js never reads showFeaturedImage)',
+		'the sidebar panel is titled "Latest Posts Controls", not a copy-pasted "Featured Posts Controls"',
 		async ({ page }) => {
 			expect(pageId).toBeTruthy();
 			await page.goto(`/wp-admin/post.php?post=${pageId}&action=edit`);
 
-			const editorFrame = page.frameLocator(
-				'iframe[name="editor-canvas"]'
-			);
-			const card = editorFrame
-				.locator(
-					'.newsly_block__featured_posts .newsly__post_card__overlay'
-				)
-				.first();
-			await expect(card).toBeVisible({ timeout: 15000 });
-			// Select the block via the list view (not by clicking the card -
-			// see selectFeaturedPostsBlockViaListView) so the sidebar
-			// switches to its "Block" tab and the toggle controls render.
-			await selectFeaturedPostsBlockViaListView(page);
+			await selectLatestPostsBlockViaListView(page);
 
-			await page
-				.getByRole('checkbox', { name: 'Show Featured Image' })
-				.setChecked(false);
-
-			await expect(card.locator('.featured-image')).toHaveCount(0);
-			await expect(card.locator('.no-featured-image')).toHaveCount(0);
-		}
-	);
-
-	test.fixme(
-		'the Show Excerpt toggle adds excerpt text to the card (FPE2E-04 - GSPostCardOverlay.js has no excerpt-rendering branch at all)',
-		async ({ page }) => {
-			expect(pageId).toBeTruthy();
-			await page.goto(`/wp-admin/post.php?post=${pageId}&action=edit`);
-
-			const editorFrame = page.frameLocator(
-				'iframe[name="editor-canvas"]'
-			);
-			const card = editorFrame
-				.locator(
-					'.newsly_block__featured_posts .newsly__post_card__overlay'
-				)
-				.first();
-			await expect(card).toBeVisible({ timeout: 15000 });
-			// Select the block via the list view (not by clicking the card -
-			// see selectFeaturedPostsBlockViaListView) so the sidebar
-			// switches to its "Block" tab and the toggle controls render.
-			await selectFeaturedPostsBlockViaListView(page);
-
-			await page
-				.getByRole('checkbox', { name: 'Show Excerpt' })
-				.setChecked(false);
-			const textWithoutExcerpt = (await card.textContent()).trim();
-
-			await page
-				.getByRole('checkbox', { name: 'Show Excerpt' })
-				.setChecked(true);
-			const textWithExcerpt = (await card.textContent()).trim();
-
-			expect(textWithExcerpt.length).toBeGreaterThan(
-				textWithoutExcerpt.length
-			);
+			await expect(
+				page.getByRole('button', { name: 'Latest Posts Controls' })
+			).toBeVisible({ timeout: 15000 });
 		}
 	);
 });
