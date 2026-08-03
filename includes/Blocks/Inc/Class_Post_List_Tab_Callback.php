@@ -5,7 +5,7 @@
  * Description.
  *
  * @since Version 3 digits
- * @package gutenberg-starter
+ * @package Newsly
  */
 
 	namespace Anam\Newsly\Blocks\Inc;
@@ -45,8 +45,8 @@ class Class_Post_List_Tab_Callback {
 	 * Construct of Class
 	 */
 	public function __construct() {
-		add_action( 'wp_ajax_nopriv_handle_category_post_content', array( $this, 'gs_handle_category_post_content' ) );
-		add_action( 'wp_ajax_handle_category_post_content', array( $this, 'gs_handle_category_post_content' ) );
+		add_action( 'wp_ajax_nopriv_handle_category_post_content', array( $this, 'newsly_handle_category_post_content' ) );
+		add_action( 'wp_ajax_handle_category_post_content', array( $this, 'newsly_handle_category_post_content' ) );
 	}
 	/**
 	 * Get block attributes from post
@@ -80,8 +80,8 @@ class Class_Post_List_Tab_Callback {
 		/**
 		 * Verify nonce for security.
 		 */
-		$gs_ajax_nonce = isset( $_POST['gsAjaxNonce'] ) ? sanitize_text_field( wp_unslash( $_POST['gsAjaxNonce'] ) ) : '';
-		if ( empty( $gs_ajax_nonce ) || ! wp_verify_nonce( $gs_ajax_nonce, 'gs_ajax_nonce' ) ) {
+		$newsly_ajax_nonce = isset( $_POST['newslyAjaxNonce'] ) ? sanitize_text_field( wp_unslash( $_POST['newslyAjaxNonce'] ) ) : '';
+		if ( empty( $newsly_ajax_nonce ) || ! wp_verify_nonce( $newsly_ajax_nonce, 'newsly_ajax_nonce' ) ) {
 			wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
 			die();
 		}
@@ -89,7 +89,7 @@ class Class_Post_List_Tab_Callback {
 		 * Check and sanitize inputs.
 		 */
 		$cat_slug = isset( $_POST['catSlug'] ) ? sanitize_text_field( wp_unslash( $_POST['catSlug'] ) ) : '';
-		$post_id  = isset( $_POST['posdID'] ) ? sanitize_text_field( wp_unslash( $_POST['posdID'] ) ) : '';
+		$post_id  = isset( $_POST['postId'] ) ? sanitize_text_field( wp_unslash( $_POST['postId'] ) ) : '';
 		// Make post int.
 		$post_id             = intval( $post_id );
 		$block_attr          = $this->get_block_attributes_from_post( $post_id, self::$block_name );
@@ -127,7 +127,7 @@ class Class_Post_List_Tab_Callback {
 								echo get_the_post_thumbnail( $post_id, 'large', array( 'class' => 'post-thumbnail rounded h-80 object-cover w-full' ) );
 							?>
 						<?php else : ?>
-							<img class="rounded h-80 object-cover w-full" src="https://placehold.co/600x400" alt="Placeholder Image">
+							<img class="rounded h-80 object-cover w-full" src="<?php echo esc_url( plugins_url( 'assets/images/placeholder.svg', NEWSLY_FILE ) ); ?>" alt="Placeholder Image">
 						<?php endif; ?>
 					</div>
 					<?php endif; ?>
@@ -158,7 +158,7 @@ class Class_Post_List_Tab_Callback {
 			<?php endwhile; ?>
 		<?php else : ?>
 			<div class="post card shadow-md hover:shadow-lg rounded border-solid border-black-200 border-x border-y p-8">
-				<h2 class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium"><?php echo esc_html( 'No Posts Found', 'newsly' ); ?></h2>
+				<h2 class="mt-4 inline-block font-poppins text-xl text-slate-900 hover:text-slate-600	transition font-medium"><?php echo esc_html__( 'No Posts Found', 'newsly' ); ?></h2>
 			</div>
 		<?php endif; ?>
 		<?php

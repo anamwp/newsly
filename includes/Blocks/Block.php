@@ -43,8 +43,7 @@ class Block
 		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/featured-posts'); // jest | playwright - test done
 		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/latest-posts'); // jest | playwright - test done
 		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/category-post'); // jest | playwright - test done
-		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/post-lists-tab' );
-		// register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/smart-category-posts' );
+		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/post-lists-tab');
 		// register_block_type_from_metadata(
 		// 	NEWSLY_PATH . '/build/blocks/movie-lists',
 		// 	array(

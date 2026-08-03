@@ -25,5 +25,9 @@ class Init
 		 * Gutenberg block
 		 */
 		Blocks\Block::init();
+		/**
+		 * Post list tab AJAX pagination callback
+		 */
+		Blocks\Inc\Class_Post_List_Tab_Callback::init();
 	}
 }
