@@ -2,74 +2,81 @@
 
 [![CI](https://github.com/anamwp/newsly/actions/workflows/ci.yml/badge.svg)](https://github.com/anamwp/newsly/actions/workflows/ci.yml)
 
-## Overview
+Newsly is a WordPress plugin that adds four Gutenberg blocks for surfacing news content on a site's own posts and categories — a category grid, a featured-content highlight, a "latest posts" list, and a tabbed post browser — for editors who want more layout control than core's block library gives them, without reaching for a page builder or an external feed. It doesn't call any external service; everything it renders comes from the site's own `wp_posts`/`wp_terms` tables.
 
-Newsly is a WordPress plugin that provides dynamic, customizable Gutenberg blocks for displaying news, content, and information on your WordPress site. Built with `@wordpress/scripts` and standard block development practices, Newsly offers a flexible, extensible solution for content management.
+## Architecture
 
-## Features
+### Block rendering: three static, one dynamic — not four dynamic blocks
 
-- **Dynamic Blocks**: Server-side rendered (SSR) Gutenberg blocks for post/category display
-- **Block Development**: Streamlined workflow for creating new blocks with `@wordpress/create-block`
-- **Internationalization**: Built-in i18n support (text domain `newsly`)
-- **Testing**: Jest, PHPUnit, and Playwright test coverage
+The blocks are not uniform in how they render, and that distinction matters more than anything else in this codebase:
+
+- **Post Lists Tab** is a genuinely dynamic block. Its `block.json` declares a `render` file (`render.php`), it ships no `save.js`, and WordPress calls `Class_Post_List_Tab_Callback`/`render.php` on every page load to turn the block's attributes into HTML. But "dynamic" here doesn't mean "re-queried on every view": the initial list of posts shown is whatever was fetched from the REST API in the editor and frozen into the block's attributes at save time (parsed straight out of the `<!-- wp:newsly-block/post-lists-tab {"fetchedPosts": [...]} -->` comment in `post_content`) — `render.php` re-renders that stored data server-side, it doesn't run a fresh `WP_Query`. The one place that *does* query live is category-tab switching: clicking a tab fires an `admin-ajax.php` request (`includes/Blocks/Inc/Class_Post_List_Tab_Callback.php`) that runs a bounded `WP_Query` (`posts_per_page => 9`) and returns freshly rendered HTML for that category.
+- **Category Post, Featured Posts and Latest Posts** are ordinary static blocks: `index.js` registers both `edit` and `save`, `save.js` renders straight from the block's own attributes, and the result is serialised into `post_content` at publish time like any core block. Post/category data is fetched from the WordPress REST API (`apiFetch`) while editing, not at render time — so once a post is published, these three blocks show whatever was true when the block was last saved. Editing or deleting a referenced post afterwards won't be reflected until someone re-opens and re-saves the block. There's no PHP render callback, no query, and no caching involved in serving them — they're static HTML, so this is a staleness trade-off, not a query-cost one.
+
+In short: the plugin's own `readme.txt` used to describe all four blocks as server-side rendered, which isn't accurate for three of them. If you're picking this apart for an interview, "server-side rendered" only applies to Post Lists Tab, and even that block's *initial* content is attribute data captured at save time, not a live query — only its AJAX tab-switch is.
+
+### Registration
+
+All four blocks are registered from one place, `Blocks\Block::register_block()` (`includes/Blocks/Block.php`), hooked on WordPress's `init` action. Each call is `register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/<name>' )`, reading the compiled `block.json` from `build/` — there's no per-block PHP registration to keep in sync. `Blocks\Inc\Class_Post_List_Tab_Callback` is a second, independent class registering the AJAX endpoints Post Lists Tab needs; both classes are instantiated from `Init.php`, which in turn is instantiated once from the main `Newsly` class's `plugins_loaded` hook.
+
+### Query cost
+
+The only PHP-side query this plugin runs against a page view is Post Lists Tab's AJAX tab switch, and it's bounded (`posts_per_page => 9`) with no object-cache or transient layer in front of it — every tab click is a fresh `WP_Query`. Given the request is user-triggered (a tab click, not something that fires automatically per page load) and capped at 9 posts, this is a reasonable trade rather than an oversight, but it's worth knowing there's no caching to lean on if traffic to that endpoint ever grows. The other three blocks impose no page-render query cost at all, for the staleness reasons above.
+
+### Build pipeline
+
+Blocks are built with `@wordpress/scripts` (webpack under the hood): `npm run build` compiles each `src/blocks/<name>` into `build/blocks/<name>`, which is what `Block.php` registers from. `build/` is git-ignored and only produced by running the build — it is **not** currently generated by either WP Engine deploy workflow (`.github/workflows/master.yml`/`dev.yml`), which just checks out the repository and syncs it as-is. That's a real gap: without `build/` present on the deploy target some other way, the blocks won't register on a freshly deployed site. Left untouched here since editing the deploy workflows was explicitly out of scope for this pass — flagging it rather than working around it quietly.
+
+Separately, `dist/css/main.css` is a small, hand-maintained Tailwind build (`npm run build-scss`, via `postcss.config.js`) that *is* committed to the repo and is enqueued globally by `newsly_enqueue_block_assets()`. Most of the utility classes used in `render.php` and the block markup (`grid`, `shadow-md`, `capitalize`, and so on) come from this Tailwind bundle rather than from each block's own webpack-bundled `style.scss`.
+
+### Internationalisation
+
+Text domain is `newsly` throughout (verified against every `__()`/`_e()`/`esc_html__()` call in the codebase). PHP strings load via `load_plugin_textdomain()`, hooked on `init` in `newsly.php`. JS strings are extracted at build time by `@wordpress/babel-plugin-makepot` (wired into `.babelrc`) into `gettext.pot`.
 
 ## Blocks
 
-- **Category Post**: Displays posts filtered by selected categories with a customizable column layout and post count
-- **Featured Posts**: Showcases featured content from a category in a highlighted card layout
-- **Latest Posts**: Displays the most recent posts with category filtering and pagination options
-- **Post Lists Tab**: Tabbed interface for browsing different post lists with dynamic switching
-- **Smart Category Posts**: Category-based post display with advanced filtering and sorting
+- **Category Post** — posts filtered by one or more categories, tabbed by category, with a configurable column layout.
+- **Featured Posts** — a highlighted card layout for featured content from a category.
+- **Latest Posts** — the most recent posts, with category filtering and a "show N" limit.
+- **Post Lists Tab** — a tabbed post browser with AJAX-driven category switching (see Architecture above).
 
-See the [Blocks Overview wiki page](../../wiki/Blocks-Overview) for attributes, shared components, and per-block notes.
+See [Blocks Overview](../../wiki/Blocks-Overview) for attributes and shared components.
 
-## Installation
+## Development
 
 ```
 composer install
-npm install        # or: yarn install
+npm install
 ```
 
 Node version is pinned in `.nvmrc` — run `nvm use` first if your global Node differs.
 
-## Common commands
-
 | Command | Purpose |
 |---|---|
-| `npm run start` | Start development (watches blocks + legacy assets) |
-| `npm run build` | Production build |
-| `npm run jest` | Run JS unit tests |
-| `npm run jest -- --coverage` | Run JS unit tests with coverage |
-| `vendor/bin/phpunit` | Run PHP unit tests |
-| `npx playwright test` | Run e2e tests |
+| `npm run build` | Production build of the blocks (`build/`) |
+| `npm run start` | Watch mode: blocks plus the legacy `assets/` SCSS |
+| `npm run build-scss` | Rebuild `dist/css/main.css` from `assets/scss` |
+| `composer lint:php` | PHPCS against the plugin's PHP |
+| `composer lint:fix` | Auto-fix what PHPCBF can |
+| `npm run lint:js` | ESLint against `src/` (see note below) |
+| `npm run jest` | Jest unit tests (242 tests) |
+| `vendor/bin/phpunit` | PHPUnit — currently a single placeholder test confirming the WP test harness is wired up correctly, not feature coverage (see `tests/README.md`) |
+| `npx playwright test` | End-to-end tests against a live WordPress install (needs `WP_BASE_URL`, see `.env.example`) |
 
-## Creating a new block
+CI (`.github/workflows/ci.yml`) runs the PHP and JS commands above on every push to `main`/`dev` and on pull requests; Playwright runs as a separate, non-blocking job since it needs a live site the workflow doesn't provision.
 
-```
-npx @wordpress/create-block@latest your-block-name --variant=dynamic --no-plugin
-```
+`npm run lint:js` currently reports pre-existing findings across `src/` (mostly formatting) that haven't been triaged — it's wired into CI as a non-blocking signal rather than left out entirely. Run it locally before you rely on it to gate anything.
 
-## Translating a string
+## Requirements
 
-```js
-import { __ } from '@wordpress/i18n';
-console.log( __( 'My log text here', 'newsly' ) );
-```
+- PHP 8.0+
+- WordPress 6.0+
+- Node version pinned in `.nvmrc`
 
-## Documentation
+## Licence
 
-Deeper documentation lives in this repo's [Wiki](../../wiki) rather than here, so it can grow without bloating this file:
+GPLv2 or later — see [LICENSE](LICENSE).
 
-- **[Blocks Overview](../../wiki/Blocks-Overview)** — what each block does, attributes, shared components
-- **[Development Workflow](../../wiki/Development-Workflow)** — full setup, block creation, the block-audit process
-- **[Testing Guide](../../wiki/Testing-Guide)** — detailed Jest/PHPUnit/Playwright commands, how the two `__mocks__` folders work
-- **[Known Issues & Fixes](../../wiki/Known-Issues-And-Fixes)** — real bugs found in this codebase and how they were fixed — read before editing `save.js`, `view.js`, or shared post-card components
-- **[Deployment](../../wiki/Deployment)** — how `dev`/`master` reach WP Engine via GitHub Actions
+## Contributing
 
-If the Wiki tab is empty, the source pages are drafted in [`wiki/`](wiki/) in this repo — see [`wiki/_publishing.md`](wiki/_publishing.md) for how to push them live.
-
-### Reference links
-
-- [@wordpress/scripts documentation](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/)
-- [Minimal Block Example](https://github.com/WordPress/block-development-examples/tree/trunk/plugins/minimal-block-ca6eda)
-- [Enqueuing built assets with dependencies/versions](https://github.com/WordPress/block-development-examples/blob/trunk/plugins/data-basics-59c8f8/plugin.php)
+Run `composer lint:php` and `npm run jest` before opening a pull request; both run in CI. See [Development Workflow](../../wiki/Development-Workflow) for the day-to-day commands and the block-audit process used when touching an existing block, and [Known Issues & Fixes](../../wiki/Known-Issues-And-Fixes) before editing `save.js`, `view.js`, or the shared post-card components — several non-obvious bugs have been fixed there before.

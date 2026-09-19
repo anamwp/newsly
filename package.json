@@ -6,10 +6,8 @@
 	"scripts": {
 		"build-scss": "postcss assets/scss/main.scss -o dist/css/main.css",
 		"watch-scss": "postcss assets/scss/main.scss -o dist/css/main.css --watch",
-		"build-js": "babel assets/js --out-dir dist/js",
-		"watch-js": "babel assets/js --out-dir dist/js --watch",
-		"build-assets": "npm run build-scss && npm run build-js",
-		"watch-assets": "npm run watch-scss & npm run watch-js",
+		"build-assets": "npm run build-scss",
+		"watch-assets": "npm run watch-scss",
 		"tailwindwatch": "tailwindcss -i ./src/*.js -o ./build/style.css --watch --postcss --minify",
 		"test": "jest",
 		"lint:js": "wp-scripts lint-js src",
