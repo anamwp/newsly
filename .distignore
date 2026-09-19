@@ -1,6 +1,5 @@
 .git
 .github
-.editorconfig
 .gitignore
 .distignore
 .env
@@ -9,7 +8,6 @@
 .nvmrc
 .phpcs.xml.dist
 .phpunit.result.cache
-.travis.yml
 .playwright-mcp
 __mocks__
 tests
@@ -23,8 +21,6 @@ playwright-report
 wiki
 node_modules
 src
-gulpfile.js
-babel-register.js
 jest-setup.js
 composer.json
 composer.lock
