@@ -1,5 +1,7 @@
 # Newsly Plugin
 
+[![CI](https://github.com/anamwp/newsly/actions/workflows/ci.yml/badge.svg)](https://github.com/anamwp/newsly/actions/workflows/ci.yml)
+
 ## Overview
 
 Newsly is a WordPress plugin that provides dynamic, customizable Gutenberg blocks for displaying news, content, and information on your WordPress site. Built with `@wordpress/scripts` and standard block development practices, Newsly offers a flexible, extensible solution for content management.
