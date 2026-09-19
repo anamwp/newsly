@@ -1,15 +1,19 @@
 {
     "name": "theanamhossain/newsly",
-    "description": "A starter plugin to start your next big idea",
+    "description": "Dynamic, server-side-rendered Gutenberg blocks for displaying news posts, categories, and featured content.",
     "type": "wordpress-plugin",
-    "license": "GPLv2",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "anamwp",
             "email": "theanamhossain@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=8.0"
+    },
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Anam\\Newsly\\": "includes/"
@@ -17,11 +21,11 @@
         "files": []
     },
     "require-dev": {
-        "composer/composer": "^2.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.4.1 || ^0.5 || ^0.6.2 || ^0.7",
-        "wp-coding-standards/wpcs": "^3.1.0",
-        "yoast/phpunit-polyfills": "^4.0@dev",
-        "phpunit/phpunit": "^9"
+        "wp-coding-standards/wpcs": "^3.4",
+        "yoast/phpunit-polyfills": "^4.0",
+        "phpunit/phpunit": "^9",
+        "phpcompatibility/phpcompatibility-wp": "dev-master"
     },
     "config": {
         "allow-plugins": {
@@ -29,9 +33,7 @@
         }
     },
     "scripts": {
-        "set_default": "phpcs --config-set default_standard WordPress",
-        "phpcs_i": "phpcs -i",
-        "phpcs": "phpcs includes/CLI/* --standard=./phpcs.xml *",
-        "phpcbf": "phpcbf includes/CLI/* --standard=./phpcbf.xml *"
+        "lint:php": "phpcs",
+        "lint:fix": "phpcbf"
     }
 }

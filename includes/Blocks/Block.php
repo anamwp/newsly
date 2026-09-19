@@ -1,54 +1,52 @@
 <?php
+/**
+ * Block registration.
+ *
+ * @package Anam\Newsly
+ */
 
 namespace Anam\Newsly\Blocks;
 
-class Block
-{
+/**
+ * Registers all of Newsly's block types.
+ */
+class Block {
+
 	/**
-	 * Undocumented variable
+	 * Singleton instance.
 	 *
-	 * @var [type]
+	 * @var Block|null
 	 */
 	private static $instance;
 	/**
-	 * Undocumented function
+	 * Initiate class.
 	 *
-	 * @return void
+	 * @return Block
 	 */
-	public static function init()
-	{
-		if (null === self::$instance) {
+	public static function init() {
+		if ( null === self::$instance ) {
 			self::$instance = new self();
 		}
 		return self::$instance;
 	}
-	// public $movie_list_callback_instance;
 	/**
 	 * Initiate Class
 	 */
-	public function __construct()
-	{
-		add_action('init', array($this, 'register_block'));
+	public function __construct() {
+		add_action( 'init', array( $this, 'register_block' ) );
 	}
 	/**
 	 * Register Block
 	 *
 	 * @return void
 	 */
-	public function register_block()
-	{
+	public function register_block() {
 		/**
 		 * Register block type from metadata
 		 */
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/featured-posts'); // jest | playwright - test done
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/latest-posts'); // jest | playwright - test done
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/category-post'); // jest | playwright - test done
-		register_block_type_from_metadata(NEWSLY_PATH . '/build/blocks/post-lists-tab');
-		// register_block_type_from_metadata(
-		// 	NEWSLY_PATH . '/build/blocks/movie-lists',
-		// 	array(
-		// 		'render_callback' => array( $this, 'movie_lists_render_frontend_callback' ),
-		// 	)
-		// );
+		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/featured-posts' );
+		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/latest-posts' );
+		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/category-post' );
+		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/post-lists-tab' );
 	}
 }

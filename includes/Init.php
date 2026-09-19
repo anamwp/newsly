@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Includes fiels.
+ * Includes files.
  *
  * All necessary files are included here.
  *
@@ -12,15 +11,14 @@
 namespace Anam\Newsly;
 
 /**
- * Inilize all necessary files.
+ * Initialise all necessary files.
  */
-class Init
-{
+class Init {
+
 	/**
 	 * Class constructor
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		/**
 		 * Gutenberg block
 		 */

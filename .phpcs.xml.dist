@@ -1,11 +1,15 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards based custom ruleset for your plugin">
-	<description>Generally-applicable sniffs for WordPress plugins.</description>
+<ruleset name="WordPress Coding Standards ruleset for Newsly">
+	<description>Generally-applicable sniffs for the Newsly plugin.</description>
 
 	<!-- What to scan -->
 	<file>.</file>
 	<exclude-pattern>/vendor/</exclude-pattern>
 	<exclude-pattern>/node_modules/</exclude-pattern>
+	<exclude-pattern>/dist/</exclude-pattern>
+	<exclude-pattern>/build/</exclude-pattern>
+	<exclude-pattern>/coverage/</exclude-pattern>
+	<exclude-pattern>/coverage-html/</exclude-pattern>
 
 	<!-- How to scan -->
 	<!-- Usage instructions: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage -->
@@ -18,30 +22,50 @@
 
 	<!-- Rules: Check PHP version compatibility -->
 	<!-- https://github.com/PHPCompatibility/PHPCompatibility#sniffing-your-code-for-compatibility-with-specific-php-versions -->
-	<config name="testVersion" value="5.6-"/>
+	<!-- Newsly's plugin header and readme.txt both declare "Requires PHP: 8.0". -->
+	<config name="testVersion" value="8.0-"/>
 	<!-- https://github.com/PHPCompatibility/PHPCompatibilityWP -->
 	<rule ref="PHPCompatibilityWP"/>
 
 	<!-- Rules: WordPress Coding Standards -->
 	<!-- https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards -->
 	<!-- https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties -->
-	<config name="minimum_supported_wp_version" value="4.6"/>
+	<!-- Matches the "Requires at least: 6.0" declared in readme.txt. -->
+	<config name="minimum_supported_wp_version" value="6.0"/>
 	<rule ref="WordPress"/>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
-			<property name="prefixes" type="array" value="my-plugin"/>
+			<!-- "Anam" covers the Anam\Newsly PSR-4 namespace; the rest cover globals in newsly.php and render.php. -->
+			<property name="prefixes" type="array">
+				<element value="newsly"/>
+				<element value="NEWSLY"/>
+				<element value="Newsly"/>
+				<element value="Anam"/>
+			</property>
 		</properties>
+		<!-- tests/bootstrap.php is the unmodified wp-cli PHPUnit scaffold; it isn't shipped and its variable/function names follow that convention, not ours. -->
+		<exclude-pattern>/tests/bootstrap\.php</exclude-pattern>
 	</rule>
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<!-- Value: replace the text domain used. -->
-			<property name="text_domain" type="array" value="my-plugin"/>
+			<property name="text_domain" type="array">
+				<element value="newsly"/>
+			</property>
 		</properties>
 	</rule>
 	<rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
 		<properties>
 			<property name="blank_line_check" value="true"/>
 		</properties>
+	</rule>
+
+	<!-- Classes are autoloaded via Composer PSR-4 (see composer.json), not WordPress's classic "class-{name}.php" file-naming convention, so that sniff doesn't apply here. -->
+	<rule ref="WordPress.Files.FileName">
+		<severity>0</severity>
+	</rule>
+
+	<!-- newsly.php is the plugin's main/bootstrap file; splitting the main class out of it would be a structural change outside the scope of this pass. -->
+	<rule ref="Universal.Files.SeparateFunctionsFromOO">
+		<exclude-pattern>/newsly\.php</exclude-pattern>
 	</rule>
 </ruleset>

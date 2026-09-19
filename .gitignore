@@ -3,6 +3,7 @@ node_modules
 /build/
 # /dist/
 *.lock
+!composer.lock
 .env
 report.txt
 .phpunit.result.cache
