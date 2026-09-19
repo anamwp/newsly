@@ -1,7 +1,7 @@
 {
-	"name": "gutenberg-starter",
+	"name": "newsly",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Dynamic Gutenberg blocks for displaying news posts, categories, and featured content.",
 	"main": "build/index.js",
 	"scripts": {
 		"build-scss": "postcss assets/scss/main.scss -o dist/css/main.css",
@@ -26,8 +26,8 @@
 		"packages-update": "wp scripts packages-update"
 	},
 	"keywords": [],
-	"author": "",
-	"license": "ISC",
+	"author": "Anam",
+	"license": "GPL-2.0-or-later",
 	"dependencies": {
 		"@wordpress/icons": "^10.3.0"
 	},

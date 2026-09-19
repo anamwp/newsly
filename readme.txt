@@ -4,7 +4,7 @@ Tags: blocks, news, posts, category, dynamic blocks
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 8.0
-Stable tag: 1.0
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Dynamic Gutenberg blocks for displaying news posts, categories, and featured con
 
 == Description ==
 
-Newsly provides a set of dynamic, customizable Gutenberg blocks for displaying news, content, and information on your WordPress site. Each block is server-side rendered and built with standard block development practices for a flexible, extensible content management experience.
+Newsly provides a set of customizable Gutenberg blocks for displaying news, content, and information on your WordPress site, built with standard block development practices for a flexible, extensible content management experience.
 
 = Blocks included =
 
@@ -20,7 +20,6 @@ Newsly provides a set of dynamic, customizable Gutenberg blocks for displaying n
 * **Featured Posts** – Showcases featured content from a category in a highlighted card layout.
 * **Latest Posts** – Displays the most recent posts with category filtering and pagination options.
 * **Post Lists Tab** – Tabbed interface for browsing different post lists with dynamic switching.
-* **Smart Category Posts** – Category-based post display with advanced filtering and sorting.
 
 == Installation ==
 
@@ -36,10 +35,10 @@ No. All blocks render using your site's own posts and categories.
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * Initial release.
 
 == Upgrade Notice ==
 
-= 1.0 =
+= 1.0.0 =
 Initial release.

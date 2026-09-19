@@ -1,6 +1,7 @@
 {
     "name": "theanamhossain/newsly",
-    "description": "Dynamic, server-side-rendered Gutenberg blocks for displaying news posts, categories, and featured content.",
+    "description": "Dynamic Gutenberg blocks for displaying news posts, categories, and featured content.",
+    "version": "1.0.0",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
     "authors": [
