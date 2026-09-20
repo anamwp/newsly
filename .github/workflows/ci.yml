@@ -82,8 +82,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Pre-existing findings (mostly formatting) haven't been triaged yet;
-      # kept non-blocking so this signal is visible without failing the build.
+      # Non-blocking: lint-js reports formatting findings across src/.
       # See lint:js in package.json to reproduce locally.
       - name: JS lint
         run: npm run lint:js

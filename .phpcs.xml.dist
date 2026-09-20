@@ -64,7 +64,7 @@
 		<severity>0</severity>
 	</rule>
 
-	<!-- newsly.php is the plugin's main/bootstrap file; splitting the main class out of it would be a structural change outside the scope of this pass. -->
+	<!-- newsly.php is the plugin's main/bootstrap file, mixing the Newsly class with the hook-registration functions that use it, a common pattern for a single-file plugin entry point. -->
 	<rule ref="Universal.Files.SeparateFunctionsFromOO">
 		<exclude-pattern>/newsly\.php</exclude-pattern>
 	</rule>
