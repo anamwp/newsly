@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build blocks
+        run: npm run build
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+
+      # Assembles a clean copy of the plugin honouring .distignore (the
+      # same file WordPress.org's SVN deploy would read), with build/ and
+      # vendor/ included since both are required at runtime and neither
+      # is tracked in git. The top-level folder inside the zip is
+      # "newsly" so it installs correctly via Plugins -> Upload.
+      - name: Assemble plugin archive
+        run: |
+          mkdir -p dist-archive/newsly
+          rsync -a --exclude-from=.distignore --exclude=dist-archive ./ dist-archive/newsly/
+          cd dist-archive
+          zip -r ../newsly.zip newsly
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Newsly ${{ github.ref_name }}
+          files: newsly.zip
+          generate_release_notes: true

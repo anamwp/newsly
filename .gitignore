@@ -14,3 +14,5 @@ coverage-html/
 coverage.xml
 coverage.txt
 .playwright-mcp
+/dist-archive/
+*.zip
