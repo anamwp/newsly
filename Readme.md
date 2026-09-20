@@ -33,7 +33,7 @@ Separately, `dist/css/main.css` is a small, hand-maintained Tailwind build (`npm
 
 ### Internationalisation
 
-Text domain is `newsly` throughout (verified against every `__()`/`_e()`/`esc_html__()` call in the codebase). PHP strings load via `load_plugin_textdomain()`, hooked on `init` in `newsly.php`. JS strings are extracted at build time by `@wordpress/babel-plugin-makepot` (wired into `.babelrc`) into `gettext.pot`.
+Text domain is `newsly` throughout (verified against every `__()`/`_e()`/`esc_html__()` call in PHP and every `@wordpress/i18n` call in `src/`). There's no `load_plugin_textdomain()` call: WordPress has loaded plugin translations just-in-time from `WP_LANG_DIR/plugins/` since 4.6, and this plugin doesn't bundle its own compiled `.mo` files, so an explicit call would have nothing to add. JS strings are extracted at build time by `@wordpress/babel-plugin-makepot` (wired into `.babelrc`) into `languages/newsly.pot`.
 
 ## Blocks
 

@@ -25,17 +25,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 /**
- * Load plugin textdomain
- */
-add_action(
-	'init',
-	function () {
-		load_plugin_textdomain( 'newsly', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-	}
-);
-
-
-/**
  * Main plugin bootstrap class.
  */
 final class Newsly {
@@ -63,14 +52,6 @@ final class Newsly {
 			$instance = new self();
 		}
 		return $instance;
-	}
-	/**
-	 * Load plugin text domain
-	 *
-	 * @return void
-	 */
-	public function load_text_domain() {
-		load_plugin_textdomain( 'newsly' );
 	}
 	/**
 	 * Define plugin

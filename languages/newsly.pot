@@ -1,0 +1,32 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"X-Generator: babel-plugin-makepot\n"
+
+#: src/blocks/components/TypographyControl.js:187
+msgid "Font Weight"
+msgstr ""
+
+#: src/blocks/components/TypographyControl.js:234
+msgid "Style"
+msgstr ""
+
+#: src/blocks/components/TypographyControl.js:240
+msgid "Decoration"
+msgstr ""
+
+#: src/blocks/components/TypographyControl.js:246
+msgid "Transform"
+msgstr ""
+
+#: src/blocks/components/TypographyControl.js:81
+msgid "Small"
+msgstr ""
+
+#: src/blocks/components/TypographyControl.js:86
+msgid "Medium"
+msgstr ""
+
+#: src/blocks/components/TypographyControl.js:91
+msgid "Big"
+msgstr ""

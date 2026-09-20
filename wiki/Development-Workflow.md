@@ -40,7 +40,7 @@ import { __ } from '@wordpress/i18n';
 console.log( __( 'My log text here', 'newsly' ) );
 ```
 
-Text domain is `newsly`. Regenerate `gettext.pot` after adding new translatable strings (check `package.json`/`composer.json` for the exact i18n build command in use, if one has been wired up).
+Text domain is `newsly`. `languages/newsly.pot` regenerates automatically whenever Babel processes `src/` (`@wordpress/babel-plugin-makepot`, configured in `.babelrc`) — running `npm run build`, `npm run start`, or `npm run jest` all trigger it as a side effect, no separate command needed.
 
 ## Block audit process
 

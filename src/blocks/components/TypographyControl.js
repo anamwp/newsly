@@ -78,17 +78,17 @@ export default function TypographyControl({
 	 */
 	const fontSizes = [
 		{
-			name: __('Small'),
+			name: __('Small', 'newsly'),
 			slug: 'small',
 			size: 16,
 		},
 		{
-			name: __('Medium'),
+			name: __('Medium', 'newsly'),
 			slug: 'medium',
 			size: 22,
 		},
 		{
-			name: __('Big'),
+			name: __('Big', 'newsly'),
 			slug: 'big',
 			size: 26,
 		},
@@ -184,7 +184,7 @@ export default function TypographyControl({
 					}}
 				>
 					<SelectControl
-						label={__('Font Weight')}
+						label={__('Font Weight', 'newsly')}
 						options={fontWeightVariationOptions}
 						value={attributes[textFontWeightAttr]}
 						onChange={handleSelectControl(textFontWeightAttr)}
@@ -231,19 +231,19 @@ export default function TypographyControl({
 						step={0.1}
 					/>
 					<SelectControl
-						label={__('Style')}
+						label={__('Style', 'newsly')}
 						value={attributes[textStyleAttr]}
 						options={styleVariationOptions}
 						onChange={handleSelectControl(textStyleAttr)}
 					/>
 					<SelectControl
-						label={__('Decoration')}
+						label={__('Decoration', 'newsly')}
 						value={attributes[textDecorationAttr]}
 						options={defcorationVariationOptions}
 						onChange={handleSelectControl(textDecorationAttr)}
 					/>
 					<SelectControl
-						label={__('Transform')}
+						label={__('Transform', 'newsly')}
 						value={attributes[textTransformAttr]}
 						options={transformVariationOptions}
 						onChange={handleSelectControl(textTransformAttr)}
@@ -251,7 +251,7 @@ export default function TypographyControl({
 				</div>
 			)}
 			{/* <SelectControl
-				label={__('Font Weight')}
+				label={__('Font Weight', 'newsly')}
 				options={fontWeightVariationOptions}
 				value={attributes[textFontWeightAttr]}
 				onChange={handleSelectControl(textFontWeightAttr)}
@@ -298,19 +298,19 @@ export default function TypographyControl({
 				step={0.1}
 			/>
 			<SelectControl
-				label={__('Style')}
+				label={__('Style', 'newsly')}
 				value={attributes[textStyleAttr]}
 				options={styleVariationOptions}
 				onChange={handleSelectControl(textStyleAttr)}
 			/>
 			<SelectControl
-				label={__('Decoration')}
+				label={__('Decoration', 'newsly')}
 				value={attributes[textDecorationAttr]}
 				options={defcorationVariationOptions}
 				onChange={handleSelectControl(textDecorationAttr)}
 			/>
 			<SelectControl
-				label={__('Transform')}
+				label={__('Transform', 'newsly')}
 				value={attributes[textTransformAttr]}
 				options={transformVariationOptions}
 				onChange={handleSelectControl(textTransformAttr)}
