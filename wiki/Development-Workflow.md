@@ -25,9 +25,8 @@ Node version is pinned in `.nvmrc` (`v16.15.0`) — use `nvm use` before install
 npx @wordpress/create-block@latest example-name --variant=dynamic --no-plugin
 ```
 
-The `--variant=dynamic` flag scaffolds a block with PHP server-side rendering (`render.php`) rather than a static `save.js` markup block. Every block in this plugin supports:
+The `--variant=dynamic` flag scaffolds a block with PHP server-side rendering (`render.php`) rather than a static `save.js` markup block. Only Post Lists Tab is built that way; Category Post, Featured Posts and Latest Posts are static blocks (`edit` + `save`, no `render.php`) — see [Blocks Overview](Blocks-Overview) and the README's Architecture section for the distinction. Every block in this plugin supports:
 
-- Server-side rendering (SSR)
 - Full block styling and customization
 - Editor and frontend preview
 - Internationalization

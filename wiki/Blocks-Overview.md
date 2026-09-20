@@ -1,6 +1,6 @@
 # Blocks Overview
 
-All blocks live under `src/blocks/<block-name>/`, are registered dynamically (server-side render via PHP in `includes/Blocks/Block.php`), and share components from `src/blocks/components/`.
+All blocks live under `src/blocks/<block-name>/`, are registered from `includes/Blocks/Block.php`, and share components from `src/blocks/components/`. Only Post Lists Tab renders via PHP (`render.php`); Category Post, Featured Posts and Latest Posts are static blocks that serialise markup from `save.js` into `post_content` — see the README's Architecture section for the full distinction.
 
 ## Category Post
 
@@ -28,7 +28,7 @@ Structurally near-identical to Featured Posts, plus a "sticky posts" option and 
 
 `src/blocks/post-lists-tab/` — `newsly-block/post-lists-tab`
 
-Tabbed interface for browsing multiple post lists, with server-side category filtering: each tab click hits `admin-ajax.php` (`Class_Post_List_Tab_Callback`) and swaps in freshly-queried posts, so results can't go stale the way a save-time snapshot (like Category Post's) can.
+Tabbed interface for browsing multiple post lists. The block's initial content is, like the other three blocks, a save-time snapshot of what was fetched from the REST API while editing. Category-tab switching is the one part that queries live: each tab click hits `admin-ajax.php` (`Class_Post_List_Tab_Callback`) and swaps in freshly-queried posts for that category.
 
 ## Shared components (`src/blocks/components/`)
 
