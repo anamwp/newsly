@@ -5,7 +5,6 @@
 		"@wordpress/babel-preset-default"
 	],
 	"plugins": [
-		["@babel/plugin-transform-runtime", { "absoluteRuntime": false }],
-		["@wordpress/babel-plugin-makepot", { "output": "languages/newsly.pot" }]
+		["@babel/plugin-transform-runtime", { "absoluteRuntime": false }]
 	]
 }

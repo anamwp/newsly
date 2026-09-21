@@ -33,7 +33,11 @@ Separately, `dist/css/main.css` is a small, hand-maintained Tailwind build (`npm
 
 ### Internationalisation
 
-Text domain is `newsly` throughout (verified against every `__()`/`_e()`/`esc_html__()` call in PHP and every `@wordpress/i18n` call in `src/`). There's no `load_plugin_textdomain()` call: WordPress has loaded plugin translations just-in-time from `WP_LANG_DIR/plugins/` since 4.6, and this plugin doesn't bundle its own compiled `.mo` files, so an explicit call would have nothing to add. JS strings are extracted at build time by `@wordpress/babel-plugin-makepot` (wired into `.babelrc`) into `languages/newsly.pot`.
+Text domain is `newsly` throughout (verified against every `__()`/`_e()`/`esc_html__()` call in PHP and every `@wordpress/i18n` call in `src/`). The plugin header declares `Domain Path: /languages`, which is how core locates translation files: there's no `load_plugin_textdomain()` call, since WordPress has loaded plugin translations just-in-time from `WP_LANG_DIR/plugins/` since 4.6 for any plugin with a declared text domain, regardless of whether it's hosted on wordpress.org.
+
+`languages/newsly.pot` is generated with WP-CLI (`npm run i18n:pot`, wrapping `wp i18n make-pot`) rather than a Babel plugin, so one pass covers PHP strings, JS strings, and translatable `block.json` fields together. `npm run i18n:json` (`wp i18n make-json`) converts any `.po` files in `languages/` into the per-script JSON files WordPress's JS translation loading needs; `npm run i18n` runs both. For the JS side, `Block::register_block()` calls `wp_set_script_translations()` against each block's real editor script handle (read from the `WP_Block_Type` that `register_block_type_from_metadata()` returns, rather than a guessed handle name).
+
+No translations ship with the plugin yet: `languages/` holds only the `.pot` template, and `npm run i18n:json` has nothing to convert until a `.po` file exists for some locale.
 
 ## Blocks
 
@@ -74,6 +78,7 @@ Node version is pinned in `.nvmrc` — run `nvm use` first if your global Node d
 | `npm run build` | Production build of the blocks (`build/`) |
 | `npm run start` | Watch mode: blocks plus the legacy `assets/` SCSS |
 | `npm run build-scss` | Rebuild `dist/css/main.css` from `assets/scss` |
+| `npm run i18n` | Regenerate `languages/newsly.pot` and convert any `.po` files to JSON (requires WP-CLI) |
 | `composer lint:php` | PHPCS against the plugin's PHP |
 | `composer lint:fix` | Auto-fix what PHPCBF can |
 | `npm run lint:js` | ESLint against `src/` (see note below) |

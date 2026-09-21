@@ -4,13 +4,14 @@
  * Plugin URI: https://anam.rocks
  * Description: Dynamic Gutenberg blocks for displaying news posts, categories, and featured content.
  * Version: 1.0.0
- * Requires at least: 6.0
+ * Requires at least: 6.1
  * Requires PHP: 8.0
  * Author: Anam
  * Author URI: https://anam.rocks
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: newsly
+ * Domain Path: /languages
  *
  * @package Anam\Newsly
  */

@@ -30,8 +30,8 @@
 	<!-- Rules: WordPress Coding Standards -->
 	<!-- https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards -->
 	<!-- https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties -->
-	<!-- Matches the "Requires at least: 6.0" declared in readme.txt. -->
-	<config name="minimum_supported_wp_version" value="6.0"/>
+	<!-- Matches the "Requires at least: 6.1" declared in readme.txt. -->
+	<config name="minimum_supported_wp_version" value="6.1"/>
 	<rule ref="WordPress"/>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>

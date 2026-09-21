@@ -7,6 +7,8 @@
 
 namespace Anam\Newsly\Blocks;
 
+use WP_Block_Type;
+
 /**
  * Registers all of Newsly's block types.
  */
@@ -18,6 +20,19 @@ class Block {
 	 * @var Block|null
 	 */
 	private static $instance;
+
+	/**
+	 * Names of the blocks registered from build/blocks/<name>.
+	 *
+	 * @var string[]
+	 */
+	private static $block_names = array(
+		'featured-posts',
+		'latest-posts',
+		'category-post',
+		'post-lists-tab',
+	);
+
 	/**
 	 * Initiate class.
 	 *
@@ -47,13 +62,15 @@ class Block {
 			}
 			return;
 		}
-		/**
-		 * Register block type from metadata
-		 */
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/featured-posts' );
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/latest-posts' );
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/category-post' );
-		register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/post-lists-tab' );
+		foreach ( self::$block_names as $block_name ) {
+			$block = register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/' . $block_name );
+			if ( ! ( $block instanceof WP_Block_Type ) ) {
+				continue;
+			}
+			foreach ( $block->editor_script_handles as $handle ) {
+				wp_set_script_translations( $handle, 'newsly', NEWSLY_PATH . '/languages' );
+			}
+		}
 	}
 
 	/**
