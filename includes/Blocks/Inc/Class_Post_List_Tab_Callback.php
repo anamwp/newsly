@@ -105,8 +105,12 @@ class Class_Post_List_Tab_Callback {
 			'post_status'    => 'publish',
 			'category_name'  => $cat_slug,
 			'posts_per_page' => 9,
+			'no_found_rows'  => true,
 		);
 		$posts = new \WP_Query( $args );
+		if ( $show_featured_image ) {
+			update_post_thumbnail_cache( $posts );
+		}
 		?>
 		<?php if ( $posts->have_posts() ) : ?>
 			<?php
