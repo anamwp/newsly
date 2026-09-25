@@ -117,7 +117,7 @@ class Class_Post_List_Tab_Callback {
 			while ( $posts->have_posts() ) :
 				$posts->the_post();
 				$post_id = get_the_ID();
-				$post    = array(
+				$card    = array(
 					'id'      => $post_id,
 					'title'   => get_the_title( $post_id ),
 					'excerpt' => get_the_excerpt( $post_id ),
@@ -136,7 +136,7 @@ class Class_Post_List_Tab_Callback {
 					</div>
 					<?php endif; ?>
 					<a class="post-card__title mt-4 inline-block font-poppins text-xl transition font-medium" href="<?php echo esc_url( get_the_permalink( $post_id ) ); ?>">
-						<h2><?php echo esc_html( $post['title'] ); ?></h2>
+						<h2><?php echo esc_html( $card['title'] ); ?></h2>
 					</a>
 					<?php if ( $show_category ) : ?>
 					<div class="inline-block mt-2">
@@ -156,10 +156,13 @@ class Class_Post_List_Tab_Callback {
 					</div>
 					<?php endif; ?>
 					<?php if ( $show_excerpt ) : ?>
-					<div class="post-card__excerpt mt-2"><?php echo wp_kses_post( $post['excerpt'] ); ?></div>
+					<div class="post-card__excerpt mt-2"><?php echo wp_kses_post( $card['excerpt'] ); ?></div>
 					<?php endif; ?>
 				</div>
-			<?php endwhile; ?>
+				<?php
+			endwhile;
+			wp_reset_postdata();
+			?>
 		<?php else : ?>
 			<div class="post-card shadow-md hover:shadow-lg rounded border-solid border-x border-y p-8">
 				<h2 class="post-card__title mt-4 inline-block font-poppins text-xl transition font-medium"><?php echo esc_html__( 'No Posts Found', 'newsly' ); ?></h2>
