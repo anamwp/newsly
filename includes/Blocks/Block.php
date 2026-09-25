@@ -50,20 +50,34 @@ class Block {
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_block' ) );
 	}
+
+	/**
+	 * Get the directory blocks are registered from.
+	 *
+	 * Filterable so tests can point registration at a fixture directory,
+	 * or at a path that doesn't exist, without touching the real build/.
+	 *
+	 * @return string
+	 */
+	public static function get_build_path() {
+		return apply_filters( 'newsly_build_path', NEWSLY_PATH . '/build' );
+	}
+
 	/**
 	 * Register Block
 	 *
 	 * @return void
 	 */
 	public function register_block() {
-		if ( ! is_dir( NEWSLY_PATH . '/build' ) ) {
+		$build_path = self::get_build_path();
+		if ( ! is_dir( $build_path ) ) {
 			if ( is_admin() ) {
 				add_action( 'admin_notices', array( $this, 'missing_build_notice' ) );
 			}
 			return;
 		}
 		foreach ( self::$block_names as $block_name ) {
-			$block = register_block_type_from_metadata( NEWSLY_PATH . '/build/blocks/' . $block_name );
+			$block = register_block_type_from_metadata( $build_path . '/blocks/' . $block_name );
 			if ( ! ( $block instanceof WP_Block_Type ) ) {
 				continue;
 			}
