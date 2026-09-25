@@ -83,7 +83,6 @@ class Class_Post_List_Tab_Callback {
 		$newsly_ajax_nonce = isset( $_POST['newslyAjaxNonce'] ) ? sanitize_text_field( wp_unslash( $_POST['newslyAjaxNonce'] ) ) : '';
 		if ( empty( $newsly_ajax_nonce ) || ! wp_verify_nonce( $newsly_ajax_nonce, 'newsly_ajax_nonce' ) ) {
 			wp_send_json_error( array( 'message' => 'Invalid nonce' ) );
-			die();
 		}
 		/**
 		 * Check and sanitize inputs.
@@ -169,6 +168,6 @@ class Class_Post_List_Tab_Callback {
 			</div>
 		<?php endif; ?>
 		<?php
-		die();
+		wp_die();
 	}
 }
