@@ -6,6 +6,7 @@ on:
       - main
       - dev
   pull_request:
+  workflow_dispatch:
 
 jobs:
   php:
@@ -61,7 +62,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y subversion
 
       - name: Install WordPress test suite
-        run: bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 latest
+        run: bash bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 latest true
         env:
           WP_TESTS_DIR: /tmp/wordpress-tests-lib
 
@@ -98,9 +99,10 @@ jobs:
     name: Playwright E2E
     runs-on: ubuntu-latest
     # These tests exercise the blocks against a live WordPress instance
-    # (see playwright.config.js), which this workflow doesn't stand up.
-    # Kept non-blocking so the job still reports its result without
-    # turning the build red.
+    # (see playwright.config.js), which this workflow doesn't stand up, so
+    # it can't run on push/PR - manual trigger only (Actions -> CI -> Run
+    # workflow), against whatever WP_BASE_URL points the runner at.
+    if: github.event_name == 'workflow_dispatch'
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
