@@ -9,7 +9,6 @@ echo "=== Newsly - PHPUnit Sanity Check ==="
 echo ""
 
 PLUGIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TEST_DIR="$PLUGIN_DIR/tests"
 
 # Check if PHPUnit is available
 PHPUNIT_CMD=""
@@ -56,14 +55,14 @@ else
 fi
 
 echo ""
-echo "🧪 Running sample test to verify setup..."
+echo "🧪 Running the test suite..."
 echo "================================="
 echo ""
 
-if $PHPUNIT_CMD --bootstrap "$TEST_DIR/bootstrap.php" "$TEST_DIR/test-sample.php" --verbose; then
-    echo "✅ Test environment is working!"
+if "$PHPUNIT_CMD" -c "$PLUGIN_DIR/phpunit.xml.dist" --verbose; then
+    echo "✅ Tests passed!"
 else
-    echo "❌ Test environment has issues. Please check the error above."
+    echo "❌ Tests failed. Please check the error above."
     exit 1
 fi
 

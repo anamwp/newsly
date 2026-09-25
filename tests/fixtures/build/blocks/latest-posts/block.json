@@ -1,0 +1,9 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "newsly-block/latest-posts",
+	"version": "0.1.0",
+	"title": "Latest Posts",
+	"category": "newsly",
+	"textdomain": "newsly"
+}

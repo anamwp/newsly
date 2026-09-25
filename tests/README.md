@@ -1,14 +1,16 @@
 # PHP Unit Tests
 
-This directory keeps a minimal PHPUnit scaffold as a canary for the
-WordPress unit-test environment, not because there's feature code to
-cover today. `test-sample.php` just asserts `true`; its only job is to
-confirm `bootstrap.php`, PHPUnit, and `WP_TESTS_DIR` are wired up
-correctly, so real unit tests can be dropped in later without first
-debugging the harness.
+- `test-block-registration.php` - all four block types register from
+  `build/`; no blocks register and the missing-build admin notice is
+  hooked (admins only) when `build/` is absent. Registration is pointed
+  at `tests/fixtures/build/` via the `newsly_build_path` filter, since
+  the PHP CI job never runs `npm run build`.
+- `test-post-lists-tab-ajax.php` - the Post Lists Tab AJAX handler
+  rejects a missing or invalid nonce, caps results at 9 posts, and
+  escapes post titles in its output.
 
 E2E coverage for the actual blocks (Category Post, Featured Posts,
-Latest Posts) lives in `tests/e2e/` and runs via Playwright — see
+Latest Posts) lives in `tests/e2e/` and runs via Playwright - see
 `playwright.config.js`.
 
 ## Prerequisites
@@ -62,6 +64,6 @@ class NewFeatureTest extends WP_UnitTestCase {
 
 ## Troubleshooting
 
-- **"Could not find WordPress test environment"** — set `WP_TESTS_DIR` and install it via `install-wp-tests.sh`.
-- **"Class not found" errors** — check the plugin loads correctly in `bootstrap.php` and the composer autoloader is up to date.
-- **"Permission denied" on the runner** — `chmod +x tests/run-tests.sh`.
+- **"Could not find WordPress test environment"** - set `WP_TESTS_DIR` and install it via `install-wp-tests.sh`.
+- **"Class not found" errors** - check the plugin loads correctly in `bootstrap.php` and the composer autoloader is up to date.
+- **"Permission denied" on the runner** - `chmod +x tests/run-tests.sh`.
