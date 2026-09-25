@@ -35,10 +35,20 @@ No. All blocks render using your site's own posts and categories.
 
 == Changelog ==
 
+= 1.0.1 =
+* Fixed: "Tested up to" corrected to 7.1.
+* Fixed: composer.json and composer.lock now ship alongside vendor/.
+* Fixed: test-harness scripts (install-wp-tests.sh, setup-wp-tests.sh) no longer ship in the plugin zip.
+* Fixed: the Post Lists Tab AJAX handler now ends with wp_die() instead of a bare die().
+* Changed: Plugin URI and Author URI updated.
+
 = 1.0.0 =
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.0.1 =
+Packaging and metadata fixes for the WordPress.org listing; no functional change to the blocks.
 
 = 1.0.0 =
 Initial release.
