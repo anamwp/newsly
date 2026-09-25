@@ -24,8 +24,6 @@ wiki
 node_modules
 src
 jest-setup.js
-composer.json
-composer.lock
 package.json
 package-lock.json
 phpunit.xml*
