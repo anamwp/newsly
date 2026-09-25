@@ -8,6 +8,7 @@
 .nvmrc
 .phpcs.xml.dist
 .phpunit.result.cache
+.DS_Store
 bin
 setup-wp-tests.sh
 .playwright-mcp
@@ -24,6 +25,10 @@ wiki
 node_modules
 src
 jest-setup.js
+jest.config.js
+playwright.config.js
+postcss.config.js
+tailwind.config.js
 package.json
 package-lock.json
 phpunit.xml*
