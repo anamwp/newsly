@@ -21,7 +21,7 @@ All four blocks are registered from one place, `Blocks\Block::register_block()` 
 
 ### Query cost
 
-The only PHP-side query this plugin runs against a page view is Post Lists Tab's AJAX tab switch, and it's bounded (`posts_per_page => 9`) with no object-cache or transient layer in front of it — every tab click is a fresh `WP_Query`. Given the request is user-triggered (a tab click, not something that fires automatically per page load) and capped at 9 posts, this is a reasonable trade rather than an oversight, but it's worth knowing there's no caching to lean on if traffic to that endpoint ever grows. The other three blocks impose no page-render query cost at all, for the staleness reasons above.
+The only PHP-side query this plugin runs against a page view is Post Lists Tab's AJAX tab switch: a `WP_Query` bounded to 9 posts (`posts_per_page => 9`), with `no_found_rows` set since the handler never paginates. `cache_results` isn't disabled anywhere in the plugin, so WordPress's own `WP_Query` result cache applies — since 6.1, `WP_Query` caches its results in the object cache, keyed with `last_changed` salts that invalidate automatically when posts or terms change. With a persistent object cache (Redis, Memcached, and so on) present, repeated identical tab switches don't re-hit the database; without one, WordPress's default object cache is per-request only, so each tab click still queries fresh. Featured image thumbnails are primed in a single `update_post_thumbnail_cache()` call rather than one query per post. The other three blocks impose no page-render query cost at all, for the staleness reasons above.
 
 ### Build pipeline
 
@@ -33,7 +33,7 @@ Separately, `dist/css/main.css` is a small, hand-maintained Tailwind build (`npm
 
 ### Internationalisation
 
-Text domain is `newsly` throughout (verified against every `__()`/`_e()`/`esc_html__()` call in PHP and every `@wordpress/i18n` call in `src/`). The plugin header declares `Domain Path: /languages`, which is how core locates translation files: there's no `load_plugin_textdomain()` call, since WordPress has loaded plugin translations just-in-time from `WP_LANG_DIR/plugins/` since 4.6 for any plugin with a declared text domain, regardless of whether it's hosted on wordpress.org.
+Text domain is `newsly` throughout (verified against every `__()`/`_e()`/`esc_html__()` call in PHP and every `@wordpress/i18n` call in `src/`). The plugin header declares `Domain Path: /languages` — a directory hint for translation tooling and for `load_plugin_textdomain()`'s default path, which this plugin doesn't call. PHP strings load via WordPress's just-in-time translation loading, which reads from `WP_LANG_DIR/plugins/` (where translate.wordpress.org language packs install) independently of `Domain Path`. JS strings load from the plugin's own `languages/` directory because `wp_set_script_translations()` is given that path explicitly.
 
 `languages/newsly.pot` is generated with WP-CLI (`npm run i18n:pot`, wrapping `wp i18n make-pot`) rather than a Babel plugin, so one pass covers PHP strings, JS strings, and translatable `block.json` fields together. `npm run i18n:json` (`wp i18n make-json`) converts any `.po` files in `languages/` into the per-script JSON files WordPress's JS translation loading needs; `npm run i18n` runs both. For the JS side, `Block::register_block()` calls `wp_set_script_translations()` against each block's real editor script handle (read from the `WP_Block_Type` that `register_block_type_from_metadata()` returns, rather than a guessed handle name).
 
