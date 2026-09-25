@@ -13,6 +13,18 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      # Pulls the section for this tag's version out of CHANGELOG.md, so
+      # the release body matches what's documented there instead of
+      # GitHub's auto-generated commit list.
+      - name: Extract release notes from CHANGELOG.md
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          awk -v version="$version" '
+            $0 ~ "^## \\[" version "\\]" { found=1; next }
+            found && /^## \[/ { exit }
+            found { print }
+          ' CHANGELOG.md > release-notes.md
+
       - name: Set up Node
         uses: actions/setup-node@v5
         with:
@@ -52,4 +64,4 @@ jobs:
         with:
           name: Newsly ${{ github.ref_name }}
           files: newsly.zip
-          generate_release_notes: true
+          body_path: release-notes.md
