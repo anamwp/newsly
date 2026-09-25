@@ -3,7 +3,7 @@
  * Plugin Name: Newsly
  * Plugin URI: https://anamhossain.dev/
  * Description: Dynamic Gutenberg blocks for displaying news posts, categories, and featured content.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 6.1
  * Requires PHP: 8.0
  * Author: Anam
@@ -34,7 +34,7 @@ final class Newsly {
 	/**
 	 * Plugin version.
 	 */
-	const NEWSLY_VERSION = '1.0.0';
+	const NEWSLY_VERSION = '1.0.1';
 	/**
 	 * Construction of this plugin.
 	 */

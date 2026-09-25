@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Newsly 1.0.0\n"
+"Project-Id-Version: Newsly 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/newsly\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-09-21T11:08:34+00:00\n"
+"POT-Creation-Date: 2026-09-25T17:26:06+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: newsly\n"
@@ -20,9 +20,8 @@ msgid "Newsly"
 msgstr ""
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
 #: newsly.php
-msgid "https://anam.rocks"
+msgid "https://anamhossain.dev/"
 msgstr ""
 
 #. Description of the plugin
@@ -35,11 +34,16 @@ msgstr ""
 msgid "Anam"
 msgstr ""
 
-#: includes/Blocks/Block.php:71
+#. Author URI of the plugin
+#: newsly.php
+msgid "https://profiles.wordpress.org/theanamhossain/"
+msgstr ""
+
+#: includes/Blocks/Block.php:102
 msgid "Newsly: no built block assets found in build/. Run \"npm ci && npm run build\" from the plugin directory, or install a release zip from the Releases page instead of the repository archive."
 msgstr ""
 
-#: includes/Blocks/Inc/Class_Post_List_Tab_Callback.php:161
+#: includes/Blocks/Inc/Class_Post_List_Tab_Callback.php:167
 #: src/blocks/post-lists-tab/render.php:94
 msgid "No Posts Found"
 msgstr ""
