@@ -8,6 +8,8 @@
 .nvmrc
 .phpcs.xml.dist
 .phpunit.result.cache
+bin
+setup-wp-tests.sh
 .playwright-mcp
 __mocks__
 tests
